@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sucursal | Skatettoo</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../../css/estilos.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/parallax.css"></link>
+        <script src="../../../js/jquery-2.2.3.min.js"></script>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src="../../../img/ST Logotype.png"></img>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="noticia.xhtml">Crear noticia</a></li>
+                        <li><a href="cdisenios.xhtml">Crear Diseños</a></li>
+                        <li><a href="#">Sucursal</a></li>
+                        <li><a href="ccitas.xhtml">Citas</a></li>
+                        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"></a></li>
+                        <li><a href="../../../../index.xhtml" onclick="#{loginManagedBean.cerrarSesion()}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <p:commandLink action="/pages/usuario/tatuador/csucursal" value="Regresar"/>
+        <f:view>
+            <center><h:form>
+                <h1><h:outputText value="Crear Sucursal"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nombre:" for="nombre" />
+                    <p:inputText id="nombre" value="#{sucursalManagedBean.sucu.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                    <p:outputLabel value="Direccion:" for="direccion" />
+                    <p:inputText id="direccion" value="#{sucursalManagedBean.sucu.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
+                    <p:outputLabel value="Descripcion:" for="descripcion" />
+                    <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{sucursalManagedBean.sucu.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                    <p:outputLabel value="Telefono:" for="telefono" />
+                    <p:inputText id="telefono" value="#{sucursalManagedBean.sucu.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
+                    <p:outputLabel value="IdLocalidad:" for="idLocalidad" />
+                    <h:selectOneMenu id="idLocalidad" value="#{sucursalManagedBean.sucu.idLocalidad}" required="true" requiredMessage="The IdLocalidad field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{localidadManagedBean.listarLocalidad()}" var="localidad" itemLabel="#{localidad.localidad}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton value="Actualizar" actionListener="#{sucursalManagedBean.modificarSucursal()}"/>
+            </h:form></center>
+        </f:view>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="es"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <link rel="icon" href="img/st1.ico" type="image/x-icon"/>
+        <title>Skatettoo</title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/estilos.css"></link>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src="img/ST Logotype.png"></img>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="javascript:openVentana1()">Solicitar cita</a></li>
+                        <li><a href="getting-started.php">Diseños</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><h:link outcome="login.xhtml" value="Iniciar sesión"/></li>
+                        <li><h:link outcome="/pages/Formulario/registro.xhtml" value="Registrarse"/></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="vacio"></div>
+        <selection>
+            <div class="container">
+                <center><img src="img/Skatetoo4.png" alt=""></img></center>
+                <center><a href="faces/pages/Formulario/registro.xhtml" class="btn btn-dark btn-lg toggle" style="color: white;">Comienza ahora</a></center>
+            </div>
+        </selection>
+        <div class="ventana2">
+            <div class="cerrar"><a href="javascript:closeVentana1()" class="equis1">X &nbsp; &nbsp;</a></div>
+            <center><h1 class="rubberBand registrate">Registrate</h1></center>
+            <center>
+                <a href="faces/pages/Formulario/registro.xhtml" class="btn btn-dark btn-lg toggle bt">Comienza ahora</a>
+            </center>
+        </div>
+        <script src="resources/js/ventana1.js"/>
+        <script src="resources/js/jquery-2.2.3.min.js"></script>
+    </h:body>
+</html>
+

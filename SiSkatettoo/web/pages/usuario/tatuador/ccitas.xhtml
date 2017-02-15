@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/skatettoo.xhtml">
+            <ui:define name="head"></ui:define>
+
+            <ui:define name="titulo">
+                Citas | Skatetto
+            </ui:define>
+
+            <ui:define name="top"></ui:define>
+
+            <ui:define name="content">
+                <div class="container fondo" >
+                    <div class="row">
+
+
+                        <div class="col-md-12 tabla">
+                            <h4>Citas</h4>
+                            <div class="table-responsive">
+
+                                <h:form>
+                                    <table id="mytable" class="table table-bordred table-striped tabla">
+
+                                        <thead>
+
+                                            <th>Sucursal</th>
+                                            <th>Cliente</th>
+                                            <th>Diseño</th>
+                                            <th>Email</th>
+                                            <th>Fecha y Hora</th>
+                                            <th>Estado</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </thead>
+                                        <tbody>
+                                            <ui:repeat value="#{citaManagedBean.listarCita()}" var="cita">
+                                                <tr>
+                                                    <td>#{cita.idSucursal.nombre}</td>
+                                                    <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                    <td>#{cita.idDisenio.nombreD}</td>
+                                                    <td>#{cita.idUsuario.email}</td>
+                                                    <td>
+                                                        <h:outputText value="#{cita.fechaHora}">
+                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                        </h:outputText>
+                                                    </td>
+                                                    <td>#{cita.idEstadoCita.nombreEstadoCita}</td>
+                                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                                    <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                </tr>
+                                            </ui:repeat>    
+                                        </tbody>
+
+                                    </table>
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+        <script src="resources/js/jquery-2.2.3.min.js"></script>
+    </body>
+</html>

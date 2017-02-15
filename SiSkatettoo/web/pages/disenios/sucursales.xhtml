@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+            
+            <ui:define name="head2"></ui:define>
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/sucur.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/gallery.css"></link>
+            </ui:define>
+
+            <ui:define name="titulo">
+                Sucursales | Skatettoo
+            </ui:define>
+            <ui:define name="top2"></ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <section class="publicaciones-blog-home">
+                        <center><div class="container">
+                                <div class="row-page row">
+                                    <h2>Sucursales</h2>
+                                    <ui:repeat value="#{sucursalManagedBean.listarSucursal()}" var="sucur"> 
+                                        <div class="">
+                                            <div class="col-page col-sm-8 col-md-6">
+                                                <a jsf:action="#{sucursalManagedBean.verSucursal(sucur)}" class="black fondo-publicacion-home">
+                                                    <div class="img-publicacion-principal-home">
+                                                        <img class="" src="../../img/#{sucur.fotoSuc}.jpg"/>
+                                                    </div>
+                                                    <div class="contenido-publicacion-principal-home">
+                                                        <h3>#{sucur.nombre}</h3>
+                                                        <p>#{sucur.descripcion}<span>...</span></p>
+                                                    </div>
+                                                    <div class="mascara-enlace-blog-home">
+                                                        <span>Ver </span>
+                                                    </div> 
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>    
+                                </div>
+                            </div></center>
+                    </section>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

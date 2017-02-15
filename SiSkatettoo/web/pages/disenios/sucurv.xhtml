@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head2"></ui:define>
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/sucurv.css"></link>
+            </ui:define>
+
+            <ui:define name="titulo">
+                #{sucursalManagedBean.sucu.nombre} | Skatettoo
+            </ui:define>
+            <ui:define name="top2"></ui:define>
+            <ui:define name="content">
+                <p:link value="Regresar" outcome="/pages/disenios/sucursales"></p:link>
+                <div class="container fondo">
+                    <div class="row">
+                        <div class="twPc-div">
+                            <a class="twPc-bg twPc-block"></a>
+
+                            <div>
+                                <div class="twPc-avatarLink">
+                                    <img alt="Mert Salih Kaplan" src="../../img/#{sucursalManagedBean.sucu.fotoSuc}.jpg" class="twPc-avatarImg"/>
+                                </div>
+
+                                <div class="twPc-divUser">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <center><h1>#{sucursalManagedBean.sucu.nombre}</h1>
+                                        <br/>
+                                        <a href=""><h2>Tatuadores</h2></a>
+                                        <p>#{sucursalManagedBean.sucu.direccion}</p>
+                                        <p>#{sucursalManagedBean.sucu.telefono}</p>
+                                        <br/>
+                                        <p>#{sucursalManagedBean.sucu.descripcion}</p></center>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invs">
+
+                        </div>
+                        <!-- code end -->
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

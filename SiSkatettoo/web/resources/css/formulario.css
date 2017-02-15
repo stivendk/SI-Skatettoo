@@ -1,0 +1,21 @@
+body{
+    background-image: url("../../img/bf.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: center;
+    background-attachment: fixed;
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+.fhormulario{
+    width: 416px;
+    height: 425px;
+    background-color: #000;
+    border-radius: 30px;
+}
+
+.forr{
+    border-radius: 20px;
+    background-color: #000;
+}

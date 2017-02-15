@@ -1,0 +1,24 @@
+@font-face{
+	font-family: "aileron_heavy";
+	src: url(../fuentes/aileron_heavy.ttf);
+
+}
+h1{
+	font-family: aileron_heavy;
+}
+@font-face{
+	font-family: "aileron";
+	src: url(../fuentes/aileron.ttf);
+
+}
+label{
+	font-family: aileron;
+}
+@font-face{
+	font-family: "aileron";
+	src: url(../fuentes/aileron.ttf);
+
+}
+input{
+	font-family: aileron;
+}

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Publicar noticia | skatettoo</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../../css/estilos.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/parallax.css"></link>
+        <script src="../../../js/jquery-2.2.3.min.js"></script>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img class="logo" src="../../../img/ST Logotype.png"></img>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Crear noticia</a></li>
+                        <li><a href="cdisenios.xhtml">Crear Diseños</a></li>
+                        <li><a href="csucursal.xhtml">Sucursal</a></li>
+                        <li><a href="ccitas.xhtml">Citas</a></li>
+                        
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"></a></li>
+                        <li><a href="../../../../index.xhtml" onclick="#{loginManagedBean.cerrarSesion()}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <p:commandLink value="Regresar" action="/pages/usuario/tatuador/noticia"/>
+        <f:view>
+            <center><h:form>
+                <h1><h:outputText value="Publicar Noticia"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Titulo:" for="titulo" />
+                    <p:inputText id="titulo" value="#{noticiaManagedBean.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                    <p:outputLabel value="Descripcion:" for="descripcion" />
+                    <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaManagedBean.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                    <p:outputLabel value="Tatuador:" for="idUsuario" />
+                    <p:outputLabel id="idUsuario" value="#{noticiaManagedBean.noti.idUsuario.nombre} #{noticiaManagedBean.noti.idUsuario.apellido}"  />
+                </p:panelGrid>
+                <p:commandButton value="Publicar" actionListener="#{noticiaManagedBean.modificarNoticia()}"/>
+            </h:form></center>
+        </f:view>
+
+    </h:body>
+</html>
+

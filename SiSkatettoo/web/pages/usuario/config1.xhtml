@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="icon" href="../../img/st1.ico" type="image/x-icon"/>
+        <title>Configurar</title>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/estailos.css"></link>
+        <link rel="stylesheet" type="text/css" href="css/parallax.css"></link>
+        <script src="../../js/jquery-2.2.3.min.js"></script>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Menu</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="inicio.xhtml">
+                        <img class="logo" src="../../img/ST Logotype.png"></img>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../disenios/cita.xhtml">Solicitar cita</a></li>
+                        <li><a href="../disenios/disenios.xhtml">Diseños</a></li>
+                        <li><a href="../disenios/sucursales.xhtml">Sucursales</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"></a></li>
+                        <li><a href="../../../index.xhtml" onclick="#{loginManagedBean.cerrarSesion()}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <p:commandLink action="/pages/usuario/config" value="Regresar"/>
+        <f:view>
+            <center><h:form>
+                <h1><h:outputText value="Editar informacion"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Username:" for="username" />
+                    <p:inputText id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
+                    <p:outputLabel value="Password:" for="password" />
+                    <p:inputText id="password" value="#{usuarioManagedBean.usuario.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
+                    <p:outputLabel value="Nombre:" for="nombre" />
+                    <p:inputText id="nombre" value="#{usuarioManagedBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                    <p:outputLabel value="Apellido:" for="apellido" />
+                    <p:inputText id="apellido" value="#{usuarioManagedBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{usuarioManagedBean.usuario.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                    <p:outputLabel value="Telefono:" for="telefono" />
+                    <p:inputText id="telefono" value="#{usuarioManagedBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
+               </p:panelGrid>
+                <p:commandButton actionListener="#{usuarioManagedBean.modificarUsuario()}" value="Editar"/>
+            </h:form></center>
+        </f:view>
+    </h:body>
+</html>
+
