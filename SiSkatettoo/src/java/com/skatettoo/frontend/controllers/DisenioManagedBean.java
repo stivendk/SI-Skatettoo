@@ -82,6 +82,11 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         disenio = d;
         return "/pages/disenios/disenio";
     }
+    
+    public String verDisenio2(Disenio d) {
+        disenio = d;
+        return "disenio";
+    }
 
     public String solicitarDisenio(Disenio d) {
         disenio = d;

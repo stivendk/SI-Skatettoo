@@ -6,9 +6,7 @@
 package com.skatettoo.backend.persistence.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,22 +14,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Entity
 @Table(name = "sucursales")
@@ -44,11 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sucursal.findByDireccion", query = "SELECT s FROM Sucursal s WHERE s.direccion = :direccion"),
     @NamedQuery(name = "Sucursal.findByTelefono", query = "SELECT s FROM Sucursal s WHERE s.telefono = :telefono")})
 public class Sucursal implements Serializable, IEntitie {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "telefono")
-    private long telefono;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,16 +64,13 @@ public class Sucursal implements Serializable, IEntitie {
     @Size(min = 1, max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
-    @JoinTable(name = "usuario_sucursal", joinColumns = {
-        @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "telefono")
+    private long telefono;
     @JoinColumn(name = "id_localidad", referencedColumnName = "id_localidad")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Localidad idLocalidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSucursal", fetch = FetchType.LAZY)
-    private List<Cita> citaList;
 
     public Sucursal() {
     }
@@ -93,7 +79,7 @@ public class Sucursal implements Serializable, IEntitie {
         this.idSucursal = idSucursal;
     }
 
-    public Sucursal(Integer idSucursal, String nombre, String direccion, String descripcion, int telefono) {
+    public Sucursal(Integer idSucursal, String nombre, String direccion, String descripcion, long telefono) {
         this.idSucursal = idSucursal;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -141,14 +127,12 @@ public class Sucursal implements Serializable, IEntitie {
         this.descripcion = descripcion;
     }
 
-
-    @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public long getTelefono() {
+        return telefono;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setTelefono(long telefono) {
+        this.telefono = telefono;
     }
 
     public Localidad getIdLocalidad() {
@@ -157,15 +141,6 @@ public class Sucursal implements Serializable, IEntitie {
 
     public void setIdLocalidad(Localidad idLocalidad) {
         this.idLocalidad = idLocalidad;
-    }
-
-    @XmlTransient
-    public List<Cita> getCitaList() {
-        return citaList;
-    }
-
-    public void setCitaList(List<Cita> citaList) {
-        this.citaList = citaList;
     }
 
     @Override
@@ -196,14 +171,6 @@ public class Sucursal implements Serializable, IEntitie {
     @Override
     public String getId() {
         return idSucursal.toString();
-    }
-
-    public long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
     }
     
 }

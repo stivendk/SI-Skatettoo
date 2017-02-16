@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <body>
+        <ui:composition template="WEB-INF/templates/skatettoo.xhtml">
+            <ui:define name="head2"><link rel="icon" href="img/st1.ico" type="image/x-icon"/></ui:define>
+            <ui:define name="top"><nav class="navbar navbar-default">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Menu</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" jsf:outcome="index.xhtml">
+                                <img class="logo" src="img/ST Logotype.png"></img>
+                            </a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Solicitar cita</a></li>
+                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Diseños</a></li>
+                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Sucursales</a></li>
+
+                            </ul>
+                            <h:form>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><h:link value="Iniciar sesión" outcome="login.xhtml"/></li>
+                                    <li><h:link value="Registrate" outcome="registro.xhtml"/></li>
+                                </ul>
+                            </h:form>
+                        </div>
+                    </div>
+                </nav></ui:define>
+            <ui:define name="head2"></ui:define>
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="resources/css/disenio.css"></link>
+                <script src="resources/js/jquery-2.2.3.min.js"></script>
+            </ui:define>
+            <ui:define name="titulo">
+                #{disenioManagedBean.disenio.nombreD} | Skatettoo
+            </ui:define>
+            <ui:define name="top2"></ui:define>
+            <ui:define name="content">
+                <p:link class="glyphicon glyphicon-arrow-left regresar" outcome="disenios.xhtml"/>
+                <h:form>
+                    <center><div class="container">    
+                            <div class="row">
+                                <div>				
+                                    <div class="panel panel-default  panel--styled" style="width: 634px;">
+                                        <div class="panel-body">
+                                            <div class="col-md-12 panelTop">	
+                                                <div class="col-md-4">	
+                                                    <img class="img-responsive" src="img/#{disenioManagedBean.disenio.nombreDisenio}.jpg" alt=""/>
+                                                </div>
+                                                <div class="col-md-8">	
+                                                    <h2>#{disenioManagedBean.disenio.idUsuario.nombre} #{disenioManagedBean.disenio.idUsuario.apellido}</h2>
+                                                    <p>#{disenioManagedBean.disenio.anotaciones}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 panelBottom">
+                                                <div class="col-md-4 text-left">
+                                                    <h5>Price <span class="itemPrice">$#{disenioManagedBean.disenio.precioDisenio}</span></h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div>
+                                                        <br/>
+                                                        <a jsf:action="#">##{disenioManagedBean.disenio.idEstiloDisenio.nombreEstilo}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 text-center">
+                                                    <h:link outcome="index.xhtml #javascript:openVentana1()?faces-redirect=true" class="btn btn-lg btn-add-to-cart" value="Solicitar cita" ></h:link>						
+                                                </div>
+                                                <div>
+                                                    <br/>
+                                                    <h:link outcome="registro.xhtml" value="Registrate" class="btn btn-dark btn-lg toggle bt"></h:link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></center>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

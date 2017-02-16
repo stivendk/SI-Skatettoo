@@ -2,10 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
+        <link rel="icon" href="img/st1.ico" type="image/x-icon"/>
         <title>Registrate</title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <link rel="stylesheet" type="text/css" href="resources/css/formulario.css"></link>
@@ -13,33 +15,39 @@
     </h:head>
     <h:body>
         <h:form>
-
-            <p:commandLink value="Regresar" action="/index"/>
+            <p:growl autoUpdate="true"/>
+            <p:link class="glyphicon glyphicon-arrow-left regresar" outcome="/index"/>
             <div class="container">
-                <center><div class="fhormulario">
-                        <h:form>
-                            <h1><h:outputText value="Registrate"/></h1>
-                            <p:messages autoUpdate="true"/>
-                            <p:panelGrid columns="2">
-                                <label for="nombre">Nombre</label>
-                                <h:inputText id="nombre" value="#{usuarioManagedBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="El nombre es requerido."/>
-                                <label for="apellido">Apellido</label>
-                                <h:inputText id="apellido" value="#{usuarioManagedBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="El apellido es requerido."/>
-                                <label for="email">Correo</label>
-                                <h:inputText id="email" value="#{usuarioManagedBean.usuario.email}" title="Email" required="true" requiredMessage="El email es requerido."/>
-                                <label for="telefono">Celular</label>
-                                <h:inputText id="telefono" value="#{usuarioManagedBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
-                                <label for="username">Username</label>
-                                <h:inputText id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="Tu Username es requerido."/>
-                                <label for="password">Contraseña</label>
-                                <p:password id="password" match="password2" value="#{usuarioManagedBean.usuario.password}" title="Password" required="true" requiredMessage="Tu password debe ser ingresado."/>
-                                <label for="password">Repetir  Contraseña</label>
-                                <p:password id="password2" title="Password" required="true" requiredMessage="Debes comprobar tu password."/>
-                            </p:panelGrid>
-                            <p:commandButton value="Registrar" action="#{usuarioManagedBean.registrarUsuario()}"/>
-
-                        </h:form>
-                    </div></center>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
+                        <legend><i class="glyphicon glyphicon-globe"></i> Registrate</legend>
+                        <form action="#" method="post" class="form" role="form">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-6">
+                                    <label for="nombre">Nombre</label>
+                                    <h:inputText class="form-control" pt:placeholder="Nombre(s)" id="nombre" value="#{usuarioManagedBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="El nombre es requerido."/>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <label for="apellido">Apellido</label>
+                                    <h:inputText class="form-control" pt:placeholder="Apellido(s)" id="apellido" value="#{usuarioManagedBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="El apellido es requerido."/>
+                                </div>
+                            </div>
+                            <label for="email">Correo</label>
+                            <h:inputText class="form-control" pt:placeholder="ejemplo@example.com" pt:type="email" id="email" value="#{usuarioManagedBean.usuario.email}" title="Email" required="true" requiredMessage="El email es requerido."/>
+                            <label for="telefono">Celular</label>
+                            <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{usuarioManagedBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                            <label for="username">Username</label>
+                            <h:inputText class="form-control" pt:placeholder="Username" id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="Tu Username es requerido."/>
+                            <label for="password">Contraseña</label>
+                            <p:password class="form-control" id="password" match="password2" value="#{usuarioManagedBean.usuario.password}" title="Password" required="true" requiredMessage="Tu password debe ser ingresado."/>
+                            <label for="password">Repetir  Contraseña</label>
+                            <p:password class="form-control" id="password2" title="Password" required="true" requiredMessage="Debes comprobar tu password."/>
+                            <br />
+                            <br />
+                            <p:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Registrar" action="#{usuarioManagedBean.registrarUsuario()}"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </h:form>
 

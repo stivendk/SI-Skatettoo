@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="WEB-INF/templates/skatettoo.xhtml">
+            <link rel="icon" href="img/st1.ico" type="image/x-icon"/>
+            <ui:define name="head2"></ui:define>
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="resources/css/gallery.css"></link>
+                <script src="resources/js/jquery-2.2.3.min.js"></script>
+            </ui:define>
+
+            <ui:define name="titulo">
+                Diseños | Skatettoo
+            </ui:define>
+            <ui:define name="head2"><link rel="icon" href="img/st1.ico" type="image/x-icon"/></ui:define>
+            <ui:define name="top"><nav class="navbar navbar-default">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Menu</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" jsf:outcome="index.xhtml">
+                                <img class="logo" src="img/ST Logotype.png"></img>
+                            </a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.xhtml javascript:openVentana1()">Solicitar cita</a></li>
+                                <li><a href="index.xhtml javascript:openVentana1()">Diseños</a></li>
+                                <li><a href="index.xhtml javascript:openVentana1()">Sucursales</a></li>
+
+                            </ul>
+                            <h:form>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><h:link value="Iniciar Sesión" outcome="login.xhtml"/></li>
+                                    <li><h:link value="Registrate" outcome="registro.xhtml"/></li>
+                                </ul>
+                            </h:form>
+                        </div>
+                    </div>
+                </nav></ui:define>
+            <ui:define name="top2"></ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <section style="background-color: #fff; padding-bottom: 50px;">
+                        <center><h1>Diseños</h1></center>
+                        <div class="container">
+                            <div class="row">
+                                <ui:repeat value="#{disenioManagedBean.listarDisenio()}" var="dis">
+                                    <div class="col-sm-4">
+                                        <div class="thumbnail">
+                                            <a jsf:action="#{disenioManagedBean.verDisenio2(dis)}" class="">
+                                                <div class="caption">
+                                                    <p class="">#{dis.anotaciones}</p>
+                                                </div>
+                                                <img src="img/#{dis.nombreDisenio}.jpg" alt="..." class=""/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                    </section>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

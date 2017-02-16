@@ -6,30 +6,22 @@
 package com.skatettoo.backend.persistence.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Entity
 @Table(name = "usuario")
@@ -85,20 +77,6 @@ public class Usuario implements Serializable, IEntitie {
     @NotNull
     @Column(name = "telefono")
     private int telefono;
-    @ManyToMany(mappedBy = "usuarioList", fetch = FetchType.LAZY)
-    private List<Sucursal> sucursalList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Disenio> disenioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Noticia> noticiaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Cita> citaList;
-    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Rol idRol;
-    @JoinColumn(name = "id_estado_usuario", referencedColumnName = "id_estado_usuario")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EstadoUsuario idEstadoUsuario;
 
     public Usuario() {
     }
@@ -181,58 +159,6 @@ public class Usuario implements Serializable, IEntitie {
         this.telefono = telefono;
     }
 
-    @XmlTransient
-    public List<Sucursal> getSucursalList() {
-        return sucursalList;
-    }
-
-    public void setSucursalList(List<Sucursal> sucursalList) {
-        this.sucursalList = sucursalList;
-    }
-
-    @XmlTransient
-    public List<Disenio> getDisenioList() {
-        return disenioList;
-    }
-
-    public void setDisenioList(List<Disenio> disenioList) {
-        this.disenioList = disenioList;
-    }
-
-    @XmlTransient
-    public List<Noticia> getNoticiaList() {
-        return noticiaList;
-    }
-
-    public void setNoticiaList(List<Noticia> noticiaList) {
-        this.noticiaList = noticiaList;
-    }
-
-    @XmlTransient
-    public List<Cita> getCitaList() {
-        return citaList;
-    }
-
-    public void setCitaList(List<Cita> citaList) {
-        this.citaList = citaList;
-    }
-
-    public Rol getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Rol idRol) {
-        this.idRol = idRol;
-    }
-
-    public EstadoUsuario getIdEstadoUsuario() {
-        return idEstadoUsuario;
-    }
-
-    public void setIdEstadoUsuario(EstadoUsuario idEstadoUsuario) {
-        this.idEstadoUsuario = idEstadoUsuario;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -261,10 +187,6 @@ public class Usuario implements Serializable, IEntitie {
     @Override
     public String getId() {
         return idUsuario.toString();
-    }
-
-    public boolean getIdRol(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

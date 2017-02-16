@@ -15,6 +15,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,6 +39,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Permiso.findByIdPermiso", query = "SELECT p FROM Permiso p WHERE p.idPermiso = :idPermiso"),
     @NamedQuery(name = "Permiso.findByNombrePermiso", query = "SELECT p FROM Permiso p WHERE p.nombrePermiso = :nombrePermiso")})
 public class Permiso implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
+    @Column(name = "menu")
+    private String menu;
+    @Size(max = 100)
+    @Column(name = "icon")
+    private String icon;
+    @JoinTable(name = "rol_permisos", joinColumns = {
+        @JoinColumn(name = "id_permiso", referencedColumnName = "id_permiso")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")})
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Rol> rolList;
 
     @Basic(optional = false)
     @NotNull
@@ -125,6 +142,31 @@ public class Permiso implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public void setMenu(String menu) {
+        this.menu = menu;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    @XmlTransient
+    public List<Rol> getRolList() {
+        return rolList;
+    }
+
+    public void setRolList(List<Rol> rolList) {
+        this.rolList = rolList;
     }
     
 }

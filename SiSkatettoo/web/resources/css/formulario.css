@@ -19,3 +19,23 @@ body{
     border-radius: 20px;
     background-color: #000;
 }
+
+.espa{
+    margin-left: 27pc;
+    margin-top: 20px;
+}
+
+.salte{
+    margin-left: 27pc;
+    margin-top: 20px;
+}
+
+.regresar{
+    font-size: 35px;
+    color: #fff;
+}
+
+.regresar:hover{
+    text-decoration: none;
+    color: #fff;
+}

@@ -40,6 +40,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cita.findByFechaHora", query = "SELECT c FROM Cita c WHERE c.fechaHora = :fechaHora")})
 public class Cita implements Serializable {
 
+    @Lob
+    @Column(name = "disenioAdjunto")
+    private byte[] disenioAdjunto;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,9 +63,6 @@ public class Cita implements Serializable {
     @Column(name = "fecha_hora")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
-    @Lob
-    @Column(name = "disenioAdjunto")
-    private byte[] disenioAdjunto;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idUsuario;
@@ -120,13 +121,6 @@ public class Cita implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public byte[] getDisenioAdjunto() {
-        return disenioAdjunto;
-    }
-
-    public void setDisenioAdjunto(byte[] disenioAdjunto) {
-        this.disenioAdjunto = disenioAdjunto;
-    }
 
     public Usuario getIdUsuario() {
         return idUsuario;
@@ -183,6 +177,14 @@ public class Cita implements Serializable {
     @Override
     public String toString() {
         return "com.skatettoo.backend.persistence.entities.Cita[ idCita=" + idCita + " ]";
+    }
+
+    public byte[] getDisenioAdjunto() {
+        return disenioAdjunto;
+    }
+
+    public void setDisenioAdjunto(byte[] disenioAdjunto) {
+        this.disenioAdjunto = disenioAdjunto;
     }
     
 }
