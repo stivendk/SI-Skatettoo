@@ -10,9 +10,11 @@ import com.skatettoo.backend.persistence.facade.NoticiaFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,6 +27,13 @@ public class NoticiaManagedBean implements Serializable {
     private Noticia noti;
     @EJB
     private NoticiaFacadeLocal notifc;
+    
+    @Inject
+    LoginManagedBean log;
+
+    public LoginManagedBean getLog() {
+        return log;
+    }
             
     public NoticiaManagedBean() {
     }
@@ -68,4 +77,12 @@ public class NoticiaManagedBean implements Serializable {
         return notifc.findAll();
     }
     
+    public List<Noticia> notiUsuario(){
+        List<Noticia> notUs = new ArrayList<>();
+        for (Noticia n: listarNoticia()){
+            if (n.getIdUsuario().equals(log.getUsuario())){
+                notUs.add(n);
+            }
+        } return notUs;
+    }
 }
