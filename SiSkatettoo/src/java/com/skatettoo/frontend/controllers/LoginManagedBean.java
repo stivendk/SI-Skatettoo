@@ -5,11 +5,13 @@
  */
 package com.skatettoo.frontend.controllers;
 
+import com.skatettoo.backend.persistence.entities.Permiso;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -24,8 +26,10 @@ import javax.faces.context.FacesContext;
 public class LoginManagedBean implements Serializable {
 
     private Usuario usuario;
+    private List<Permiso> permis;
+    
     @EJB UsuarioFacadeLocal usfc;
-
+    
     public LoginManagedBean() {
     }
 
@@ -37,10 +41,15 @@ public class LoginManagedBean implements Serializable {
         this.usuario = usuario;
     }
 
+    public List<Permiso> getPermis() {
+        return permis;
+    }
+
     @PostConstruct
     public void init() {
         usuario = (Usuario) FacesUtils.getUsuarioLogueado();
         System.out.println(usuario);
+        permis = getUsuario().getIdRol().getPermisoList();
     }
 
     public void modificarUs(){

@@ -10,10 +10,13 @@ import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -27,7 +30,7 @@ public class CitaManagedBean implements Serializable {
     private Cita cita;
     @EJB
     private CitaFacadeLocal citafc;
-    
+ 
     @Inject LoginManagedBean us;
     
     public CitaManagedBean() {
@@ -77,6 +80,20 @@ public class CitaManagedBean implements Serializable {
         return us;
     }
 
-    
+    public List<Cita> citaSucu(){
+        List<Cita> cit = new ArrayList<>();
+        try {
+            for (Cita ci : listarCita()) {
+                if (ci.getIdDisenio().getIdUsuario().equals(us.getUsuario())) {
+                    cit.add(ci);
+                }
+
+            }
+            
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "No hay citas por el momento", "Se modifico"));
+        }
+        return cit;
+    }
     
 }

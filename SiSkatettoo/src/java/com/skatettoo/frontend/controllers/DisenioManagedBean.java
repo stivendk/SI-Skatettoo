@@ -11,9 +11,11 @@ import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -27,7 +29,21 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     @EJB
     private DisenioFacadeLocal diseniofc;
     private List<Disenio> resultado;
-    private int estilo;
+
+    @Inject
+    LoginManagedBean us;
+
+    @Inject
+    EstiloManagedBean est;
+
+    public EstiloManagedBean getEst() {
+        return est;
+    }
+    
+    public LoginManagedBean getUs() {
+        return us;
+    }
+
 
     public DisenioManagedBean() {
     }
@@ -48,13 +64,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         this.resultado = resultado;
     }
 
-    public int getEstilo() {
-        return estilo;
-    }
-
-    public void setEstilo(int estilo) {
-        this.estilo = estilo;
-    }
+    
 
     @PostConstruct
     public void init() {
@@ -82,7 +92,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         disenio = d;
         return "/pages/disenios/disenio";
     }
-    
+
     public String verDisenio2(Disenio d) {
         disenio = d;
         return "disenio";
@@ -102,39 +112,26 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         return diseniofc.find(i);
     }
 
-    /*public String estiloDisenio() {
-        int esti = 0;
-        try {
-        resultado = diseniofc.estiloDisenio(estilo);
-            if (esti == 1) {
-                return "/pages/disenios/estilos/caligrafia";
-            } if (esti == 2){
-                return "/pages/disenios/estilos/acuarela";
-            } if (esti == 3){
-                return "/pages/disenios/estilos/sakyant";
-            } if (esti == 4){
-                return "/pages/disenios/estilos/animados";
-            }if (esti == 5){
-                return "/pages/disenios/estilos/realismo";
-            }if (esti == 6){
-                return "/pages/disenios/estilos/biomecanicos";
-            }if (esti == 7){
-                return "/pages/disenios/estilos/henna";
-            }if (esti == 8){
-                return "/pages/disenios/estilos/coverup";
-            }if (esti == 9){
-                return "/pages/disenios/estilos/ilustracion";
-            }if (esti == 10){
-                return "/pages/disenios/estilos/minimalista";
-            }if (esti == 11){
-                return "/pages/disenios/estilos/tradicional";
-            }if (esti == 12){
-                return "/pages/disenios/estilos/geometricos";
-            }
-        } catch (Exception e) {
-        }
-        return "";
-    }
-    */
     
+    public List<Disenio> disenioTat() {
+        List<Disenio> dis = new ArrayList<>();
+        for (Disenio di : listarDisenio()) {
+            if (di.getIdUsuario().equals( us.getUsuario())) {
+                dis.add(di);
+            }
+        }
+        return dis;
+    }
+    
+    
+    public List<Disenio> disenioEst() {
+        List<Disenio> dis = new ArrayList<>();
+        for (Disenio di : listarDisenio()) {
+            if (di.getIdEstiloDisenio().equals( est.getEstil())) {
+                dis.add(di);
+            }
+        }
+        return dis;
+    }
+
 }
