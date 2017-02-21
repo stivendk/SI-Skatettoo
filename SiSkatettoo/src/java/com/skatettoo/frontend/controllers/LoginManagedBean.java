@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 public class LoginManagedBean implements Serializable {
 
     private Usuario usuario;
+    @EJB UsuarioFacadeLocal usfc;
 
     public LoginManagedBean() {
     }
@@ -42,6 +43,14 @@ public class LoginManagedBean implements Serializable {
         System.out.println(usuario);
     }
 
+    public void modificarUs(){
+        try {
+            usfc.edit(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Se a guardado satisfactoriamente!", "Se modifico"));
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     public String cerrarSesion() {
         FacesUtils.removerUsuario();
         usuario = null;
