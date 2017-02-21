@@ -44,10 +44,9 @@
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="../disenios/cita.xhtml">Solicitar cita</a></li>
-                                <li><a href="../disenios/disenios.xhtml">Diseños</a></li>
-                                <li><a href="../disenios/sucursales.xhtml">Sucursales</a></li>
-
+                                <ui:repeat value="#{loginManagedBean.permis}" var="per">
+                                    <li><h:link value="#{per.nombrePermiso}" outcome="#{per.url}"/></li> 
+                                </ui:repeat>
                             </ul>
                             <h:form>
                                 <ul class="nav navbar-nav navbar-right">
@@ -55,37 +54,6 @@
                                     <li><h:commandLink value="Cerrar Sesión" action="#{loginManagedBean.cerrarSesion()}"/></li>
                                 </ul>
                             </h:form>
-                        </div>
-                    </div>
-                </nav>
-            </ui:insert>
-            <ui:insert name="top2">
-                <nav class="navbar navbar-default">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Menu</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">
-                                <img class="logo" src="../../../img/ST Logotype.png"></img>
-                            </a>
-                        </div>
-                        <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li><a jsf:outcome="/pages/usuario/tatuador/noticia">Crear noticia</a></li>
-                                <li><a jsf:outcome="/pages/usuario/tatuador/cdisenios">Crear Diseños</a></li>
-                                <li><a jsf:outcome="/pages/usuario/tatuador/csucursal">Sucursal</a></li>
-                                <li><a jsf:outcome="/pages/usuario/tatuador/ccitas">Citas</a></li>
-                                <li><a jsf:outcome="/pages/usuario/tatuador/reportes">Reportes</a></li>
-
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#"></a></li>
-                                <li><a href="../../../../index.xhtml" onclick="#{loginManagedBean.cerrarSesion()}">Cerrar Sesión</a></li>
-                            </ul>
                         </div>
                     </div>
                 </nav>
