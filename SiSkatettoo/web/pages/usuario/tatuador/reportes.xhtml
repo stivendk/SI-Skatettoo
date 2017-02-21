@@ -17,7 +17,6 @@
                 Reportes | Skatettoo
             </ui:define>
 
-            <ui:define name="top"></ui:define>
 
             <ui:define name="content">
                 <div class="container fondo" >
@@ -34,7 +33,7 @@
                                     <p:dataExporter type="xls" target="mitabla" fileName="Citas"/>
                                 </h:commandLink>
 
-                                <p:dataTable id="mitabla" value="#{citaManagedBean.listarCita()}" class="table table-bordred table-striped tabla" var="item">
+                                <p:dataTable id="mitabla" value="#{citaManagedBean.citaSucu()}" class="table table-bordred table-striped tabla" var="item">
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Sucursal"/>

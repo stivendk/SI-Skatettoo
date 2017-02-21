@@ -20,7 +20,6 @@
                 Editar Diseños | Skatettoo
             </ui:define>
 
-            <ui:define name="top"></ui:define>
 
             <ui:define name="content">
                 <h:form>
@@ -28,7 +27,7 @@
                         <center><h1>Diseños</h1></center>
                         <div class="container">
                             <div class="row">
-                                <ui:repeat value="#{disenioManagedBean.listarDisenio()}" var="dis">
+                                <ui:repeat value="#{disenioManagedBean.disenioTat()}" var="dis">
                                     <div class="col-xs-4 col-sm-2 col-md-3">            
                                         <div class="thumbnail">
                                             <div class="caption">
