@@ -6,18 +6,23 @@
 package com.skatettoo.backend.persistence.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +36,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Rol.findByIdRol", query = "SELECT r FROM Rol r WHERE r.idRol = :idRol"),
     @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")})
 public class Rol implements Serializable,IEntitie {
+
+    @ManyToMany(mappedBy = "rolList", fetch = FetchType.LAZY)
+    private List<Permiso> permisoList;
+
+    @OneToMany(mappedBy = "idRol", fetch = FetchType.LAZY)
+    private List<Usuario> usuarioList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -100,6 +111,24 @@ public class Rol implements Serializable,IEntitie {
     @Override
     public String getId() {
         return idRol.toString();
+    }
+
+    @XmlTransient
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
+    }
+
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
+    }
+
+    @XmlTransient
+    public List<Permiso> getPermisoList() {
+        return permisoList;
+    }
+
+    public void setPermisoList(List<Permiso> permisoList) {
+        this.permisoList = permisoList;
     }
     
 }

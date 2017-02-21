@@ -6,6 +6,7 @@
 package com.skatettoo.backend.persistence.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +19,12 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,6 +41,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sucursal.findByDireccion", query = "SELECT s FROM Sucursal s WHERE s.direccion = :direccion"),
     @NamedQuery(name = "Sucursal.findByTelefono", query = "SELECT s FROM Sucursal s WHERE s.telefono = :telefono")})
 public class Sucursal implements Serializable, IEntitie {
+
+    @OneToMany(mappedBy = "idSucursal", fetch = FetchType.LAZY)
+    private List<Usuario> usuarioList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -171,6 +177,15 @@ public class Sucursal implements Serializable, IEntitie {
     @Override
     public String getId() {
         return idSucursal.toString();
+    }
+
+    @XmlTransient
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
+    }
+
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
     
 }
