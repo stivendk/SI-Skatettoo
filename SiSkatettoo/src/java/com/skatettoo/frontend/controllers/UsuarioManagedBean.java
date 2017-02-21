@@ -19,6 +19,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -32,6 +33,12 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     @EJB
     private UsuarioFacadeLocal usuariofc;
 
+    @Inject LoginManagedBean us;
+
+    public LoginManagedBean getUs() {
+        return us;
+    }
+    
     public UsuarioManagedBean() {
     }
 
@@ -58,12 +65,17 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     }
 
     public void modificarUsuario() {
-        usuariofc.edit(usuario);
+        try {
+            usuariofc.edit(usuario);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Se a guardado satisfactoriamente!", "Se modifico"));
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public String actualizarUsuario(Usuario u) {
-        usuario = u;
-        return "/pages/editar";
+    public String actualizarUsuario() {
+        us.getUsuario();
+        return "/pages/usuario/configuracion?faces-redirect=true";
     }
 
     public List<Usuario> listarUsuario() {
