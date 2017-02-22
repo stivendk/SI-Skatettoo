@@ -30,17 +30,17 @@
 
                 <div style="position:relative;">
                     <div class="seccion">
-                        <ui:repeat value="#{noticiaManagedBean.notiUsuario()}" var="item">
+                        <ui:repeat value="#{noticiaManagedBean.notiUsuario()}" var="noticia">
                             <div class="panel-body" id="cuidados">
-                                <center><h1 class="parrafo">#{item.titulo}</h1></center>
-                                <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../../img/#{item.imgn}.jpg" width="400px" height="400px"/>
+                                <center><h1 class="parrafo">#{noticia.titulo}</h1></center>
+                                <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../../img/#{noticia.imgn}.jpg" width="400px" height="400px"/>
                                     <figcaption class="text-center"></figcaption>
                                 </figure>
                                 <hr/> 
-                                <p class="parrafo">#{item.descripcion}</p>
-                                <td><h:commandButton class="btn btn-primary btn-xs" action="#{noticiaManagedBean.editarNoticia()}" value="Editar"><samp class="glyphicon glyphicon-pencil"></samp></h:commandButton></td>
-                                <td><h:commandButton class="btn btn-danger btn-xs" action="#{noticiaManagedBean.eliminarNoticia()}" value="eliminar"><samp class="glyphicon glyphicon-trash"></samp></h:commandButton></td>
+                                <p class="parrafo">#{noticia.descripcion}</p>
                                 <hr/>
+                                <td><h:commandButton class="btn btn-primary btn-xs" action="#{noticiaManagedBean.verNoticia()}" value="Editar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                <td><h:commandButton class="btn btn-danger btn-xs" action="#{noticiaManagedBean.eliminarNoticia()}" value="eliminar"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
                             </div>
                             <div class="bgimg-2">
                                 <div class="caption">

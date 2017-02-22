@@ -52,7 +52,7 @@
                     <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaManagedBean.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
                     <p:outputLabel value="IdUsuario:" for="idUsuario" />
                     <p:selectOneMenu id="idUsuario" value="#{noticiaManagedBean.noti.idUsuario}">
-                        <f:selectItems value="#{usuarioManagedBean.listarUsuario}" var="tatuador" itemLabel="#{tatuador.nombre} #{tatuador.apellido}"/>
+                        <f:selectItems value="#{usuarioManagedBean.listarUsuario()}" var="tatuador" itemLabel="#{tatuador.nombre} #{tatuador.apellido}"/>
                     </p:selectOneMenu>
                 </p:panelGrid>
                 <p:commandButton value="Publicar" actionListener="#{noticiaManagedBean.publicarNoticia()}"/>

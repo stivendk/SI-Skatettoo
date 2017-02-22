@@ -65,12 +65,12 @@ public class NoticiaManagedBean implements Serializable {
     
     public String actualizarNoticia(Noticia n){
         noti = n;
-        return "";
+        return "/pages/usuario/tatuador/gnoticia";
     }
     
     public String verNoticia(Noticia nn){
         noti = nn;
-        return "";
+        return "/pages/usuario/tatuador/gnoticia1";
     }
     
     public List<Noticia> listarNoticia(){
