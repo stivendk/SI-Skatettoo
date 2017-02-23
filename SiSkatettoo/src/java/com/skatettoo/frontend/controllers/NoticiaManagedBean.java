@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -65,12 +67,13 @@ public class NoticiaManagedBean implements Serializable {
     
     public String actualizarNoticia(Noticia n){
         noti = n;
-        return "/pages/usuario/tatuador/gnoticia";
+        return "/pages/tatuador/gnoticia1?faces-redirect=true";
     }
     
     public String verNoticia(Noticia nn){
         noti = nn;
-        return "/pages/usuario/tatuador/gnoticia1";
+        return "";
+        
     }
     
     public List<Noticia> listarNoticia(){

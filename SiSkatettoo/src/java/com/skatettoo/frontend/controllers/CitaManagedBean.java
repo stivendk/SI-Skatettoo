@@ -64,12 +64,12 @@ public class CitaManagedBean implements Serializable {
     
     public String actualizarCita(Cita c){
         cita = c;
-        return "/pages/usuario/tatuador/rcita";
+        return "/pages/tatuador/rcita";
     }
     
     public String aplazarCita(Cita c){
         cita = c;
-        return "/pages/usuario/tatuador/acita";
+        return "/pages/tatuador/acita";
     }
     
     public List<Cita> listarCita(){

@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -72,7 +74,13 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void registrarDisenio() {
-        diseniofc.create(disenio);
+        try {
+            disenio.setIdUsuario(getUs().getUsuario());
+            diseniofc.create(disenio);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha publicado con exito", "Se ha agregado un nuevo diseño"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha producido un error", "¡Error!"));
+        }
     }
 
     public void eliminarDisenio() {
@@ -85,7 +93,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
     public String actualizarDisenio(Disenio d) {
         disenio = d;
-        return "/pages/usuario/tatuador/cdisenio";
+        return "/pages/tatuador/cdisenio";
     }
 
     public String verDisenio(Disenio d) {

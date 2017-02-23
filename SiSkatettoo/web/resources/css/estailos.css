@@ -87,3 +87,22 @@ body{
 .texto{
     color: #000;
 }
+.caja2{
+    background-color: #f9f9f9;
+    width: 780px;
+    height: 500px;
+    margin-bottom: 30px;
+    margin-left: 177px;
+    position: fixed;
+}
+
+.dentro{
+    background-color: rgba(215, 44, 239, 0.1);
+    width: 370px;
+    height: 480px;
+    margin-top: 10px;
+    margin-left: -6px;
+}
+.dentro:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
