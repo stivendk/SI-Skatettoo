@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="./../../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head2">
+                <link rel="icon" href="../../../img/st1.ico" type="image/x-icon"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/estailos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../../resources/css/parallax.css"></link>
+            </ui:define>
+
+            <ui:define name="titulo">
+                Publicar Noticia | Skatettoo
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" jsf:outcome="/pages/usuario/tatuador/gnoticia" class="btn btn-default btn-sm right" style="width: 3%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                        <center><h4 class="modal-title custom_align" id="Heading">#{noticiaManagedBean.noti.titulo}</h4></center>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h:outputLabel value="Titulo:" for="titulo" />
+                            <h:inputText class="form-control" id="titulo" value="#{noticiaManagedBean.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>  
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Descripcion:" for="descripcion" />
+                            <h:inputTextarea class="form-control" rows="4" cols="30" id="descripcion" value="#{noticiaManagedBean.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Imgn:" for="imgn" />
+                            <h:inputText class="form-control" id="imgn" value="#{noticiaManagedBean.noti.imgn}" title="Imgn" />                            
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Tatuador:" for="tatuador" />
+                            <h:selectOneMenu class="form-control" id="tatuador" value="#{noticiaManagedBean.noti.idUsuario.nombre} #{noticiaManagedBean.noti.idUsuario.apellido}" title="IdUsuario" required="true" requiredMessage="The IdUsuario field is required."/>                           
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container">
+                            <div class="row">
+                                <button type="button" jsf:outcome="/pages/usuario/tatuador/gnoticia" class="btn btn-danger btn-lg col-lg-4" style="width: 50%;"><span class="glyphicon glyphicon-floppy-remove"></span> Cancelar</button>
+                                <h:commandButton type="button" value="Publicar" actionListener="#{noticiaManagedBean.publicarNoticia()}" class="btn btn-primary btn-lg col-lg-4-6" style="width:  50%; margin-top:  -77px;"></h:commandButton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
