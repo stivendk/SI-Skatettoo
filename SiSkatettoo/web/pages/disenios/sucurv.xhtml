@@ -7,54 +7,97 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-
             <ui:define name="head2"></ui:define>
             <ui:define name="head">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/estilos.css"></link>
-                <link rel="stylesheet" type="text/css" href="../../resources/css/sucurv.css"></link>
+                <h:outputStylesheet name="css/sucurv.css" />
             </ui:define>
-
             <ui:define name="titulo">
-                #{sucursalManagedBean.sucu.nombre} | Skatettoo
+                #{panelSucursalManagedBean.sucu.nombre} | Skatettoo
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
-                <p:link value="Regresar" outcome="/pages/disenios/sucursales"></p:link>
-                <div class="container fondo">
-                    <div class="row">
-                        <div class="twPc-div">
-                            <a class="twPc-bg twPc-block"></a>
-
-                            <div>
-                                <div class="twPc-avatarLink">
-                                    <img alt="Mert Salih Kaplan" src="../../img/#{sucursalManagedBean.sucu.fotoSuc}.jpg" class="twPc-avatarImg"/>
-                                </div>
-
-                                <div class="twPc-divUser">
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <center><h1>#{sucursalManagedBean.sucu.nombre}</h1>
-                                        <br/>
-                                        <a href=""><h2>Tatuadores</h2></a>
-                                        <p>#{sucursalManagedBean.sucu.direccion}</p>
-                                        <p>#{sucursalManagedBean.sucu.telefono}</p>
-                                        <br/>
-                                        <p>#{sucursalManagedBean.sucu.descripcion}</p></center>
-                                </div>
-                            </div>
+                <div class="contenido-izquierda">
+                    <div class="contenido-sucursal-header">
+                        <img alt="Mert Salih Kaplan" src="../../img/#{panelSucursalManagedBean.sucu.fotoSuc}.jpg" class="avatar-sucursal"/>
+                    </div>
+                    <div class="contenido-sucursal listatatuadoressucursal">
+                        <div class="info-sucursal">
+                            <h1>#{panelSucursalManagedBean.sucu.nombre}</h1>
+                            <a href=""><h2>Tatuadores</h2></a>
+                            <p>#{panelSucursalManagedBean.sucu.direccion}</p>
+                            <p>#{panelSucursalManagedBean.sucu.telefono}</p>
+                            <p>#{panelSucursalManagedBean.sucu.descripcion}</p>
                         </div>
-                        <div class="invs">
-
+                        <div class="sucursal-tattooist">
+                            <h:form>
+                                <ul id="display-inline-block-example">
+                                    <ui:repeat value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="item">
+                                        <li><img class="avatar-tatuador" src="../../img/#{item.fotoPerfil}.jpg" />
+                                            <span>#{item.nombre} #{item.apellido}</span></li>
+                                    </ui:repeat>
+                                </ul>
+                            </h:form>
                         </div>
-                        <!-- code end -->
+                    </div>
+                    <div id="listadisenios">
+                        <span class="tatuador-link">X</span>
+                        <f:view>
+
+
+                            <h:form>
+                                <h1><h:outputText value="List"/></h1>
+                                <h:dataTable value="#{panelSucursalManagedBean.listaDisenio()}" var="dis">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NombreD"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.nombreD}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NombreDisenio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.nombreDisenio}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="SesionesRecomendadas"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.sesionesRecomendadas}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="PrecioDisenio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.precioDisenio}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Anotaciones"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.anotaciones}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdEstiloDisenio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{dis.idEstiloDisenio.nombreEstilo}"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+
                     </div>
                 </div>
+                <script>
+                    $('.tatuador-link').on('click', function () {
+                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
+                    });
+                </script>
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
+

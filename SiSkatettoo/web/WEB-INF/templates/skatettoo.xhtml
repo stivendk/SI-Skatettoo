@@ -11,8 +11,9 @@
         <link rel="icon" href="../../img/st1.ico" type="image/x-icon"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <link rel="stylesheet" type="text/css" href="css/estailos.css"></link>
-        <link rel="stylesheet" type="text/css" href="css/parallax.css"></link>
+        <h:outputScript name="js/jquery-2.2.3.min.js"/>
+        <h:outputStylesheet name="css/estailos.css"/>
+        <h:outputStylesheet name="css/estilos.css"/>
         <ui:insert name="head">
             <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
         </ui:insert>
@@ -82,11 +83,13 @@
                                 </div>
                             </div>
                         </ui:repeat>
+                        <h:form>
+                            <h:commandLink action="/pages/disenios/prueba.xhtml" value="lol"/>
+                        </h:form>
                     </div>
                 </div>
             </ui:insert>
         </div>
-
     </h:body>
 
 </html>

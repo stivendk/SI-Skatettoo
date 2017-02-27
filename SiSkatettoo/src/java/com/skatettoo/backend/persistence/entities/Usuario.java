@@ -6,7 +6,9 @@
 package com.skatettoo.backend.persistence.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +19,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +45,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable, IEntitie {
 
+    private static final long serialVersionUID = 1L;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Disenio> disenioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Noticia> noticiaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Cita> citaList;
+
     @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     @ManyToOne(fetch = FetchType.LAZY)
     private Rol idRol;
@@ -51,7 +63,6 @@ public class Usuario implements Serializable, IEntitie {
     @ManyToOne(fetch = FetchType.LAZY)
     private Sucursal idSucursal;
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -224,6 +235,33 @@ public class Usuario implements Serializable, IEntitie {
 
     public void setIdSucursal(Sucursal idSucursal) {
         this.idSucursal = idSucursal;
+    }
+
+    @XmlTransient
+    public List<Disenio> getDisenioList() {
+        return disenioList;
+    }
+
+    public void setDisenioList(List<Disenio> disenioList) {
+        this.disenioList = disenioList;
+    }
+
+    @XmlTransient
+    public List<Noticia> getNoticiaList() {
+        return noticiaList;
+    }
+
+    public void setNoticiaList(List<Noticia> noticiaList) {
+        this.noticiaList = noticiaList;
+    }
+
+    @XmlTransient
+    public List<Cita> getCitaList() {
+        return citaList;
+    }
+
+    public void setCitaList(List<Cita> citaList) {
+        this.citaList = citaList;
     }
     
 }

@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FacesUtils {
 
-    public static void setUsuarioLogueado(Usuario u) {
+    public static void setObjectAcceso(String nombre, Object objeto) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getSessionMap().put("usuario", u);
+        context.getExternalContext().getSessionMap().put(nombre, objeto);
     }
 
     public static void mensaje(String mensaje) {
@@ -27,14 +27,14 @@ public class FacesUtils {
         context.addMessage(null, new FacesMessage(mensaje));
     }
 
-    public static Usuario getUsuarioLogueado() {
+    public static Object getObjectMapSession(String s) {
         FacesContext context = FacesContext.getCurrentInstance();
-        return (Usuario) context.getExternalContext().getSessionMap().get("usuario");
+        return context.getExternalContext().getSessionMap().get(s);
     }
 
-    public static void removerUsuario() {
+    public static void removerObjectAcceso(String nombre) {
         FacesContext context = FacesContext.getCurrentInstance();
-        context.getExternalContext().getSessionMap().remove("usuario");
+        context.getExternalContext().getSessionMap().remove(nombre);
         context.getExternalContext().invalidateSession();
     }
 

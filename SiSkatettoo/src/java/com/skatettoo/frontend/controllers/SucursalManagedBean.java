@@ -9,18 +9,18 @@ import com.plandemjr.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author StivenDavid
  */
 @Named(value = "sucursalManagedBean")
-@SessionScoped
+@RequestScoped
 public class SucursalManagedBean implements Serializable, Managedbean <Sucursal> {
 
     private Sucursal sucu;
@@ -62,7 +62,8 @@ public class SucursalManagedBean implements Serializable, Managedbean <Sucursal>
     
     public String verSucursal(Sucursal ss){
         sucu = ss;
-        return "/pages/disenios/sucurv";
+        FacesUtils.setObjectAcceso("sucursal", ss);
+        return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
     }
     
     public List<Sucursal> listarSucursal(){

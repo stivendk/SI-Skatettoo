@@ -41,35 +41,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <!-- Email input-->
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Sucursal:" for="idSucursal" />
-                                                            <div class="col-md-9">
-                                                                <h:selectOneMenu class="form-control" id="idSucursal" value="#{citaManagedBean.cita.idSucursal}" required="true" requiredMessage="The IdSucursal field is required.">
-                                                                    <!-- TODO: update below reference to list of available items-->
-                                                                    <f:selectItems value="#{sucursalManagedBean.listarSucursal()}" var="sucu" itemLabel="#{sucu.nombre}"/>
-                                                                </h:selectOneMenu>
-                                                            </div>
-                                                        </div>
                                                         <br/>
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
-                                                            <div class="col-md-9">
-                                                                <div class="input-group image-preview">
-                                                                    <span class="input-group-btn">
-                                                                        <!-- image-preview-clear button -->
-                                                                        <!-- image-preview-input -->
-                                                                        <div class="btn btn-default image-preview-input">
-                                                                            <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-                                                                            <span class="glyphicon glyphicon-folder-open"></span>
-                                                                            <span class="image-preview-input-title">Buscar</span>
-                                                                        </div>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Message body -->
                                                         <div class="form-group">
                                                             <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
                                                             <div class="col-md-9">
@@ -80,7 +52,7 @@
                                                         <!-- Form actions -->
                                                         <div class="form-group">
                                                             <div class="col-md-12 text-right">
-                                                                <h:commandButton pt:type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
+                                                                <h:commandButton pt:type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarDisenio()}"/>
                                                             </div>
                                                         </div>
                                                     </fieldset>

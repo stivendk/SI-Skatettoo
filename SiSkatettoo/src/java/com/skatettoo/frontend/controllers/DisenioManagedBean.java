@@ -9,12 +9,12 @@ import com.plandemjr.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import javax.inject.Inject;
  * @author StivenDavid
  */
 @Named(value = "disenioManagedBean")
-@SessionScoped
+@RequestScoped
 public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
     private Disenio disenio;

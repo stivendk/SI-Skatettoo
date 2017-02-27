@@ -26,12 +26,36 @@ import javax.inject.Inject;
 @Named(value = "citaManagedBean")
 @SessionScoped
 public class CitaManagedBean implements Serializable {
+    
+    private int hora = 5;
 
+    public int getHora() {
+        return hora;
+    }
+
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
     private Cita cita;
     @EJB
     private CitaFacadeLocal citafc;
  
     @Inject LoginManagedBean us;
+    @Inject DisenioManagedBean dis;
+    @Inject UsuarioManagedBean usu;
+
+    public UsuarioManagedBean getUsu() {
+        return usu;
+    }
+    @Inject SucursalManagedBean suc;
+
+    public DisenioManagedBean getDis() {
+        return dis;
+    }
+
+    public SucursalManagedBean getSuc() {
+        return suc;
+    }
     
     public CitaManagedBean() {
     }
@@ -50,8 +74,27 @@ public class CitaManagedBean implements Serializable {
     }
     
     public void solicitarCita(){
-        cita.setIdUsuario(getUs().getUsuario()); 
+        cita.setIdUsuario(getUs().getUsuario());
         citafc.create(cita);
+    }
+    
+    public String seleccionarDis(){
+        try {
+            dis.getDisenio();
+            return "/pages/disenios/citadis?faces-redirect=true";
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    public void solicitarDisenio(){
+        try {
+            cita.setIdSucursal(getSuc().getSucu());
+            citafc.create(cita);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Tu solicitud se ha realizado!", "Se modifico"));
+        } catch (Exception e) {
+            throw e;
+        }
     }
     
     public void eliminarCita(){

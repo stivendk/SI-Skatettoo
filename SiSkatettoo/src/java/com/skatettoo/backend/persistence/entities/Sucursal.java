@@ -8,6 +8,7 @@ package com.skatettoo.backend.persistence.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,10 +43,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sucursal.findByTelefono", query = "SELECT s FROM Sucursal s WHERE s.telefono = :telefono")})
 public class Sucursal implements Serializable, IEntitie {
 
+    private static final long serialVersionUID = 1L;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSucursal", fetch = FetchType.LAZY)
+    private List<Cita> citaList;
+
     @OneToMany(mappedBy = "idSucursal", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -186,6 +191,15 @@ public class Sucursal implements Serializable, IEntitie {
 
     public void setUsuarioList(List<Usuario> usuarioList) {
         this.usuarioList = usuarioList;
+    }
+
+    @XmlTransient
+    public List<Cita> getCitaList() {
+        return citaList;
+    }
+
+    public void setCitaList(List<Cita> citaList) {
+        this.citaList = citaList;
     }
     
 }

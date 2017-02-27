@@ -47,8 +47,7 @@ public class LoginManagedBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        usuario = (Usuario) FacesUtils.getUsuarioLogueado();
-        System.out.println(usuario);
+        usuario = (Usuario) FacesUtils.getObjectMapSession("usuario");
         permis = getUsuario().getIdRol().getPermisoList();
     }
 
@@ -61,7 +60,8 @@ public class LoginManagedBean implements Serializable {
         }
     }
     public String cerrarSesion() {
-        FacesUtils.removerUsuario();
+        FacesUtils.removerObjectAcceso("usuario");
+        FacesUtils.removerObjectAcceso("sucursal");
         usuario = null;
         return "/index.xhtml?faces-redirect=true";
     }

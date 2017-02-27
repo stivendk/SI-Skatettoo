@@ -87,7 +87,7 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         try {
             if (usuariofc.iniciarSesion(usuario)!=null) {
                 usuario = usuariofc.iniciarSesion(usuario);
-                FacesUtils.setUsuarioLogueado(usuario);
+                FacesUtils.setObjectAcceso("usuario",usuario);
                 return "/pages/usuario/inicio.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {

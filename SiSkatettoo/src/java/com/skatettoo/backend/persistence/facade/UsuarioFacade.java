@@ -60,13 +60,10 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return null;
     }*/
-    
+
     @Override
     public List<Usuario> sucursalUsuario() {
-        TypedQuery<Usuario> query;
-        query = em.createQuery("SELECT u.nombre, u.apellido, s.nombre, s.direccion FROM Usuario u INNER JOIN Usuario_sucursal us on  u.id_usuario=us.id_usuario INNER JOIN Sucursal s ON us.id_sucursal=s.id_sucursal WHERE s.id_sucursal=1", Usuario.class);
-        List<Usuario> sucur = query.getResultList();
-        return sucur;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
