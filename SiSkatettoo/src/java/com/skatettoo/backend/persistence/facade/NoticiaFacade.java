@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class NoticiaFacade extends AbstractFacade<Noticia> implements NoticiaFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override

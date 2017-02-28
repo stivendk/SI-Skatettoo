@@ -91,6 +91,7 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
                 return "/pages/usuario/inicio.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "¡Credenciales Incorrectas!", "Error"));
         }
         return null;
     }

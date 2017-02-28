@@ -17,11 +17,10 @@
                 <script src="../../resources/js/jquery-2.2.3.min.js"></script>
             </ui:define>
             <ui:define name="titulo">
-                #{disenioManagedBean.disenio.nombreD} | Skatettoo
+                #{panelDisenioManagedBean.dis.nombreD} | Skatettoo
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
-                <p:link value="Regresar" outcome="/pages/disenios/disenios"/>
                 <h:form>
                     <center><div class="container">    
                             <div class="row">
@@ -30,22 +29,22 @@
                                         <div class="panel-body">
                                             <div class="col-md-12 panelTop">	
                                                 <div class="col-md-4">	
-                                                    <img class="img-responsive" src="../../img/#{disenioManagedBean.disenio.nombreDisenio}.jpg" alt=""/>
+                                                    <img class="img-responsive" src="../../img/#{panelDisenioManagedBean.dis.nombreDisenio}.jpg" alt=""/>
                                                 </div>
                                                 <div class="col-md-8">	
-                                                    <h2>#{disenioManagedBean.disenio.idUsuario.nombre} #{disenioManagedBean.disenio.idUsuario.apellido}</h2>
-                                                    <p>#{disenioManagedBean.disenio.anotaciones}</p>
+                                                    <h2>#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}</h2>
+                                                    <p>#{panelDisenioManagedBean.dis.anotaciones}</p>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-12 panelBottom">
                                                 <div class="col-md-4 text-left">
-                                                    <h5>Price <span class="itemPrice">$#{disenioManagedBean.disenio.precioDisenio}</span></h5>
+                                                    <h5>Price <span class="itemPrice">$#{panelDisenioManagedBean.dis.precioDisenio}</span></h5>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div>
                                                         <br/>
-                                                        <a jsf:action="#{disenioManagedBean.estiloDisenio()}">##{disenioManagedBean.disenio.idEstiloDisenio.nombreEstilo}</a>
+                                                        <a jsf:action="#{panelDisenioManagedBean.estiloDisenio()}">##{panelDisenioManagedBean.dis.idEstiloDisenio.nombreEstilo}</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 text-center">

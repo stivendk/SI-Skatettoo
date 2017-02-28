@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class EstadoUsuarioFacade extends AbstractFacade<EstadoUsuario> implements EstadoUsuarioFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override

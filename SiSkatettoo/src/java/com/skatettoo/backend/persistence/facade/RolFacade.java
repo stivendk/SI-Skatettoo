@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override

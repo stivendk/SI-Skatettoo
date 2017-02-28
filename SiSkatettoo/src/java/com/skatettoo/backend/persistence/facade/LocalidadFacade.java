@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class LocalidadFacade extends AbstractFacade<Localidad> implements LocalidadFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override

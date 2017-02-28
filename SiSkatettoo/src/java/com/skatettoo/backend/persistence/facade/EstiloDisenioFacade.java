@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class EstiloDisenioFacade extends AbstractFacade<EstiloDisenio> implements EstiloDisenioFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override

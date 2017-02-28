@@ -1,8 +1,10 @@
 body{
-    height: 100%;
-    margin: 0;
-    font: 400 15px/1.8 "Lato", sans-serif;
-    color: #777;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: center;
+    background-attachment: fixed;
+    text-decoration: none;
+    text-decoration-line: none;
 }
 .navbar {background-color: #0B0B0B !important; border-color: transparent; border-radius: 0%;
          box-shadow: 0 0 6px 3px rgba(0,0,0,.35); }
@@ -63,6 +65,76 @@ body{
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
     color: #DDBE42;
+}
+.logo{
+    margin-top: -26px;
+}
+.vacio{
+    width: 100%;
+    height: 110px;
+    background-color: transparent;
+}
+.capa{
+    background-color: rgba(0,0,0,0.4);
+}
+.caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
+.caption span.border {
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+
+.texto{
+    color:#fff;
+}
+.text {
+    min-height:300px;
+    height:auto;
+    border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+    border-color: rgb(252, 227, 176); 
+    background-color: #ffffcc; 
+    background-image: url(https://d3dma7a8zw52bz.cloudfront.net/assets/documents/document_body_rules-f0711254a4cc2b734e9317489d363ce2.gif);
+}
+
+.content-text {
+    padding:0px 20px 10px;
+    margin: -5px;
+}
+.ventana2{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    position: fixed;
+    background-color: rgba(255,255,255,.8);
+    top: 0;
+    left: 0;
+    display: none;
+}
+.cerrar{
+    color: #000;
+    font-weight: 900;
+    text-align: right;
+}
+.equis1{
+    font-size:40px;text-decoration: none;
+    color: #000;
+}
+.fondo{
+    background-color: #fff; padding-bottom: 50px;
+}
+
+.tabla{
+    background-color: #fff;
 }
 .logo{
     margin-top: -26px;

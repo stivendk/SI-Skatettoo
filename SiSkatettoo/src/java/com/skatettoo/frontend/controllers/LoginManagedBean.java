@@ -62,6 +62,7 @@ public class LoginManagedBean implements Serializable {
     public String cerrarSesion() {
         FacesUtils.removerObjectAcceso("usuario");
         FacesUtils.removerObjectAcceso("sucursal");
+        FacesUtils.removerObjectAcceso("disenio");
         usuario = null;
         return "/index.xhtml?faces-redirect=true";
     }

@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Local
 public interface UsuarioFacadeLocal {
@@ -32,5 +32,4 @@ public interface UsuarioFacadeLocal {
     
     Usuario iniciarSesion(Usuario us)throws Exception;
     
-    List<Usuario> sucursalUsuario();
 }

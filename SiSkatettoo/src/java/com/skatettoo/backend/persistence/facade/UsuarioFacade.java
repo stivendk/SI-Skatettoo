@@ -6,21 +6,19 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Usuario;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {
 
-    @PersistenceContext(unitName = "SkatettooSI1PU")
+    @PersistenceContext(unitName = "SiSkatettooPU")
     private EntityManager em;
 
     @Override
@@ -47,23 +45,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             throw e;
         }
         return usuario;
-    }
-
-    /*public Usuario autenticar(Usuario u){
-        try {
-            TypedQuery<Usuario> usuariolist = getEntityManager().createNamedQuery("Usuario.findByUsername", Usuario.class)
-                    .setParameter("username", u.getUsername());
-            if (usuariolist.getResultList().get(0).getPassword().equals(u.getPassword())) {
-                return usuariolist.getResultList().get(0);
-            }
-        } catch (Exception e) {
-        }
-        return null;
-    }*/
-
-    @Override
-    public List<Usuario> sucursalUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

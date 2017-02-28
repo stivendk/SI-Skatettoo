@@ -98,6 +98,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
     public String verDisenio(Disenio d) {
         disenio = d;
+        FacesUtils.setObjectAcceso("disenio", d);
         return "/pages/disenios/disenio";
     }
 

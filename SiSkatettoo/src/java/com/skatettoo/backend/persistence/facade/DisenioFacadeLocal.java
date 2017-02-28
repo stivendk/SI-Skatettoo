@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
 @Local
 public interface DisenioFacadeLocal {
@@ -30,5 +30,4 @@ public interface DisenioFacadeLocal {
 
     int count();
     
-    //List<Disenio> estiloDisenio(int estilo);
 }

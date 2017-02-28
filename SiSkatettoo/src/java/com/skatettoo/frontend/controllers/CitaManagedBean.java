@@ -6,6 +6,7 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
+import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -37,11 +38,28 @@ public class CitaManagedBean implements Serializable {
         this.hora = hora;
     }
     private Cita cita;
+    private Disenio dis;
     @EJB
     private CitaFacadeLocal citafc;
  
     @Inject LoginManagedBean us;
-    @Inject DisenioManagedBean dis;
+    @Inject DisenioManagedBean du;
+
+    public Disenio getDis() {
+        return dis;
+    }
+
+    public void setDis(Disenio dis) {
+        this.dis = dis;
+    }
+
+    public DisenioManagedBean getDu() {
+        return du;
+    }
+
+    public void setDu(DisenioManagedBean du) {
+        this.du = du;
+    }
     @Inject UsuarioManagedBean usu;
 
     public UsuarioManagedBean getUsu() {
@@ -49,9 +67,6 @@ public class CitaManagedBean implements Serializable {
     }
     @Inject SucursalManagedBean suc;
 
-    public DisenioManagedBean getDis() {
-        return dis;
-    }
 
     public SucursalManagedBean getSuc() {
         return suc;
@@ -78,9 +93,10 @@ public class CitaManagedBean implements Serializable {
         citafc.create(cita);
     }
     
-    public String seleccionarDis(){
+    public String seleccionarDis(Disenio d){
         try {
-            dis.getDisenio();
+            dis = d;
+            FacesUtils.setObjectAcceso("disenio", d);
             return "/pages/disenios/citadis?faces-redirect=true";
         } catch (Exception e) {
             throw e;
@@ -90,6 +106,7 @@ public class CitaManagedBean implements Serializable {
     public void solicitarDisenio(){
         try {
             cita.setIdSucursal(getSuc().getSucu());
+            cita.setIdDisenio(getDu().getDisenio());
             citafc.create(cita);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Tu solicitud se ha realizado!", "Se modifico"));
         } catch (Exception e) {
