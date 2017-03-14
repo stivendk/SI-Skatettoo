@@ -5,7 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <link rel="icon" href="img/st1.ico" type="image/x-icon"/>
         <title>Iniciar Sesion</title>
@@ -15,7 +16,7 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:growl autoUpdate="true"/>
+            <h:messages showSummary="true"/>
             <div class="login-body">
                 <article class="container-login center-block">
                     <section>
@@ -28,19 +29,19 @@
                                 <h:form>
                                     <form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
                                         <div class="form-group ">
-                                            <p:outputLabel  class="sr-only"> Username</p:outputLabel>
-                                            <p:inputText type="text" class="form-control"  id="login_value" 
-                                                         placeholder="Username" tabindex="1" value="#{usuarioManagedBean.usuario.username}" />
+                                            <h:outputLabel  class="sr-only"> Username</h:outputLabel>
+                                            <h:inputText pt:type="text" class="form-control"  id="login_value" 
+                                                         pt:placeholder="Username" tabindex="1" value="#{usuarioManagedBean.usuario.username}" />
                                         </div>
                                         <div class="form-group ">
-                                            <p:outputLabel for="password" class="sr-only">Password</p:outputLabel>
-                                            <p:password  class="form-control"  id="password"
-                                                         placeholder="Password" value="#{usuarioManagedBean.usuario.password}" tabindex="2" />
+                                            <h:outputLabel for="password" class="sr-only">Password</h:outputLabel>
+                                            <h:inputText pt:type="password" class="form-control"  id="password"
+                                                         pt:placeholder="Password" value="#{usuarioManagedBean.usuario.password}" tabindex="2" />
                                         </div>
 
                                         <br/>
                                         <div class="form-group ">				
-                                            <p:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSession()}" id="submit" tabindex="5" class="btn btn-lg btn-primary"/>
+                                            <h:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSession()}" id="submit" tabindex="5" class="btn btn-lg btn-danger"/>
                                         </div>
                                     </form>
                                 </h:form>
