@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <h:outputScript name="js/jquery-2.2.3.min.js"/>
         <h:outputStylesheet name="css/estailos.css"/>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
         <ui:insert name="head">
             <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
         </ui:insert>
@@ -59,33 +60,45 @@
 
         <div id="content" class="center_content">
             <ui:insert name="content">
-                <div class="bgimg-2">
-                    <div class="caption">
-                    </div>
-                </div>
-
                 <div style="position:relative;">
-                    <div class="seccion">
+                    <div class="">
                         <ui:repeat value="#{noticiaManagedBean.listarNoticia()}" var="item">
-                            <div class="panel-body" id="cuidados">
-                                <center><h1 class="parrafo">#{item.titulo}</h1></center>
-                                <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../img/#{item.imgn}.jpg" width="400px" height="400px"/>
-                                    <figcaption class="text-center"></figcaption>
-                                </figure>
-                                <hr/> 
-                                <p class="parrafo">#{item.descripcion}</p>
-
-                                <hr/>
-                            </div>
-                            <div class="bgimg-2">
-                                <div class="caption">
+                            <div class="">
+                                <div class="col-page col-sm-8 col-md-6">
+                                    <a href="#" data-toggle="modal" data-target=".pop-up-1" class="black fondo-publicacion-home">
+                                        <div class="img-publicacion-principal-home">
+                                            <img class="img-responsive img-rounded" alt="image" src="../../img/#{item.imgn}.jpg" width="400px" height="400px"/>
+                                        </div>
+                                        <div class="contenido-publicacion-principal-home">
+                                            <h3>#{item.titulo}</h3>
+                                        </div>
+                                        <div class="mascara-enlace-blog-home">
+                                            <span>Ver </span>
+                                        </div> 
+                                    </a>
                                 </div>
                             </div>
                         </ui:repeat>
-                        <h:form>
-                            <h:commandLink action="/pages/disenios/prueba.xhtml" value="lol"/>
-                        </h:form>
                     </div>
+                </div>
+                <div class="modal fade pop-up-1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content" style="color: #000;">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" id="myLargeModalLabel-1">Cuidados del tatuaje</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img src="imgs/jh.jpg" class="img-responsive img-rounded center-block" alt=""/>
+                                <p> El tatuador te vendará el tatuaje, recuerda que debes dejarlo así por lo menos 1 hora y no más de 5. Después de quitar la venda NO vuelvas a colocar otra, ya que, esto permite que tu piel respire. Humedécelo levemente usando jabón neutro y agua tibia. Enjuaga de tres a cuatro veces al día y suavemente coloca crema cicatrizante, debes usarlo sólo cuando sientas tirante el tatuaje o que te pica; debes continuar con el tratamiento durante una semana y las dos semanas siguientes aplicar una crema hidratante. 
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
                 </div>
             </ui:insert>
         </div>
