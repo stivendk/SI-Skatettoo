@@ -12,7 +12,11 @@
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
 
-            <ui:define name="head2"></ui:define>
+            <ui:define name="head2">
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
+            </ui:define>
             <ui:define name="titulo">
                 Enviar Cita | Skatettoo
             </ui:define>
@@ -20,81 +24,97 @@
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <f:view>
-                    <center><h:form>
-                            <h:messages showSummary="true"/>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <div class="well well-sm">
-                                            <h:form>
-                                                <form class="form-horizontal" action="" method="post">
-                                                    <fieldset>
-                                                        <legend class="text-center">Solicitar Cita</legend>
+                    <center><h:messages showSummary="true"/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="well well-sm">
+                                        <h:form class="form-horizontal"  pt:method="post" prependId="false">
 
-                                                        <!-- Name input-->
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
-                                                            <div class="col-md-9">
-                                                                <h:inputText class="form-control" id="fechaHora" pt:placeholder="MM/dd/yyyy HH:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
-                                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                                                </h:inputText>
-                                                            </div>
-                                                        </div>
+                                            <fieldset>
+                                                <legend class="text-center">Solicitar Cita</legend>
 
-                                                        <!-- Email input-->
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Sucursal:" for="idSucursal" />
-                                                            <div class="col-md-9">
-                                                                <h:selectOneMenu class="form-control" id="idSucursal" value="#{citaManagedBean.cita.idSucursal}" required="true" requiredMessage="The IdSucursal field is required.">
-                                                                    <!-- TODO: update below reference to list of available items-->
-                                                                    <f:selectItems value="#{sucursalManagedBean.listarSucursal()}" var="sucu" itemLabel="#{sucu.nombre}"/>
-                                                                </h:selectOneMenu>
-                                                            </div>
-                                                        </div>
-                                                        <br/>
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
-                                                            <div class="col-md-9">
-                                                                <div class="input-group image-preview">
-                                                                    <span class="input-group-btn">
-                                                                        <!-- image-preview-clear button -->
-                                                                        <!-- image-preview-input -->
-                                                                        <div class="btn btn-default image-preview-input">
-                                                                            <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-                                                                            <span class="glyphicon glyphicon-folder-open"></span>
-                                                                            <span class="image-preview-input-title">Buscar</span>
-                                                                        </div>
-                                                                    </span>
+                                                <!-- Name input-->
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
+                                                    <div class="col-md-9">
+                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                            <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
+                                                        </h:inputText>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Email input-->
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-md-3 control-label" value="Sucursal:" for="idSucursal" />
+                                                    <div class="col-md-9">
+                                                        <h:selectOneMenu class="form-control" id="idSucursal" value="#{citaManagedBean.cita.idSucursal}" required="true" requiredMessage="The IdSucursal field is required.">
+                                                            <!-- TODO: update below reference to list of available items-->
+                                                            <f:selectItems value="#{sucursalManagedBean.listarSucursal()}" var="sucu" itemLabel="#{sucu.nombre}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
+                                                    <div class="col-md-9">
+                                                        <div class="input-group image-preview">
+                                                            <span class="input-group-btn">
+                                                                <!-- image-preview-clear button -->
+                                                                <!-- image-preview-input -->
+                                                                <div class="btn btn-default image-preview-input">
+                                                                    <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                                                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                                                    <span class="image-preview-input-title">Buscar</span>
                                                                 </div>
-                                                            </div>
+                                                            </span>
                                                         </div>
+                                                    </div>
+                                                </div>
 
-                                                        <!-- Message body -->
-                                                        <div class="form-group">
-                                                            <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
-                                                            <div class="col-md-9">
-                                                                <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                                                            </div>
-                                                        </div>
+                                                <!-- Message body -->
+                                                <div class="form-group">
+                                                    <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
+                                                    <div class="col-md-9">
+                                                        <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                    </div>
+                                                </div>
 
-                                                        <!-- Form actions -->
-                                                        <div class="form-group">
-                                                            <div class="col-md-12 text-right">
-                                                                <h:commandButton pt:type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </form>
-                                            </h:form>
-                                        </div>
+                                                <!-- Form actions -->
+                                                <div class="form-group">
+                                                    <div class="col-md-12 text-right">
+                                                        <h:commandButton type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <script>
+                                                var disabledDays = [0];
+                                                $("#fechaHora").datepicker({
+                                                    dateFormat: 'dd/mm/yyyy',
+                                                    timeFormat: 'hh:ii ',
+                                                    onRenderCell: function (date, cellType) {
+                                                        if (cellType == 'day') {
+                                                            var day = date.getDay(),
+                                                                    isDisabled = disabledDays.indexOf(day) != -1;
+
+                                                            return {
+                                                                disabled: isDisabled
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                            </script>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>
-                        </h:form></center>
+                        </div>
+                    </center>
                 </f:view>
             </ui:define>
 
         </ui:composition>
+
         <script src="../../../resources/js/subir.js"></script>
     </body>
 </html>

@@ -29,6 +29,12 @@ import javax.inject.Inject;
 public class CitaManagedBean implements Serializable {
     
     private int hora = 5;
+    private Cita cita;
+    private Disenio dis;
+    @EJB
+    private CitaFacadeLocal citafc;
+    @Inject LoginManagedBean us;
+    @Inject DisenioManagedBean du;
 
     public int getHora() {
         return hora;
@@ -37,13 +43,7 @@ public class CitaManagedBean implements Serializable {
     public void setHora(int hora) {
         this.hora = hora;
     }
-    private Cita cita;
-    private Disenio dis;
-    @EJB
-    private CitaFacadeLocal citafc;
  
-    @Inject LoginManagedBean us;
-    @Inject DisenioManagedBean du;
 
     public Disenio getDis() {
         return dis;
@@ -89,8 +89,13 @@ public class CitaManagedBean implements Serializable {
     }
     
     public void solicitarCita(){
-        cita.setIdUsuario(getUs().getUsuario());
-        citafc.create(cita);
+        try {
+            cita.setIdUsuario(getUs().getUsuario());
+            citafc.create(cita);
+            FacesUtils.mensaje("Se ha enviado");
+        } catch (Exception e) {
+            throw e;
+        }
     }
     
     public String seleccionarDis(Disenio d){

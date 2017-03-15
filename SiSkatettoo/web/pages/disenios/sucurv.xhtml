@@ -8,8 +8,7 @@
 
     <body>
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-            <ui:define name="head2"></ui:define>
-            <ui:define name="head">
+            <ui:define name="head2">
                 <h:outputStylesheet name="css/sucurv.css" />
             </ui:define>
             <ui:define name="titulo">
@@ -24,10 +23,10 @@
                     <div class="contenido-sucursal listatatuadoressucursal">
                         <div class="info-sucursal">
                             <h1>#{panelSucursalManagedBean.sucu.nombre}</h1>
-                            <a href=""><h2>Tatuadores</h2></a>
                             <p>#{panelSucursalManagedBean.sucu.direccion}</p>
                             <p>#{panelSucursalManagedBean.sucu.telefono}</p>
                             <p>#{panelSucursalManagedBean.sucu.descripcion}</p>
+                            <h2>Tatuadores</h2>
                         </div>
                         <div class="sucursal-tattooist">
                             <h:form>
