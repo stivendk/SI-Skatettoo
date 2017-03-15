@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ import javax.inject.Inject;
  * @author StivenDavid
  */
 @Named(value = "citaManagedBean")
-@SessionScoped
+@RequestScoped
 public class CitaManagedBean implements Serializable {
     
     private int hora = 5;
@@ -35,6 +36,11 @@ public class CitaManagedBean implements Serializable {
     private CitaFacadeLocal citafc;
     @Inject LoginManagedBean us;
     @Inject DisenioManagedBean du;
+    @Inject PanelSucursalManagedBean su;
+
+    public PanelSucursalManagedBean getSu() {
+        return su;
+    }
 
     public int getHora() {
         return hora;
@@ -91,6 +97,8 @@ public class CitaManagedBean implements Serializable {
     public void solicitarCita(){
         try {
             cita.setIdUsuario(getUs().getUsuario());
+            cita.setIdSucursal(getSu().getSucu());
+            cita.setTatuador(getSu().getTatuador().getIdUsuario());
             citafc.create(cita);
             FacesUtils.mensaje("Se ha enviado");
         } catch (Exception e) {

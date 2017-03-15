@@ -24,7 +24,7 @@
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <f:view>
-                    <center><h:messages showSummary="true"/>
+                    <center><h:messages showSummary="true" />
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
@@ -38,7 +38,7 @@
                                                 <div class="form-group">
                                                     <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
                                                     <div class="col-md-9">
-                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
                                                             <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
                                                         </h:inputText>
                                                     </div>

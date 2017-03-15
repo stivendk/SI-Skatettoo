@@ -40,11 +40,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cita.findByFechaHora", query = "SELECT c FROM Cita c WHERE c.fechaHora = :fechaHora")})
 public class Cita implements Serializable {
 
-    @Lob
-    @Column(name = "disenioAdjunto")
-    private byte[] disenioAdjunto;
-
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull()
+    @Column(name = "tatuador")
+    private Integer tatuador;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -179,12 +180,13 @@ public class Cita implements Serializable {
         return "com.skatettoo.backend.persistence.entities.Cita[ idCita=" + idCita + " ]";
     }
 
-    public byte[] getDisenioAdjunto() {
-        return disenioAdjunto;
+    public Integer getTatuador() {
+        return tatuador;
     }
 
-    public void setDisenioAdjunto(byte[] disenioAdjunto) {
-        this.disenioAdjunto = disenioAdjunto;
+    public void setTatuador(Integer tatuador) {
+        this.tatuador = tatuador;
     }
+
     
 }

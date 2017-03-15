@@ -3,6 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
@@ -10,6 +12,9 @@
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
             <ui:define name="head2">
                 <h:outputStylesheet name="css/sucurv.css" />
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
             </ui:define>
             <ui:define name="titulo">
                 #{panelSucursalManagedBean.sucu.nombre} | Skatettoo
@@ -32,7 +37,10 @@
                             <h:form>
                                 <ul id="display-inline-block-example">
                                     <ui:repeat value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="item">
-                                        <li><img class="avatar-tatuador" src="../../img/#{item.fotoPerfil}.jpg" />
+                                        <li>
+                                            <h:graphicImage class="avatar-tatuador">
+                                                <f:ajax event="click" listener="#{panelSucursalManagedBean.seleccionarTatt(item)}" render="disenios"/>
+                                            </h:graphicImage>
                                             <span>#{item.nombre} #{item.apellido}</span></li>
                                     </ui:repeat>
                                 </ul>
@@ -43,10 +51,10 @@
                         <span class="tatuador-link">X</span>
                         <f:view>
 
-
-                            <h:form>
+                            <h:commandButton pt:data-toggle="modal" pt:data-target=".pop-up-1"/>
+                            <h:form id="disenios">
                                 <h1><h:outputText value="List"/></h1>
-                                <h:dataTable value="#{panelSucursalManagedBean.listaDisenio()}" var="dis">
+                                <h:dataTable value="#{panelSucursalManagedBean.listUsSucu()}" var="dis">
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="NombreD"/>
@@ -88,12 +96,80 @@
                         </f:view>
 
                     </div>
+                    <script>
+                        $('.tatuador-link').on('click', function () {
+                            $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
+                        });
+                    </script>
                 </div>
-                <script>
-                    $('.tatuador-link').on('click', function () {
-                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
-                    });
-                </script>
+                <div class="modal fade pop-up-1" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- content goes here -->
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
+                                        <div class="col-md-9">
+                                            <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="da form-control" id="fechaHora" style="z-index: 1" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">File input</label>
+                                        <input type="file" id="exampleInputFile"/>
+                                        <p class="help-block">Example block-level help text here.</p>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
+                                        <div class="col-md-9">
+                                            <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        var disabledDays = [0];
+                                        $("#fechaHora").datepicker({
+                                            dateFormat: 'dd/mm/yyyy',
+                                            timeFormat: 'hh:ii ',
+                                            onRenderCell: function (date, cellType) {
+                                                if (cellType == 'day') {
+                                                    var day = date.getDay(),
+                                                            isDisabled = disabledDays.indexOf(day) != -1;
+
+                                                    return {
+                                                        disabled: isDisabled
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </h:form>
+                                <div class="modal-footer">
+                                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+                                        </div>
+                                        <div class="btn-group btn-delete hidden" role="group">
+                                            <button type="button" id="delImage" class="btn btn-danger btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" id="saveImage" class="btn btn-success btn-hover-green" jsf:actionListener="#{citaManagedBean.solicitarCita()}" role="button">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
 
         </ui:composition>

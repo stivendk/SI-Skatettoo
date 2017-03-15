@@ -9,8 +9,10 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -19,11 +21,14 @@ import javax.enterprise.context.RequestScoped;
  * @author APRENDIZ
  */
 @Named(value = "panelSucursalManagedBean")
-@RequestScoped
-public class PanelSucursalManagedBean {
+@ConversationScoped
+public class PanelSucursalManagedBean implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private Sucursal sucu;
     private Usuario tatuador;
+
 
     public Sucursal getSucu() {
         return sucu;
@@ -40,13 +45,14 @@ public class PanelSucursalManagedBean {
     public void setTatuador(Usuario tatuador) {
         this.tatuador = tatuador;
     }
-    
+
     public PanelSucursalManagedBean() {
     }
 
     @PostConstruct
     public void init() {
         sucu = (Sucursal) FacesUtils.getObjectMapSession("sucursal");
+        tatuador = new Usuario();
     }
 
     public List<Usuario> tattuadoresSurcursal() {
@@ -59,5 +65,13 @@ public class PanelSucursalManagedBean {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    public void seleccionarTatt(Usuario t) {
+        setTatuador(t);
+    }
+
+    public List<Disenio> listUsSucu() {
+        return getTatuador().getDisenioList();
     }
 }
