@@ -19,20 +19,14 @@
             <ui:define name="content">
                 <div class="container fondo" >
                     <div class="row">
-
-
                         <div class="col-md-12 tabla">
                             <h4>Citas</h4>
                             <div class="table-responsive">
-
-                                <h:form>
+                                <h:form >
                                     <table id="mytable" class="table table-bordred table-striped tabla">
-
                                         <thead>
-
                                             <th>Sucursal</th>
                                             <th>Cliente</th>
-                                            <th>Diseño</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
                                             <th>Estado</th>
@@ -41,11 +35,11 @@
                                             <th>Cancelar</th>
                                         </thead>
                                         <tbody>
+                                            
                                             <ui:repeat value="#{citaManagedBean.citaSucu()}" var="cita">
                                                 <tr>
                                                     <td>#{cita.idSucursal.nombre}</td>
                                                     <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
-                                                    <td>#{cita.idDisenio.nombreD}</td>
                                                     <td>#{cita.idUsuario.email}</td>
                                                     <td>
                                                         <h:outputText value="#{cita.fechaHora}">
@@ -59,8 +53,8 @@
                                                 </tr>
                                             </ui:repeat>    
                                         </tbody>
-
                                     </table>
+                                    <h:messages showSummary="true" />
                                 </h:form>
                             </div>
 
