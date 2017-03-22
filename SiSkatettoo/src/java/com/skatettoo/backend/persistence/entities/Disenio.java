@@ -78,8 +78,6 @@ public class Disenio implements Serializable, IEntitie {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idUsuario;
-    @OneToMany(mappedBy = "idDisenio", fetch = FetchType.LAZY)
-    private List<Cita> citaList;
 
     public Disenio() {
     }
@@ -150,15 +148,6 @@ public class Disenio implements Serializable, IEntitie {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    @XmlTransient
-    public List<Cita> getCitaList() {
-        return citaList;
-    }
-
-    public void setCitaList(List<Cita> citaList) {
-        this.citaList = citaList;
     }
 
     @Override

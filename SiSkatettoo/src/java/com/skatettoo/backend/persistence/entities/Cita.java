@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Basic(optional = false)
     @NotNull()
     @Column(name = "tatuador")
@@ -67,9 +68,6 @@ public class Cita implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idUsuario;
-    @JoinColumn(name = "id_disenio", referencedColumnName = "id_disenio")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Disenio idDisenio;
     @JoinColumn(name = "id_estado_cita", referencedColumnName = "id_estado_cita")
     @ManyToOne(fetch = FetchType.LAZY)
     private EstadoCita idEstadoCita;
@@ -129,14 +127,6 @@ public class Cita implements Serializable {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public Disenio getIdDisenio() {
-        return idDisenio;
-    }
-
-    public void setIdDisenio(Disenio idDisenio) {
-        this.idDisenio = idDisenio;
     }
 
     public EstadoCita getIdEstadoCita() {
