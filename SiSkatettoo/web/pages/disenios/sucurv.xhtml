@@ -3,10 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <body>
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
@@ -107,33 +105,66 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+                                <h3 class="modal-title text-center" id="lineModalLabel">Solicitar Cita</h3>
                             </div>
                             <div class="modal-body">
-
                                 <!-- content goes here -->
-                                <h:form>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
-                                        <div class="col-md-9">
-                                            <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="da form-control" id="fechaHora" style="z-index: 1" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
-                                                <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
-                                            </h:inputText>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="exampleInputFile">File input</label>
-                                        <input type="file" id="exampleInputFile"/>
-                                        <p class="help-block">Example block-level help text here.</p>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
-                                        <div class="col-md-9">
-                                            <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                                        </div>
-                                    </div>
+                                <h:form class="form-horizontal"  pt:method="post" prependId="false">
+                                        <h:messages showSummary="true" />
+                                        <fieldset>
+                                            <!-- Name input-->
+                                            <div class="form-group">
+                                                <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
+                                                <div class="col-md-9">
+                                                    <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                        <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+
+                                            <!-- Email input-->
+                                            <div class="form-group">
+                                                <h:outputLabel class="col-md-3 control-label" value="Tatuador:" for="tatuador" />
+                                                <div class="col-md-9">
+                                                    <h:selectOneMenu class="form-control" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="The IdSucursal field is required.">
+                                                        <!-- TODO: update below reference to list of available items-->
+                                                        <f:selectItems value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="sucu" itemLabel="#{sucu.nombre} #{sucu.apellido}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="form-group">
+                                                <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
+                                                <div class="col-md-9">
+                                                    <div class="input-group image-preview">
+                                                        <span class="input-group-btn">
+                                                            <!-- image-preview-clear button -->
+                                                            <!-- image-preview-input -->
+                                                            <div class="btn btn-default image-preview-input">
+                                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                                                                <span class="glyphicon glyphicon-folder-open"></span>
+                                                                <span class="image-preview-input-title">Buscar</span>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Message body -->
+                                            <div class="form-group">
+                                                <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
+                                                <div class="col-md-9">
+                                                    <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                </div>
+                                            </div>
+
+                                            <!-- Form actions -->
+                                            <div class="form-group">
+                                                <div class="col-md-12 text-right">
+                                                    <h:commandButton type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
 
                                     <script>
                                         var disabledDays = [0];
@@ -153,19 +184,6 @@
                                         });
                                     </script>
                                 </h:form>
-                                <div class="modal-footer">
-                                    <div class="btn-group btn-group-justified" role="group" aria-label="group button">
-                                        <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
-                                        </div>
-                                        <div class="btn-group btn-delete hidden" role="group">
-                                            <button type="button" id="delImage" class="btn btn-danger btn-hover-red" data-dismiss="modal"  role="button">Delete</button>
-                                        </div>
-                                        <div class="btn-group" role="group">
-                                            <button type="button" id="saveImage" class="btn btn-success btn-hover-green" jsf:actionListener="#{citaManagedBean.solicitarCita()}" role="button">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
