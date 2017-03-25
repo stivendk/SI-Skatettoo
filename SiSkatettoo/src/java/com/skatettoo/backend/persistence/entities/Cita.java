@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,11 +42,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "disenioAdjunto")
+    private String disenioAdjunto;
 
-    @Basic(optional = false)
-    @NotNull()
-    @Column(name = "tatuador")
-    private Integer tatuador;
+
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,6 +71,9 @@ public class Cita implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario idUsuario;
+    @JoinColumn(name = "tatuador", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuario tatuador;
     @JoinColumn(name = "id_estado_cita", referencedColumnName = "id_estado_cita")
     @ManyToOne(fetch = FetchType.LAZY)
     private EstadoCita idEstadoCita;
@@ -170,12 +176,20 @@ public class Cita implements Serializable {
         return "com.skatettoo.backend.persistence.entities.Cita[ idCita=" + idCita + " ]";
     }
 
-    public Integer getTatuador() {
+    public Usuario getTatuador() {
         return tatuador;
     }
 
-    public void setTatuador(Integer tatuador) {
+    public void setTatuador(Usuario tatuador) {
         this.tatuador = tatuador;
+    }
+
+    public String getDisenioAdjunto() {
+        return disenioAdjunto;
+    }
+
+    public void setDisenioAdjunto(String disenioAdjunto) {
+        this.disenioAdjunto = disenioAdjunto;
     }
 
     

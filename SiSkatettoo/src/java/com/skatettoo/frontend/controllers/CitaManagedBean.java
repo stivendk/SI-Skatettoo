@@ -6,6 +6,7 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
+import com.skatettoo.backend.persistence.entities.EstadoCita;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import javax.inject.Named;
@@ -31,6 +32,15 @@ public class CitaManagedBean implements Serializable {
 
     private int hora = 5;
     private Cita cita;
+    private EstadoCita estad;
+
+    public EstadoCita getEstad() {
+        return estad;
+    }
+
+    public void setEstad(EstadoCita estad) {
+        this.estad = estad;
+    }
     private Sucursal suc;
     @Inject
     UsuarioManagedBean usu;
@@ -84,7 +94,7 @@ public class CitaManagedBean implements Serializable {
             throw e;
         }
     }
-
+    
     public void eliminarCita() {
         citafc.remove(cita);
     }
