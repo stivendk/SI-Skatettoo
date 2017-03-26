@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
@@ -32,6 +33,7 @@
                             <p>#{panelSucursalManagedBean.sucu.descripcion}</p>
                             <h2>Tatuadores</h2>
                         </div>
+                        <button class="btn-success btn-lg" data-toggle="modal" data-target=".pop-up-1">Solicitar cita</button>
                         <div class="sucursal-tattooist">
                             <h:form>
                                 <ul id="display-inline-block-example">
@@ -39,20 +41,43 @@
                                         <li>
                                             <h:graphicImage class="avatar-tatuador">
                                                 <f:ajax event="click" listener="#{panelSucursalManagedBean.seleccionarTatt(item)}" render="disenios"/>
+                                                <f:ajax event="click" listener="#{panelSucursalManagedBean.selecTatt(item)}" render="infotat"/>
                                             </h:graphicImage>
-                                            <span>#{item.nombre} #{item.apellido}</span></li>
+                                            <span>#{item.nombre} #{item.apellido}</span>
+                                        </li>
                                     </ui:repeat>
                                 </ul>
                             </h:form>
                         </div>
                     </div>
+                    <h:form id="infotat">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class=" col-md-9 col-lg-9 "> 
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Nombre: </td>
+                                                <td>#{panelSucursalManagedBean.tatuador.nombre} #{panelSucursalManagedBean.tatuador.apellido}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Numero: </td>
+                                                <td>#{panelSucursalManagedBean.tatuador.telefono}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email: </td>
+                                                <td>#{panelSucursalManagedBean.tatuador.email}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
                     <div id="listadisenios">
-                        <span class="tatuador-link">X</span>
                         <f:view>
-
-                            <h:commandButton pt:data-toggle="modal" pt:data-target=".pop-up-1"/>
                             <h:form id="disenios">
-                                <h1><h:outputText value="List"/></h1>
+                                <h1><h:outputText value="Diseños"/></h1>
                                 <h:dataTable value="#{panelSucursalManagedBean.listUsSucu()}" var="dis">
                                     <h:column>
                                         <f:facet name="header">
@@ -93,14 +118,13 @@
                                 </h:dataTable>
                             </h:form>
                         </f:view>
-
                     </div>
-                    <script>
-                        $('.tatuador-link').on('click', function () {
-                            $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
-                        });
-                    </script>
                 </div>
+                <script>
+                    $('.tatuador-link').on('click', function () {
+                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
+                    });
+                </script>
                 <div class="modal fade pop-up-1" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -111,60 +135,60 @@
                             <div class="modal-body">
                                 <!-- content goes here -->
                                 <h:form class="form-horizontal"  pt:method="post" prependId="false">
-                                        <fieldset>
-                                            <!-- Name input-->
-                                            <div class="form-group">
-                                                <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
-                                                <div class="col-md-9">
-                                                    <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
-                                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                                    </h:inputText>
-                                                </div>
+                                    <fieldset>
+                                        <!-- Name input-->
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
+                                            <div class="col-md-9">
+                                                <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                                </h:inputText>
                                             </div>
+                                        </div>
 
-                                            <!-- Email input-->
-                                            <div class="form-group">
-                                                <h:outputLabel class="col-md-3 control-label" value="Tatuador:" for="tatuador" />
-                                                <div class="col-md-9">
-                                                    <h:selectOneMenu class="form-control" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="The IdSucursal field is required.">
-                                                        <!-- TODO: update below reference to list of available items-->
-                                                        <f:selectItems value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="sucu" itemLabel="#{sucu.nombre} #{sucu.apellido}"/>
-                                                    </h:selectOneMenu>
+                                        <!-- Email input-->
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-md-3 control-label" value="Tatuador:" for="tatuador" />
+                                            <div class="col-md-9">
+                                                <h:selectOneMenu class="form-control" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="The IdSucursal field is required.">
+                                                    <!-- TODO: update below reference to list of available items-->
+                                                    <f:selectItems value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="sucu" itemLabel="#{sucu.nombre} #{sucu.apellido}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
+                                            <div class="col-md-9">
+                                                <div class="input-group image-preview">
+                                                    <span class="input-group-btn">
+                                                        <!-- image-preview-clear button -->
+                                                        <!-- image-preview-input -->
+                                                        <div class="btn btn-default image-preview-input">
+                                                            <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                                                            <span class="glyphicon glyphicon-folder-open"></span>
+                                                            <span class="image-preview-input-title">Buscar</span>
+                                                        </div>
+                                                    </span>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <div class="form-group">
-                                                <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:" />
-                                                <div class="col-md-9">
-                                                    <div class="input-group image-preview">
-                                                        <span class="input-group-btn">
-                                                            <!-- image-preview-clear button -->
-                                                            <!-- image-preview-input -->
-                                                            <div class="btn btn-default image-preview-input">
-                                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-                                                                <span class="glyphicon glyphicon-folder-open"></span>
-                                                                <span class="image-preview-input-title">Buscar</span>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <!-- Message body -->
-                                            <div class="form-group">
-                                                <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
-                                                <div class="col-md-9">
-                                                    <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                                                </div>
+                                        <!-- Message body -->
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
+                                            <div class="col-md-9">
+                                                <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
                                             </div>
+                                        </div>
 
-                                            <!-- Form actions -->
-                                            <div class="form-group">
-                                                <div class="col-md-12 text-right">
-                                                    <h:commandButton type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
-                                                </div>
+                                        <!-- Form actions -->
+                                        <div class="form-group">
+                                            <div class="col-md-12 text-right">
+                                                <h:commandButton type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
                                             </div>
-                                        </fieldset>
+                                        </div>
+                                    </fieldset>
 
                                     <script>
                                         var disabledDays = [0];
@@ -184,6 +208,20 @@
                                         });
                                     </script>
                                 </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade pop-up-2" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h3 class="modal-title text-center" id="lineModalLabel">#{item.nombre} #{item.apellido}</h3>
+                            </div>
+                            <div class="modal-body">
+
+
                             </div>
                         </div>
                     </div>

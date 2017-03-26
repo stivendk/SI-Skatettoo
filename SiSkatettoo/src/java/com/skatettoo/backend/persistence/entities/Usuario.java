@@ -52,6 +52,8 @@ public class Usuario implements Serializable, IEntitie {
     private List<Noticia> noticiaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
     private List<Cita> citaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tatuador", fetch = FetchType.LAZY)
+    private List<Cita> citaListT;
 
     @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -262,6 +264,14 @@ public class Usuario implements Serializable, IEntitie {
 
     public void setCitaList(List<Cita> citaList) {
         this.citaList = citaList;
+    }
+    @XmlTransient
+    public List<Cita> getCitaListT() {
+        return citaListT;
+    }
+
+    public void setCitaListT(List<Cita> citaList) {
+        this.citaListT = citaList;
     }
     
 }

@@ -14,7 +14,7 @@
 .contenido-sucursal-header .avatar-sucursal {
     position: absolute;
     bottom: -100px;
-    z-index: 2000;
+    z-index: 1000;
     box-shadow: 0px 0px 10px #000;
     left:0;
     right: 0;

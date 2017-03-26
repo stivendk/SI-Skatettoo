@@ -14,7 +14,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 
 /**
  *
@@ -24,7 +23,7 @@ import javax.enterprise.context.RequestScoped;
 @ConversationScoped
 public class PanelSucursalManagedBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     
     private Sucursal sucu;
     private Usuario tatuador;
@@ -69,6 +68,10 @@ public class PanelSucursalManagedBean implements Serializable {
 
     public void seleccionarTatt(Usuario t) {
         setTatuador(t);
+    }
+    
+    public void selecTatt(Usuario t) {
+        tatuador = t;
     }
 
     public List<Disenio> listUsSucu() {

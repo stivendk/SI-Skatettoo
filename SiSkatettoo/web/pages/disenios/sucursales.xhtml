@@ -10,10 +10,10 @@
     <body>
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-            
+
             <ui:define name="head2"></ui:define>
             <ui:define name="head">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
                 <link rel="stylesheet" type="text/css" href="../../resources/css/sucur.css"></link>
                 <link rel="stylesheet" type="text/css" href="../../resources/css/gallery.css"></link>
             </ui:define>
@@ -24,14 +24,29 @@
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <h:form>
-                    <section class="publicaciones-blog-home">
-                        <center><div class="container">
-                                <div class="row-page row">
-                                    <h2>Sucursales</h2>
-                                    <ui:repeat value="#{sucursalManagedBean.listarSucursal()}" var="sucur"> 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Localidad </a>
+                        <ul class="dropdown-menu">
+                            <ui:repeat value="#{sucursalManagedBean.listarloc()}" var="loc">
+                                <li><h:commandLink value="">#{loc.localidad}
+                                        <span class="glyphicon glyphicon-cog pull-right"></span>
+                                        <f:ajax event="click" listener="#{sucursalManagedBean.selectLocalidad(loc)}" render="sucursales"/>
+                                    </h:commandLink>
+                                </li>
+                                <li class="divider"></li>
+                            </ui:repeat>
+                        </ul>
+                    </li>
+                </h:form>
+                <section class="publicaciones-blog-home">
+                    <center><div class="container">
+                            <div class="row-page row">
+                                <h2>Sucursales</h2>
+                                <h:form id="sucursales">
+                                    <ui:repeat value="#{sucursalManagedBean.sucuList()}" var="sucur"> 
                                         <div class="">
                                             <div class="col-page col-sm-8 col-md-6">
-                                                <a jsf:action="#{sucursalManagedBean.verSucursal(sucur)}" class="black fondo-publicacion-home">
+                                                <h:commandLink action="#{sucursalManagedBean.verSucursal(sucur)}" class="black fondo-publicacion-home">
                                                     <div class="img-publicacion-principal-home">
                                                         <img class="" src="../../img/#{sucur.fotoSuc}.jpg"/>
                                                     </div>
@@ -42,14 +57,14 @@
                                                     <div class="mascara-enlace-blog-home">
                                                         <span>Ver </span>
                                                     </div> 
-                                                </a>
+                                                </h:commandLink>
                                             </div>
                                         </div>
                                     </ui:repeat>    
-                                </div>
-                            </div></center>
-                    </section>
-                </h:form>
+                                </h:form>
+                            </div>
+                        </div></center>
+                </section>
             </ui:define>
 
         </ui:composition>

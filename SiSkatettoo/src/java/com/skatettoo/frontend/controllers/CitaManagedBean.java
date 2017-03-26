@@ -7,13 +7,11 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.EstadoCita;
-import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
+import com.skatettoo.frontend.email.Email;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -33,15 +31,6 @@ public class CitaManagedBean implements Serializable {
     private int hora = 5;
     private Cita cita;
     private EstadoCita estad;
-
-    public EstadoCita getEstad() {
-        return estad;
-    }
-
-    public void setEstad(EstadoCita estad) {
-        this.estad = estad;
-    }
-    private Sucursal suc;
     @Inject
     UsuarioManagedBean usu;
     @EJB
@@ -53,6 +42,14 @@ public class CitaManagedBean implements Serializable {
 
     public PanelSucursalManagedBean getSu() {
         return su;
+    }
+
+    public EstadoCita getEstad() {
+        return estad;
+    }
+
+    public void setEstad(EstadoCita estad) {
+        this.estad = estad;
     }
 
     public int getHora() {
@@ -94,7 +91,7 @@ public class CitaManagedBean implements Serializable {
             throw e;
         }
     }
-    
+
     public void eliminarCita() {
         citafc.remove(cita);
     }
