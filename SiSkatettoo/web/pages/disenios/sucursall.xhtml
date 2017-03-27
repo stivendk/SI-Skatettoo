@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/sucur.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/gallery.css"></link>
+            </ui:define>
+
+            <ui:define name="head2"></ui:define>
+
+            <ui:define name="titulo">
+                #{localidadSessionController.loc.localidad} | Skatettoo
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Localidad </a>
+                        <ul class="dropdown-menu">
+                            <ui:repeat value="#{localidadManagedBean.listarLocalidad()}" var="loc">
+                                <li><h:commandLink action="#{localidadManagedBean.selectLocalidad(loc)}" value="#{loc.localidad}"></h:commandLink></li>
+                                <li class="divider"></li>
+                            </ui:repeat>
+                        </ul>
+                    </li>
+                </h:form>
+                <section class="publicaciones-blog-home">
+                    <center><div class="container">
+                            <div class="row-page row">
+                                <h2>Sucursales</h2>
+                                <h:form id="sucursales">
+                                    <ui:repeat value="#{localidadSessionController.sucuList()}" var="sucur"> 
+                                        <div class="">
+                                            <div class="col-page col-sm-8 col-md-6">
+                                                <h:commandLink action="#{localidadManagedBean.verSucursal(sucur)}" class="black fondo-publicacion-home">
+                                                    <div class="img-publicacion-principal-home">
+                                                        <img class="" src="../../img/#{sucur.fotoSuc}.jpg"/>
+                                                    </div>
+                                                    <div class="contenido-publicacion-principal-home">
+                                                        <h3>#{sucur.nombre}</h3>
+                                                        <p>#{sucur.descripcion}<span>...</span></p>
+                                                    </div>
+                                                    <div class="mascara-enlace-blog-home">
+                                                        <span>Ver </span>
+                                                    </div> 
+                                                </h:commandLink>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>    
+                                </h:form>
+                            </div>
+                        </div></center>
+                </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

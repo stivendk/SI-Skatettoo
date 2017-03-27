@@ -5,35 +5,29 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Localidad;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.LocalidadFacadeLocal;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
- * @author StivenDavid
+ * @author APRENDIZ
  */
-@Named(value = "localidadManagedBean")
+@Named(value = "localidadSessionController")
 @RequestScoped
-public class LocalidadManagedBean implements Serializable, Managedbean <Localidad> {
+public class LocalidadSessionController implements Serializable{
 
     private Localidad loc;
     private Sucursal suc;
 
-    @EJB
-    private LocalidadFacadeLocal lofc;
+    @EJB LocalidadFacadeLocal lfl;
     
-            
-    public LocalidadManagedBean() {
-    }
-
     public Sucursal getSuc() {
         return suc;
     }
@@ -41,6 +35,7 @@ public class LocalidadManagedBean implements Serializable, Managedbean <Localida
     public void setSuc(Sucursal suc) {
         this.suc = suc;
     }
+    
     public Localidad getLoc() {
         return loc;
     }
@@ -49,30 +44,21 @@ public class LocalidadManagedBean implements Serializable, Managedbean <Localida
         this.loc = loc;
     }
     
+    public LocalidadSessionController() {
+    }
+    
     @PostConstruct
     public void init(){
-        loc = new Localidad();
+        loc = (Localidad) FacesUtils.getObjectMapSession("localidad");
         suc = new Sucursal();
-        
     }
     
-    public List<Localidad> listarLocalidad(){
-        return lofc.findAll();
-    }
-            
-    @Override
-    public Localidad getObject(Integer i) {
-        return lofc.find(i);
-    }
-    
-    public String selectLocalidad(Localidad l){
+    public void selectLocalidad(Localidad l){
         setLoc(l);
-        FacesUtils.setObjectAcceso("localidad", l);
-        return "/pages/disenios/sucursall?faces-redirect=true";
     }
     
-    public List<Sucursal> sucuList(){
-        return loc.getSucursalList();
+    public List<Localidad> listarLoc(){
+        return lfl.findAll();
     }
     
     public String verSucursal(Sucursal ss) {
@@ -80,4 +66,9 @@ public class LocalidadManagedBean implements Serializable, Managedbean <Localida
         FacesUtils.setObjectAcceso("sucursal", ss);
         return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
     }
+    
+    public List<Sucursal> sucuList(){
+        return loc.getSucursalList();
+    }
+    
 }

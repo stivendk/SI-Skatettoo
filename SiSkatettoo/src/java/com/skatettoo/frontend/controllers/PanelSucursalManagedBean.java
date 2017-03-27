@@ -5,7 +5,6 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
@@ -23,7 +22,7 @@ import javax.inject.Named;
 @ConversationScoped
 public class PanelSucursalManagedBean implements Serializable {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 1L;
     
     private Sucursal sucu;
     private Usuario tatuador;
@@ -52,6 +51,7 @@ public class PanelSucursalManagedBean implements Serializable {
     public void init() {
         sucu = (Sucursal) FacesUtils.getObjectMapSession("sucursal");
         tatuador = new Usuario();
+        
     }
 
     public List<Usuario> tattuadoresSurcursal() {

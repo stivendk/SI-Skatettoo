@@ -91,14 +91,10 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     }
     
     public List<Sucursal> sucuList(){
-        return loc.getSucursalList();
+        return getLoc().getSucursalList();
     }
     
-    public String verSucursal(Sucursal ss) {
-        sucu = ss;
-        FacesUtils.setObjectAcceso("sucursal", ss);
-        return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
-    }
+    
 
     public List<Sucursal> listarSucursal() {
         return sucufc.findAll();

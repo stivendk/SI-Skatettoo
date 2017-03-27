@@ -91,7 +91,10 @@ public class CitaManagedBean implements Serializable {
             throw e;
         }
     }
-
+        public void enviarEmail(){
+            Email e = new Email("Nueva solicitud","Te han enviado una nueva solcitud de cita" + getUs().getUsuario().getNombre() + getUs().getUsuario().getApellido(), getUsu().getUsuario().getEmail());
+            e.enviarEmail2();
+        }
     public void eliminarCita() {
         citafc.remove(cita);
     }
@@ -122,7 +125,7 @@ public class CitaManagedBean implements Serializable {
         List<Cita> cit = new ArrayList<>();
         try {
             for (Cita ci : listarCita()) {
-                if (ci.getIdSucursal().equals(us.getUsuario())) {
+                if (ci.getIdUsuario().equals(us.getUsuario())) {
                     cit.add(ci);
                 }
 
