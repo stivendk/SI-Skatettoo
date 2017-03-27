@@ -30,6 +30,9 @@ body{
     margin-top: 20px;
 }
 
+.requiredMessage{
+    color:red;
+}
 .regresar{
     font-size: 35px;
     color: #fff;

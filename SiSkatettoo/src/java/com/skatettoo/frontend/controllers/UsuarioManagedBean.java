@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacade;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
+import com.skatettoo.frontend.email.Email;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,7 +19,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 
 /**
@@ -56,8 +60,10 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     }
 
     public String registrarUsuario() {
+        Email e = new Email("Bienvenido a Skatettoo " + getUsuario().getNombre() + getUsuario().getApellido(),"\\n Te damos la bienvenida, ahora puedes pedir citas para la realizacion de tus tatuajes", getUsuario().getEmail());
+        e.enviarEmail();
         usuariofc.create(usuario);
-        return "/pages/usuario/inicio?faces-redirect=true";
+        return "login.xhtml?faces-redirect=true";
     }
 
     public void eliminarUsuario(Usuario u) {
@@ -95,6 +101,39 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         }
         return null;
     }
+    
+    public void validatePassword(ComponentSystemEvent event) {
+
+	  FacesContext fc = FacesContext.getCurrentInstance();
+
+	  UIComponent components = event.getComponent();
+
+	  // get password
+	  UIInput uiInputPassword = (UIInput) components.findComponent("password");
+	  String password = uiInputPassword.getLocalValue() == null ? ""
+		: uiInputPassword.getLocalValue().toString();
+	  String passwordId = uiInputPassword.getClientId();
+
+	  // get confirm password
+	  UIInput uiInputConfirmPassword = (UIInput) components.findComponent("confirmPassword");
+	  String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
+		: uiInputConfirmPassword.getLocalValue().toString();
+
+	  // Let required="true" do its job.
+	  if (password.isEmpty() || confirmPassword.isEmpty()) {
+		return;
+	  }
+
+	  if (!password.equals(confirmPassword)) {
+
+		FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		fc.addMessage(passwordId, msg);
+		fc.renderResponse();
+
+	  }
+
+	}
     
     @Override
     public Usuario getObject(Integer i) {
