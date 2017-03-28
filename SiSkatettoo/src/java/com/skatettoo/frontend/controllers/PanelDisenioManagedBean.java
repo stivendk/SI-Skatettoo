@@ -35,4 +35,8 @@ public class PanelDisenioManagedBean {
     public void init(){
         dis = (Disenio) FacesUtils.getObjectMapSession("disenio");
     }
+    
+    public void selectDisenio(Disenio d){
+        setDis(d);
+    }
 }

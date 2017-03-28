@@ -72,6 +72,7 @@ public class NoticiaManagedBean implements Serializable {
     
     public String verNoticia(Noticia nn){
         noti = nn;
+        FacesUtils.setObjectAcceso("noticia", nn);
         return "";
         
     }
