@@ -27,6 +27,7 @@
                                         <thead>
                                             <th>Sucursal</th>
                                             <th>Cliente</th>
+                                            <th>Tatuador</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
                                             <th>Estado</th>
@@ -40,6 +41,7 @@
                                                 <tr>
                                                     <td>#{cita.idSucursal.nombre}</td>
                                                     <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                    <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
                                                     <td>#{cita.idUsuario.email}</td>
                                                     <td>
                                                         <h:outputText value="#{cita.fechaHora}">

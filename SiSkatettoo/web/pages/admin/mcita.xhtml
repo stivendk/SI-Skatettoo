@@ -12,7 +12,7 @@
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
 
             <ui:define name="titulo">
-                Cita | Skatettoo
+                Mis Citas | Skatettoo
             </ui:define>
 
             <ui:define name="content">
@@ -26,18 +26,16 @@
                                         <thead>
                                             <th>Sucursal</th>
                                             <th>Cliente</th>
-                                            <th>Tatuador</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
                                             <th>Estado</th>
                                         </thead>
                                         <tbody>
                                             
-                                            <ui:repeat value="#{citaManagedBean.citaSucu()}" var="cita">
+                                            <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
                                                 <tr>
                                                     <td>#{cita.idSucursal.nombre}</td>
                                                     <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
-                                                    <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
                                                     <td>#{cita.idUsuario.email}</td>
                                                     <td>
                                                         <h:outputText value="#{cita.fechaHora}">
@@ -45,6 +43,9 @@
                                                         </h:outputText>
                                                     </td>
                                                     <td>#{cita.idEstadoCita.nombreEstadoCita}</td>
+                                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                                    <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                    <td><h:commandButton class="btn btn-danger btn-xs" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
                                                 </tr>
                                             </ui:repeat>    
                                         </tbody>
