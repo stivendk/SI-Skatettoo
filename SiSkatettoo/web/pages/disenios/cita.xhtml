@@ -30,27 +30,24 @@
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="well well-sm">
                                         <h:form class="form-horizontal"  pt:method="post" prependId="false">
-
                                             <fieldset>
-                                                <legend class="text-center">Solicitar Cita</legend>
-
                                                 <!-- Name input-->
                                                 <div class="form-group">
                                                     <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
                                                     <div class="col-md-9">
-                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="dd/mm/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
-                                                            <f:convertDateTime pattern="dd/mm/yyyy hh:mm:ss" />
+                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                                         </h:inputText>
                                                     </div>
                                                 </div>
 
                                                 <!-- Email input-->
                                                 <div class="form-group">
-                                                    <h:outputLabel class="col-md-3 control-label" value="Sucursal:" for="idSucursal" />
+                                                    <h:outputLabel class="col-md-3 control-label" value="Tatuador:" for="tatuador" />
                                                     <div class="col-md-9">
-                                                        <h:selectOneMenu class="form-control" id="idSucursal" value="#{citaManagedBean.cita.idSucursal}" required="true" requiredMessage="The IdSucursal field is required.">
+                                                        <h:selectOneMenu class="form-control" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="The IdSucursal field is required.">
                                                             <!-- TODO: update below reference to list of available items-->
-                                                            <f:selectItems value="#{sucursalManagedBean.listarSucursal()}" var="sucu" itemLabel="#{sucu.nombre}"/>
+                                                            <f:selectItems value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="sucu" itemLabel="#{sucu.nombre} #{sucu.apellido}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div>
@@ -87,11 +84,12 @@
                                                     </div>
                                                 </div>
                                             </fieldset>
+
                                             <script>
                                                 var disabledDays = [0];
                                                 $("#fechaHora").datepicker({
-                                                    dateFormat: 'dd/mm/yyyy',
-                                                    timeFormat: 'hh:ii ',
+                                                    dateFormat: 'mm/dd/yyyy',
+                                                    timeFormat: 'hh:ii:ss ',
                                                     onRenderCell: function (date, cellType) {
                                                         if (cellType == 'day') {
                                                             var day = date.getDay(),

@@ -36,6 +36,33 @@
                         </ul>
                     </li>
                 </h:form>
+                <section class="publicaciones-blog-home">
+                    <center><div class="container">
+                            <div class="row-page row">
+                                <h2>Sucursales</h2>
+                                <h:form id="sucursales">
+                                    <ui:repeat value="#{sucursalManagedBean.listarSucursal()}" var="sucur"> 
+                                        <div class="">
+                                            <div class="col-page col-sm-8 col-md-6">
+                                                <h:commandLink action="#{sucursalManagedBean.verSucursal(sucur)}" class="black fondo-publicacion-home">
+                                                    <div class="img-publicacion-principal-home">
+                                                        <img class="" src="../../img/#{sucur.fotoSuc}.jpg"/>
+                                                    </div>
+                                                    <div class="contenido-publicacion-principal-home">
+                                                        <h3>#{sucur.nombre}</h3>
+                                                        <p>#{sucur.descripcion}<span>...</span></p>
+                                                    </div>
+                                                    <div class="mascara-enlace-blog-home">
+                                                        <span>Ver </span>
+                                                    </div> 
+                                                </h:commandLink>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>    
+                                </h:form>
+                            </div>
+                        </div></center>
+                </section>
             </ui:define>
 
         </ui:composition>

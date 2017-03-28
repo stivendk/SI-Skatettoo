@@ -105,4 +105,9 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         return sucufc.find(i);
     }
 
+    public String verSucursal(Sucursal ss) {
+        sucu = ss;
+        FacesUtils.setObjectAcceso("sucursal", ss);
+        return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
+    }
 }

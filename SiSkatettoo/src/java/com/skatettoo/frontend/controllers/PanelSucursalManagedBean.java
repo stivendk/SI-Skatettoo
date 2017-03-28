@@ -66,6 +66,12 @@ public class PanelSucursalManagedBean implements Serializable {
         return null;
     }
 
+    public String enviarSucursal(){
+        setSucu(sucu);
+        FacesUtils.setObjectAcceso("sucursal", sucu);
+        return "/pages/disenios/cita.xhtml?faces-redirect=true";
+    }
+    
     public void seleccionarTatt(Usuario t) {
         setTatuador(t);
     }

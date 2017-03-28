@@ -85,6 +85,7 @@ public class CitaManagedBean implements Serializable {
             cita.setIdUsuario(getUs().getUsuario());
             cita.setIdSucursal(getSu().getSucu());
             citafc.create(cita);
+            enviarEmail();
             FacesUtils.mensaje("Se ha enviado");
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");
