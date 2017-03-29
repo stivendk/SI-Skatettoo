@@ -5,6 +5,8 @@
  */
 package com.skatettoo.backend.persistence.facade;
 
+import com.skatettoo.backend.persistence.entities.EstadoUsuario;
+import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,5 +48,4 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return usuario;
     }
-    
 }

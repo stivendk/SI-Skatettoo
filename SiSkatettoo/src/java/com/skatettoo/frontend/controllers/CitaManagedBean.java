@@ -88,26 +88,41 @@ public class CitaManagedBean implements Serializable {
             FacesUtils.mensaje("Ocurrio un error");
             throw e;
         }
-    }
-
-    
+    }    
 
     public void eliminarCita() {
         citafc.remove(cita);
     }
 
     public void responderCita() {
+        FacesUtils.setObjectAcceso("cita", cita);
         citafc.edit(cita);
+        FacesUtils.mensaje("Se ha actualizado la cita");
+        
     }
 
     public String actualizarCita(Cita c) {
         cita = c;
+        FacesUtils.setObjectAcceso("cita", cita);
         return "/pages/tatuador/rcita";
+    }
+    
+    public String actualizarCitaA(Cita c) {
+        cita = c;
+        FacesUtils.setObjectAcceso("cita", cita);
+        return "/pages/admin/rcita?faces-redirect=true";
     }
 
     public String aplazarCita(Cita c) {
         cita = c;
+        FacesUtils.setObjectAcceso("cita", cita);
         return "/pages/tatuador/acita";
+    }
+    
+    public String aplazarCitaA(Cita c) {
+        cita = c;
+        FacesUtils.setObjectAcceso("cita", cita);
+        return "/pages/admin/acita?faces-redirect=true";
     }
 
     public List<Cita> listarCita() {
@@ -122,7 +137,7 @@ public class CitaManagedBean implements Serializable {
         List<Cita> cit = new ArrayList<>();
         try {
             for (Cita ci : listarCita()) {
-                if (ci.getIdUsuario().equals(us.getUsuario())) {
+                if (ci.getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
                     cit.add(ci);
                 }
 

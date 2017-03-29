@@ -54,12 +54,13 @@ public class PanelSucursalManagedBean implements Serializable {
     public void init() {
         sucu = (Sucursal) FacesUtils.getObjectMapSession("sucursal");
         tatuador = new Usuario();
-        
     }
 
     public List<Usuario> tattuadoresSurcursal() {
         return sucu.getUsuarioList();
     }
+    
+    
 
     public List<Disenio> listaDisenio() {
         try {
@@ -81,11 +82,6 @@ public class PanelSucursalManagedBean implements Serializable {
     
     public void selecTatt(Usuario t) {
         tatuador = t;
-    }
-
-    public void editarSucursal(){
-        sfl.edit(sucu);
-        FacesUtils.mensaje("Funciono");
     }
     
     public List<Disenio> listUsSucu() {

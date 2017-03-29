@@ -6,13 +6,10 @@
 package com.skatettoo.frontend.controllers;
 
 import com.plandemjr.frontend.util.Managedbean;
-import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
-import com.skatettoo.backend.persistence.facade.UsuarioFacade;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -57,11 +54,12 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     @PostConstruct
     public void init() {
         usuario = new Usuario();
+        
     }
 
     public String registrarUsuario() {
-        Email e = new Email("Bienvenido a Skatettoo " + getUsuario().getNombre() + getUsuario().getApellido()," Te damos la bienvenida, ahora puedes pedir citas para la realizacion de tus tatuajes", getUsuario().getEmail());
-        e.enviarEmail();
+        //Email e = new Email("Bienvenido a Skatettoo " + getUsuario().getNombre() + getUsuario().getApellido()," Te damos la bienvenida, ahora puedes pedir citas para la realizacion de tus tatuajes", getUsuario().getEmail());
+        //e.enviarEmail();
         usuariofc.create(usuario);
         return "login.xhtml?faces-redirect=true";
     }

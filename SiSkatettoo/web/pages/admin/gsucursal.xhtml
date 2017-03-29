@@ -17,42 +17,33 @@
             </ui:define>
 
             <ui:define name="titulo">
-                Gestionar sucursal | Skatettoo
+                Gestionar loginManagedBean.usuario.idSucursalrsal | Skatettoo
             </ui:define>
 
             <ui:define name="content">
                 <h:form>
                     <h:messages showSummary="true"/>
-                    <h:form>
-                        <h:form>
-                            <h:commandButton class="btn btn-circle btn-primary btn-sm" type="submit" value="Editar" actionListener="#{sucursalManagedBean.miSucursal()}"/>
-                        </h:form>
-                    </h:form>
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
-                                <ui:repeat value="#{sucursalManagedBean.consulta}" var="suc">
-                                    <h:form  pt:method="post" class="form" role="form">
-                                        <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
-                                        <div class="row">
-                                            <div class="col-xs-6 col-md-6">
-                                                <label for="nombre">Nombre</label>
-                                                <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{suc.nombre}" title="Nombre sucursal" required="true" requiredMessage="El nombre es requerido."/>
-                                            </div>
+                                <h:form>
+                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-6">
+                                            <label for="nombre">Nombre</label>
+                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{loginManagedBean.usuario.idSucursal.nombre}" title="Nombre loginManagedBean.usuario.idSucursalrsal" required="true" requiredMessage="El nombre es requerido."/>
                                         </div>
-                                        <label for="direccion">Dirección</label>
-                                        <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{suc.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
-                                        <label for="username">Descripcion</label>
-                                        <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{suc.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
-                                        <label for="telefono">Celular</label>
-                                        <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{suc.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
-                                        <br />
-                                        <br />
-                                        <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" action="#{sucursalManagedBean.selecSucursal(suc)}"/>
-                                    </h:form>
-                                </ui:repeat>
-                                <br/>
-                                
+                                    </div>
+                                    <label for="direccion">Dirección</label>
+                                    <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{loginManagedBean.usuario.idSucursal.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
+                                    <label for="username">Descripcion</label>
+                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{loginManagedBean.usuario.idSucursal.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
+                                    <label for="telefono">Celular</label>
+                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.idSucursal.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                                    <br />
+                                    <br />
+                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Editar" action="#{loginManagedBean.gestSurcursal()}"/>
+                                </h:form>
                             </div>
                         </div>
                     </div>

@@ -61,7 +61,7 @@
                             <h:inputSecret class="form-control" binding="#{confirmPassword}" pt:placeholder="Confirmar Contraseña" id="confirmPassword"  title="Confirmar Contraseña" required="true" requiredMessage="Tu password debe ser ingresado.">
                                 <f:ajax event="blur" render="password2Error" /> 
                             </h:inputSecret>
-                            <h:message for="password2" errorClass="invalid" id="password2Error" />
+                            <h:message for="confirmPassword" errorClass="invalid" id="password2Error" />
                             <br />
                             <br />
                             <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Registrar" action="#{usuarioManagedBean.registrarUsuario()}"/>

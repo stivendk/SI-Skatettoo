@@ -31,18 +31,18 @@
                                     <div class="row">
                                         <div class="col-xs-6 col-md-6">
                                             <label for="nombre">Nombre</label>
-                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{sucursalManagedBean.sucu.nombre}" title="Nombre sucursal" required="true" requiredMessage="El nombre es requerido."/>
+                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{panelSucursalManagedBean.sucu.nombre}" title="Nombre sucursal" required="true" requiredMessage="El nombre es requerido."/>
                                         </div>
                                     </div>
                                     <label for="direccion">Dirección</label>
-                                    <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{sucursalManagedBean.sucu.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
+                                    <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{panelSucursalManagedBean.sucu.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
                                     <label for="username">Descripcion</label>
-                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{sucursalManagedBean.sucu.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
+                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{panelSucursalManagedBean.sucu.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
                                     <label for="telefono">Celular</label>
-                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{sucursalManagedBean.sucu.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{panelSucursalManagedBean.sucu.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
                                     <br />
                                     <br />
-                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" actionListener="#{sucursalManagedBean.editarSucursal()}"/>
+                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" actionListener="#{panelSucursalManagedBean.enviarSucursal()}"/>
                                 </h:form>
                             </div>
                         </div>

@@ -80,11 +80,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     }
 
     public void eliminarSucursal() {
+        FacesUtils.setObjectAcceso("sucursal", sucu);
         sucufc.remove(sucu);
     }
 
     public void editarSucursal() {
+        FacesUtils.setObjectAcceso("sucursal", sucu);
         sucufc.edit(sucu);
+        FacesUtils.mensaje("Se ha actualizado con exito!");
     }
 
     public String actualizarSucursal(Sucursal s) {
@@ -122,7 +125,8 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
     }
 
-    public void miSucursal(){
+    public String miSucursal(){
         consulta = sucufc.consuSuc(getUsu().getUsuario().getIdSucursal().getNombre());
+        return "/pages/admin/acitas.xhtml?faces-redirect=true";
     }
 }

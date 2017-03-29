@@ -6,6 +6,7 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Permiso;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import javax.inject.Named;
@@ -27,10 +28,17 @@ public class LoginManagedBean implements Serializable {
 
     private Usuario usuario;
     private List<Permiso> permis;
+    private Sucursal suc;
     
     @EJB UsuarioFacadeLocal usfc;
-    
 
+    public Sucursal getSuc() {
+        return suc;
+    }
+
+    public void setSuc(Sucursal suc) {
+        this.suc = suc;
+    }
     
     public LoginManagedBean() {
     }
@@ -63,12 +71,19 @@ public class LoginManagedBean implements Serializable {
         }
     }
     
+    public String gestSurcursal() {
+        usuario.setIdSucursal(suc);
+        FacesUtils.setObjectAcceso("sucursal", suc);
+        return "/pages/admin/gsucursall?faces-redirect=true";
+    }
+    
     public String cerrarSesion() {
         FacesUtils.removerObjectAcceso("usuario");
         FacesUtils.removerObjectAcceso("sucursal");
         FacesUtils.removerObjectAcceso("disenio");
         FacesUtils.removerObjectAcceso("localidad");
         FacesUtils.removerObjectAcceso("noticia");
+        FacesUtils.removerObjectAcceso("cita");
         usuario = null;
         return "/index.xhtml?faces-redirect=true";
     }

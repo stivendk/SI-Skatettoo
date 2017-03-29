@@ -33,6 +33,7 @@ public class SucursalFacade extends AbstractFacade<Sucursal> implements Sucursal
     @Override
     public List<Sucursal> consuSuc(String nombre) {
         return em.createNamedQuery("Sucursal.consultarSucursal").setParameter("nombre", nombre).getResultList();
+        
     }
     
 }
