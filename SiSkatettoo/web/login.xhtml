@@ -29,9 +29,9 @@
                                 <h:form>
                                     <form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
                                         <div class="form-group ">
-                                            <h:outputLabel  class="sr-only"> Username</h:outputLabel>
-                                            <h:inputText pt:type="text" class="form-control"  id="login_value" 
-                                                         pt:placeholder="Username" tabindex="1" value="#{usuarioManagedBean.usuario.username}" />
+                                            <h:outputLabel  class="sr-only"> Correo</h:outputLabel>
+                                            <h:inputText pt:type="email" class="form-control"  id="login_value" 
+                                                         pt:placeholder="Correo" tabindex="1" value="#{usuarioManagedBean.usuario.email}" />
                                         </div>
                                         <div class="form-group ">
                                             <h:outputLabel for="password" class="sr-only">Password</h:outputLabel>
@@ -50,7 +50,6 @@
                     </section>
                 </article>
             </div>
-        </h:form>
+</h:form>
     </h:body>
 </html>
-

@@ -65,6 +65,12 @@ public class EstiloManagedBean implements Serializable, Managedbean <EstiloDisen
         return "";
     }
     
+    public String selecEstiloD(EstiloDisenio e){
+        setEstil(e);
+        FacesUtils.setObjectAcceso("EstiloDisenioD", e);
+        return "/pages/disenios/disenioss?faces-redirect=true";
+    }
+    
     public List<EstiloDisenio> listarEstilo(){
         return estilfc.findAll();
     }

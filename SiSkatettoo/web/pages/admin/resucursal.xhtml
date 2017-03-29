@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head">
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/parallax.css"></link>
+            </ui:define>
+
+            <ui:define name="titulo">
+                Registrar Sucursal | Skatettoo
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:messages showSummary="true"/>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
+                                <h:form>
+                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-6">
+                                            <label for="nombre">Nombre</label>
+                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre" value="#{sucursalManagedBean.sucu.nombre}" title="Nombre"/>
+                                        </div>
+                                    </div>
+                                    <label for="direccion">Dirección</label>
+                                    <h:inputText class="form-control" id="dirreccion" value="#{sucursalManagedBean.sucu.direccion}" title="Direccion"/>
+                                    <label for="username">Descripcion</label>
+                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{sucursalManagedBean.sucu.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
+                                    <label for="telefono">Celular</label>
+                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{sucursalManagedBean.sucu.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                                    <Label for="Localidad">Localidad</Label>
+                                    <h:selectOneMenu id="Localidad" value="#{sucursalManagedBean.sucu.idLocalidad}" title="Localidad" required="true" requiredMessage="The Localidad field is required.">
+                                    <!-- TODO: update below reference to list of available items-->
+                                    <f:selectItems value="#{localidadManagedBean.listarLocalidad()}" var="loc" itemLabel="#{loc.localidad}"/>
+                                    </h:selectOneMenu>
+                                    <br />
+                                    <br />
+                                    <p:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Registrar" action="#{sucursalManagedBean.crearSucursal()}"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

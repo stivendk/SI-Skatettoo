@@ -35,8 +35,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         Usuario usuario = null;
         TypedQuery<Usuario> query;
         try {
-            query = em.createQuery("FROM Usuario u WHERE u.username = ?1 and u.password = ?2 ", Usuario.class);
-            query.setParameter(1, us.getUsername());
+            query = em.createQuery("FROM Usuario u WHERE u.email = ?1 and u.password = ?2 ", Usuario.class);
+            query.setParameter(1, us.getEmail());
             query.setParameter(2, us.getPassword());
             if(!query.getResultList().isEmpty()){
                 usuario = query.getResultList().get(0);

@@ -49,12 +49,6 @@
                             </h:inputText>
                             <h:message for="telefono" errorClass="invalid" id="telefonoError" />
                             <br/>
-                            <label for="username">Username</label>
-                            <h:inputText class="form-control" pt:placeholder="Username" id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="Tu Username es requerido.">
-                                <f:ajax event="blur" render="usernameError"/>
-                            </h:inputText>
-                            <h:message for="username" errorClass="invalid" id="usernameError" />
-                            <br/>
                             <label for="password">Contraseña</label>
                             <h:inputSecret class="form-control" pt:placeholder="Contraseña" id="password"  value="#{usuarioManagedBean.usuario.password}" title="Contraseña" required="true" requiredMessage="Tu password debe ser ingresado.">
                                 <f:validator validatorId="passwordValidator" />

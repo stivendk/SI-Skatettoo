@@ -28,53 +28,28 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author APRENDIZ
+ * @author Persa
  */
 @Entity
 @Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
-    @NamedQuery(name = "Usuario.findByFotoPerfil", query = "SELECT u FROM Usuario u WHERE u.fotoPerfil = :fotoPerfil"),
-    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
-    @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
+    , @NamedQuery(name = "Usuario.findByFotoPerfil", query = "SELECT u FROM Usuario u WHERE u.fotoPerfil = :fotoPerfil")
+    , @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre")
+    , @NamedQuery(name = "Usuario.findByApellido", query = "SELECT u FROM Usuario u WHERE u.apellido = :apellido")
+    , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+    , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable, IEntitie {
 
     private static final long serialVersionUID = 1L;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Disenio> disenioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Noticia> noticiaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
-    private List<Cita> citaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tatuador", fetch = FetchType.LAZY)
-    private List<Cita> citaListT;
-
-    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Rol idRol;
-    @JoinColumn(name = "id_estado_usuario", referencedColumnName = "id_estado_usuario")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EstadoUsuario idEstadoUsuario;
-    @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Sucursal idSucursal;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_usuario")
     private Integer idUsuario;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "username")
-    private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -103,6 +78,23 @@ public class Usuario implements Serializable, IEntitie {
     @NotNull
     @Column(name = "telefono")
     private int telefono;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Disenio> disenioList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Noticia> noticiaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
+    private List<Cita> citaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tatuador", fetch = FetchType.LAZY)
+    private List<Cita> citaList1;
+    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Rol idRol;
+    @JoinColumn(name = "id_estado_usuario", referencedColumnName = "id_estado_usuario")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private EstadoUsuario idEstadoUsuario;
+    @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Sucursal idSucursal;
 
     public Usuario() {
     }
@@ -111,9 +103,8 @@ public class Usuario implements Serializable, IEntitie {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String username, String password, String nombre, String apellido, String email, int telefono) {
+    public Usuario(Integer idUsuario, String password, String nombre, String apellido, String email, int telefono) {
         this.idUsuario = idUsuario;
-        this.username = username;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -127,14 +118,6 @@ public class Usuario implements Serializable, IEntitie {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -185,6 +168,7 @@ public class Usuario implements Serializable, IEntitie {
         this.telefono = telefono;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -214,31 +198,7 @@ public class Usuario implements Serializable, IEntitie {
     public String getId() {
         return idUsuario.toString();
     }
-
-    public Rol getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Rol idRol) {
-        this.idRol = idRol;
-    }
-
-    public EstadoUsuario getIdEstadoUsuario() {
-        return idEstadoUsuario;
-    }
-
-    public void setIdEstadoUsuario(EstadoUsuario idEstadoUsuario) {
-        this.idEstadoUsuario = idEstadoUsuario;
-    }
-
-    public Sucursal getIdSucursal() {
-        return idSucursal;
-    }
-
-    public void setIdSucursal(Sucursal idSucursal) {
-        this.idSucursal = idSucursal;
-    }
-
+    
     @XmlTransient
     public List<Disenio> getDisenioList() {
         return disenioList;
@@ -265,13 +225,37 @@ public class Usuario implements Serializable, IEntitie {
     public void setCitaList(List<Cita> citaList) {
         this.citaList = citaList;
     }
+
     @XmlTransient
-    public List<Cita> getCitaListT() {
-        return citaListT;
+    public List<Cita> getCitaList1() {
+        return citaList1;
     }
 
-    public void setCitaListT(List<Cita> citaList) {
-        this.citaListT = citaList;
+    public void setCitaList1(List<Cita> citaList1) {
+        this.citaList1 = citaList1;
     }
-    
+
+    public Rol getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Rol idRol) {
+        this.idRol = idRol;
+    }
+
+    public EstadoUsuario getIdEstadoUsuario() {
+        return idEstadoUsuario;
+    }
+
+    public void setIdEstadoUsuario(EstadoUsuario idEstadoUsuario) {
+        this.idEstadoUsuario = idEstadoUsuario;
+    }
+
+    public Sucursal getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(Sucursal idSucursal) {
+        this.idSucursal = idSucursal;
+    }
 }
