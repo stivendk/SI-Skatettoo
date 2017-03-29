@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -23,6 +24,19 @@ public class EmailManagedBean {
     private String destinatario;
     private String mensaje;
 
+    @Inject
+    UsuarioManagedBean usu;
+    @Inject
+    LoginManagedBean us;
+
+    public UsuarioManagedBean getUsu() {
+        return usu;
+    }
+
+    public LoginManagedBean getUs() {
+        return us;
+    }
+    
     public String getAsunto() {
         return asunto;
     }
@@ -58,8 +72,9 @@ public class EmailManagedBean {
         fc.addMessage(null, m);
         return "";
     }
+    
     public void enviarCorreo(){
-        Email e = new Email(asunto, mensaje, destinatario);
+        Email e = new Email("Nueva solicitud", "Te han enviado una nueva solcitud de cita" + getUs().getUsuario().getNombre() + getUs().getUsuario().getApellido(), getUsu().getUsuario().getEmail());
         e.enviarEmail();
     }
 }

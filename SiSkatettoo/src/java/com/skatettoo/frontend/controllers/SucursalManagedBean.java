@@ -31,18 +31,16 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     
     private Sucursal sucu;
     private Localidad loc;
+    private List<Sucursal> consulta;
 
     @EJB
     private SucursalFacadeLocal sucufc;
-    @Inject LocalidadManagedBean loca;
+    @Inject LoginManagedBean usu;
     
     public SucursalManagedBean() {
     }
 
-    public LocalidadManagedBean getLoca() {
-        return loca;
-    }
-
+    
     public Localidad getLoc() {
         return loc;
     }
@@ -56,6 +54,18 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     public void setSucu(Sucursal sucu) {
         this.sucu = sucu;
+    }
+
+    public List<Sucursal> getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(List<Sucursal> consulta) {
+        this.consulta = consulta;
+    }
+
+    public LoginManagedBean getUsu() {
+        return usu;
     }
 
     @PostConstruct
@@ -82,10 +92,6 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         return "";
     }
     
-    public List<Localidad> listarloc(){
-        return loca.listarLocalidad();
-    }
-    
     public void selectLocalidad(Localidad l){
         setLoc(l);
     }
@@ -109,5 +115,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         sucu = ss;
         FacesUtils.setObjectAcceso("sucursal", ss);
         return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
+    }
+    
+    public String selecSucursal(Sucursal ss) {
+        sucu = ss;
+        return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
+    }
+
+    public void miSucursal(){
+        consulta = sucufc.consuSuc(getUsu().getUsuario().getIdSucursal().getNombre());
     }
 }

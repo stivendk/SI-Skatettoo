@@ -30,4 +30,6 @@ public interface SucursalFacadeLocal {
 
     int count();
     
+    List<Sucursal> consuSuc(String nombre);
+    
 }

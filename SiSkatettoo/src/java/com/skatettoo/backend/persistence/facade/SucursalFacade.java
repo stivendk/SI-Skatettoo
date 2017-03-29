@@ -6,6 +6,7 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Sucursal;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,11 @@ public class SucursalFacade extends AbstractFacade<Sucursal> implements Sucursal
 
     public SucursalFacade() {
         super(Sucursal.class);
+    }
+
+    @Override
+    public List<Sucursal> consuSuc(String nombre) {
+        return em.createNamedQuery("Sucursal.consultarSucursal").setParameter("nombre", nombre).getResultList();
     }
     
 }

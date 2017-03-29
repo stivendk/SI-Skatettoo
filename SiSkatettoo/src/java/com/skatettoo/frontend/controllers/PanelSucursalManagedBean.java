@@ -8,9 +8,11 @@ package com.skatettoo.frontend.controllers;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
+import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 
@@ -27,6 +29,7 @@ public class PanelSucursalManagedBean implements Serializable {
     private Sucursal sucu;
     private Usuario tatuador;
 
+    @EJB private SucursalFacadeLocal sfl;
 
     public Sucursal getSucu() {
         return sucu;
@@ -80,6 +83,11 @@ public class PanelSucursalManagedBean implements Serializable {
         tatuador = t;
     }
 
+    public void editarSucursal(){
+        sfl.edit(sucu);
+        FacesUtils.mensaje("Funciono");
+    }
+    
     public List<Disenio> listUsSucu() {
         return getTatuador().getDisenioList();
     }

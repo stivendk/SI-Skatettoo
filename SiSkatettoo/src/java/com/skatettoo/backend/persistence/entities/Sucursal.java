@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sucursal.findByIdSucursal", query = "SELECT s FROM Sucursal s WHERE s.idSucursal = :idSucursal"),
     @NamedQuery(name = "Sucursal.findByFotoSuc", query = "SELECT s FROM Sucursal s WHERE s.fotoSuc = :fotoSuc"),
     @NamedQuery(name = "Sucursal.findByNombre", query = "SELECT s FROM Sucursal s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "Sucursal.consultarSucursal", query = "SELECT s FROM Sucursal s WHERE s.nombre LIKE :nombre"),
     @NamedQuery(name = "Sucursal.findByDireccion", query = "SELECT s FROM Sucursal s WHERE s.direccion = :direccion"),
     @NamedQuery(name = "Sucursal.findByTelefono", query = "SELECT s FROM Sucursal s WHERE s.telefono = :telefono")})
 public class Sucursal implements Serializable, IEntitie {

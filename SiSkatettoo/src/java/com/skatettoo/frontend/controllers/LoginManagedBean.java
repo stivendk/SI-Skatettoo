@@ -30,6 +30,8 @@ public class LoginManagedBean implements Serializable {
     
     @EJB UsuarioFacadeLocal usfc;
     
+
+    
     public LoginManagedBean() {
     }
 
@@ -43,12 +45,13 @@ public class LoginManagedBean implements Serializable {
 
     public List<Permiso> getPermis() {
         return permis;
-    }
-
+    }    
+    
     @PostConstruct
     public void init() {
         usuario = (Usuario) FacesUtils.getObjectMapSession("usuario");
         permis = getUsuario().getIdRol().getPermisoList();
+        
     }
 
     public void modificarUs(){

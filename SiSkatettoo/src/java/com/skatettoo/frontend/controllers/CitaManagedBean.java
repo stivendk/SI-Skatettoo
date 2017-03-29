@@ -28,9 +28,11 @@ import javax.inject.Inject;
 @RequestScoped
 public class CitaManagedBean implements Serializable {
 
-    private int hora = 5;
     private Cita cita;
     private EstadoCita estad;
+    
+    @Inject
+    EmailManagedBean email;
     @Inject
     UsuarioManagedBean usu;
     @EJB
@@ -44,6 +46,10 @@ public class CitaManagedBean implements Serializable {
         return su;
     }
 
+    public EmailManagedBean getEmail() {
+        return email;
+    }
+    
     public EstadoCita getEstad() {
         return estad;
     }
@@ -51,15 +57,7 @@ public class CitaManagedBean implements Serializable {
     public void setEstad(EstadoCita estad) {
         this.estad = estad;
     }
-
-    public int getHora() {
-        return hora;
-    }
-
-    public void setHora(int hora) {
-        this.hora = hora;
-    }
-
+    
     public UsuarioManagedBean getUsu() {
         return usu;
     }
@@ -85,7 +83,6 @@ public class CitaManagedBean implements Serializable {
             cita.setIdUsuario(getUs().getUsuario());
             cita.setIdSucursal(getSu().getSucu());
             citafc.create(cita);
-            enviarEmail();
             FacesUtils.mensaje("Se ha enviado");
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");
@@ -93,10 +90,7 @@ public class CitaManagedBean implements Serializable {
         }
     }
 
-    public void enviarEmail() {
-        Email e = new Email("Nueva solicitud", "Te han enviado una nueva solcitud de cita" + getUs().getUsuario().getNombre() + getUs().getUsuario().getApellido(), getUsu().getUsuario().getEmail());
-        e.enviarEmail2();
-    }
+    
 
     public void eliminarCita() {
         citafc.remove(cita);

@@ -4,12 +4,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-            
+
             <ui:define name="head">
                 <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
                 <link rel="stylesheet" type="text/css" href="../../resources/css/parallax.css"></link>
@@ -22,29 +23,36 @@
             <ui:define name="content">
                 <h:form>
                     <h:messages showSummary="true"/>
+                    <h:form>
+                        <h:form>
+                            <h:commandButton class="btn btn-circle btn-primary btn-sm" type="submit" value="Editar" actionListener="#{sucursalManagedBean.miSucursal()}"/>
+                        </h:form>
+                    </h:form>
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
-                                <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
-                                <h:form>
-                                    <form action="#" method="post" class="form" role="form">
+                                <ui:repeat value="#{sucursalManagedBean.consulta}" var="suc">
+                                    <h:form  pt:method="post" class="form" role="form">
+                                        <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
                                         <div class="row">
                                             <div class="col-xs-6 col-md-6">
                                                 <label for="nombre">Nombre</label>
-                                                <h:outputText class="form-control" pt:placeholder="Nombre" id="nombre" value="#{sucursalManagedBean.sucu.nombre}" title="Nombre" />
+                                                <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{suc.nombre}" title="Nombre sucursal" required="true" requiredMessage="El nombre es requerido."/>
                                             </div>
                                         </div>
                                         <label for="direccion">Dirección</label>
-                                        <h:outputText class="form-control" id="dirreccion" value="#{sucursalManagedBean.sucu.direccion}" title="Direccion" />
+                                        <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{suc.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
                                         <label for="username">Descripcion</label>
-                                        <h:inputText class="form-control" pt:placeholder="Username" id="username" value="#{loginManagedBean.usuario.username}" title="Username" required="true" requiredMessage="Tu Username es requerido."/>
+                                        <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{suc.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
                                         <label for="telefono">Celular</label>
-                                        <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                                        <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{suc.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
                                         <br />
                                         <br />
-                                        <p:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" action="#{loginManagedBean.modificarUs()}"/>
-                                    </form>
-                                </h:form>
+                                        <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" action="#{sucursalManagedBean.selecSucursal(suc)}"/>
+                                    </h:form>
+                                </ui:repeat>
+                                <br/>
+                                
                             </div>
                         </div>
                     </div>
