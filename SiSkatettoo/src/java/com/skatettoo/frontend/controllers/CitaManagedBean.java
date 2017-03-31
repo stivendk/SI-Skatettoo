@@ -6,7 +6,6 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
-import com.skatettoo.backend.persistence.entities.EstadoCita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import javax.inject.Named;
@@ -29,7 +28,6 @@ import javax.inject.Inject;
 public class CitaManagedBean implements Serializable {
 
     private Cita cita;
-    private EstadoCita estad;
     
     @Inject
     EmailManagedBean email;
@@ -48,14 +46,6 @@ public class CitaManagedBean implements Serializable {
 
     public EmailManagedBean getEmail() {
         return email;
-    }
-    
-    public EstadoCita getEstad() {
-        return estad;
-    }
-
-    public void setEstad(EstadoCita estad) {
-        this.estad = estad;
     }
     
     public UsuarioManagedBean getUsu() {

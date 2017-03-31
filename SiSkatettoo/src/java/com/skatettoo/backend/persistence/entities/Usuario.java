@@ -44,6 +44,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable, IEntitie {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Column(name = "estadoUsuario")
+    private String estadoUsuario;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,9 +95,6 @@ public class Usuario implements Serializable, IEntitie {
     @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     @ManyToOne(fetch = FetchType.LAZY)
     private Rol idRol;
-    @JoinColumn(name = "id_estado_usuario", referencedColumnName = "id_estado_usuario")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EstadoUsuario idEstadoUsuario;
     @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")
     @ManyToOne(fetch = FetchType.LAZY)
     private Sucursal idSucursal;
@@ -243,19 +246,19 @@ public class Usuario implements Serializable, IEntitie {
         this.idRol = idRol;
     }
 
-    public EstadoUsuario getIdEstadoUsuario() {
-        return idEstadoUsuario;
-    }
-
-    public void setIdEstadoUsuario(EstadoUsuario idEstadoUsuario) {
-        this.idEstadoUsuario = idEstadoUsuario;
-    }
-
     public Sucursal getIdSucursal() {
         return idSucursal;
     }
 
     public void setIdSucursal(Sucursal idSucursal) {
         this.idSucursal = idSucursal;
+    }
+
+    public String getEstadoUsuario() {
+        return estadoUsuario;
+    }
+
+    public void setEstadoUsuario(String estadoUsuario) {
+        this.estadoUsuario = estadoUsuario;
     }
 }

@@ -42,6 +42,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 2)
+    @Column(name = "estadoCita")
+    private String estadoCita;
+
     
     @Lob
     @Size(max = 65535)
@@ -74,9 +80,6 @@ public class Cita implements Serializable {
     @JoinColumn(name = "tatuador", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario tatuador;
-    @JoinColumn(name = "id_estado_cita", referencedColumnName = "id_estado_cita")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EstadoCita idEstadoCita;
     @JoinColumn(name = "id_sucursal", referencedColumnName = "id_sucursal")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Sucursal idSucursal;
@@ -135,14 +138,6 @@ public class Cita implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public EstadoCita getIdEstadoCita() {
-        return idEstadoCita;
-    }
-
-    public void setIdEstadoCita(EstadoCita idEstadoCita) {
-        this.idEstadoCita = idEstadoCita;
-    }
-
     public Sucursal getIdSucursal() {
         return idSucursal;
     }
@@ -190,6 +185,14 @@ public class Cita implements Serializable {
 
     public void setDisenioAdjunto(String disenioAdjunto) {
         this.disenioAdjunto = disenioAdjunto;
+    }
+
+    public String getEstadoCita() {
+        return estadoCita;
+    }
+
+    public void setEstadoCita(String estadoCita) {
+        this.estadoCita = estadoCita;
     }
 
     
