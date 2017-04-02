@@ -30,14 +30,13 @@
                                             <th>Tatuador</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
-                                            <th>Estado</th>
                                             <th>Responder</th>
                                             <th>Aplazar</th>
                                             <th>Cancelar</th>
                                         </thead>
                                         <tbody>
                                             
-                                            <ui:repeat value="#{citaManagedBean.citaSucu()}" var="cita">
+                                            <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
                                                 <tr>
                                                     <td>#{cita.idSucursal.nombre}</td>
                                                     <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
@@ -48,7 +47,6 @@
                                                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                                         </h:outputText>
                                                     </td>
-                                                    <td>#{cita.idEstadoCita.nombreEstadoCita}</td>
                                                     <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
                                                     <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
                                                     <td><h:commandButton class="btn btn-danger btn-xs" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
