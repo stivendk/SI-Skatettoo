@@ -38,10 +38,10 @@
                 </h:form>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>Diseños</h1></center>
+                        <center><h1>#{panelEstiloManagedBean.estild.nombreEstilo}</h1></center>
                         <div class="container">
                             <div class="row">
-                                <ui:repeat value="#{disenioManagedBean.listarDisenio()}" var="dis">
+                                <ui:repeat value="#{panelEstiloManagedBean.disenioEstilo()}" var="dis">
                                     <div class="col-sm-4">
                                         <div class="thumbnail">
                                             <a jsf:action="#{disenioManagedBean.verDisenio(dis)}" class="">

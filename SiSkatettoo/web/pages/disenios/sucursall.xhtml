@@ -28,6 +28,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Localidad </a>
                         <ul class="dropdown-menu">
+                                <li><h:link outcome="/pages/disenios/sucursales.xhtml?faces-redirect=true" value="Todos"/></li>
+                                <li class="divider"></li>
                             <ui:repeat value="#{localidadManagedBean.listarLocalidad()}" var="loc">
                                 <li><h:commandLink action="#{localidadManagedBean.selectLocalidad(loc)}" value="#{loc.localidad}"></h:commandLink></li>
                                 <li class="divider"></li>
@@ -38,7 +40,7 @@
                 <section class="publicaciones-blog-home">
                     <center><div class="container">
                             <div class="row-page row">
-                                <h2>Sucursales</h2>
+                                <h2>#{localidadSessionController.loc.localidad}</h2>
                                 <h:form id="sucursales">
                                     <ui:repeat value="#{localidadSessionController.sucuList()}" var="sucur"> 
                                         <div class="">
