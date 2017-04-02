@@ -5,8 +5,12 @@
  */
 package com.skatettoo.frontend.controllers;
 
+import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.entities.EstiloDisenio;
+import com.skatettoo.backend.persistence.facade.EstiloDisenioFacadeLocal;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -19,10 +23,21 @@ import javax.enterprise.context.RequestScoped;
 public class PanelEstiloManagedBean {
 
     private EstiloDisenio estild;
+    private Disenio dis;
+    @EJB 
+    private EstiloDisenioFacadeLocal esfl;
     
     public PanelEstiloManagedBean() {
     }
 
+    public Disenio getDis() {
+        return dis;
+    }
+
+    public void setDis(Disenio dis) {
+        this.dis = dis;
+    }
+    
     public EstiloDisenio getEstild() {
         return estild;
     }
@@ -33,10 +48,11 @@ public class PanelEstiloManagedBean {
     
     @PostConstruct
     public void init (){
-        estild = (EstiloDisenio) FacesUtils.getObjectMapSession("estiloDisenio");
+        estild = (EstiloDisenio) FacesUtils.getObjectMapSession("estilo");
+        dis = new Disenio();
     }
-    
-    public void selectEstiloD(EstiloDisenio e){
-        setEstild(estild);
+     
+    public List<Disenio> disenioEstilo(){
+       return estild.getDisenioList();
     }
 }

@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
+import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.EstiloDisenio;
 import com.skatettoo.backend.persistence.facade.EstiloDisenioFacadeLocal;
 import javax.inject.Named;
@@ -67,7 +67,7 @@ public class EstiloManagedBean implements Serializable, Managedbean <EstiloDisen
     
     public String selecEstiloD(EstiloDisenio e){
         setEstil(e);
-        FacesUtils.setObjectAcceso("EstiloDisenioD", e);
+        FacesUtils.setObjectAcceso("estilo", e);
         return "/pages/disenios/disenioss?faces-redirect=true";
     }
     

@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
+import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;

@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
+import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.facade.RolFacadeLocal;
 import javax.inject.Named;

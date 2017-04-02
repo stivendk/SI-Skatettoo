@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
+import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Localidad;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.LocalidadFacadeLocal;

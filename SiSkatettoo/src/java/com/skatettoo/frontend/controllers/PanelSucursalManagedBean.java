@@ -28,6 +28,7 @@ public class PanelSucursalManagedBean implements Serializable {
     
     private Sucursal sucu;
     private Usuario tatuador;
+    private Disenio dis;
 
     @EJB private SucursalFacadeLocal sfl;
 
@@ -47,6 +48,14 @@ public class PanelSucursalManagedBean implements Serializable {
         this.tatuador = tatuador;
     }
 
+    public Disenio getDis() {
+        return dis;
+    }
+
+    public void setDis(Disenio dis) {
+        this.dis = dis;
+    }
+
     public PanelSucursalManagedBean() {
     }
 
@@ -54,6 +63,7 @@ public class PanelSucursalManagedBean implements Serializable {
     public void init() {
         sucu = (Sucursal) FacesUtils.getObjectMapSession("sucursal");
         tatuador = new Usuario();
+        dis = new Disenio();
     }
 
     public List<Usuario> tattuadoresSurcursal() {
@@ -74,6 +84,12 @@ public class PanelSucursalManagedBean implements Serializable {
         setSucu(sucu);
         FacesUtils.setObjectAcceso("sucursal", sucu);
         return "/pages/disenios/cita.xhtml?faces-redirect=true";
+    }
+    
+    public String enviarDisenio(Disenio d){
+        dis = d;
+        FacesUtils.setObjectAcceso("disenio", dis);
+        return "/pages/disenios/disenio.xhtml?faces-redirect=true";
     }
     
     public void seleccionarTatt(Usuario t) {

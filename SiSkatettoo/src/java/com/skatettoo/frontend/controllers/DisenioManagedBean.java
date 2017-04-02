@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.controllers;
 
-import com.plandemjr.frontend.util.Managedbean;
+import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.inject.Named;

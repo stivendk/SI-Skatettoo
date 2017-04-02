@@ -7,11 +7,13 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
+import com.skatettoo.frontend.email.Email;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -23,6 +25,10 @@ public class CitaSessionController implements Serializable{
 
     private Cita cit;
     @EJB private CitaFacadeLocal cfl;
+    @Inject
+    LoginManagedBean us;
+    @Inject
+    PanelSucursalManagedBean su;
     
     public CitaSessionController() {
     }
@@ -34,6 +40,14 @@ public class CitaSessionController implements Serializable{
     public void setCit(Cita cit) {
         this.cit = cit;
     }
+
+    public LoginManagedBean getUs() {
+        return us;
+    }
+
+    public PanelSucursalManagedBean getSu() {
+        return su;
+    }
     
     @PostConstruct
     public void init(){
@@ -41,7 +55,18 @@ public class CitaSessionController implements Serializable{
     }
     
     public void responderCita(){
+        Email e = new Email("Cita aceptada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha respondido la cita que enviaste para el dia " + getCit().getFechaHora() + "\nPor el valor de: $" + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
+        e.enviarEmail();
         cfl.edit(cit);
         FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
     }
+    
+    public void aplazarCita(){
+        cit.setEstadoCita("2");
+        Email e = new Email("Cita aplazada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha puesto una nueva fecha para continuar con la cita el dia " + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
+        e.enviarEmail();
+        cfl.edit(cit);
+        FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
+    }
+    
 }

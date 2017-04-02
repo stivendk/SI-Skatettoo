@@ -72,6 +72,9 @@ public class CitaManagedBean implements Serializable {
         try {
             cita.setIdUsuario(getUs().getUsuario());
             cita.setIdSucursal(getSu().getSucu());
+            cita.setEstadoCita("1");
+            Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
+            e.enviarEmail();
             citafc.create(cita);
             FacesUtils.mensaje("Se ha enviado");
         } catch (Exception e) {
@@ -94,25 +97,25 @@ public class CitaManagedBean implements Serializable {
     public String actualizarCita(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/tatuador/rcita";
+        return "/pages/tatuador/rcita.xhtml?faces-redirect=true";
     }
     
     public String actualizarCitaA(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/admin/rcita?faces-redirect=true";
+        return "/pages/admin/rcita.xhtml?faces-redirect=true";
     }
 
     public String aplazarCita(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/tatuador/acita";
+        return "/pages/tatuador/acita.xhtml?faces-redirect=true";
     }
     
     public String aplazarCitaA(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/admin/acita?faces-redirect=true";
+        return "/pages/admin/acita.xhtml?faces-redirect=true";
     }
 
     public List<Cita> listarCita() {
