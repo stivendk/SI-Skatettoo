@@ -28,7 +28,6 @@
                                             <th>Cliente</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
-                                            <th>Estado</th>
                                         </thead>
                                         <tbody>
                                             
@@ -42,7 +41,6 @@
                                                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                                         </h:outputText>
                                                     </td>
-                                                    <td>#{cita.idEstadoCita.nombreEstadoCita}</td>
                                                     <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCitaA(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
                                                     <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCitaA(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
                                                     <td><h:commandButton class="btn btn-danger btn-xs" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
