@@ -6,8 +6,8 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Cita;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
-import com.skatettoo.frontend.controllers.LoginManagedBean;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -32,6 +32,6 @@ public interface CitaFacadeLocal {
 
     int count();
 
-   
+   String crearCita(Usuario cliente, Usuario tatuador, Cita c, Sucursal s);
     
 }

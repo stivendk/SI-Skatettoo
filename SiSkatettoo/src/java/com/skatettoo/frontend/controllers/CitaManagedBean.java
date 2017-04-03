@@ -66,6 +66,10 @@ public class CitaManagedBean implements Serializable {
         this.cita = cita;
     }
 
+    public LoginManagedBean getUs() {
+        return us;
+    }
+
     @PostConstruct
     public void init() {
         cita = new Cita();
@@ -73,26 +77,16 @@ public class CitaManagedBean implements Serializable {
 
     public String solicitarCita() {
         try {
-            if (cita.getEstadoCita() != 1) {
-                cita.setIdUsuario(getUs().getUsuario());
-                cita.setIdSucursal(getSu().getSucu());
-                cita.setEstadoCita((short)1);
-                Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
-                e.enviarEmail();
-                us.getUsuario().setEstadoUsuario((short)3);
-                citafc.create(cita);
-                FacesUtils.mensaje("Se ha enviado");
-               
-            }
-            if (us.getUsuario().getEstadoUsuario() == 3) {
-                FacesUtils.mensaje("buena");
-                return "/pages/disenios/sucursall.xhtml?faces-redirect=true";
-            }
+            citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
+            citafc.create(cita);
+            Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
+            e.enviarEmail();
+            FacesUtils.mensaje("Se ha enviado");
+            return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");
             throw e;
         }
-        return "";
     }
 
     public void eliminarCita() {
@@ -132,10 +126,6 @@ public class CitaManagedBean implements Serializable {
 
     public List<Cita> listarCita() {
         return citafc.findAll();
-    }
-
-    public LoginManagedBean getUs() {
-        return us;
     }
 
     public List<Cita> citaSucuf() {

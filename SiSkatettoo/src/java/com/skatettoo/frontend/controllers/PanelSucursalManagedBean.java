@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -31,6 +32,11 @@ public class PanelSucursalManagedBean implements Serializable {
     private Disenio dis;
 
     @EJB private SucursalFacadeLocal sfl;
+    @Inject LoginManagedBean us;
+
+    public LoginManagedBean getUs() {
+        return us;
+    }
 
     public Sucursal getSucu() {
         return sucu;
@@ -81,9 +87,14 @@ public class PanelSucursalManagedBean implements Serializable {
     }
 
     public String enviarSucursal(){
-        setSucu(sucu);
-        FacesUtils.setObjectAcceso("sucursal", sucu);
-        return "/pages/disenios/cita.xhtml?faces-redirect=true";
+        if(getUs().getUsuario().getEstadoUsuario()!=2){
+            setSucu(sucu);
+            FacesUtils.setObjectAcceso("sucursal", sucu);
+            return "/pages/disenios/cita.xhtml?faces-redirect=true";
+        } else{
+            FacesUtils.mensaje("Ya tienes una cita en proceso");
+            return "";
+        }
     }
     
     public String enviarDisenio(Disenio d){
