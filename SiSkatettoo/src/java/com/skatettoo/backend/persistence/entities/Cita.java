@@ -42,12 +42,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Cita implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
     @Column(name = "estadoCita")
-    private String estadoCita;
-
+    private short estadoCita;
     
     @Lob
     @Size(max = 65535)
@@ -187,11 +187,11 @@ public class Cita implements Serializable {
         this.disenioAdjunto = disenioAdjunto;
     }
 
-    public String getEstadoCita() {
+    public short getEstadoCita() {
         return estadoCita;
     }
 
-    public void setEstadoCita(String estadoCita) {
+    public void setEstadoCita(short estadoCita) {
         this.estadoCita = estadoCita;
     }
 

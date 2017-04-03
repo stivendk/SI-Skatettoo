@@ -6,6 +6,8 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Cita;
+import com.skatettoo.backend.persistence.entities.Usuario;
+import com.skatettoo.frontend.controllers.LoginManagedBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,6 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
     public CitaFacade() {
         super(Cita.class);
     }
+    
     
 }

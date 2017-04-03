@@ -12,7 +12,7 @@
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
             <ui:define name="head2"></ui:define>
             <ui:define name="head">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
                 <link rel="stylesheet" type="text/css" href="../../resources/css/disenio.css"></link>
                 <script src="../../resources/js/jquery-2.2.3.min.js"></script>
             </ui:define>
@@ -21,41 +21,33 @@
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
+                <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="/pages/disenios/disenios.xhtml?faces-redirect=true"/>
                 <h:form>
-                    <center><div class="container">    
-                            <div class="row">
-                                <div>				
-                                    <div class="panel panel-default  panel--styled" style="width: 634px;">
-                                        <div class="panel-body">
-                                            <div class="col-md-12 panelTop">	
-                                                <div class="col-md-4">	
-                                                    <img class="img-responsive" src="../../img/#{panelDisenioManagedBean.dis.nombreDisenio}.jpg" alt=""/>
-                                                </div>
-                                                <div class="col-md-8">	
-                                                    <h2>#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}</h2>
-                                                    <p>#{panelDisenioManagedBean.dis.anotaciones}</p>
-                                                </div>
-                                            </div>
+                    <div class="container">
+                        <div class="card">
+                            <div class="container-fliud">
+                                <div class="wrapper row">
+                                    <div class="preview col-md-6">
 
-                                            <div class="col-md-12 panelBottom">
-                                                <div class="col-md-4 text-left">
-                                                    <h5>Price <span class="itemPrice">$#{panelDisenioManagedBean.dis.precioDisenio}</span></h5>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div>
-                                                        <br/>
-                                                        <a jsf:action="#{panelDisenioManagedBean.selectDisenio(d)}">##{panelDisenioManagedBean.dis.idEstiloDisenio.nombreEstilo}</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 text-center">
-                                                    <h:commandButton action="#{citaManagedBean.seleccionarDis()}" class="btn btn-lg btn-add-to-cart" value="Solicitar cita" ></h:commandButton>						
-                                                </div>
-                                            </div>
+                                        <div class="preview-pic tab-content">
+                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="../../img/#{panelDisenioManagedBean.dis.nombreDisenio}.jpg" alt="#{panelDisenioManagedBean.dis.nombreD}" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="details col-md-6">
+                                        <h1 class="product-description">#{panelDisenioManagedBean.dis.nombreD}</h1>
+                                        <div class="vacio"></div>
+                                        <div class="vacio"></div>
+                                        <h3 class="product-description">#{panelDisenioManagedBean.dis.anotaciones}</h3>
+                                        
+                                        <div class="action">
+                                            <a href="#">#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}</a>
                                         </div>
                                     </div>
                                 </div>
+                                <br/>
                             </div>
-                        </div></center>
+                        </div>
+                    </div>
                 </h:form>
             </ui:define>
 

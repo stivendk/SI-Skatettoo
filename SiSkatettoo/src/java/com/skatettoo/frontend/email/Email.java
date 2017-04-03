@@ -44,6 +44,7 @@ public class Email {
         iniciarPropiedades();
     }
 
+
     public void iniciarPropiedades() {
         props = new Properties();
         props.put("mail.smtp.auth", "true");

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.plandemjr.frontend.util;
+package com.skatettoo.frontend.util;
 
 import com.skatettoo.backend.persistence.entities.IEntitie;
 import javax.faces.application.FacesMessage;

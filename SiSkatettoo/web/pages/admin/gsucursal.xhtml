@@ -26,24 +26,62 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
-                                <h:form>
-                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
-                                    <div class="row">
-                                        <div class="col-xs-6 col-md-6">
-                                            <label for="nombre">Nombre</label>
-                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{loginManagedBean.usuario.idSucursal.nombre}" title="Nombre loginManagedBean.usuario.idSucursalrsal" required="true" requiredMessage="El nombre es requerido."/>
-                                        </div>
-                                    </div>
-                                    <label for="direccion">Dirección</label>
-                                    <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{loginManagedBean.usuario.idSucursal.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
-                                    <label for="username">Descripcion</label>
-                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{loginManagedBean.usuario.idSucursal.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
-                                    <label for="telefono">Celular</label>
-                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.idSucursal.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
-                                    <br />
-                                    <br />
-                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Editar" action="#{loginManagedBean.gestSurcursal()}"/>
-                                </h:form>
+                                <f:view>
+                                    <h:form>
+                                        <h1><h:outputText value="List"/></h1>
+                                        <h:dataTable value="#{sucursalManagedBean.miSucu()}" var="item">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="IdSucursal"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.idSucursal}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="FotoSuc"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.fotoSuc}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombre"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Direccion"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.direccion}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Descripcion"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.descripcion}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Telefono"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.telefono}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="IdLocalidad"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.idLocalidad}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Id"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.id}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:form>
+                                </f:view>
+
                             </div>
                         </div>
                     </div>

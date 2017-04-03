@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.converters;
 
-import com.plandemjr.frontend.util.AbstractConverter;
+import com.skatettoo.frontend.util.AbstractConverter;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import javax.faces.convert.FacesConverter;
 

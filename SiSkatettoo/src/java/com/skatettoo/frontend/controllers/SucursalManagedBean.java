@@ -125,8 +125,17 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
     }
 
-    public String miSucursal(){
-        consulta = sucufc.consuSuc(getUsu().getUsuario().getIdSucursal().getNombre());
-        return "/pages/admin/acitas.xhtml?faces-redirect=true";
+    public List<Sucursal> miSucu() {
+        List<Sucursal> sul = new ArrayList<>();
+        try {
+            for (Sucursal ci : listarSucursal()) {
+                if (ci.getUsuarioList().equals(getUsu().getUsuario().getIdSucursal())) {
+                    sul.add(ci);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return sul;
     }
 }

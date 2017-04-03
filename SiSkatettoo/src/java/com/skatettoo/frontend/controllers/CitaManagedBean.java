@@ -7,6 +7,7 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
+import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -28,11 +29,13 @@ import javax.inject.Inject;
 public class CitaManagedBean implements Serializable {
 
     private Cita cita;
-    
+
     @Inject
     EmailManagedBean email;
     @Inject
     UsuarioManagedBean usu;
+    @EJB
+    UsuarioFacadeLocal ufl;
     @EJB
     private CitaFacadeLocal citafc;
     @Inject
@@ -47,7 +50,7 @@ public class CitaManagedBean implements Serializable {
     public EmailManagedBean getEmail() {
         return email;
     }
-    
+
     public UsuarioManagedBean getUsu() {
         return usu;
     }
@@ -68,20 +71,29 @@ public class CitaManagedBean implements Serializable {
         cita = new Cita();
     }
 
-    public void solicitarCita() {
+    public String solicitarCita() {
         try {
-            cita.setIdUsuario(getUs().getUsuario());
-            cita.setIdSucursal(getSu().getSucu());
-            cita.setEstadoCita("1");
-            Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
-            e.enviarEmail();
-            citafc.create(cita);
-            FacesUtils.mensaje("Se ha enviado");
+            if (cita.getEstadoCita() != 1) {
+                cita.setIdUsuario(getUs().getUsuario());
+                cita.setIdSucursal(getSu().getSucu());
+                cita.setEstadoCita((short)1);
+                Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
+                e.enviarEmail();
+                us.getUsuario().setEstadoUsuario((short)3);
+                citafc.create(cita);
+                FacesUtils.mensaje("Se ha enviado");
+               
+            }
+            if (us.getUsuario().getEstadoUsuario() == 3) {
+                FacesUtils.mensaje("buena");
+                return "/pages/disenios/sucursall.xhtml?faces-redirect=true";
+            }
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");
             throw e;
         }
-    }    
+        return "";
+    }
 
     public void eliminarCita() {
         citafc.remove(cita);
@@ -91,7 +103,7 @@ public class CitaManagedBean implements Serializable {
         FacesUtils.setObjectAcceso("cita", cita);
         citafc.edit(cita);
         FacesUtils.mensaje("Se ha actualizado la cita");
-        
+
     }
 
     public String actualizarCita(Cita c) {
@@ -99,7 +111,7 @@ public class CitaManagedBean implements Serializable {
         FacesUtils.setObjectAcceso("cita", cita);
         return "/pages/tatuador/rcita.xhtml?faces-redirect=true";
     }
-    
+
     public String actualizarCitaA(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
@@ -111,7 +123,7 @@ public class CitaManagedBean implements Serializable {
         FacesUtils.setObjectAcceso("cita", cita);
         return "/pages/tatuador/acita.xhtml?faces-redirect=true";
     }
-    
+
     public String aplazarCitaA(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);

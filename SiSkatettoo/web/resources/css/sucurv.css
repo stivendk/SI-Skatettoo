@@ -99,3 +99,13 @@ ul#display-inline-block-example li {
     zoom: 1;
     *display: inline;
 }
+
+.regresar{
+    font-size: 35px;
+    color: #000;
+}
+
+.regresar:hover{
+    text-decoration: none;
+    color: #f00;
+}

@@ -44,13 +44,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable, IEntitie {
 
+    private static final long serialVersionUID = 1L;
+
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
     @Column(name = "estadoUsuario")
-    private String estadoUsuario;
-
-    private static final long serialVersionUID = 1L;
+    private short estadoUsuario;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -254,11 +254,11 @@ public class Usuario implements Serializable, IEntitie {
         this.idSucursal = idSucursal;
     }
 
-    public String getEstadoUsuario() {
+    public short getEstadoUsuario() {
         return estadoUsuario;
     }
 
-    public void setEstadoUsuario(String estadoUsuario) {
+    public void setEstadoUsuario(short estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
     }
 }

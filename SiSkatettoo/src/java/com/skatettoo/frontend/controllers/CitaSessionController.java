@@ -62,7 +62,7 @@ public class CitaSessionController implements Serializable{
     }
     
     public void aplazarCita(){
-        cit.setEstadoCita("2");
+        cit.setEstadoCita((short)2);
         Email e = new Email("Cita aplazada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha puesto una nueva fecha para continuar con la cita el dia " + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
         e.enviarEmail();
         cfl.edit(cit);
