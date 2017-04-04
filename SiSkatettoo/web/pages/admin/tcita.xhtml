@@ -11,18 +11,16 @@
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
 
-
             <ui:define name="titulo">
                 #{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido} | Skatettoo
             </ui:define>
-
 
             <ui:define name="content">
                 <div class="modal-content">
                     <h:messages showSummary="true"/>
                     <h:form pt:method="post" prependId="false" class="form" role="form">
                         <div class="modal-header">
-                            <button type="button" jsf:outcome="/pages/admin/mcita.xhtml.xhtml?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 3%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                            <button type="button" jsf:outcome="/pages/admin/mcita?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 3%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
                             <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
                         </div>
                         <div class="modal-body">
@@ -40,9 +38,9 @@
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
-                                <h:inputText pt:type="text" class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
+                                <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:inputText>
+                                </h:outputText>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
@@ -52,13 +50,14 @@
                         <div class="modal-footer ">
                             <div class="container">
                                 <div class="row">
-                                    <button type="button" jsf:outcome="/pages/admin/mcita.xhtml?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
-                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.responderCita()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%; margin-top: -68px;"></h:commandButton>
+                                    <button type="button" jsf:outcome="/pages/admin/mcita?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
+                                    <h:commandButton type="submit" value="Finalizar" action="#{citaSessionController.terminarCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: -68px;"></h:commandButton>
                                 </div>
                             </div>
                         </div>
                     </h:form>
                 </div>
+                <!-- /.modal-content --> 
             </ui:define>
 
         </ui:composition>

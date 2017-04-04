@@ -59,7 +59,7 @@ public class UploadFile implements Serializable {
         path = path + "\\web\\img\\";
         try {
             this.nombre = file.getSubmittedFileName();
-            pathReal = "/SISkatettoo/archivos/" + nombre;
+            pathReal = "/SISkatettoo/img/" + nombre;
             path = path + this.nombre;
             InputStream in = file.getInputStream();
 

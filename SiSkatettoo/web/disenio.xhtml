@@ -41,7 +41,7 @@
                 </nav></ui:define>
             <ui:define name="head2"></ui:define>
             <ui:define name="head">
-                <link rel="stylesheet" type="text/css" href="resources/css/estilos.css"></link>
+                <link rel="stylesheet" type="text/css" href="resources/css/estailos.css"></link>
                 <link rel="stylesheet" type="text/css" href="resources/css/disenio.css"></link>
                 <script src="resources/js/jquery-2.2.3.min.js"></script>
             </ui:define>
@@ -50,46 +50,37 @@
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
-                <p:link class="glyphicon glyphicon-arrow-left regresar" outcome="disenios.xhtml"/>
+                <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="disenios.xhtml"/>
                 <h:form>
-                    <center><div class="container">    
-                            <div class="row">
-                                <div>				
-                                    <div class="panel panel-default  panel--styled" style="width: 634px;">
-                                        <div class="panel-body">
-                                            <div class="col-md-12 panelTop">	
-                                                <div class="col-md-4">	
-                                                    <img class="img-responsive" src="img/#{disenioManagedBean.disenio.nombreDisenio}.jpg" alt=""/>
-                                                </div>
-                                                <div class="col-md-8">	
-                                                    <h2>#{disenioManagedBean.disenio.idUsuario.nombre} #{disenioManagedBean.disenio.idUsuario.apellido}</h2>
-                                                    <p>#{disenioManagedBean.disenio.anotaciones}</p>
-                                                </div>
-                                            </div>
+                    <div class="container">
+                        <div class="card">
+                            <div class="container-fliud">
+                                <div class="wrapper row">
+                                    <div class="preview col-md-6">
 
-                                            <div class="col-md-12 panelBottom">
-                                                <div class="col-md-4 text-left">
-                                                    <h5>Price <span class="itemPrice">$#{disenioManagedBean.disenio.precioDisenio}</span></h5>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div>
-                                                        <br/>
-                                                        <a jsf:action="#">##{disenioManagedBean.disenio.idEstiloDisenio.nombreEstilo}</a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 text-center">
-                                                    <h:link outcome="index.xhtml #javascript:openVentana1()?faces-redirect=true" class="btn btn-lg btn-add-to-cart" value="Solicitar cita" ></h:link>						
-                                                </div>
-                                                <div>
-                                                    <br/>
-                                                    <h:link outcome="registro.xhtml" value="Registrate" class="btn btn-dark btn-lg toggle bt"></h:link>
-                                                </div>
-                                            </div>
+                                        <div class="preview-pic tab-content">
+                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="../../img/#{disenioManagedBean.disenio.nombreDisenio}.jpg" alt="#{disenioManagedBean.disenio.nombreD}" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="details col-md-6">
+                                        <h1 class="product-description">#{disenioManagedBean.disenio.nombreD}</h1>
+                                        <div class="vacio"></div>
+                                        <div class="vacio"></div>
+                                        <h3 class="product-description">#{disenioManagedBean.disenio.anotaciones}</h3>
+                                        
+                                        <div class="action">
+                                            <a href="#">#{disenioManagedBean.disenio.idUsuario.nombre} #{disenioManagedBean.disenio.idUsuario.apellido}</a>
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <br/>
+                                    <h:link outcome="registro.xhtml" value="Registrate" class="btn btn-dark btn-lg toggle bt"></h:link>
+                                </div>
+                                <br/>
                             </div>
-                        </div></center>
+                        </div>
+                    </div>
                 </h:form>
             </ui:define>
 

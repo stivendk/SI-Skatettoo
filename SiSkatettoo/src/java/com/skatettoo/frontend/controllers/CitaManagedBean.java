@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
+import java.io.File;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 
 /**
  *
@@ -29,7 +32,7 @@ import javax.inject.Inject;
 public class CitaManagedBean implements Serializable {
 
     private Cita cita;
-
+    private Part file;
     @Inject
     EmailManagedBean email;
     @Inject
@@ -42,7 +45,13 @@ public class CitaManagedBean implements Serializable {
     LoginManagedBean us;
     @Inject
     PanelSucursalManagedBean su;
+    @Inject
+    UploadFile up;
 
+    public UploadFile getUp() {
+        return up;
+    }
+    
     public PanelSucursalManagedBean getSu() {
         return su;
     }
@@ -70,6 +79,14 @@ public class CitaManagedBean implements Serializable {
         return us;
     }
 
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
     @PostConstruct
     public void init() {
         cita = new Cita();
@@ -78,6 +95,7 @@ public class CitaManagedBean implements Serializable {
     public String solicitarCita() {
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
+            cita.setDisenioAdjunto(getUp().upload(file));
             citafc.create(cita);
             Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();
@@ -99,7 +117,13 @@ public class CitaManagedBean implements Serializable {
         FacesUtils.mensaje("Se ha actualizado la cita");
 
     }
-
+    
+    public String terminarCita(Cita c) {
+        cita = c;
+        FacesUtils.setObjectAcceso("cita", cita);
+        return "/pages/tatuador/tcita.xhtml?faces-redirect=true";
+    }
+    
     public String actualizarCita(Cita c) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
@@ -171,4 +195,5 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
+    
 }

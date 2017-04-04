@@ -32,26 +32,28 @@
                                             <th>Fecha y Hora</th>
                                             <th>Responder</th>
                                             <th>Aplazar</th>
-                                            <th>Cancelar</th>
+                                            <th>Terminar</th>
                                         </thead>
                                         <tbody>
-                                            
-                                            <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
-                                                <tr>
-                                                    <td>#{cita.idSucursal.nombre}</td>
-                                                    <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
-                                                    <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
-                                                    <td>#{cita.idUsuario.email}</td>
-                                                    <td>
-                                                        <h:outputText value="#{cita.fechaHora}">
-                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                                        </h:outputText>
-                                                    </td>
-                                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
-                                                    <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
-                                                    <td><h:commandButton class="btn btn-danger btn-xs" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
-                                                </tr>
-                                            </ui:repeat>    
+                                            <h:form>
+                                                <h:messages showSummary="true"/>
+                                                <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
+                                                    <tr>
+                                                        <td>#{cita.idSucursal.nombre}</td>
+                                                        <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                        <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
+                                                        <td>#{cita.idUsuario.email}</td>
+                                                        <td>
+                                                            <h:outputText value="#{cita.fechaHora}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </td>
+                                                        <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-danger btn-xs"  action="#{citaManagedBean.terminarCita(cita)}" value="Terminar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </h:form>
                                         </tbody>
                                     </table>
                                     <h:messages showSummary="true" />

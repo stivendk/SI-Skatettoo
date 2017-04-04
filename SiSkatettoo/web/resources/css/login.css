@@ -102,3 +102,12 @@ body {
     background: #de2f18;
     border-color: #be2815;
 }
+.regresar{
+    font-size: 35px;
+    color: #000;
+}
+
+.regresar:hover{
+    text-decoration: none;
+    color: #f00;
+}

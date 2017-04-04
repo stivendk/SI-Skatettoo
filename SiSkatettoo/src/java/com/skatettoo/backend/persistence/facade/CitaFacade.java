@@ -9,8 +9,7 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.frontend.controllers.FacesUtils;
-import com.skatettoo.frontend.controllers.LoginManagedBean;
-import com.skatettoo.frontend.controllers.PanelSucursalManagedBean;
+import com.skatettoo.frontend.controllers.UploadFile;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +44,22 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
                 getEntityManager().merge(cliente);
             } else {
                 FacesUtils.mensaje("Ya tienes una cita en proceso");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return "";
+    }
+
+    @Override
+    public String terminarCita(Cita c, Usuario u) {
+        try {
+            if(u.getEstadoUsuario() !=1){
+                c.setEstadoCita((short)4);
+                u.setEstadoUsuario((short)1);
+                getEntityManager().merge(u);
+            }else {
+                FacesUtils.mensaje("El cliente aun no ha realizado su cita");
             }
         } catch (Exception e) {
             throw e;

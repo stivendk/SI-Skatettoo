@@ -8,6 +8,7 @@ package com.skatettoo.frontend.controllers;
 import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Localidad;
 import com.skatettoo.backend.persistence.entities.Sucursal;
+import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -29,6 +30,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     private static final long serialVersionUID = 1L;
     
+    private Usuario us;
     private Sucursal sucu;
     private Localidad loc;
     private List<Sucursal> consulta;
@@ -36,6 +38,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     @EJB
     private SucursalFacadeLocal sucufc;
     @Inject LoginManagedBean usu;
+    @Inject CitaManagedBean cit;
     
     public SucursalManagedBean() {
     }
@@ -56,6 +59,10 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         this.sucu = sucu;
     }
 
+    public void setCit(CitaManagedBean cit) {
+        this.cit = cit;
+    }
+
     public List<Sucursal> getConsulta() {
         return consulta;
     }
@@ -66,6 +73,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     public LoginManagedBean getUsu() {
         return usu;
+    }
+
+    public Usuario getUs() {
+        return us;
+    }
+
+    public void setUs(Usuario us) {
+        this.us = us;
     }
 
     @PostConstruct
@@ -129,7 +144,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         List<Sucursal> sul = new ArrayList<>();
         try {
             for (Sucursal ci : listarSucursal()) {
-                if (ci.getUsuarioList().equals(getUsu().getUsuario().getIdSucursal())) {
+                if (ci.getIdSucursal().equals(usu.getUsuario().getIdUsuario())) {
                     sul.add(ci);
                 }
             }

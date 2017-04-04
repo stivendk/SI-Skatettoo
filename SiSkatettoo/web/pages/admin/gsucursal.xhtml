@@ -1,94 +1,66 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
-
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-
-            <ui:define name="head">
-                <link rel="stylesheet" type="text/css" href="../../resources/css/estailos.css"></link>
-                <link rel="stylesheet" type="text/css" href="../../resources/css/parallax.css"></link>
+            <ui:define name="head2">
+                <h:outputStylesheet name="css/sucurv.css" />
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputStylesheet name="css/gallery.css"/>
+                <h:outputScript name="js/jquery-2.2.3.min.js"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
             </ui:define>
-
             <ui:define name="titulo">
-                Gestionar loginManagedBean.usuario.idSucursalrsal | Skatettoo
+                Gestionar Sucursal | Skatettoo
             </ui:define>
-
+            <ui:define name="top2"></ui:define>
             <ui:define name="content">
-                <h:form>
-                    <h:messages showSummary="true"/>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
-                                <f:view>
-                                    <h:form>
-                                        <h1><h:outputText value="List"/></h1>
-                                        <h:dataTable value="#{sucursalManagedBean.miSucu()}" var="item">
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="IdSucursal"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.idSucursal}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="FotoSuc"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.fotoSuc}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Nombre"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.nombre}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Direccion"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.direccion}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Descripcion"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.descripcion}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Telefono"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.telefono}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="IdLocalidad"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.idLocalidad}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Id"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.id}"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </h:form>
-                                </f:view>
+                <h:messages showSummary="true" />
+                    <div class="contenido-izquierda">
+                        <div class="contenido-sucursal-header">
+                            <img alt="Mert Salih Kaplan" src="../../img/#{loginManagedBean.usuario.idSucursal.fotoSuc}.jpg" class="avatar-sucursal"/>
+                        </div>
+                        <div class="contenido-sucursal listatatuadoressucursal">
+                            <h:form>
+                                <div class="info-sucursal">
+                                    <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
+                                    <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
+                                    <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
+                                    <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
+                                </div>
+                                
+                            </h:form>
+                        </div>
+                    </div>
+                <script>
+                    $('.tatuador-link').on('click', function () {
+                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
+                    });
+                </script>
+                <div class="modal fade pop-up-2" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h3 class="modal-title text-center" id="lineModalLabel">#{item.nombre} #{item.apellido}</h3>
+                            </div>
+                            <div class="modal-body">
+
 
                             </div>
                         </div>
                     </div>
-                </h:form>
+                </div>
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
+

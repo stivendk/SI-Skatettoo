@@ -6,6 +6,7 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.frontend.util.Managedbean;
+import com.skatettoo.frontend.controllers.UploadFile;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.inject.Named;
@@ -18,6 +19,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 
 /**
  *
@@ -27,6 +30,8 @@ import javax.inject.Inject;
 @RequestScoped
 public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
+    Part file;
+    private UploadFile up;
     private Disenio disenio;
     @EJB
     private DisenioFacadeLocal diseniofc;
@@ -37,6 +42,14 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
     @Inject
     EstiloManagedBean est;
+
+    public UploadFile getUp() {
+        return up;
+    }
+
+    public void setUp(UploadFile up) {
+        this.up = up;
+    }
 
     public EstiloManagedBean getEst() {
         return est;
@@ -66,7 +79,15 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         this.resultado = resultado;
     }
 
-    
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+     
 
     @PostConstruct
     public void init() {
@@ -80,6 +101,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha publicado con exito", "Se ha agregado un nuevo diseño"));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha producido un error", "¡Error!"));
+            throw e;
         }
     }
 

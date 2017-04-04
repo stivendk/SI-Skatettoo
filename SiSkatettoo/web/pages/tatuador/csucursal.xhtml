@@ -1,37 +1,59 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
-
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-
-            <ui:define name="titulo">
-                Sucursal | Skatettoo
+            <ui:define name="head2">
+                <h:outputStylesheet name="css/sucurv.css" />
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputStylesheet name="css/gallery.css"/>
+                <h:outputScript name="js/jquery-2.2.3.min.js"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
             </ui:define>
-
+            <ui:define name="titulo">
+                #{loginManagedBean.usuario.idSucursal.nombre} | Skatettoo
+            </ui:define>
+            <ui:define name="top2"></ui:define>
             <ui:define name="content">
-                <div class="container">
-                    <div class="col-md-8">
-                        <div class="caja2">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="dentro">
-                                            <img src="../../img/bird.jpg" class="img-responsive"/>
-                                        </div>     
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="dentro">
-
-                                        </div>  
-                                    </div>
+                <h:messages showSummary="true" />
+                <div class="contenido-izquierda">
+                        <div class="contenido-sucursal-header">
+                            <img alt="Mert Salih Kaplan" src="../../img/#{loginManagedBean.usuario.idSucursal.fotoSuc}.jpg" class="avatar-sucursal"/>
+                        </div>
+                        <div class="contenido-sucursal listatatuadoressucursal">
+                            <h:form>
+                                <div class="info-sucursal">
+                                    <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
+                                    <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
+                                    <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
+                                    <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
                                 </div>
+                                
+                            </h:form>
+                        </div>
+                    </div>
+                <script>
+                    $('.tatuador-link').on('click', function () {
+                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
+                    });
+                </script>
+                <div class="modal fade pop-up-2" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h3 class="modal-title text-center" id="lineModalLabel">#{item.nombre} #{item.apellido}</h3>
+                            </div>
+                            <div class="modal-body">
+
+
                             </div>
                         </div>
                     </div>
@@ -39,6 +61,6 @@
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
+

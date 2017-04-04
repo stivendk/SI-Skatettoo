@@ -19,7 +19,8 @@
 
             <ui:define name="content">
                 <div class="modal-content">
-                    <h:form>
+                    <h:messages showSummary="true"/>
+                    <h:form pt:method="post" prependId="false" class="form" role="form">
                         <div class="modal-header">
                             <button type="button" jsf:outcome="/pages/tatuador/cgdisenios?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 3%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
                             <center><h4 class="modal-title custom_align" id="Heading">#{disenioManagedBean.disenio.nombreD}</h4></center>
@@ -54,7 +55,7 @@
                         <div class="modal-footer ">
                             <div class="container">
                                 <div class="row">
-                                    <center><h:commandButton type="button" value="Modificar" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%;"></h:commandButton></center>
+                                    <center><h:commandButton type="submit" value="Modificar" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%;"></h:commandButton></center>
                                 </div>
                             </div>
                         </div>

@@ -22,30 +22,35 @@
                             <h4>Citas</h4>
                             <div class="table-responsive">
                                 <h:form >
+                                    <h:messages showSummary="true"/>
                                     <table id="mytable" class="table table-bordred table-striped tabla">
                                         <thead>
                                             <th>Sucursal</th>
                                             <th>Cliente</th>
                                             <th>Email</th>
                                             <th>Fecha y Hora</th>
+                                            <th>Responder</th>
+                                            <th>Aplazar</th>
+                                            <th>Terminar</th>
                                         </thead>
                                         <tbody>
-                                            
-                                            <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
-                                                <tr>
-                                                    <td>#{cita.idSucursal.nombre}</td>
-                                                    <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
-                                                    <td>#{cita.idUsuario.email}</td>
-                                                    <td>
-                                                        <h:outputText value="#{cita.fechaHora}">
-                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                                                        </h:outputText>
-                                                    </td>
-                                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCitaA(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
-                                                    <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCitaA(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
-                                                    <td><h:commandButton class="btn btn-danger btn-xs" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
-                                                </tr>
-                                            </ui:repeat>    
+                                            <h:form>
+                                                <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
+                                                    <tr>
+                                                        <td>#{cita.idSucursal.nombre}</td>
+                                                        <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                        <td>#{cita.idUsuario.email}</td>
+                                                        <td>
+                                                            <h:outputText value="#{cita.fechaHora}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </td>
+                                                        <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCitaA(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCitaA(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-danger btn-xs"  action="#{citaManagedBean.terminarCita(cita)}" value="Cancelar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </h:form>
                                         </tbody>
                                     </table>
                                     <h:messages showSummary="true" />
