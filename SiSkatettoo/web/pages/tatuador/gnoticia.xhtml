@@ -25,6 +25,7 @@
                     </div>
                 </div>
 
+                <button type="button" class="btn btn-info btn-lg glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"></button>
                 <h:form>
                     <div style="position:relative;">
                         <div class="seccion">
@@ -48,6 +49,41 @@
                         </div>
                     </div>
                 </h:form>
+                <div class="container">
+                    <div class="row">
+
+
+                        <div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">×</button>
+                                        <h4 class="modal-title">Publicar Noticia</h4>
+                                    </div>
+                                    <h:form pt:method="post" prependId="false" class="form" role="form">
+                                        <h:messages showSummary="true"/>
+                                        <h:panelGrid columns="3">
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Titulo:" for="titulo" />
+                                                    <h:inputText id="titulo" value="#{noticiaManagedBean.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Descripcion:" for="descripcion" />
+                                                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaManagedBean.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                </div>
+                                            </div>
+                                        </h:panelGrid>
+                                        <div class="modal-footer">
+                                            <h:commandButton type="submit" value="Publicar" actionListener="#{noticiaManagedBean.publicarNoticia()}" class="btn btn-success" />
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
 
         </ui:composition>
