@@ -30,7 +30,6 @@ import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 @RequestScoped
 public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
-    Part file;
     private UploadFile up;
     private Disenio disenio;
     @EJB
@@ -78,15 +77,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public void setResultado(List<Disenio> resultado) {
         this.resultado = resultado;
     }
-
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
-    }
-
      
 
     @PostConstruct
@@ -105,8 +95,13 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         }
     }
 
+    public void eliminarDisenioA() {
+        diseniofc.remove(disenio);
+        FacesUtils.mensaje("Se ha eliminado con exito");
+    }
     public void eliminarDisenio() {
         diseniofc.remove(disenio);
+        FacesUtils.mensaje("Se ha eliminado con exito");
     }
 
     public void editarDisenio() {
@@ -115,7 +110,14 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
     public String actualizarDisenio(Disenio d) {
         disenio = d;
-        return "/pages/tatuador/cdisenio";
+        FacesUtils.setObjectAcceso("disenio", d);
+        return "/pages/tatuador/cdisenio.xhtml?faces-redirect=true";
+    }
+    
+    public String actualizarDisenioA(Disenio d) {
+        disenio = d;
+        FacesUtils.setObjectAcceso("disenio", d);
+        return "/pages/admin/cdisenio.xhtml?faces-redirect=true";
     }
 
     public String verDisenio(Disenio d) {

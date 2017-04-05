@@ -34,6 +34,7 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     @EJB
     private UsuarioFacadeLocal usuariofc;
 
+    @Inject RolManagedBean rol;
     @Inject LoginManagedBean us;
 
     public LoginManagedBean getUs() {
@@ -58,8 +59,8 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     }
 
     public String registrarUsuario() {
-        //Email e = new Email("Bienvenido a Skatettoo " + getUsuario().getNombre() + getUsuario().getApellido()," Te damos la bienvenida, ahora puedes pedir citas para la realizacion de tus tatuajes", getUsuario().getEmail());
-        //e.enviarEmail();
+        Email e = new Email("Bienvenido a Skatettoo " + getUsuario().getNombre() + getUsuario().getApellido()," Te damos la bienvenida, ahora puedes pedir citas para la realizacion de tus tatuajes", getUsuario().getEmail());
+        e.enviarEmail();
         usuariofc.create(usuario);
         return "login.xhtml?faces-redirect=true";
     }

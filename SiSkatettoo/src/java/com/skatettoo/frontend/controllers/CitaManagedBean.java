@@ -51,7 +51,7 @@ public class CitaManagedBean implements Serializable {
     public UploadFile getUp() {
         return up;
     }
-    
+
     public PanelSucursalManagedBean getSu() {
         return su;
     }
@@ -117,35 +117,71 @@ public class CitaManagedBean implements Serializable {
         FacesUtils.mensaje("Se ha actualizado la cita");
 
     }
-    
+
     public String terminarCita(Cita c) {
-        cita = c;
-        FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/tatuador/tcita.xhtml?faces-redirect=true";
+        if (getCita().getEstadoCita() != 3 | cita.getEstadoCita() != 2) {
+            cita = c;
+            FacesUtils.setObjectAcceso("cita", cita);
+            return "/pages/tatuador/tcita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Aun no has respondido la cita");
+            return "";
+        }
     }
     
+    public String terminarCitaA(Cita c) {
+        if (getCita().getEstadoCita() != 3 | cita.getEstadoCita() != 2) {
+            cita = c;
+            FacesUtils.setObjectAcceso("cita", cita);
+            return "/pages/admin/tcita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Aun no has respondido la cita");
+            return "";
+        }
+    }
+
     public String actualizarCita(Cita c) {
-        cita = c;
-        FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/tatuador/rcita.xhtml?faces-redirect=true";
+        if (getCita().getEstadoCita() != 1) {
+            cita = c;
+            FacesUtils.setObjectAcceso("cita", cita);
+            return "/pages/tatuador/rcita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Ya respondiste esta cita");
+            return "";
+        }
     }
 
     public String actualizarCitaA(Cita c) {
-        cita = c;
-        FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/admin/rcita.xhtml?faces-redirect=true";
+        if (getCita().getEstadoCita() != 1) {
+            cita = c;
+            FacesUtils.setObjectAcceso("cita", cita);
+            return "/pages/admin/rcita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Ya respondiste esta cita");
+            return "";
+        }
     }
 
     public String aplazarCita(Cita c) {
-        cita = c;
-        FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/tatuador/acita.xhtml?faces-redirect=true";
+        if (getCita().getEstadoCita() != 1) {
+            cita = c;
+            FacesUtils.setObjectAcceso("cita", cita);
+            return "/pages/tatuador/acita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Ya respondiste esta cita");
+            return "";
+        }
     }
 
     public String aplazarCitaA(Cita c) {
+        if (getCita().getEstadoCita() != 1) {
         cita = c;
         FacesUtils.setObjectAcceso("cita", cita);
         return "/pages/admin/acita.xhtml?faces-redirect=true";
+        } else {
+            FacesUtils.mensaje("Ya respondiste esta cita");
+            return "";
+        }
     }
 
     public List<Cita> listarCita() {
@@ -195,5 +231,5 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
-    
+
 }

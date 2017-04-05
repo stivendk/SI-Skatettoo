@@ -6,7 +6,9 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Disenio;
+import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -19,6 +21,8 @@ import javax.enterprise.context.RequestScoped;
 public class PanelDisenioManagedBean {
 
     private Disenio dis;
+    @EJB
+    private DisenioFacadeLocal dfl;
     
     public PanelDisenioManagedBean() {
     }
@@ -38,5 +42,17 @@ public class PanelDisenioManagedBean {
     
     public void selectDisenio(Disenio d){
         setDis(d);
+    }
+    
+    public String editarDisenio() {
+        dfl.edit(dis);
+        FacesUtils.mensaje("Tu diseño se ha actualizado");
+        return "/pages/tatuador/cgdisenios.xhtml?faces-redirect=true";
+    }
+    
+    public String editarDisenioA() {
+        dfl.edit(dis);
+        FacesUtils.mensaje("Tu diseño se ha actualizado");
+        return "/pages/admin/cgdisenios.xhtml?faces-redirect=true";
     }
 }

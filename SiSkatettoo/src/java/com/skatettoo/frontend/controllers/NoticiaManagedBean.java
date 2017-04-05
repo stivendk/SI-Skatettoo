@@ -54,7 +54,9 @@ public class NoticiaManagedBean implements Serializable {
     }
     
     public void publicarNoticia(){
+        noti.setIdUsuario(getLog().getUsuario());
         notifc.create(noti);
+        FacesUtils.mensaje("Has publicado una nueva noticia.");
     }
     
     public void eliminarNoticia(){
