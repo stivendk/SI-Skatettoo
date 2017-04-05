@@ -32,7 +32,6 @@
                                             <th>Fecha y Hora</th>
                                             <th>Responder</th>
                                             <th>Aplazar</th>
-                                            <th>Terminar</th>
                                         </thead>
                                         <tbody>
                                             <h:form>
@@ -50,7 +49,6 @@
                                                         </td>
                                                         <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
                                                         <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
-                                                        <td><h:commandButton class="btn btn-danger btn-xs"  action="#{citaManagedBean.terminarCita(cita)}" value="Terminar"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
                                                     </tr>
                                                 </ui:repeat>
                                             </h:form>
