@@ -29,7 +29,7 @@ import javax.inject.Inject;
 public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Usuario us;
     private Sucursal sucu;
     private Localidad loc;
@@ -37,13 +37,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     @EJB
     private SucursalFacadeLocal sucufc;
-    @Inject LoginManagedBean usu;
-    @Inject CitaManagedBean cit;
-    
+    @Inject
+    LoginManagedBean usu;
+    @Inject
+    CitaManagedBean cit;
+
     public SucursalManagedBean() {
     }
 
-    
     public Localidad getLoc() {
         return loc;
     }
@@ -51,6 +52,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     public void setLoc(Localidad loc) {
         this.loc = loc;
     }
+
     public Sucursal getSucu() {
         return sucu;
     }
@@ -87,7 +89,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     public void init() {
         sucu = new Sucursal();
         loc = new Localidad();
-        
+
     }
 
     public void crearSucursal() {
@@ -100,25 +102,23 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     }
 
     public void editarSucursal() {
+        sucufc.edit(sucu);
+        FacesUtils.mensaje("Se ha actualizado con exito!");
+    }
+    
+    public void erSucursal() {
         FacesUtils.setObjectAcceso("sucursal", sucu);
         sucufc.edit(sucu);
         FacesUtils.mensaje("Se ha actualizado con exito!");
     }
 
-    public String actualizarSucursal(Sucursal s) {
-        sucu = s;
-        return "";
-    }
-    
-    public void selectLocalidad(Localidad l){
+    public void selectLocalidad(Localidad l) {
         setLoc(l);
     }
-    
-    public List<Sucursal> sucuList(){
+
+    public List<Sucursal> sucuList() {
         return getLoc().getSucursalList();
     }
-    
-    
 
     public List<Sucursal> listarSucursal() {
         return sucufc.findAll();
@@ -134,7 +134,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         FacesUtils.setObjectAcceso("sucursal", ss);
         return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
     }
-    
+
     public String selecSucursal(Sucursal ss) {
         sucu = ss;
         return "/pages/admin/gsucursall.xhtml?faces-redirect=true";

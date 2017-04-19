@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -30,6 +31,7 @@ public class LoginManagedBean implements Serializable {
     private List<Permiso> permis;
     private Sucursal suc;
     
+    @Inject SucursalManagedBean su;
     @EJB UsuarioFacadeLocal usfc;
 
     public Sucursal getSuc() {
@@ -43,6 +45,11 @@ public class LoginManagedBean implements Serializable {
     public LoginManagedBean() {
     }
 
+    public SucursalManagedBean getSu() {
+        return su;
+    }
+
+    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -70,6 +77,20 @@ public class LoginManagedBean implements Serializable {
             throw e;
         }
     }
+    
+    public String actualizarSucursal() {
+        setSuc(usuario.getIdSucursal());
+        return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
+    }
+    
+    public void editarSucursal(){
+        try {
+            su.editarSucursal();
+        } catch (Exception e) {
+            FacesUtils.mensaje("Se realizo correctamente");
+        }
+    }
+    
     
     public String gestSurcursal() {
         usuario.setIdSucursal(suc);

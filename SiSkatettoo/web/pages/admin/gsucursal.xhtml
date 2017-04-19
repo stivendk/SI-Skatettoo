@@ -35,7 +35,9 @@
                                     <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
                                     <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
                                 </div>
-                                
+                            </h:form>
+                            <h:form>
+                                <h:commandButton value="Editar" action="#{loginManagedBean.actualizarSucursal()}"/>
                             </h:form>
                         </div>
                     </div>
