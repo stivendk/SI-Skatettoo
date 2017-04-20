@@ -9,7 +9,6 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.frontend.controllers.FacesUtils;
-import com.skatettoo.frontend.controllers.UploadFile;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

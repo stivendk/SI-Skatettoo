@@ -45,12 +45,6 @@ public class CitaManagedBean implements Serializable {
     LoginManagedBean us;
     @Inject
     PanelSucursalManagedBean su;
-    @Inject
-    UploadFile up;
-
-    public UploadFile getUp() {
-        return up;
-    }
 
     public PanelSucursalManagedBean getSu() {
         return su;
@@ -95,7 +89,6 @@ public class CitaManagedBean implements Serializable {
     public String solicitarCita() {
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
-            cita.setDisenioAdjunto(getUp().upload(file));
             citafc.create(cita);
             Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();

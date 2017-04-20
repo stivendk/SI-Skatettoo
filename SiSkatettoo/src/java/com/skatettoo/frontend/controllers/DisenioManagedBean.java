@@ -6,7 +6,6 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.frontend.util.Managedbean;
-import com.skatettoo.frontend.controllers.UploadFile;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
 import javax.inject.Named;
@@ -30,7 +29,7 @@ import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 @RequestScoped
 public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
 
-    private UploadFile up;
+    private Part file;
     private Disenio disenio;
     @EJB
     private DisenioFacadeLocal diseniofc;
@@ -42,20 +41,20 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     @Inject
     EstiloManagedBean est;
 
-    public UploadFile getUp() {
-        return up;
-    }
-
-    public void setUp(UploadFile up) {
-        this.up = up;
-    }
-
     public EstiloManagedBean getEst() {
         return est;
     }
     
     public LoginManagedBean getUs() {
         return us;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
 
@@ -87,6 +86,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public void registrarDisenio() {
         try {
             disenio.setIdUsuario(getUs().getUsuario());
+            disenio.setNombreDisenio(UploadFIle.uploadFile(file, String.valueOf(disenio.getNombreD())));
             diseniofc.create(disenio);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha publicado con exito", "Se ha agregado un nuevo diseño"));
         } catch (Exception e) {
