@@ -89,6 +89,7 @@ public class CitaManagedBean implements Serializable {
     public String solicitarCita() {
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
+            cita.setDisenioAdjunto(UploadFIle.uploadFile(file, String.valueOf(cita.getDisenioAdjunto())));
             citafc.create(cita);
             Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();

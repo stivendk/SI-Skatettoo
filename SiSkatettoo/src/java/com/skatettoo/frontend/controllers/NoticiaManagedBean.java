@@ -8,15 +8,17 @@ package com.skatettoo.frontend.controllers;
 import com.skatettoo.backend.persistence.entities.Noticia;
 import com.skatettoo.backend.persistence.facade.NoticiaFacadeLocal;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -26,6 +28,7 @@ import javax.inject.Inject;
 @SessionScoped
 public class NoticiaManagedBean implements Serializable {
 
+    private Part file;
     private Noticia noti;
     @EJB
     private NoticiaFacadeLocal notifc;
@@ -47,6 +50,14 @@ public class NoticiaManagedBean implements Serializable {
     public void setNoti(Noticia noti) {
         this.noti = noti;
     }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
     
     @PostConstruct
     public void init(){
@@ -55,21 +66,33 @@ public class NoticiaManagedBean implements Serializable {
     
     public void publicarNoticia(){
         noti.setIdUsuario(getLog().getUsuario());
+        noti.setImgn(UploadFIle.uploadFile(file, String.valueOf(noti.getImgn())));
         notifc.create(noti);
         FacesUtils.mensaje("Has publicado una nueva noticia.");
     }
     
-    public void eliminarNoticia(){
-        notifc.remove(noti);
+    public void eliminarNoticia(Noticia n){
+        try {
+            notifc.remove(n);
+            FacesUtils.mensaje("Se ha eliminado con exito");
+        } catch (Exception e) {
+            FacesUtils.mensaje("Ocurrio un error");
+        }
     }
     
     public void editarNoticia(){
-        notifc.edit(noti);
+        try {
+            notifc.edit(noti);
+            FacesUtils.mensaje("Se ha actualizado con Exito");
+        } catch (Exception e) {
+            FacesUtils.mensaje("Ocurrio un error");
+        }
     }
     
     public String actualizarNoticia(Noticia n){
         noti = n;
-        return "/pages/tatuador/gnoticia1?faces-redirect=true";
+        FacesUtils.setObjectAcceso("noticia", n);
+        return "/pages/tatuador/gnoticia1.xhtml?faces-redirect=true";
     }
     
     public String verNoticia(Noticia nn){

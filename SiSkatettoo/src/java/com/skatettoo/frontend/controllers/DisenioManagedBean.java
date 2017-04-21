@@ -44,7 +44,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public EstiloManagedBean getEst() {
         return est;
     }
-    
+
     public LoginManagedBean getUs() {
         return us;
     }
@@ -56,7 +56,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public void setFile(Part file) {
         this.file = file;
     }
-
 
     public DisenioManagedBean() {
     }
@@ -76,7 +75,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public void setResultado(List<Disenio> resultado) {
         this.resultado = resultado;
     }
-     
 
     @PostConstruct
     public void init() {
@@ -95,13 +93,22 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         }
     }
 
-    public void eliminarDisenioA() {
-        diseniofc.remove(disenio);
-        FacesUtils.mensaje("Se ha eliminado con exito");
+    public void eliminarDisenioA(Disenio d) {
+        try {
+            diseniofc.remove(d);
+            FacesUtils.mensaje("Se ha eliminado con exito");
+        } catch (Exception e) {
+            FacesUtils.mensaje("Ha ocurrido un error");
+        }
     }
-    public void eliminarDisenio() {
-        diseniofc.remove(disenio);
-        FacesUtils.mensaje("Se ha eliminado con exito");
+
+    public void eliminarDisenio(Disenio d) {
+        try {
+            diseniofc.remove(d);
+            FacesUtils.mensaje("Se ha eliminado con exito");
+        } catch (Exception e) {
+            FacesUtils.mensaje("Ha ocurrido un error");
+        }
     }
 
     public void editarDisenio() {
@@ -113,7 +120,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         FacesUtils.setObjectAcceso("disenio", d);
         return "/pages/tatuador/cdisenio.xhtml?faces-redirect=true";
     }
-    
+
     public String actualizarDisenioA(Disenio d) {
         disenio = d;
         FacesUtils.setObjectAcceso("disenio", d);
@@ -136,12 +143,12 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         return "/pages/disenios/citas";
     }
 
-    public String selecDisenio(Disenio d){
+    public String selecDisenio(Disenio d) {
         setDisenio(d);
         FacesUtils.setObjectAcceso("Disenio", d);
         return "/pages/disenios/diseniossfaces-redirect=true";
     }
-    
+
     public List<Disenio> listarDisenio() {
         return diseniofc.findAll();
     }
@@ -151,22 +158,20 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         return diseniofc.find(i);
     }
 
-    
     public List<Disenio> disenioTat() {
         List<Disenio> dis = new ArrayList<>();
         for (Disenio di : listarDisenio()) {
-            if (di.getIdUsuario().equals( us.getUsuario())) {
+            if (di.getIdUsuario().equals(us.getUsuario())) {
                 dis.add(di);
             }
         }
         return dis;
     }
-    
-    
+
     public List<Disenio> disenioEst() {
         List<Disenio> dis = new ArrayList<>();
         for (Disenio di : listarDisenio()) {
-            if (di.getIdEstiloDisenio().equals( est.getEstil())) {
+            if (di.getIdEstiloDisenio().equals(est.getEstil())) {
                 dis.add(di);
             }
         }

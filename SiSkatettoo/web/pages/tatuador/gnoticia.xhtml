@@ -24,31 +24,31 @@
                     <div class="caption">
                     </div>
                 </div>
-
+                <h:messages showSummary="true"/>
                 <button type="button" class="btn btn-info btn-lg glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"></button>
-                <h:form>
-                    <div style="position:relative;">
-                        <div class="seccion">
-                            <ui:repeat value="#{noticiaManagedBean.notiUsuario()}" var="noticia">
+                <div style="position:relative;">
+                    <div class="seccion">
+                        <ui:repeat value="#{noticiaManagedBean.notiUsuario()}" var="noticia">
+                            <h:form>
                                 <div class="panel-body" id="cuidados">
                                     <center><h1 class="parrafo">#{noticia.titulo}</h1></center>
-                                    <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../img/#{noticia.imgn}.jpg" width="400px" height="400px"/>
+                                    <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../#{noticia.imgn}" width="400px" height="400px"/>
                                         <figcaption class="text-center"></figcaption>
                                     </figure>
                                     <hr/> 
                                     <p class="parrafo">#{noticia.descripcion}</p>
                                     <hr/>
                                     <td><h:commandButton class="btn btn-primary btn-xs" action="#{noticiaManagedBean.actualizarNoticia(noticia)}" value="Editar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
-                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaManagedBean.eliminarNoticia()}" value="eliminar"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
+                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaManagedBean.eliminarNoticia(noticia)}" value="eliminar"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
                                 </div>
                                 <div class="bgimg-2">
                                     <div class="caption">
                                     </div>
                                 </div>
-                            </ui:repeat>
-                        </div>
+                            </h:form>
+                        </ui:repeat>
                     </div>
-                </h:form>
+                </div>
                 <div class="container">
                     <div class="row">
 
@@ -60,7 +60,7 @@
                                         <button type="button" class="close" data-dismiss="modal">×</button>
                                         <h4 class="modal-title">Publicar Noticia</h4>
                                     </div>
-                                    <h:form pt:method="post" prependId="false" class="form" role="form">
+                                    <h:form enctype="multipart/form-data" pt:method="post" prependId="false" class="form" role="form">
                                         <h:messages showSummary="true"/>
                                         <h:panelGrid columns="3">
                                             <div class="modal-body">
@@ -68,6 +68,10 @@
                                                 <div class="form-group">
                                                     <h:outputLabel value="Titulo:" for="titulo" />
                                                     <h:inputText id="titulo" value="#{noticiaManagedBean.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:outputLabel value="Imagen:" for="imagen" />
+                                                    <h:inputFile id="imagen" value="#{noticiaManagedBean.file}" title="Imagen" />
                                                 </div>
                                                 <div class="form-group">
                                                     <h:outputLabel value="Descripcion:" for="descripcion" />
