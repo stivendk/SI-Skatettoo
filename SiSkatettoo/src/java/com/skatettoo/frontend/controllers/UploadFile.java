@@ -8,68 +8,65 @@ package com.skatettoo.frontend.controllers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
 /**
  *
- * @author StivenDavid
+ * @author SENA
  */
-@Named(value = "uploadFile")
-@SessionScoped
-public class UploadFile implements Serializable {
+public class UploadFIle {
 
-    private Part file;
-    private String nombre;
-    private String pathReal;
-
-    public Part getFile() {
-        return file;
+    public static void uploadFile() {
     }
 
-    public void setFile(Part file) {
-        this.file = file;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPathReal() {
-        return pathReal;
-    }
-
-    public void setPathReal(String pathReal) {
-        this.pathReal = pathReal;
-    }
-
-    public UploadFile() {
-    }
-
-    public String upload(Part file) {
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img");
-        path = path.substring(0, path.indexOf("\\build"));
-        path = path + "\\web\\img\\";
+    public static String upload(Part file) {
         try {
-            this.nombre = file.getSubmittedFileName();
-            pathReal = "/SISkatettoo/img/" + nombre;
-            path = path + this.nombre;
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img");
+            if (path.substring(0, path.indexOf("/build")) == null) {
+                path:
+                path.substring(0, path.indexOf("\\build"));
+                path = path + "\\web\\img\\";
+            } else {
+                path = path.substring(0, path.indexOf("/build"));
+                path = path + "/web/img/";
+            }
+            String nombre = file.getSubmittedFileName();
+            String pathReal = "/SISkatettoo/img/" + nombre;
+            path = path + nombre;
             InputStream in = file.getInputStream();
-
             byte[] data = new byte[in.available()];
             in.read(data);
             FileOutputStream out = new FileOutputStream(new File(path));
             out.write(data);
             in.close();
             out.close();
-             
+            return pathReal;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public static String uploadFile(Part file, String d) {
+        try {
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img");
+            path = path.substring(0, path.indexOf("\\build"));
+            path = path + "\\web\\img\\";
+            String[] h = file.getContentType().split("/");
+            String pathReal = "img
+                " + d + "." + h[h.length - 1];
+            System.out.println(pathReal);
+            path = path + d + "." + h[h.length - 1];
+            InputStream in = file.getInputStream();
+            byte[] data = new byte[in.available()];
+            in.read(data);
+            FileOutputStream out = new FileOutputStream(new File(path));
+            out.write(data);
+            in.close();
+            out.close();
+            return pathReal;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,3 +74,4 @@ public class UploadFile implements Serializable {
         return "";
     }
 }
+
