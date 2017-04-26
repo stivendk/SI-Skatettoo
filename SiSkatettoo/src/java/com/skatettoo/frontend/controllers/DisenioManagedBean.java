@@ -84,7 +84,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     public void registrarDisenio() {
         try {
             disenio.setIdUsuario(getUs().getUsuario());
-            disenio.setNombreDisenio(UploadFIle.uploadFile(file, String.valueOf(disenio.getNombreD())));
+            disenio.setNombreDisenio(UploadFIles.uploadFile(file, String.valueOf(disenio.getNombreD())));
             diseniofc.create(disenio);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha publicado con exito", "Se ha agregado un nuevo diseño"));
         } catch (Exception e) {

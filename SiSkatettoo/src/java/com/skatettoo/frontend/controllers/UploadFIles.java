@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
  *
  * @author SENA
  */
-public class UploadFIle {
+public class UploadFIles {
 
     public static void uploadFile() {
     }
@@ -99,11 +99,11 @@ public class UploadFIle {
 
     public static String uploadFileN(Part file, String d) {
         try {
-            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img");
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img/noticias");
             path = path.substring(0, path.indexOf("\\build"));
-            path = path + "\\web\\img\\";
+            path = path + "\\web\\img\\noticias\\";
             String[] h = file.getContentType().split("/");
-            String pathReal = "img/" + d + "." + h[h.length - 1];
+            String pathReal = "img/noticias/" + d + "." + h[h.length - 1];
             System.out.println(pathReal);
             path = path + d + "." + h[h.length - 1];
             InputStream in = file.getInputStream();
@@ -123,11 +123,11 @@ public class UploadFIle {
 
     public static String uploadFileC(Part file, String d) {
         try {
-            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img");
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img/citas");
             path = path.substring(0, path.indexOf("\\build"));
-            path = path + "\\web\\img\\";
+            path = path + "\\web\\img\\citas\\";
             String[] h = file.getContentType().split("/");
-            String pathReal = "img/" + d + "." + h[h.length - 1];
+            String pathReal = "img/citas/" + d + "." + h[h.length - 1];
             System.out.println(pathReal);
             path = path + d + "." + h[h.length - 1];
             InputStream in = file.getInputStream();

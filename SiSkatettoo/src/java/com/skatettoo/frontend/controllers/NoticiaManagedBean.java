@@ -67,7 +67,7 @@ public class NoticiaManagedBean implements Serializable {
     public String publicarNoticia(){
         try {
             noti.setIdUsuario(getLog().getUsuario());
-            noti.setImgn(UploadFIle.uploadFile(file, String.valueOf(noti.getImgn())));
+            noti.setImgn(UploadFIles.uploadFileN(file, String.valueOf(noti.getTitulo())));
             notifc.create(noti);
             FacesUtils.mensaje("Has publicado una nueva noticia.");
             return "/pages/tatuador/gnoticia.xhtml?faces-redirect=true";
