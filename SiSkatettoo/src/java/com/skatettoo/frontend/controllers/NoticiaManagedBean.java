@@ -25,7 +25,7 @@ import javax.servlet.http.Part;
  * @author StivenDavid
  */
 @Named(value = "noticiaManagedBean")
-@SessionScoped
+@RequestScoped
 public class NoticiaManagedBean implements Serializable {
 
     private Part file;
@@ -64,11 +64,17 @@ public class NoticiaManagedBean implements Serializable {
         noti = new Noticia();
     }
     
-    public void publicarNoticia(){
-        noti.setIdUsuario(getLog().getUsuario());
-        noti.setImgn(UploadFIle.uploadFile(file, String.valueOf(noti.getImgn())));
-        notifc.create(noti);
-        FacesUtils.mensaje("Has publicado una nueva noticia.");
+    public String publicarNoticia(){
+        try {
+            noti.setIdUsuario(getLog().getUsuario());
+            noti.setImgn(UploadFIle.uploadFile(file, String.valueOf(noti.getImgn())));
+            notifc.create(noti);
+            FacesUtils.mensaje("Has publicado una nueva noticia.");
+            return "/pages/tatuador/gnoticia.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            FacesUtils.mensaje("Perra");
+        }
+        return "";
     }
     
     public void eliminarNoticia(Noticia n){
