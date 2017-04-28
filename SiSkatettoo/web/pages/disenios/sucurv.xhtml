@@ -37,7 +37,7 @@
                                 <p>#{panelSucursalManagedBean.sucu.descripcion}</p>
                                 <h2>Tatuadores</h2>
                             </div>
-                            <h:commandButton value="Solicitar Cita" class="btn-success btn-lg" action="#{panelSucursalManagedBean.enviarSucursal()}"/>
+                            <center><h:commandButton value="Solicitar Cita" class="btn-success btn-block btn-lg" action="#{panelSucursalManagedBean.enviarSucursal()}"/></center>
                             <div class="sucursal-tattooist">
                                 <h:form>
                                     <ul id="display-inline-block-example">
@@ -89,12 +89,10 @@
                                             <ui:repeat value="#{panelSucursalManagedBean.listUsSucu()}" var="dis">
                                                 <div class="col-sm-4">
                                                     <div class="thumbnail">
-                                                        <h:commandLink action="#{panelSucursalManagedBean.enviarDisenio(dis)}" class="">
-                                                            <div class="caption">
-                                                                <p class="">#{dis.anotaciones}</p>
-                                                            </div>
-                                                            <img src="../../img/#{dis.nombreDisenio}.jpg" alt="..." class=""/>
-                                                        </h:commandLink>
+                                                        <div class="caption">
+                                                            <p class="">#{dis.anotaciones}</p>
+                                                        </div>
+                                                        <img src="../../#{dis.nombreDisenio}" alt="..." class=""/>
                                                     </div>
                                                 </div>
                                             </ui:repeat>

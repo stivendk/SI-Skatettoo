@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
+import com.skatettoo.frontend.util.Generador;
 import java.io.File;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class CitaManagedBean implements Serializable {
 
     private Cita cita;
     private Part file;
+    private Generador gen;
     @Inject
     EmailManagedBean email;
     @Inject
@@ -81,6 +83,14 @@ public class CitaManagedBean implements Serializable {
         this.file = file;
     }
 
+    public Generador getGen() {
+        return gen;
+    }
+
+    public void setGen(Generador gen) {
+        this.gen = gen;
+    }
+
     @PostConstruct
     public void init() {
         cita = new Cita();
@@ -89,7 +99,7 @@ public class CitaManagedBean implements Serializable {
     public String solicitarCita() {
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
-            cita.setDisenioAdjunto(UploadFIles.uploadFile(file, String.valueOf(cita.getIdCita())));
+            cita.setDisenioAdjunto(UploadFIles.uploadFileC(file, String.valueOf(cita.getDisenioAdjunto())));
             citafc.create(cita);
             Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();
@@ -186,7 +196,7 @@ public class CitaManagedBean implements Serializable {
         List<Cita> cit = new ArrayList<>();
         try {
             for (Cita ci : listarCita()) {
-                if (ci.getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
+                if (ci.getIdUsuario().getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
                     cit.add(ci);
                 }
 
@@ -225,5 +235,9 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
-
+    
+    public void mostrarInfo(Cita c){
+        setCita(c);
+        FacesUtils.setObjectAcceso("cita", cita);
+    }
 }

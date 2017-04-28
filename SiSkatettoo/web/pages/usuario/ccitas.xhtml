@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="titulo">
+                Citas | Skatetto
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="container fondo" >
+                    <div class="row">
+                        <div class="col-md-12 tabla">
+                            <h4>Citas</h4>
+                            <div class="table-responsive">
+                                <h:form >
+                                    <table id="mytable" class="table table-bordred table-striped tabla">
+                                        <thead>
+                                            <th>Sucursal</th>
+                                            <th>Cliente</th>
+                                            <th>Tatuador</th>
+                                            <th>Email</th>
+                                            <th>Fecha y Hora</th>
+                                            <th><span class="glyphicon glyphicon-info-sign"></span></th>
+                                        </thead>
+                                        <tbody>
+                                            <h:form>
+                                                <h:messages showSummary="true"/>
+                                                <ui:repeat value="#{citaManagedBean.citaSucuf()}" var="cita">
+                                                    <tr>
+                                                        <td>#{cita.idSucursal.nombre}</td>
+                                                        <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                        <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
+                                                        <td>#{cita.tatuador.email}</td>
+                                                        <td>
+                                                            <h:outputText value="#{cita.fechaHora}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </td>
+                                                        <td><h:commandLink class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="Ver">
+                                                                <f:ajax event="click" listener="#{citaManagedBean.mostrarInfo(cita)}" render="citas"/>
+                                                            </h:commandLink></td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </h:form>
+                                        </tbody>
+                                    </table>
+                                    <h:messages showSummary="true" />
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ordine" class="modal fade" role="dialog">
+                    <h:form id="citas">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">#{citaSessionController.cit.idSucursal.nombre}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>#{citaSessionController.cit.descripcion}</p>
+                                    <h:outputText value="#{citaSessionController.cit.fechaHora}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                        
+                                    </h:outputText>
+                                    <br/>
+                                    <b>#{citaSessionController.cit.tatuador.nombre} #{citaSessionController.cit.tatuador.apellido}</b>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
