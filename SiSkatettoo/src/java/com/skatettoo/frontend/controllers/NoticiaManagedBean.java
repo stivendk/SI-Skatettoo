@@ -101,11 +101,9 @@ public class NoticiaManagedBean implements Serializable {
         return "/pages/tatuador/gnoticia1.xhtml?faces-redirect=true";
     }
     
-    public String verNoticia(Noticia nn){
-        noti = nn;
+    public void verNoticia(Noticia nn){
+        setNoti(nn);
         FacesUtils.setObjectAcceso("noticia", nn);
-        return "";
-        
     }
     
     public List<Noticia> listarNoticia(){
