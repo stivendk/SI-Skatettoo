@@ -39,12 +39,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sucursal.findByIdSucursal", query = "SELECT s FROM Sucursal s WHERE s.idSucursal = :idSucursal"),
     @NamedQuery(name = "Sucursal.findByFotoSuc", query = "SELECT s FROM Sucursal s WHERE s.fotoSuc = :fotoSuc"),
     @NamedQuery(name = "Sucursal.findByNombre", query = "SELECT s FROM Sucursal s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "Sucursal.findByPinSucursal", query = "SELECT s FROM Sucursal s WHERE s.pin LIKE :nombre"),
     @NamedQuery(name = "Sucursal.consultarSucursal", query = "SELECT s FROM Sucursal s WHERE s.nombre LIKE :nombre"),
     @NamedQuery(name = "Sucursal.findByDireccion", query = "SELECT s FROM Sucursal s WHERE s.direccion = :direccion"),
     @NamedQuery(name = "Sucursal.findByTelefono", query = "SELECT s FROM Sucursal s WHERE s.telefono = :telefono")})
 public class Sucursal implements Serializable, IEntitie {
 
     private static final long serialVersionUID = 1L;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "pin")
+    private String pin;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSucursal", fetch = FetchType.LAZY)
     private List<Cita> citaList;
@@ -201,6 +209,14 @@ public class Sucursal implements Serializable, IEntitie {
 
     public void setCitaList(List<Cita> citaList) {
         this.citaList = citaList;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
     
 }

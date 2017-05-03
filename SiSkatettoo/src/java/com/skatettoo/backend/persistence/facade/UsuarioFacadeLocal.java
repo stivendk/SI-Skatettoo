@@ -5,6 +5,7 @@
  */
 package com.skatettoo.backend.persistence.facade;
 
+import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -32,4 +33,5 @@ public interface UsuarioFacadeLocal {
     
     Usuario iniciarSesion(Usuario us)throws Exception;
     
+    String registrarCl(Usuario us, Rol r);
 }

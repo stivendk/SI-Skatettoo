@@ -45,11 +45,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Usuario implements Serializable, IEntitie {
 
     private static final long serialVersionUID = 1L;
-
     @Basic(optional = false)
     @NotNull
     @Column(name = "estadoUsuario")
-    private short estadoUsuario;
+    private int estadoUsuario;
+
+
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -254,11 +255,11 @@ public class Usuario implements Serializable, IEntitie {
         this.idSucursal = idSucursal;
     }
 
-    public short getEstadoUsuario() {
+    public int getEstadoUsuario() {
         return estadoUsuario;
     }
 
-    public void setEstadoUsuario(short estadoUsuario) {
+    public void setEstadoUsuario(int estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
     }
 }
