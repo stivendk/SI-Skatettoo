@@ -33,5 +33,7 @@ public interface UsuarioFacadeLocal {
     
     Usuario iniciarSesion(Usuario us)throws Exception;
     
+    Usuario consultarUsu(Usuario us);
+    
     String registrarCl(Usuario us, Rol r);
 }

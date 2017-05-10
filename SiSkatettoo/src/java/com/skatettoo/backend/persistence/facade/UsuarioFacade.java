@@ -60,4 +60,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return "";
     }
+
+    @Override
+    public Usuario consultarUsu(Usuario us) {
+        try {
+            return getEntityManager().createNamedQuery("Usuario.findByEmail", Usuario.class).setParameter("email", us.getEmail()).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

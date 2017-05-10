@@ -42,3 +42,17 @@ body{
     text-decoration: none;
     color: #fff;
 }
+.espacio{
+    width: 3px;
+}
+.info-reg{
+    background-color: rgba(0,0,0,0.3);
+    border-color: transparent;
+    color: #fff;
+}
+.letra-blanca{
+    color: #fff;
+}
+.vacio-letra{
+    height: 20px;
+}

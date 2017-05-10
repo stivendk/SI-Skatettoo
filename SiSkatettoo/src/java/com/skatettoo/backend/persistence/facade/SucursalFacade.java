@@ -31,9 +31,17 @@ public class SucursalFacade extends AbstractFacade<Sucursal> implements Sucursal
     }
 
     @Override
-    public List<Sucursal> consuSuc(String nombre) {
-        return em.createNamedQuery("Sucursal.consultarSucursal").setParameter("nombre", nombre).getResultList();
-        
+    public List<Sucursal> consuSuc(String pin) {
+        return em.createNamedQuery("Sucursal.findByPinSucursal").setParameter("pin", pin).getResultList();
+    }
+
+    @Override
+    public Sucursal consultarSuc(Sucursal su) {
+        try {
+            return getEntityManager().createNamedQuery("Sucursal.findByPin", Sucursal.class).setParameter("pín", su.getPin()).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }

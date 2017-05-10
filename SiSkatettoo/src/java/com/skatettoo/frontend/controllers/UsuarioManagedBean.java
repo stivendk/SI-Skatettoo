@@ -117,38 +117,7 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         return null;
     }
 
-    public void validatePassword(ComponentSystemEvent event) {
-
-        FacesContext fc = FacesContext.getCurrentInstance();
-
-        UIComponent components = event.getComponent();
-
-        // get password
-        UIInput uiInputPassword = (UIInput) components.findComponent("password");
-        String password = uiInputPassword.getLocalValue() == null ? ""
-                : uiInputPassword.getLocalValue().toString();
-        String passwordId = uiInputPassword.getClientId();
-
-        // get confirm password
-        UIInput uiInputConfirmPassword = (UIInput) components.findComponent("confirmPassword");
-        String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
-                : uiInputConfirmPassword.getLocalValue().toString();
-
-        // Let required="true" do its job.
-        if (password.isEmpty() || confirmPassword.isEmpty()) {
-            return;
-        }
-
-        if (!password.equals(confirmPassword)) {
-
-            FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            fc.addMessage(passwordId, msg);
-            fc.renderResponse();
-
-        }
-
-    }
+    
 
     @Override
     public Usuario getObject(Integer i) {

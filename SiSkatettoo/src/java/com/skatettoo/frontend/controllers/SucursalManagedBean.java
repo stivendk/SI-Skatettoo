@@ -33,6 +33,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     private Usuario us;
     private Sucursal sucu;
     private Localidad loc;
+    private String pin;
     private List<Sucursal> consulta;
 
     @EJB
@@ -83,6 +84,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     public void setUs(Usuario us) {
         this.us = us;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     @PostConstruct
@@ -152,5 +161,15 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
         }
         return sul;
+    }
+    
+    public String pinSucursal(){
+        consulta = sucufc.consuSuc(pin);
+        return "newxhtml1.xhtml?faces-redirect=true";
+    }
+    
+    public String enviarSucur(Sucursal suc){
+        setSucu(suc);
+        return "newxhtml.xhtml?faces-redirect=true";
     }
 }

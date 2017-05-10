@@ -32,4 +32,5 @@ public interface SucursalFacadeLocal {
     
     List<Sucursal> consuSuc(String nombre);
     
+    Sucursal consultarSuc(Sucursal su);
 }

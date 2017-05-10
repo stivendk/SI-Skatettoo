@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="IdSucursal:" for="idSucursal" />
+                    <h:inputText id="idSucursal" value="#{sucursalManagedBean.sucu.idSucursal}" title="IdSucursal" required="true" requiredMessage="The IdSucursal field is required."/>
+                    <h:outputLabel value="FotoSuc:" for="fotoSuc" />
+                    <h:inputText id="fotoSuc" value="#{sucursalManagedBean.sucu.fotoSuc}" title="FotoSuc" />
+                    <h:outputLabel value="Nombre:" for="nombre" />
+                    <h:inputText id="nombre" value="#{sucursalManagedBean.sucu.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                    <h:outputLabel value="Direccion:" for="direccion" />
+                    <h:inputText id="direccion" value="#{sucursalManagedBean.sucu.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
+                    <h:outputLabel value="Descripcion:" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{sucursalManagedBean.sucu.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                    <h:outputLabel value="Telefono:" for="telefono" />
+                    <h:inputText id="telefono" value="#{sucursalManagedBean.sucu.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
+                    <h:outputLabel value="IdLocalidad:" for="idLocalidad" />
+                    <h:selectOneMenu id="idLocalidad" value="#{sucursalManagedBean.sucu.idLocalidad}" title="IdLocalidad" required="true" requiredMessage="The IdLocalidad field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Pin:" for="pin" />
+                    <h:inputText id="pin" value="#{sucursalManagedBean.sucu.pin}" title="Pin" required="true" requiredMessage="The Pin field is required."/>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
+    </body>
+</html>
