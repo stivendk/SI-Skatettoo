@@ -26,34 +26,44 @@
                             <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
                         </div>
                         <div class="modal-body">
-                            <div class="form-group">
-                                <h:outputLabel value="Sucursal:" for="sucursal" />
-                                <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="Sucursal" />
+                            <div class="form-group">      
+                                <div class="col-sm-10">
+                                    <h:outputLabel value="Sucursal:" for="sucursal"/>
+                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="sucursal"/>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h:outputLabel value="Cliente:" for="cliente" />
-                                <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
+                            <div class="form-group">      
+                                <div class="col-sm-10">
+                                    <h:outputLabel value="Cliente:" for="cliente" />
+                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h:outputLabel value="Email:" for="email" />
-                                <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
+                            <div class="form-group">      
+                                <div class="col-sm-10">
+                                    <h:outputLabel value="Email:" for="email" />
+                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
-                                <h:inputText pt:type="text" class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:inputText>
+                            <div class="form-group">      
+                                <div class="col-sm-10">
+                                    <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
+                                    <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
-                                <h:outputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
+                            <div class="form-group">      
+                                <div class="col-sm-10">
+                                    <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
+                                    <h:inputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer ">
-                            <div class="container">
-                                <div class="row">
-                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas.xhtml?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
-                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.aplazarCita()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%; margin-top: -68px;"></h:commandButton>
+                        <div class="form-group">
+                            <div class="modal-header">
+                                <div class="pull-right">
+                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
+                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.responderCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: -68px;"></h:commandButton>
                                 </div>
                             </div>
                         </div>

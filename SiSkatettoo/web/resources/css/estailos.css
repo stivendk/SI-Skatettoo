@@ -226,3 +226,11 @@ body{
     padding: 10px 15px;
     margin-top: 5px;
 }
+.form{
+    width: 525px;
+	margin: auto;
+	padding: 67px 5px;
+	box-sizing: border-box;
+	margin-top: 40px;
+	border-radius: 7px;
+}
