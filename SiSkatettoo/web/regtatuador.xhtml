@@ -23,18 +23,18 @@ and open the template in the editor.
     <body>
         <h:form>
             <label>Pin:</label>
-            <h:inputText value="#{sucursalManagedBean.pin}" />
-            <h:commandButton action="#{sucursalManagedBean.pinSucursal()}" value="Aceptar"/>
+            <h:inputText value="#{registroTaController.pin}" />
+            <h:commandButton actionListener="#{registroTaController.pinSucursal()}" value="Aceptar"/>
         </h:form>
         <section class="publicaciones-blog-home">
             <center><div class="container">
                     <div class="row-page row">
                         <h2>Sucursales</h2>
                         <h:form id="sucursales">
-                            <ui:repeat value="#{sucursalManagedBean.consulta}" var="sucur"> 
+                            <ui:repeat value="#{registroTaController.consulta}" var="sucur"> 
                                 <div class="">
                                     <div class="col-page col-sm-8 col-md-6">
-                                        <h:commandLink action="#{sucursalManagedBean.enviarSucur(sucur)}" class="black fondo-publicacion-home">
+                                        <h:commandLink action="#{registroTaController.enviarSucur(sucur)}" class="black fondo-publicacion-home">
                                             <div class="img-publicacion-principal-home">
                                                 <img class="" src="../../#{sucur.fotoSuc}"/>
                                             </div>

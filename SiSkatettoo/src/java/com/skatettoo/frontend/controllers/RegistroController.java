@@ -79,21 +79,6 @@ public class RegistroController {
         return "";
     }
     
-    public String registrarTatuador(){
-        try {
-            Rol r = new Rol();
-            r.setIdRol(2);
-            us.setIdRol(r);
-            ufc.create(us);
-            Email e = new Email("Nuevo Tatuador", getUs().getNombre() + getUs().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getUs().getEmail());
-            e.enviarEmail();
-            return "login.xhtml?faces-redirect=true";
-        } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
-        }
-        return "";
-    }
-    
     public String registrarAdmin(){
         try {
             Rol r = new Rol();
