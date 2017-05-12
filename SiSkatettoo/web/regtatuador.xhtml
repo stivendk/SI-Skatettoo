@@ -16,34 +16,38 @@ and open the template in the editor.
         <title>Registrate</title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <link rel="stylesheet" type="text/css" href="resources/css/formulario.css"></link>
-        <link rel="stylesheet" type="text/css" href="../../resources/css/sucur.css"></link>
-        <link rel="stylesheet" type="text/css" href="../../resources/css/gallery.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/sucur.css"></link>
+        <link rel="stylesheet" type="text/css" href="resources/css/gallery.css"></link>
         <script src="resources/js/jquery-2.2.3.min.js"></script>
     </h:head>
     <body>
-        <h:form>
-            <label>Pin:</label>
-            <h:inputText value="#{registroTaController.pin}" />
-            <h:commandButton actionListener="#{registroTaController.pinSucursal()}" value="Aceptar"/>
-        </h:form>
-        <section class="publicaciones-blog-home">
+        <section class="publicaciones-blog-home" style="background-color: rgba(0,0,0,0.3)">
+        <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="registro.xhtml"/>
             <center><div class="container">
+                    <h3 class="letra-blanca">#{regTatuadorBundle.info}</h3>
+                    <h:form>
+                        <h2 class="letra-blanca">#{regTatuadorBundle.pin}</h2>
+                        <h:inputSecret class="form-control-static" value="#{registroTaController.pin}" />
+                        <br/>
+                        <br/>
+                        <h:commandButton actionListener="#{registroTaController.pinSucursal()}" class="btn btn-primary" value="#{regTatuadorBundle.aceptar}"/>
+                    </h:form>
+                    <br/>
                     <div class="row-page row">
-                        <h2>Sucursales</h2>
                         <h:form id="sucursales">
                             <ui:repeat value="#{registroTaController.consulta}" var="sucur"> 
                                 <div class="">
-                                    <div class="col-page col-sm-8 col-md-6">
+                                    <div class="col-page col-sm-8 col-md-12">
                                         <h:commandLink action="#{registroTaController.enviarSucur(sucur)}" class="black fondo-publicacion-home">
                                             <div class="img-publicacion-principal-home">
-                                                <img class="" src="../../#{sucur.fotoSuc}"/>
+                                                <img class="" src="#{sucur.fotoSuc}"/>
                                             </div>
                                             <div class="contenido-publicacion-principal-home">
                                                 <h3>#{sucur.nombre}</h3>
                                                 <p>#{sucur.descripcion}<span>...</span></p>
                                             </div>
                                             <div class="mascara-enlace-blog-home">
-                                                <span>Ver </span>
+                                                <span>#{regTatuadorBundle.seleccionar}</span>
                                             </div> 
                                         </h:commandLink>
                                     </div>

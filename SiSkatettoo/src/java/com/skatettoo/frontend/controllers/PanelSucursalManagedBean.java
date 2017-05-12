@@ -68,7 +68,6 @@ public class PanelSucursalManagedBean implements Serializable {
     @PostConstruct
     public void init() {
         sucu = (Sucursal) FacesUtils.getObjectMapSession("sucursal");
-        tatuador = new Usuario();
         dis = new Disenio();
     }
 
@@ -113,5 +112,11 @@ public class PanelSucursalManagedBean implements Serializable {
     
     public List<Disenio> listUsSucu() {
         return getTatuador().getDisenioList();
+    }
+    
+    public String tatuadorS(){
+        setTatuador(tatuador);
+        FacesUtils.setObjectAcceso("tatuador", tatuador);
+        return "/pages/tatuador/perfil.xhtml?faces-redirect=true";
     }
 }

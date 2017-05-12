@@ -110,7 +110,7 @@ public class RegistroTaController implements Serializable {
             ta.setEstadoUsuario(4);
             ta.setIdSucursal(suc);
             tfc.create(ta);
-            Email e = new Email("Nuevo Tatuador", getTa().getNombre() + getTa().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getTa().getEmail());
+            Email e = new Email("Nuevo Tatuador", getTa().getNombre() + getTa().getApellido() + "\n Bienvenido a Skatettoo" + "\nPor el momento estas inhabilitado, espera a que tu Administrador de habilite", getTa().getEmail());
             e.enviarEmail();
             conversation.end();
             return "login.xhtml?faces-redirect=true";

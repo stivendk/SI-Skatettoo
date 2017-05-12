@@ -86,7 +86,7 @@ public class RegistroController {
             us.setIdRol(r);
             us.setEstadoUsuario(1);
             ufc.create(us);
-            Email e = new Email("Nueva Sucursal", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo " + getUs().getIdSucursal().getNombre() + "\nEl PIN de tu tattoo studio es " + getUs().getIdSucursal().getPin() + "\nEspero que lo disfrutes mucho", getUs().getEmail());
+            Email e = new Email("Nueva Sucursal", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo " + getUs().getIdSucursal().getNombre() + "\nEl codigo de tu tattoo studio es " + getUs().getIdSucursal().getPin() + "\nEspero que lo disfrutes mucho", getUs().getEmail());
             e.enviarEmail();
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");

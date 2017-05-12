@@ -33,5 +33,9 @@
             <base-name>com.skatettoo.traducciones.regSucursal</base-name>
             <var>regSucursalBundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.regTatuador</base-name>
+            <var>regTatuadorBundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

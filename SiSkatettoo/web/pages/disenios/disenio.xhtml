@@ -40,7 +40,7 @@
                                         <h3 class="product-description">#{panelDisenioManagedBean.dis.anotaciones}</h3>
                                         
                                         <div class="action">
-                                            <a href="#">#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}</a>
+                                            <h:commandLink value="#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}" action="#{panelDisenioManagedBean.autor(us)}"/>
                                         </div>
                                     </div>
                                 </div>
