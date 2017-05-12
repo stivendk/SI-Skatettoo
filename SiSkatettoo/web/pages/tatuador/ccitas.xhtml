@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
 
@@ -47,8 +48,12 @@
                                                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                                             </h:outputText>
                                                         </td>
-                                                        <td><h:commandButton class="btn btn-success btn-xs" action="#{citaManagedBean.actualizarCita(cita)}" value="Responder"><span class="glyphicon glyphicon-send"></span></h:commandButton></td>
-                                                        <td><h:commandButton class="btn btn-primary btn-xs" action="#{citaManagedBean.aplazarCita(cita)}" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-success btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="Responder"><span class="glyphicon glyphicon-send"></span>
+                                                                <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}" render="citas"/>
+                                                            </h:commandButton></td>
+                                                        <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine2" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span>
+                                                                <f:ajax event="click" listener="#{citaManagedBean.aplazarCita(cita)}" render="citas2"/>
+                                                            </h:commandButton></td>
                                                     </tr>
                                                 </ui:repeat>
                                             </h:form>
@@ -60,6 +65,67 @@
 
                         </div>
                     </div>
+                </div>
+                <div id="ordine" class="modal fade" role="dialog">
+                    <h:form id="citas">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 7%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                                    <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
+                                </div>
+                                <div class="modal-body">
+                                    <h:outputLabel value="Sucursal:" for="sucursal"/>
+                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="sucursal"/>
+                                    <h:outputLabel value="Cliente:" for="cliente" />
+                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
+                                    <h:outputLabel value="Email:" for="email" />
+                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
+                                    <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
+                                    <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                    <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
+                                    <h:inputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
+                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%; margin-top: 6px;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
+                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.responderCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: 6px;"></h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+
+                <div id="ordine2" class="modal fade" role="dialog">
+                    <h:form id="citas2">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <button type="button" jsf:outcome="/pages/tatuador/ccitas.xhtml?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 7%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                                    <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
+                                </div>
+                                <div class="modal-body">
+                                    <h:outputLabel value="Sucursal:" for="sucursal"/>
+                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="sucursal"/>
+                                    <h:outputLabel value="Cliente:" for="cliente" />
+                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
+                                    <h:outputLabel value="Email:" for="email" />
+                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
+                                    <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
+                                        <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
+                                    <h:inputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
+                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%; margin-top: 6px;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
+                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.aplazarCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: 6px;"></h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
                 </div>
 
             </ui:define>
