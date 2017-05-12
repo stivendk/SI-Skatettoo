@@ -11,5 +11,27 @@
        <validator-class>util.validators.RepeatPasswordValidator</validator-class>
        <validator-id>repeatPasswordValidator</validator-id>
     </validator>   
-
+    
+    <application>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.login</base-name>
+            <var>loginBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.index</base-name>
+            <var>indexBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.registro</base-name>
+            <var>registroBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.regCliente</base-name>
+            <var>regClienteBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.regSucursal</base-name>
+            <var>regSucursalBundle</var>
+        </resource-bundle>
+    </application>
 </faces-config>

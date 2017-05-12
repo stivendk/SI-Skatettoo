@@ -25,15 +25,14 @@
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
-                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Solicitar cita</a></li>
-                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Diseños</a></li>
-                                <li><a href="index.xhtml #javascript:openVentana1()?faces-redirect=true">Sucursales</a></li>
+                                <li><a href="#">#{indexBundle.sucursales}</a></li>
+                                <li><a href="disenios.xhtml">#{indexBundle.disenios}</a></li>
 
                             </ul>
                             <h:form>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><h:link value="Iniciar sesión" outcome="login.xhtml"/></li>
-                                    <li><h:link value="Registrate" outcome="registro.xhtml"/></li>
+                                    <li><h:link value="#{indexBundle.iniciarS}" outcome="login.xhtml"/></li>
+                                    <li><h:link value="#{indexBundle.registrate}" outcome="registro.xhtml"/></li>
                                 </ul>
                             </h:form>
                         </div>
@@ -59,7 +58,7 @@
                                     <div class="preview col-md-6">
 
                                         <div class="preview-pic tab-content">
-                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="../../img/#{disenioManagedBean.disenio.nombreDisenio}.jpg" alt="#{disenioManagedBean.disenio.nombreD}" /></div>
+                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="#{disenioManagedBean.disenio.nombreDisenio}" alt="#{disenioManagedBean.disenio.nombreD}" /></div>
                                         </div>
                                     </div>
                                     <div class="details col-md-6">
@@ -75,7 +74,7 @@
                                 </div>
                                 <div>
                                     <br/>
-                                    <h:link outcome="registro.xhtml" value="Registrate" class="btn btn-dark btn-lg toggle bt"></h:link>
+                                    <h:link outcome="registro.xhtml" value="#{indexBundle.registrate}" class="btn btn-dark btn-lg toggle bt"></h:link>
                                 </div>
                                 <br/>
                             </div>

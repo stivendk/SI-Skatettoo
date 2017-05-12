@@ -20,30 +20,28 @@
                 <div class="row">
                     <div class="col-md-1 espacio"></div>
                     <div class="col-xs-12 col-sm-12 col-md-4 well well-sm info-reg">
-                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> Solicita tus citas</legend>
+                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regCli}</legend>
                         <div class="vacio-letra"></div>
-                        <div class="vacio-letra"></div>
-                        <p>Solicita citas para la realizacion de tus tatuajes y tambien observa las novedades en este mundo artistico.</p>
+                        <p>#{registroBundle.descrCli}</p>
                         <h:form pt:method="post" prependId="false" class="form" role="form">
-                            <h:link class="btn btn-lg btn-primary btn-block" outcome="cliente.xhtml" value="Registrar"/>
+                            <h:link class="btn btn-lg btn-primary btn-block" outcome="cliente.xhtml" value="#{registroBundle.registrar}"/>
                         </h:form>
                     </div>
                     <div class="col-md-1 espacio"></div>
                     <div class="col-xs-12 col-sm-12 col-md-3 well well-sm info-reg">
-                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> Nuevo Tatuador</legend>
+                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regTa}</legend>
                         <div class="vacio-letra"></div>
-                        <div class="vacio-letra"></div>
-                        <p>Recibe y agenda citas solicitadas para la realizacion de tatuajes.</p>
+                        <p>#{registroBundle.descrTa}</p>
                         <h:form pt:method="post" prependId="false" class="form" role="form">
-                            <h:link class="btn btn-lg btn-primary btn-block" outcome="regtatuador.xhtml" value="Registrar"/>
+                            <h:link class="btn btn-lg btn-primary btn-block" outcome="regtatuador.xhtml" value="#{registroBundle.registrar}"/>
                         </h:form>
                     </div>
                     <div class="col-md-1 espacio"></div>
                     <div class="col-xs-12 col-sm-12 col-md-4 well well-sm info-reg">
-                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> Nueva Sucursal</legend>
-                        <p>¿Eres tatuador y tu sucursal aun no esta registrada? Registrate y registra tu sucursal, podras recibir y agendar citas como todo tatuador añadiendo la gestion de tu sucursal.</p>
+                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regAd}</legend>
+                        <p>#{registroBundle.descrAd}</p>
                         <h:form pt:method="post" prependId="false" class="form" role="form">
-                            <h:link class="btn btn-lg btn-primary btn-block" outcome="crsucu.xhtml" value="Registrar"/>
+                            <h:link class="btn btn-lg btn-primary btn-block" outcome="crsucu.xhtml" value="#{registroBundle.registrar}"/>
                         </h:form>
                     </div>
                 </div>

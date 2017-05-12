@@ -16,13 +16,12 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:messages showSummary="true"/>
             <div class="login-body">
                 <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="index.xhtml"/>
                 <article class="container-login center-block">
                     <section>
                         <ul id="top-bar" class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#login-access">Iniciar Sesión</a></li>
+                            <li class="active"><a href="#login-access">#{loginBundle.login}</a></li>
                         </ul>
                         <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
                             <div id="login-access" class="tab-pane fade active in">
@@ -41,8 +40,9 @@
                                         </div>
 
                                         <br/>
+                                        <h:messages showSummary="true"/>
                                         <div class="form-group ">				
-                                            <h:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSession()}" id="submit" tabindex="5" class="btn btn-lg btn-danger"/>
+                                            <h:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSessions()}" id="submit" tabindex="5" class="btn btn-lg btn-danger"/>
                                         </div>
                                     </form>
                                 </h:form>

@@ -12,6 +12,7 @@ import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -103,6 +104,31 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         return usuariofc.findAll();
     }
 
+    public String iniciarSessions() {
+        Object obj = usuariofc.autenticar(usuario);
+        ResourceBundle prop = FacesUtils.getBundle("loginBundle");
+        if (obj instanceof Integer) {
+            switch ((Integer)obj){
+                case 1: 
+                    FacesUtils.mensaje(prop.getString("msjError"));
+                break;
+                case 2: 
+                    FacesUtils.mensaje(prop.getString("msjErrorEm"));
+                break;
+                case 3: 
+                    FacesUtils.mensaje(prop.getString("msjErrorCl"));
+                break;
+                case 4: 
+                    FacesUtils.mensaje(prop.getString("msjErrorTa"));
+                break;
+            }
+        }else{
+            FacesUtils.setUserSession((Usuario) obj);
+            return "/pages/usuario/inicio.xhtml?faces-redirect=true";
+        }
+        return "";
+    }
+    
     public String iniciarSession() {
         Usuario u;
         try {

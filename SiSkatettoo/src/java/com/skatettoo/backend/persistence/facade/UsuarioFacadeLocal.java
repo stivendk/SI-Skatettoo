@@ -36,4 +36,6 @@ public interface UsuarioFacadeLocal {
     Usuario consultarUsu(Usuario us);
     
     String registrarCl(Usuario us, Rol r);
+    
+    Object autenticar(Usuario usu);
 }

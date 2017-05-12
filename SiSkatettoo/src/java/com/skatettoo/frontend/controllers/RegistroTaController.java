@@ -107,7 +107,7 @@ public class RegistroTaController implements Serializable {
             Rol r = new Rol();
             r.setIdRol(2);
             ta.setIdRol(r);
-            ta.setEstadoUsuario(1);
+            ta.setEstadoUsuario(4);
             ta.setIdSucursal(suc);
             tfc.create(ta);
             Email e = new Email("Nuevo Tatuador", getTa().getNombre() + getTa().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getTa().getEmail());

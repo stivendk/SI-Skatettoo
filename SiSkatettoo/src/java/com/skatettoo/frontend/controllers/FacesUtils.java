@@ -7,9 +7,11 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Usuario;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,5 +46,20 @@ public class FacesUtils {
         context.getExternalContext().redirect(request.getContextPath());
     }
 
+    public static ResourceBundle getBundle(String nombAr){
+        FacesContext context = FacesContext.getCurrentInstance();
+        return context.getApplication().getResourceBundle(context, nombAr);
+    }
     
+    public static void setUserSession(Usuario u){
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession uss = (HttpSession) context.getExternalContext().getSession(false);
+        uss.setAttribute("usuario", u);
+    }
+    
+    public static Usuario getUserSession(String u){
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession uss = (HttpSession) context.getExternalContext().getSession(false);
+        return (Usuario) uss.getAttribute(u);
+    }
 }

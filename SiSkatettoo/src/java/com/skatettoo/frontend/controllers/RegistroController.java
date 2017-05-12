@@ -70,7 +70,7 @@ public class RegistroController {
             r.setIdRol(1);
             us.setIdRol(r);
             ufc.create(us);
-            Email e = new Email("Nuevo Usuario", getUs().getNombre() + getUs().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getUs().getEmail());
+            Email e = new Email("Nuevo Usuario", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo espero que lo disfrutes mucho", getUs().getEmail());
             e.enviarEmail();
             return "login.xhtml?faces-redirect=true";
         } catch (Exception e) {
