@@ -56,3 +56,7 @@ body{
 .vacio-letra{
     height: 20px;
 }
+.vacio-reg{
+    height: 500px;
+    background-color: transparent;
+}

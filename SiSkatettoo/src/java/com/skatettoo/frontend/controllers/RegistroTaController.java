@@ -94,12 +94,12 @@ public class RegistroTaController implements Serializable {
     
     public void pinSucursal(){
         consulta = sfc.consuSuc(pin);
+        conversation.begin();
     }
     
     public String enviarSucur(Sucursal sc){
-        setSuc(sc);
-        conversation.begin();
-        return "newxhtml.xhtml?faces-redirect=true";
+        suc = sc;
+        return "tatuador.xhtml?faces-redirect=true";
     }
 
     public String registrarTatuador() {
@@ -107,6 +107,7 @@ public class RegistroTaController implements Serializable {
             Rol r = new Rol();
             r.setIdRol(2);
             ta.setIdRol(r);
+            ta.setEstadoUsuario(1);
             ta.setIdSucursal(suc);
             tfc.create(ta);
             Email e = new Email("Nuevo Tatuador", getTa().getNombre() + getTa().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getTa().getEmail());

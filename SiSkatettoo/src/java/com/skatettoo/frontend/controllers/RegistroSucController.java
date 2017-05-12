@@ -6,12 +6,17 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Rol;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
-import com.skatettoo.frontend.email.Email;
+import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
-import java.util.List;
+import com.skatettoo.frontend.email.Email;
+import com.skatettoo.frontend.util.GeneradorPss;
+import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -20,74 +25,60 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
- * @author APRENDIZ
+ * @author StivenDavid
  */
-@Named(value = "registroController")
+@Named(value = "registroSucController")
 @RequestScoped
-public class RegistroController {
+public class RegistroSucController implements Serializable{
 
-    private Usuario us;
-    private Rol rl;
-    @EJB private UsuarioFacadeLocal ufc;
-    @Inject SucursalManagedBean smb;
+    private Sucursal suc;
+    private Part file;
+    @EJB
+    private SucursalFacadeLocal slfc;
+    @Inject
+    private RegistroController sfc;
 
-    public Usuario getUs() {
-        return us;
+    public RegistroController getSfc() {
+        return sfc;
     }
 
-    public SucursalManagedBean getSmb() {
-        return smb;
+    public Part getFile() {
+        return file;
     }
 
-    public void setUs(Usuario us) {
-        this.us = us;
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
+    public Sucursal getSuc() {
+        return suc;
+    }
+
+    public void setSuc(Sucursal suc) {
+        this.suc = suc;
     }
     
-    public RegistroController() {
+    public RegistroSucController() {
     }
-
-    public Rol getRl() {
-        return rl;
-    }
-
-    public void setRl(Rol rl) {
-        this.rl = rl;
-    }
-    
     
     @PostConstruct
     public void init(){
-       us = new Usuario();
+        suc = new Sucursal();
     }
     
-    
-    public String registrarCliente(){
+    public String registrarAdminS(){
         try {
-            Rol r = new Rol();
-            r.setIdRol(1);
-            us.setIdRol(r);
-            ufc.create(us);
-            Email e = new Email("Nuevo Usuario", getUs().getNombre() + getUs().getApellido() + "\n Bienvenido a Skatettoo espero que lo disfrutes mucho", getUs().getEmail());
-            e.enviarEmail();
+            suc.setPin(GeneradorPss.generadorPassword());
+            suc.setFotoSuc(UploadFIles.uploadFileS(file, GeneradorPss.generadorPassword()));
+            slfc.create(suc);
+            Sucursal sl = slfc.consultarSuc(suc);
+            getSfc().getUs().setIdSucursal(suc);
+            getSfc().registrarAdmin();
             return "login.xhtml?faces-redirect=true";
-        } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
-        }
-        return "";
-    }
-    
-    public String registrarAdmin(){
-        try {
-            Rol r = new Rol();
-            r.setIdRol(3);
-            us.setIdRol(r);
-            us.setEstadoUsuario(1);
-            ufc.create(us);
-            Email e = new Email("Nueva Sucursal", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo " + getUs().getIdSucursal().getNombre() + "\nEl PIN de tu tattoo studio es " + getUs().getIdSucursal().getPin() + "\nEspero que lo disfrutes mucho", getUs().getEmail());
-            e.enviarEmail();
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error");
         }

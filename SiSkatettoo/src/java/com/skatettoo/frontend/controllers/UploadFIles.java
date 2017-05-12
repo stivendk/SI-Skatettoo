@@ -144,4 +144,28 @@ public class UploadFIles {
 
         return "";
     }
+    
+    public static String uploadFileS(Part file, String d) {
+        try {
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img/sucursal");
+            path = path.substring(0, path.indexOf("\\build"));
+            path = path + "\\web\\img\\sucursal\\";
+            String[] h = file.getContentType().split("/");
+            String pathReal = "img/sucursal/" + d + "." + h[h.length - 1];
+            System.out.println(pathReal);
+            path = path + d + "." + h[h.length - 1];
+            InputStream in = file.getInputStream();
+            byte[] data = new byte[in.available()];
+            in.read(data);
+            FileOutputStream out = new FileOutputStream(new File(path));
+            out.write(data);
+            in.close();
+            out.close();
+            return pathReal;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
 }
