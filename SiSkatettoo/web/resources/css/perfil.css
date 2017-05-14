@@ -811,3 +811,12 @@
     }
 }
 
+.regresar{
+    font-size: 35px;
+    color: #000;
+}
+
+.regresar:hover{
+    text-decoration: none;
+    color: #f00;
+}

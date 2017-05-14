@@ -114,9 +114,9 @@ public class PanelSucursalManagedBean implements Serializable {
         return getTatuador().getDisenioList();
     }
     
-    public String tatuadorS(){
-        setTatuador(tatuador);
-        FacesUtils.setObjectAcceso("tatuador", tatuador);
+    public String tatuadorS(Usuario ta){
+        setTatuador(ta);
+        FacesUtils.setObjectAcceso("tatuador", ta);
         return "/pages/tatuador/perfil.xhtml?faces-redirect=true";
     }
 }

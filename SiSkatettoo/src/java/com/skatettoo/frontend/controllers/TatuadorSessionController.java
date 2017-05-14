@@ -58,6 +58,16 @@ public class TatuadorSessionController implements Serializable{
     public String sucursal(){
         setSu(ta.getIdSucursal());
         FacesUtils.setObjectAcceso("sucursal", su);
-        return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
+        return "/pages/tatuador/sucursal.xhtml?faces-redirect=true";
+    }
+    
+    public List<Usuario> tattuadoresSurcursal() {
+        return ta.getIdSucursal().getUsuarioList();
+    }
+    
+    public String tatuadorS(Usuario ta){
+        setTa(ta);
+        FacesUtils.setObjectAcceso("tatuador", ta);
+        return "/pages/disenios/tatuador.xhtml?faces-redirect=true";
     }
 }

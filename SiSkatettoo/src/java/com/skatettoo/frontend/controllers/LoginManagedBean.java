@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -100,6 +100,7 @@ public class LoginManagedBean implements Serializable {
     
     public String cerrarSesion() {
         FacesUtils.removerObjectAcceso("usuario");
+        FacesUtils.removerObjectAcceso("tatuador");
         FacesUtils.removerObjectAcceso("sucursal");
         FacesUtils.removerObjectAcceso("disenio");
         FacesUtils.removerObjectAcceso("localidad");
