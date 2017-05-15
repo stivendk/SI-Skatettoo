@@ -33,7 +33,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <div class="author">
-                                                        Por <b>#{item.idUsuario.nombre} #{item.idUsuario.apellido}</b> | <h:commandLink pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="Ver">
+                                                        #{inicioBundle.por} <b>#{item.idUsuario.nombre} #{item.idUsuario.apellido}</b> | <h:commandLink pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="#{inicioBundle.ver}">
                                                             <f:ajax event="click" listener="#{noticiaManagedBean.verNoticia(item)}" render="noticias"/> 
                                                         </h:commandLink> 
                                                     </div>
@@ -63,7 +63,7 @@
                                     <b>#{noticiaManagedBean.noti.idUsuario.nombre} #{noticiaManagedBean.noti.idUsuario.apellido}</b>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{inicioBundle.cerrar}</button>
                                 </div>
                             </div>
 

@@ -11,6 +11,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -65,11 +66,12 @@ public class NoticiaManagedBean implements Serializable {
     }
     
     public String publicarNoticia(){
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             noti.setIdUsuario(getLog().getUsuario());
             noti.setImgn(UploadFIles.uploadFileN(file, String.valueOf(noti.getTitulo())));
             notifc.create(noti);
-            FacesUtils.mensaje("Has publicado una nueva noticia.");
+            FacesUtils.mensaje(prop.getString("succesNoti"));
             return "/pages/tatuador/gnoticia.xhtml?faces-redirect=true";
         } catch (Exception e) {
             FacesUtils.mensaje("Perra");
@@ -78,20 +80,22 @@ public class NoticiaManagedBean implements Serializable {
     }
     
     public void eliminarNoticia(Noticia n){
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             notifc.remove(n);
-            FacesUtils.mensaje("Se ha eliminado con exito");
+            FacesUtils.mensaje(prop.getString("deleteNoti"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("errorNoti"));
         }
     }
     
     public void editarNoticia(){
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             notifc.edit(noti);
-            FacesUtils.mensaje("Se ha actualizado con Exito");
+            FacesUtils.mensaje(prop.getString("actualNoti"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("errorNoti"));
         }
     }
     
@@ -103,7 +107,6 @@ public class NoticiaManagedBean implements Serializable {
     
     public void verNoticia(Noticia nn){
         setNoti(nn);
-        FacesUtils.setObjectAcceso("noticia", nn);
     }
     
     public List<Noticia> listarNoticia(){

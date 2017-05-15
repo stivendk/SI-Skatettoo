@@ -37,5 +37,13 @@
             <base-name>com.skatettoo.traducciones.regTatuador</base-name>
             <var>regTatuadorBundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.inicio</base-name>
+            <var>inicioBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.editeli</base-name>
+            <var>editeliBundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

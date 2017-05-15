@@ -12,6 +12,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -82,37 +83,46 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void registrarDisenio() {
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             disenio.setIdUsuario(getUs().getUsuario());
             disenio.setNombreDisenio(UploadFIles.uploadFile(file, String.valueOf(disenio.getNombreD())));
             diseniofc.create(disenio);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha publicado con exito", "Se ha agregado un nuevo diseño"));
+            FacesUtils.mensaje(prop.getString("newDis"));
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha producido un error", "¡Error!"));
+            FacesUtils.mensaje(prop.getString("errorNoti"));
             throw e;
         }
     }
 
     public void eliminarDisenioA(Disenio d) {
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             diseniofc.remove(d);
-            FacesUtils.mensaje("Se ha eliminado con exito");
+            FacesUtils.mensaje(prop.getString("deleteNoti"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ha ocurrido un error");
+            FacesUtils.mensaje(prop.getString("errorNoti"));
         }
     }
 
     public void eliminarDisenio(Disenio d) {
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             diseniofc.remove(d);
-            FacesUtils.mensaje("Se ha eliminado con exito");
+            FacesUtils.mensaje(prop.getString("deleteNoti"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ha ocurrido un error");
+            FacesUtils.mensaje(prop.getString("errorNoti"));
         }
     }
 
     public void editarDisenio() {
-        diseniofc.edit(disenio);
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
+        try {
+            diseniofc.edit(disenio);
+            FacesUtils.mensaje(prop.getString("actualNoti"));
+        } catch (Exception e) {
+            FacesUtils.mensaje(prop.getString("errorNoti"));
+        }
     }
 
     public String actualizarDisenio(Disenio d) {

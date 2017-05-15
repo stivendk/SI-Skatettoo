@@ -38,8 +38,8 @@
                                     <hr/> 
                                     <p class="parrafo">#{noticia.descripcion}</p>
                                     <hr/>
-                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{noticiaManagedBean.actualizarNoticia(noticia)}" value="Editar"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
-                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaManagedBean.eliminarNoticia(noticia)}" value="eliminar"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
+                                    <td><h:commandButton class="btn btn-primary btn-xs" action="#{noticiaManagedBean.actualizarNoticia(noticia)}" value="#{editeliBundle.editar}"><span class="glyphicon glyphicon-pencil"></span></h:commandButton></td>
+                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaManagedBean.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
                                 </div>
                                 <div class="bgimg-2">
                                     <div class="caption">
@@ -51,8 +51,6 @@
                 </div>
                 <div class="container">
                     <div class="row">
-
-
                         <div id="myModal" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">

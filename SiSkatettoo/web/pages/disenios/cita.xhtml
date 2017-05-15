@@ -85,20 +85,37 @@
                                                 </div>
                                             </fieldset>
 
+                                            <ui:repeat value="#{citaManagedBean.citaSucu()}" var="cita"/>
                                             <script>
                                                 var disabledDays = [0];
                                                 $("#fechaHora").datepicker({
                                                     dateFormat: 'mm/dd/yyyy',
                                                     timeFormat: 'hh:ii:ss ',
                                                     onRenderCell: function (date, cellType) {
-                                                        if (cellType == 'day') {
+                                                        if (cellType === 'day') {
                                                             var day = date.getDay(),
-                                                                    isDisabled = disabledDays.indexOf(day) != -1;
+                                                                    isDisabled = disabledDays.indexOf(day) !== -1;
 
                                                             return {
                                                                 disabled: isDisabled
-                                                            }
+                                                            };
+
                                                         }
+                                                    }
+                                                });
+                                            </script>
+                                            <script>
+                                                var dateToday = new Date();
+                                                var dates = $("#fechaHora").datepicker({
+                                                    defaultDate: "+1w",
+                                                    changeMonth: true,
+                                                    numberOfMonths: 3,
+                                                    minDate: dateToday,
+                                                    onSelect: function (selectedDate) {
+                                                        var option = this.id == "from" ? "minDate" : "maxDate",
+                                                                instance = $(this).data("datepicker"),
+                                                                date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                                                        dates.not(this).datepicker("option", option, date);
                                                     }
                                                 });
                                             </script>

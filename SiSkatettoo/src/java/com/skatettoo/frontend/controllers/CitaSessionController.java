@@ -62,21 +62,23 @@ public class CitaSessionController implements Serializable {
     }
 
     public String responderCita() {
-        Email e = new Email("Cita aceptada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha respondido la cita que enviaste para el dia " + getCit().getFechaHora() + "\nPor el valor de: $" + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
-        e.enviarEmail();
         cfl.edit(cit);
         FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
+        Email e = new Email("Cita aceptada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha respondido la cita que enviaste para el dia " + getCit().getFechaHora() + "\nPor el valor de: $" + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
+        e.enviarEmail();
         return "/pages/tatuador/ccitas.xhtml?faces-redirect=true";
     }
 
-    public String aplazarCita() {
-
-        cit.setEstadoCita((short) 2);
-        Email e = new Email("Cita aplazada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha puesto una nueva fecha para continuar con la cita el dia " + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
-        e.enviarEmail();
-        cfl.edit(cit);
-        FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
-        return "/pages/tatuador/ccitas.xhtml?faces-redirect=true";
+    public void aplazarCita() {
+        try {
+            cit.setEstadoCita((short) 2);
+            cfl.edit(cit);
+            FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
+            Email e = new Email("Cita aplazada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha puesto una nueva fecha para continuar con la cita el dia " + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
+            e.enviarEmail();
+        } catch (Exception e) {
+            FacesUtils.mensaje("Ocurrio un problema" + e.getMessage());
+        }
 
     }
 

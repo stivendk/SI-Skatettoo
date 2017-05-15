@@ -24,7 +24,7 @@
             <ui:define name="content">
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>Diseños</h1></center>
+                        <center><h1>#{indexBundle.disenios}</h1></center>
                         <h:messages showSummary="true"/>
                         <div class="container">
                             <div class="row">
@@ -34,8 +34,8 @@
                                             <div class="caption">
                                                 <h4>#{dis.nombreD}</h4>
                                                 <p>#{dis.anotaciones}</p>
-                                                <h:commandButton value="Editar" action="#{disenioManagedBean.actualizarDisenio(dis)}" class="btn btn-primary btn-sm"/>
-                                                <h:commandButton value="Eliminar" actionListener="#{disenioManagedBean.eliminarDisenio(dis)}" class="btn btn-danger btn-sm"/>
+                                                <h:commandButton value="#{editeliBundle.editar}" action="#{disenioManagedBean.actualizarDisenio(dis)}" class="btn btn-primary btn-sm"/>
+                                                <h:commandButton value="#{editeliBundle.eliminar}" actionListener="#{disenioManagedBean.eliminarDisenio(dis)}" class="btn btn-danger btn-sm"/>
 
                                             </div>
                                             <img src="../../#{dis.nombreDisenio}" width="200px" height="200px" alt="..." class="img-responsive"/>

@@ -23,23 +23,23 @@
                     <h:form enctype="multipart/form-data" pt:method="post" prependId="false" class="form" role="form">
                         <div class="modal-header">
                             <button type="button" title="Mis diseños" alt="Mis diseños" jsf:outcome="/pages/tatuador/cgdisenios?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 3%;"><span class="glyphicon glyphicon-circle-arrow-down"></span></button>
-                            <center><h4 class="modal-title custom_align" id="Heading">Publicar Diseño</h4></center>
+                            <center><h4 class="modal-title custom_align" id="Heading">#{editeliBundle.newDise}</h4></center>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <h:outputLabel value="Nombre Disenio:" for="nombreD" />
+                                <h:outputLabel value="#{editeliBundle.nombDis}:" for="nombreD" />
                                 <h:inputText class="form-control" id="nombreD" value="#{disenioManagedBean.disenio.nombreD}" title="NombreDisenio" required="true" requiredMessage="The NombreDisenio field is required."/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel value="Diseño:" for="nombreDisenio" />
+                                <h:outputLabel value="#{editeliBundle.dis}:" for="nombreDisenio" />
                                 <h:inputFile class="form-control" id="nombreDisenio" value="#{disenioManagedBean.file}" title="Disenio"/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel value="Anotaciones:" for="anotaciones" />
+                                <h:outputLabel value="#{editeliBundle.anotaci}:" for="anotaciones" />
                                 <h:inputTextarea class="form-control" rows="4" cols="30" id="anotaciones" value="#{disenioManagedBean.disenio.anotaciones}" title="Anotaciones" required="true" requiredMessage="The Anotaciones field is required."/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel value="Estilo Disenio:" for="idEstiloDisenio" />
+                                <h:outputLabel value="#{editeliBundle.estil}:" for="idEstiloDisenio" />
                                 <h:selectOneMenu class="form-control" id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" required="true" requiredMessage="The IdEstiloDisenio field is required.">
                                     <!-- TODO: update below reference to list of available items-->
                                     <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
@@ -50,7 +50,7 @@
                         <div class="modal-footer ">
                             <div class="container">
                                 <div class="row">
-                                    <center><h:commandButton type="submit" value="Publicar" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%;"></h:commandButton></center>
+                                    <center><h:commandButton type="submit" value="#{editeliBundle.publi}" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg col-lg-4-6" style="width: 50%;"></h:commandButton></center>
                                 </div>
                             </div>
                         </div>

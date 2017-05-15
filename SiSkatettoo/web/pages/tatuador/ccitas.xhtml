@@ -11,9 +11,8 @@
     <body>
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
-
             <ui:define name="titulo">
-                Citas | Skatetto
+                #{editeliBundle.citas} | Skatetto
             </ui:define>
 
 
@@ -21,18 +20,18 @@
                 <div class="container fondo" >
                     <div class="row">
                         <div class="col-md-12 tabla">
-                            <h4>Citas</h4>
+                            <h4>#{editeliBundle.citas}</h4>
                             <div class="table-responsive">
                                 <h:form >
                                     <table id="mytable" class="table table-bordred table-striped tabla">
                                         <thead>
-                                            <th>Sucursal</th>
-                                            <th>Cliente</th>
-                                            <th>Tatuador</th>
-                                            <th>Email</th>
-                                            <th>Fecha y Hora</th>
-                                            <th>Responder</th>
-                                            <th>Aplazar</th>
+                                            <th>#{editeliBundle.sucu}</th>
+                                            <th>#{editeliBundle.clien}</th>
+                                            <th>#{editeliBundle.tatu}</th>
+                                            <th>#{editeliBundle.email}</th>
+                                            <th>#{editeliBundle.fechora}</th>
+                                            <th>#{editeliBundle.responder}</th>
+                                            <th>#{editeliBundle.aplazar}</th>
                                         </thead>
                                         <tbody>
                                             <h:form>
@@ -48,18 +47,17 @@
                                                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                                                             </h:outputText>
                                                         </td>
-                                                        <td><h:commandButton class="btn btn-success btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="Responder"><span class="glyphicon glyphicon-send"></span>
+                                                        <td><h:commandButton class="btn btn-success btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="#{editeliBundle.responder}"><span class="glyphicon glyphicon-send"></span>
                                                                 <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}" render="citas"/>
                                                             </h:commandButton></td>
-                                                        <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine2" value="Aplazar"><span class="glyphicon glyphicon-pencil"></span>
-                                                                <f:ajax event="click" listener="#{citaManagedBean.aplazarCita(cita)}" render="citas2"/>
+                                                        <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine2" value="#{editeliBundle.aplazar}"><span class="glyphicon glyphicon-pencil"></span>
+                                                                <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}" render="citas2"/>
                                                             </h:commandButton></td>
                                                     </tr>
                                                 </ui:repeat>
                                             </h:form>
                                         </tbody>
                                     </table>
-                                    <h:messages showSummary="true" />
                                 </h:form>
                             </div>
 
@@ -73,24 +71,26 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 7%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
                                     <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
                                 </div>
                                 <div class="modal-body">
-                                    <h:outputLabel value="Sucursal:" for="sucursal"/>
-                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="sucursal"/>
-                                    <h:outputLabel value="Cliente:" for="cliente" />
-                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
-                                    <h:outputLabel value="Email:" for="email" />
-                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
-                                    <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
-                                    <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
+                                    <h:outputLabel value="#{editeliBundle.sucu}:" for="sucursal"/>
+                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="#{editeliBundle.sucu}"/>
+                                    <h:outputLabel value="#{editeliBundle.clien}:" for="cliente" />
+                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="#{editeliBundle.clien}" />
+                                    <h:outputLabel value="#{editeliBundle.email}:" for="email" />
+                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="#{editeliBundle.email}" />
+                                    <h:outputLabel value="#{editeliBundle.fechora}:" for="fechaHora" />
+                                    <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="#{editeliBundle.fechora}">
                                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                     </h:outputText>
-                                    <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
+                                    <h:outputLabel value="#{editeliBundle.valor}:" for="valorTatuaje" />
                                     <h:inputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
-                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%; margin-top: 6px;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
-                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.responderCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: 6px;"></h:commandButton>
+                                    <hr/>
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg">#{editeliBundle.cancelar}</button>
+                                    <div class="col-md-4"></div>
+                                    <h:commandButton type="submit" value="#{editeliBundle.responder}" action="#{citaSessionController.responderCita()}" class="btn btn-success btn-lg"></h:commandButton>
                                 </div>
                             </div>
                         </div>
@@ -104,24 +104,18 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
-                                     <button type="button" jsf:outcome="/pages/tatuador/ccitas.xhtml?faces-redirect=true" class="btn btn-default btn-sm right" style="width: 7%;"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
                                     <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
                                 </div>
                                 <div class="modal-body">
-                                    <h:outputLabel value="Sucursal:" for="sucursal"/>
-                                    <h:outputLabel class="form-control" id="sucursal" value="#{citaSessionController.cit.idSucursal.nombre}" title="sucursal"/>
-                                    <h:outputLabel value="Cliente:" for="cliente" />
-                                    <h:outputText class="form-control" id="cliente" value="#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}" title="Cliente" />
-                                    <h:outputLabel value="Email:" for="email" />
-                                    <h:outputText class="form-control" id="email" value="#{citaSessionController.cit.idUsuario.email}" title="Email" />
-                                    <h:outputLabel value="Fecha y Hora:" for="fechaHora" />
-                                        <h:outputText class="form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}" title="Sucursal">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    <h:outputLabel value="Valor Tatuaje:" for="valorTatuaje" />
-                                    <h:inputText id="valorTatuaje" class="form-control" pt:type="number" value="#{citaSessionController.cit.valorTatuaje}" title="ValorTatuaje" />
-                                    <button type="button" jsf:outcome="/pages/tatuador/ccitas?faces-redirect=true" class="btn btn-danger btn-lg col-lg-4" style="width: 50%; margin-top: 6px;"><span class="glyphicon glyphicon-ok-sign"></span> Cancelar</button>
-                                    <h:commandButton type="submit" value="Responder" action="#{citaSessionController.aplazarCita()}" class="btn btn-success btn-lg col-lg-4-6" style="width: 50%; margin-top: 6px;"></h:commandButton>
+                                    <p:outputLabel value="#{editeliBundle.fechora}:" for="fechaHora" />
+                                    <p:calendar showOn="button" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaSessionController.cit.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </p:calendar>
+                                    <hr/>
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                    <div class="col-md-4"></div>
+                                    <p:commandButton type="submit" value="#{editeliBundle.aplazar}" actionListener="#{citaSessionController.aplazarCita()}" class="btn btn-success btn-lg" ></p:commandButton>
                                 </div>
                             </div>
                         </div>

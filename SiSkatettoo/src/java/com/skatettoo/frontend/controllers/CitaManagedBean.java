@@ -15,6 +15,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -97,16 +98,17 @@ public class CitaManagedBean implements Serializable {
     }
 
     public String solicitarCita() {
+        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
             cita.setDisenioAdjunto(UploadFIles.uploadFileC(file, String.valueOf(cita.getDisenioAdjunto())));
             citafc.create(cita);
             Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();
-            FacesUtils.mensaje("Se ha enviado");
+            FacesUtils.mensaje(prop.getString("envio"));
             return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("errorNoti"));
             throw e;
         }
     }
@@ -144,14 +146,12 @@ public class CitaManagedBean implements Serializable {
         }
     }
 
-    public String actualizarCita(Cita c) {
+    public void actualizarCita(Cita c) {
         if (getCita().getEstadoCita() != 1) {
-            cita = c;
-            FacesUtils.setObjectAcceso("cita", cita);
-            return "/pages/tatuador/rcita.xhtml?faces-redirect=true";
+            setCita(c);
+            FacesUtils.setObjectAcceso("cita", c);
         } else {
             FacesUtils.mensaje("Ya respondiste esta cita");
-            return "";
         }
     }
 
@@ -168,7 +168,7 @@ public class CitaManagedBean implements Serializable {
 
     public String aplazarCita(Cita c) {
         if (getCita().getEstadoCita() != 1) {
-            cita = c;
+            setCita(c);
             FacesUtils.setObjectAcceso("cita", cita);
             return "/pages/tatuador/acita.xhtml?faces-redirect=true";
         } else {
