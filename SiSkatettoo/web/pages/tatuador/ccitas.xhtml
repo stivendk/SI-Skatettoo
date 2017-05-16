@@ -11,6 +11,14 @@
     <body>
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head2">
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
+
+            </ui:define>  
+
             <ui:define name="titulo">
                 #{editeliBundle.citas} | Skatetto
             </ui:define>
@@ -50,8 +58,8 @@
                                                         <td><h:commandButton class="btn btn-success btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="#{editeliBundle.responder}"><span class="glyphicon glyphicon-send"></span>
                                                                 <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}" render="citas"/>
                                                             </h:commandButton></td>
-                                                        <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine2" value="#{editeliBundle.aplazar}"><span class="glyphicon glyphicon-pencil"></span>
-                                                                <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}" render="citas2"/>
+                                                        <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#aplazar" value="#{editeliBundle.aplazar}"><span class="glyphicon glyphicon-pencil"></span>
+                                                                <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}"/>
                                                             </h:commandButton></td>
                                                     </tr>
                                                 </ui:repeat>
@@ -60,8 +68,71 @@
                                     </table>
                                 </h:form>
                             </div>
-
                         </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+
+
+                        <div id="aplazar" class="modal fade in">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <h:form >
+                                        <div class="modal-header">
+                                            <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                            <h4 class="modal-title">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="datepicker-here form-control" id="fechaHora" value="#{citaSessionController.cit.fechaHora}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss"/>
+                                            </h:inputText>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="btn-group">
+                                                <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                                <h:commandButton type="submit" value="#{editeliBundle.aplazar}" actionListener="#{citaSessionController.aplazarCita()}" class="btn btn-success btn-lg" ></h:commandButton>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            var disabledDays = [0, 6];
+                                            $("#fechaHora1").datepicker({
+                                                dateFormat: 'mm/dd/yyyy',
+                                                timeFormat: 'hh:ii:ss ',
+                                                onRenderCell: function (date, cellType) {
+                                                    if (cellType === 'day') {
+                                                        var day = date.getDay(),
+                                                                isDisabled = disabledDays.indexOf(day) !== -1;
+
+                                                        return {
+                                                            disabled: isDisabled
+                                                        };
+
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                        <script>
+                                            var dateToday = new Date();
+                                            var dates = $("#fechaHora1").datepicker({
+                                                defaultDate: "+1w",
+                                                changeMonth: true,
+                                                numberOfMonths: 3,
+                                                minDate: dateToday,
+                                                onSelect: function (selectedDate) {
+                                                    var option = this.id === "from" ? "minDate" : "maxDate",
+                                                            instance = $(this).data("datepicker"),
+                                                            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                                                    dates.not(this).datepicker("option", option, date);
+                                                }
+                                            });
+                                        </script>
+                                    </h:form>
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dalog -->
+                        </div><!-- /.modal -->
                     </div>
                 </div>
                 <div id="ordine" class="modal fade" role="dialog">
@@ -108,17 +179,16 @@
                                     <center><h4 class="modal-title custom_align" id="Heading">#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</h4></center>
                                 </div>
                                 <div class="modal-body">
-                                    <p:outputLabel value="#{editeliBundle.fechora}:" for="fechaHora" />
-                                    <p:calendar showOn="button" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaSessionController.cit.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                    <h:outputLabel value="#{editeliBundle.fechora}:" for="fechaHora" />
+                                    <h:inputText  pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="datepicker-here" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaSessionController.cit.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
                                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                    </p:calendar>
+                                    </h:inputText>
                                     <hr/>
-                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
-                                    <div class="col-md-4"></div>
-                                    <p:commandButton type="submit" value="#{editeliBundle.aplazar}" actionListener="#{citaSessionController.aplazarCita()}" class="btn btn-success btn-lg" ></p:commandButton>
+
                                 </div>
                             </div>
                         </div>
+
                     </h:form>
                 </div>
 

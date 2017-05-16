@@ -8,6 +8,7 @@ package com.skatettoo.frontend.controllers;
 import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.facade.DisenioFacadeLocal;
+import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -86,12 +87,11 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             disenio.setIdUsuario(getUs().getUsuario());
-            disenio.setNombreDisenio(UploadFIles.uploadFile(file, String.valueOf(disenio.getNombreD())));
+            disenio.setNombreDisenio(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
             diseniofc.create(disenio);
             FacesUtils.mensaje(prop.getString("newDis"));
         } catch (Exception e) {
-            FacesUtils.mensaje(prop.getString("errorNoti"));
-            throw e;
+            FacesUtils.mensaje(prop.getString("errorNoti") + e.getMessage());
         }
     }
 
@@ -125,10 +125,9 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         }
     }
 
-    public String actualizarDisenio(Disenio d) {
-        disenio = d;
+    public void actualizarDisenio(Disenio d) {
+        setDisenio(d);
         FacesUtils.setObjectAcceso("disenio", d);
-        return "/pages/tatuador/cdisenio.xhtml?faces-redirect=true";
     }
 
     public String actualizarDisenioA(Disenio d) {

@@ -36,18 +36,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Disenio.findAll", query = "SELECT d FROM Disenio d"),
     @NamedQuery(name = "Disenio.findByIdDisenio", query = "SELECT d FROM Disenio d WHERE d.idDisenio = :idDisenio"),
-    @NamedQuery(name = "Disenio.findByNombreDisenio", query = "SELECT d FROM Disenio d WHERE d.nombreDisenio = :nombreDisenio"),
-    @NamedQuery(name = "Disenio.findBySesionesRecomendadas", query = "SELECT d FROM Disenio d WHERE d.sesionesRecomendadas = :sesionesRecomendadas"),
-    @NamedQuery(name = "Disenio.findByPrecioDisenio", query = "SELECT d FROM Disenio d WHERE d.precioDisenio = :precioDisenio")})
+    @NamedQuery(name = "Disenio.findByNombreDisenio", query = "SELECT d FROM Disenio d WHERE d.nombreDisenio = :nombreDisenio")})
 public class Disenio implements Serializable, IEntitie {
 
+    private static final long serialVersionUID = 1L;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "nombreD")
     private String nombreD;
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -58,14 +57,6 @@ public class Disenio implements Serializable, IEntitie {
     @Size(min = 1, max = 100)
     @Column(name = "nombre_disenio")
     private String nombreDisenio;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sesiones_recomendadas")
-    private int sesionesRecomendadas;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "precio_disenio")
-    private int precioDisenio;
     @Basic(optional = false)
     @NotNull
     @Lob
@@ -86,11 +77,9 @@ public class Disenio implements Serializable, IEntitie {
         this.idDisenio = idDisenio;
     }
 
-    public Disenio(Integer idDisenio, String nombreDisenio, int sesionesRecomendadas, int precioDisenio, String anotaciones) {
+    public Disenio(Integer idDisenio, String nombreDisenio, String anotaciones) {
         this.idDisenio = idDisenio;
         this.nombreDisenio = nombreDisenio;
-        this.sesionesRecomendadas = sesionesRecomendadas;
-        this.precioDisenio = precioDisenio;
         this.anotaciones = anotaciones;
     }
 
@@ -108,22 +97,6 @@ public class Disenio implements Serializable, IEntitie {
 
     public void setNombreDisenio(String nombreDisenio) {
         this.nombreDisenio = nombreDisenio;
-    }
-
-    public int getSesionesRecomendadas() {
-        return sesionesRecomendadas;
-    }
-
-    public void setSesionesRecomendadas(int sesionesRecomendadas) {
-        this.sesionesRecomendadas = sesionesRecomendadas;
-    }
-
-    public int getPrecioDisenio() {
-        return precioDisenio;
-    }
-
-    public void setPrecioDisenio(int precioDisenio) {
-        this.precioDisenio = precioDisenio;
     }
 
     public String getAnotaciones() {

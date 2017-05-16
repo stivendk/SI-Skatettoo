@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
@@ -22,6 +23,7 @@
 
 
             <ui:define name="content">
+                <button type="button" class="btn btn-info btn-lg glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#nuevoDis"></button>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
                         <center><h1>#{indexBundle.disenios}</h1></center>
@@ -34,7 +36,9 @@
                                             <div class="caption">
                                                 <h4>#{dis.nombreD}</h4>
                                                 <p>#{dis.anotaciones}</p>
-                                                <h:commandButton value="#{editeliBundle.editar}" action="#{disenioManagedBean.actualizarDisenio(dis)}" class="btn btn-primary btn-sm"/>
+                                                <h:commandButton value="#{editeliBundle.editar}" pt:href="#" pt:data-toggle="modal" pt:data-target="#actualDis" class="btn btn-primary btn-sm">
+                                                    <f:ajax event="click" listener="#{disenioManagedBean.actualizarDisenio(dis)}" render="editarDis"/>
+                                                </h:commandButton>
                                                 <h:commandButton value="#{editeliBundle.eliminar}" actionListener="#{disenioManagedBean.eliminarDisenio(dis)}" class="btn btn-danger btn-sm"/>
 
                                             </div>
@@ -46,6 +50,92 @@
                         </div>
                     </section>
                 </h:form>
+                <div class="container">
+                    <div class="row">
+                        <div id="nuevoDis" class="modal fade in">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <h4 class="modal-title">#{editeliBundle.newDise}</h4>
+                                    </div>
+                                    <h:form enctype="multipart/form-data" pt:method="post" prependId="false" class="form" role="form">
+                                        <div class="modal-body" style="margin-top: -105px">
+                                            <div class="form-group">
+                                                <h:outputLabel value="#{editeliBundle.nombDis}:" for="nombreD" />
+                                                <h:inputText class="form-control" id="nombreD" value="#{disenioManagedBean.disenio.nombreD}" title="NombreDisenio" required="true" requiredMessage="The NombreDisenio field is required."/>
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputLabel value="#{editeliBundle.dis}:" for="nombreDisenio" />
+                                                <h:inputFile class="form-control" id="nombreDisenio" value="#{disenioManagedBean.file}" title="Disenio"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputLabel value="#{editeliBundle.anotaci}:" for="anotaciones" />
+                                                <h:inputTextarea class="form-control" rows="4" cols="30" id="anotaciones" value="#{disenioManagedBean.disenio.anotaciones}" title="Anotaciones" required="true" requiredMessage="The Anotaciones field is required."/>
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputLabel value="#{editeliBundle.estil}:" for="idEstiloDisenio" />
+                                                <h:selectOneMenu class="form-control" id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" required="true" requiredMessage="The IdEstiloDisenio field is required.">
+                                                    <!-- TODO: update below reference to list of available items-->
+                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <div class="btn-group">
+                                                <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                                <h:commandButton type="submit" value="#{editeliBundle.publi}" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg"></h:commandButton>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dalog -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div id="actualDis" class="modal fade in">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <h:form id="editarDis" pt:method="post" prependId="false" class="form" role="form">
+                                        <div class="modal-header">
+                                            <a  class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                            <h4 class="modal-title">#{editeliBundle.editar}</h4>
+                                        </div>
+
+                                        <div class="modal-body" style="margin-top: -105px">
+                                            <div class="form-group">
+                                                <h:outputLabel value="Nombre de Disenio:" for="nombreDaa" />
+                                                <h:inputText class="form-control" id="nombreDa" value="#{panelDisenioManagedBean.dis.nombreD}" title="NombreDisenio" required="true" requiredMessage="The NombreDisenio field is required."/>
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputLabel value="Anotaciones:" for="anotacionesa" />
+                                                <h:inputTextarea class="form-control" rows="4" cols="30" id="anotacionesa" value="#{panelDisenioManagedBean.dis.anotaciones}" title="Anotaciones" required="true" requiredMessage="The Anotaciones field is required."/>
+                                            </div>
+                                            <div class="form-group">
+                                                <h:outputLabel value="Estilo Disenio:" for="estiloDisenio" />
+                                                <h:selectOneMenu class="form-control" id="estiloDisenio" value="#{panelDisenioManagedBean.dis.idEstiloDisenio}" required="true" requiredMessage="The IdEstiloDisenio field is required.">
+                                                    <!-- TODO: update below reference to list of available items-->
+                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="modal-footer ">
+                                            <div class="btn-group">
+                                                <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                                <h:commandButton type="submit" value="Editar" action="#{panelDisenioManagedBean.editarDisenio()}" class="btn btn-primary btn-lg"></h:commandButton>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dalog -->
+                    </div><!-- /.modal -->
+                </div>
             </ui:define>
 
         </ui:composition>

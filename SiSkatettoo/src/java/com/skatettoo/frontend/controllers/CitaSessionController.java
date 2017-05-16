@@ -61,12 +61,11 @@ public class CitaSessionController implements Serializable {
         cit = (Cita) FacesUtils.getObjectMapSession("cita");
     }
 
-    public String responderCita() {
+    public void responderCita() {
         cfl.edit(cit);
         FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
         Email e = new Email("Cita aceptada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha respondido la cita que enviaste para el dia " + getCit().getFechaHora() + "\nPor el valor de: $" + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
         e.enviarEmail();
-        return "/pages/tatuador/ccitas.xhtml?faces-redirect=true";
     }
 
     public void aplazarCita() {
@@ -82,14 +81,12 @@ public class CitaSessionController implements Serializable {
 
     }
 
-    public String terminarCita() {
-        cfl.terminarCita(cit, usu.getUsuario());
-        cfl.edit(cit);
+    public void terminarCita(Cita c) {
+        cfl.terminarCita(c, usu.getUsuario());
+        cfl.edit(c);
         Email e = new Email("Cita terminada", "El tatto studdio " + getUs().getUsuario().getIdSucursal().getNombre() + "\nY Skatettoo, te agradecemos por utilizar nuestro sistema, esperamos que regreses pronto. ", getCit().getIdUsuario().getEmail());
         e.enviarEmail();
         FacesUtils.mensaje("La cita ha finalizado satisfactoriamente");
-        return "/pages/tatuador/ccitas.xhtml?faces-redirect=true";
-
     }
 
 }

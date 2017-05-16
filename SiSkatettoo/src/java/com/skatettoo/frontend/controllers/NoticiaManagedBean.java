@@ -92,17 +92,16 @@ public class NoticiaManagedBean implements Serializable {
     public void editarNoticia(){
         ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
+            noti.setIdUsuario(getLog().getUsuario());
             notifc.edit(noti);
             FacesUtils.mensaje(prop.getString("actualNoti"));
         } catch (Exception e) {
-            FacesUtils.mensaje(prop.getString("errorNoti"));
+            FacesUtils.mensaje(prop.getString("errorNoti") + e.getMessage());
         }
     }
     
-    public String actualizarNoticia(Noticia n){
-        noti = n;
-        FacesUtils.setObjectAcceso("noticia", n);
-        return "/pages/tatuador/gnoticia1.xhtml?faces-redirect=true";
+    public void actualizarNoticia(Noticia n){
+        setNoti(n);
     }
     
     public void verNoticia(Noticia nn){

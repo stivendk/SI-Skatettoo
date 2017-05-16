@@ -54,6 +54,10 @@ public class PanelDisenioManagedBean {
         setDis(d);
     }
     
+    public void removerDisenioss(){
+        FacesUtils.removerObjectAcceso("disenio");
+    }
+    
     public String editarDisenio() {
         dfl.edit(dis);
         FacesUtils.mensaje("Tu diseño se ha actualizado");
