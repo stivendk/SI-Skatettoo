@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Permiso;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
+import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -16,8 +17,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -28,6 +33,7 @@ import javax.inject.Inject;
 public class LoginManagedBean implements Serializable {
 
     private Usuario usuario;
+    private Part file;
     private List<Permiso> permis;
     private Sucursal suc;
     
@@ -40,6 +46,14 @@ public class LoginManagedBean implements Serializable {
 
     public void setSuc(Sucursal suc) {
         this.suc = suc;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
     
     public LoginManagedBean() {
@@ -71,10 +85,11 @@ public class LoginManagedBean implements Serializable {
 
     public void modificarUs(){
         try {
+            usuario.setFotoPerfil(UploadFIles.uploadFileU(file, GeneradorPss.generadorPassword()));
             usfc.edit(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Se a guardado satisfactoriamente!", "Se modifico"));
         } catch (Exception e) {
-            throw e;
+            FacesUtils.mensaje("Ocurrio un error" + " " + e.getMessage());
         }
     }
     
@@ -98,6 +113,39 @@ public class LoginManagedBean implements Serializable {
         return "/pages/admin/gsucursall?faces-redirect=true";
     }
     
+    public void validatePassword(ComponentSystemEvent event) {
+
+        FacesContext fc = FacesContext.getCurrentInstance();
+
+        UIComponent components = event.getComponent();
+
+        // get password
+        UIInput uiInputPassword = (UIInput) components.findComponent("password");
+        String password = uiInputPassword.getLocalValue() == null ? ""
+                : uiInputPassword.getLocalValue().toString();
+        String passwordId = uiInputPassword.getClientId();
+
+        // get confirm password
+        UIInput uiInputConfirmPassword = (UIInput) components.findComponent("confirmPassword");
+        String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
+                : uiInputConfirmPassword.getLocalValue().toString();
+
+        // Let required="true" do its job.
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+
+            FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            fc.addMessage(passwordId, msg);
+            fc.renderResponse();
+
+        }
+
+    }
+    
     public String cerrarSesion() {
         FacesUtils.removerObjectAcceso("usuario");
         FacesUtils.removerObjectAcceso("tatuador");
@@ -109,4 +157,5 @@ public class LoginManagedBean implements Serializable {
         usuario = null;
         return "/index.xhtml?faces-redirect=true";
     }
+    
 }

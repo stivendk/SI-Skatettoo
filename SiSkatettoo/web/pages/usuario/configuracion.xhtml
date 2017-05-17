@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui">
 
@@ -24,37 +25,46 @@
             <ui:define name="top2"></ui:define>
 
             <ui:define name="content">
-                <h:form>
-                    <h:messages showSummary="true"/>
+                <h:form >
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
-                                <legend><i class="glyphicon glyphicon-globe"></i> Editar info</legend>
-                                <h:form>
-                                    <form action="#" method="post" class="form" role="form">
-                                        <div class="row">
-                                            <div class="col-xs-6 col-md-6">
-                                                <label for="nombre">#{regClienteBundle.cliNombre}</label>
-                                                <h:outputText class="form-control" pt:placeholder="#{regClienteBundle.cliNombre}(s)" id="nombre" value="#{loginManagedBean.usuario.nombre}" title="#{regClienteBundle.cliNombre}" />
-                                            </div>
-                                            <div class="col-xs-6 col-md-6">
-                                                <label for="apellido">#{regClienteBundle.cliApellido}</label>
-                                                <h:outputText class="form-control" pt:placeholder="#{regClienteBundle.cliApellido}(s)" id="apellido" value="#{loginManagedBean.usuario.apellido}" title="#{regClienteBundle.cliApellido}" />
-                                            </div>
+                                <h:messages showSummary="true"/>
+                                <h:form enctype="multipart/form-data" pt:method="post" class="form" role="form">
+                                    <legend><i class="glyphicon glyphicon-globe"></i> #{regClienteBundle.editInfo}
+                                        <label for="fotoPerfil" class="btn-bs-file btn btn-primary glyphicon glyphicon-picture" style="margin-left: 200px">
+                                            <h:inputFile class="glyphicon glyphicon-picture" id="fotoPerfil" value="#{loginManagedBean.file}" title="#{regClienteBundle.subirFo}"/>
+                                        </label>
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-6">
+                                            <label for="nombre">#{regClienteBundle.cliNombre}</label>
+                                            <h:outputText class="form-control" pt:placeholder="#{regClienteBundle.cliNombre}(s)" id="nombre" value="#{loginManagedBean.usuario.nombre}" title="#{regClienteBundle.cliNombre}" />
                                         </div>
-                                        <label for="email">#{regClienteBundle.cliEmail}</label>
-                                        <h:outputText class="form-control" pt:placeholder="ejemplo@example.com" pt:type="email" id="email" value="#{loginManagedBean.usuario.email}" title="#{regClienteBundle.cliEmail}" />
-                                        <label for="telefono">#{regClienteBundle.cliCell}</label>
-                                        <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliCell}" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.telefono}" title="#{regClienteBundle.cliCell}" required="true" requiredMessage="#{regClienteBundle.msjCell}."/>
-                                        <label for="password">#{regClienteBundle.cliCla}</label>
-                                        <p:password class="form-control" id="password" match="password2" value="#{loginManagedBean.usuario.password}" title="#{regClienteBundle.msjCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}."/>
-                                        <label for="password">#{regClienteBundle.cliConCla}</label>
-                                        <p:password class="form-control" id="password2" title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}."/>
-                                        <br />
-                                        <br />
-                                        <p:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="#{regClienteBundle.guardar}" action="#{loginManagedBean.modificarUs()}"/>
-                                    </form>
+                                        <div class="col-xs-6 col-md-6">
+                                            <label for="apellido">#{regClienteBundle.cliApellido}</label>
+                                            <h:outputText class="form-control" pt:placeholder="#{regClienteBundle.cliApellido}(s)" id="apellido" value="#{loginManagedBean.usuario.apellido}" title="#{regClienteBundle.cliApellido}" />
+                                        </div>
+                                    </div>
+                                    <label for="email">#{regClienteBundle.cliEmail}</label>
+                                    <h:outputText class="form-control" pt:placeholder="ejemplo@example.com" pt:type="email" id="email" value="#{loginManagedBean.usuario.email}" title="#{regClienteBundle.cliEmail}" />
+                                    <br/>                                
+                                    <label for="telefono">#{regClienteBundle.cliCell}</label>
+                                    <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliCell}" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.telefono}" title="#{regClienteBundle.cliCell}" required="true" />
+                                    <br/>
+                                    <label for="password">#{regClienteBundle.cliCla}</label>
+                                    <h:inputSecret class="form-control" pt:placeholder="#{regClienteBundle.cliCla}" id="password"  value="#{loginManagedBean.usuario.password}" title="#{regClienteBundle.cliCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}">
+                                        <f:validator validatorId="passwordValidator" />
+                                        <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                                    </h:inputSecret>
+                                    <br/>
+                                    <label for="password2">#{regClienteBundle.cliConCla}</label>
+                                    <h:inputSecret class="form-control" binding="#{confirmPassword}" pt:placeholder="#{regClienteBundle.cliConCla}" id="confirmPassword"  title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}"/>
+                                    <br />
+                                    <br />
+                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="#{regClienteBundle.guardar}" action="#{loginManagedBean.modificarUs()}"/>
                                 </h:form>
+
                             </div>
                         </div>
                     </div>

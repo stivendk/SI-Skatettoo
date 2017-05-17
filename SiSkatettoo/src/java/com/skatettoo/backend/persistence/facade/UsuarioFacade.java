@@ -104,4 +104,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             return 1;
         }
     }
+
+    @Override
+    public Object enviarCorreo(Usuario us) {
+         Usuario usuario = null;
+        TypedQuery<Usuario> query;
+        try {
+            query = em.createQuery("FROM Usuario u WHERE u.email = ?1 ", Usuario.class);
+            query.setParameter(1, us.getEmail());
+            if (!query.getResultList().isEmpty()) {
+                usuario = query.getResultList().get(0);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return usuario;
+    }
 }

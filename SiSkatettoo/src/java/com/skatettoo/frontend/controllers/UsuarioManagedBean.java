@@ -9,8 +9,11 @@ import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.frontend.util.Managedbean;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
+import com.skatettoo.frontend.email.Email;
+import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -129,6 +132,18 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         return "";
     }
     
+    public String recuperarContraseña(){
+        try {
+            usuariofc.enviarCorreo(usuario);
+            Email e = new Email("Contraseña", "Tu contraseña es: " + " " + usuario.getPassword(), getUsuario().getEmail());
+            e.enviarEmail();
+            return "login.xhtml";
+        } catch (Exception e) {
+            FacesUtils.mensaje("Te la creiste we" + " " + e.getMessage());
+        }
+        return "";
+    }
+    
     public String iniciarSession() {
         Usuario u;
         try {
@@ -143,7 +158,6 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
         return null;
     }
 
-    
 
     @Override
     public Usuario getObject(Integer i) {

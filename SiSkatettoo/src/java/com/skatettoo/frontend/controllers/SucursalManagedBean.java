@@ -10,8 +10,10 @@ import com.skatettoo.backend.persistence.entities.Localidad;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
+import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,6 +21,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -32,6 +35,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
 
     private Usuario us;
     private Sucursal sucu;
+    private Part file;
     private Localidad loc;
     private String pin;
     private List<Sucursal> consulta;
@@ -74,6 +78,14 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         this.consulta = consulta;
     }
 
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
     public LoginManagedBean getUsu() {
         return usu;
     }
@@ -110,7 +122,8 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         sucufc.remove(sucu);
     }
 
-    public void editarSucursal() {
+    public void editarSucursal() throws NoSuchAlgorithmException {
+        sucu.setFotoSuc(UploadFIles.uploadFileS(file, GeneradorPss.generadorPassword()));
         sucufc.edit(sucu);
         FacesUtils.mensaje("Se ha actualizado con exito!");
     }

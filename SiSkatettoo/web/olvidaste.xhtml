@@ -20,31 +20,23 @@
                 <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="index.xhtml"/>
                 <article class="container-login center-block">
                     <section>
-                        <ul id="top-bar" class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#login-access">#{loginBundle.login}</a></li>
-                        </ul>
-                        <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
+                         <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
                             <div id="login-access" class="tab-pane fade active in">
-                                <h2><i ></i> Entrar</h2>
+                                <h2><i ></i> Has olvidado tu contraseña</h2>
+                                <p>Parece que has olvidado tu contraseña
+                                digita tu correo, y te enviaremos una nueva
+                                contraseña</p>
                                 <h:form pt:method="post" pt:accept-charset="utf-8" pt:autocomplete="off" role="form" class="form-horizontal" >
                                     <div class="form-group ">
                                         <h:outputLabel  class="sr-only"> Correo</h:outputLabel>
                                         <h:inputText pt:type="email" class="form-control"  id="login_value" 
                                                      pt:placeholder="Correo" tabindex="1" value="#{usuarioManagedBean.usuario.email}" />
                                     </div>
-                                    <div class="form-group ">
-                                        <h:outputLabel for="password" class="sr-only">Password</h:outputLabel>
-                                        <h:inputText pt:type="password" class="form-control"  id="password"
-                                                     pt:placeholder="Password" value="#{usuarioManagedBean.usuario.password}" tabindex="2" />
-                                    </div>
-
-                                    <br/>
-                                    <h:messages showSummary="true"/>
                                     <div class="form-group ">				
-                                        <h:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSessions()}" id="submit" tabindex="5" class="btn btn-lg btn-block btn-danger"/>
+                                        <h:commandButton type="submit" value="Enviar" action="#{usuarioManagedBean.recuperarContraseña()}" id="submit" tabindex="5" class="btn btn-lg btn-block btn-danger"/>
                                     </div>
+                                    <h:messages showSummary="true"/>
                                 </h:form>
-                                <h:link value="¿Olvidaste tu contraseña?" outcome="olvidaste.xhtml"/>
                             </div>
                         </div>
                     </section>

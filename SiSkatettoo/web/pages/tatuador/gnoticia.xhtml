@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-info btn-lg glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#myModal"></button>
                 <div style="position:relative;">
                     <div class="seccion">
-                        <ui:repeat value="#{noticiaManagedBean.notiUsuario()}" var="noticia">
+                        <ui:repeat value="#{noticiaController.notiUsuario()}" var="noticia">
                             <h:form>
                                 <div class="panel-body" id="cuidados">
                                     <center><h1 class="parrafo">#{noticia.titulo}</h1></center>
@@ -37,9 +37,9 @@
                                     <p class="parrafo">#{noticia.descripcion}</p>
                                     <hr/>
                                     <td><h:commandButton pt:href="#" pt:data-toggle="modal" pt:data-target="#actualNoti" class="btn btn-primary btn-xs"  value="#{editeliBundle.editar}"><span class="glyphicon glyphicon-pencil"></span>
-                                            <f:ajax event="click" listener="#{noticiaManagedBean.actualizarNoticia(noticia)}" render="editNoti"/>
+                                            <f:ajax event="click" listener="#{noticiaController.actualizarNoticia(noticia)}" render="editNoti"/>
                                         </h:commandButton></td>
-                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaManagedBean.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
+                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaController.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
                                 </div>
                                 <div class="bgimg-2">
                                     <div class="caption">
@@ -64,20 +64,20 @@
 
                                                 <div class="form-group">
                                                     <h:outputLabel value="Titulo:" for="titulo" />
-                                                    <h:inputText id="titulo" value="#{noticiaSessionController.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                    <h:inputText id="titulo" value="#{noticiaController.nt.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
                                                 </div>
                                                 <div class="form-group">
                                                     <h:outputLabel value="Imagen:" for="imagen" />
-                                                    <h:inputFile id="imagen" value="#{noticiaSessionController.file}" title="Imagen" />
+                                                    <h:inputFile id="imagen" value="#{noticiaController.file}" title="Imagen" />
                                                 </div>
                                                 <div class="form-group">
                                                     <h:outputLabel value="Descripcion:" for="descripcion" />
-                                                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaSessionController.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaController.nt.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
                                                 </div>
                                             </div>
                                         </h:panelGrid>
                                         <div class="modal-footer">
-                                            <h:commandButton type="submit" value="Publicar" action="#{noticiaSessionController.publicarNoticia()}" class="btn btn-success" />
+                                            <h:commandButton type="submit" value="Publicar" action="#{noticiaController.publicarNoticia()}" class="btn btn-success" />
                                         </div>
                                     </h:form>
                                 </div>
@@ -93,26 +93,26 @@
                                     <h:form id="editNoti" pt:method="post" prependId="false" class="form" role="form">
                                         <div class="modal-header" style="margin-top: -100px">
                                             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-                                            <center><h4 class="modal-title custom_align" id="Heading">#{noticiaManagedBean.noti.titulo}</h4></center>
+                                            <center><h4 class="modal-title custom_align" id="Heading">#{noticiaSessionController.nt.titulo}</h4></center>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <div class="col-sm-10">
                                                     <h:outputLabel value="Titulo:" for="titulo1" />
-                                                    <h:inputText class="form-control" id="titulo1" value="#{noticiaManagedBean.noti.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                    <h:inputText class="form-control" id="titulo1" value="#{noticiaSessionController.nt.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
                                                     <h:outputLabel value="Descripcion:" for="descripcion1" />
-                                                    <h:inputTextarea class="form-control" rows="4" cols="30" id="descripcion1" value="#{noticiaManagedBean.noti.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                    <h:inputTextarea class="form-control" rows="4" cols="30" id="descripcion1" value="#{noticiaSessionController.nt.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer ">
                                             <div class="btn-group" style="margin-top: 10px">
                                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
-                                                <h:commandButton type="submit" value="Actualizar" actionListener="#{noticiaManagedBean.editarNoticia()}" class="btn btn-primary btn-lg"/>
+                                                <h:commandButton type="submit" value="Actualizar" actionListener="#{noticiaSessionController.editarNoticia()}" class="btn btn-primary btn-lg"/>
                                             </div>
                                         </div>
                                     </h:form>

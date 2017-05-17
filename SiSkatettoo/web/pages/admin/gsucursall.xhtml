@@ -27,7 +27,11 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
                                 <h:form>
-                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal</legend>
+                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal
+                                        <label for="fotoSuc" class="btn-bs-file btn btn-primary glyphicon glyphicon-picture" style="margin-left: 151px">
+                                            <h:inputFile class="glyphicon glyphicon-picture" id="fotoSuc" value="#{loginManagedBean.file}" title="#{regClienteBundle.cliCell}"/>
+                                        </label>
+                                    </legend>
                                     <div class="row">
                                         <div class="col-xs-6 col-md-6">
                                             <label for="nombre">Nombre</label>

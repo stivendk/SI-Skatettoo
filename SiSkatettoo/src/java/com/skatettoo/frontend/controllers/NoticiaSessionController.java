@@ -7,79 +7,46 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Noticia;
 import com.skatettoo.backend.persistence.facade.NoticiaFacadeLocal;
-import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.http.Part;
 
 /**
  *
- * @author APRENDIZ
+ * @author StivenDavid
  */
 @Named(value = "noticiaSessionController")
 @RequestScoped
 public class NoticiaSessionController {
 
-    private Noticia noti;
-    private Part file;
-    @EJB
-    private NoticiaFacadeLocal notifc;
-    @Inject
-    LoginManagedBean log;
+    private Noticia nt;
+    @EJB 
+    private NoticiaFacadeLocal nc;
 
-    public LoginManagedBean getLog() {
-        return log;
+    public Noticia getNt() {
+        return nt;
     }
 
-    public Noticia getNoti() {
-        return noti;
+    public void setNt(Noticia nt) {
+        this.nt = nt;
     }
-
-    public void setNoti(Noticia noti) {
-        this.noti = noti;
-    }
-
-    public Part getFile() {
-        return file;
-    }
-
-    public void setFile(Part file) {
-        this.file = file;
-    }
-
+    
     public NoticiaSessionController() {
     }
-
+    
     @PostConstruct
-    public void init() {
-        noti = (Noticia) FacesUtils.getObjectMapSession("noticia");
-        noti = new Noticia();
+    public void init(){
+        nt = (Noticia) FacesUtils.getObjectMapSession("noticia");
     }
-
-    public String publicarNoticia() {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
+    
+    public void editarNoticia(){
         try {
-            noti.setIdUsuario(getLog().getUsuario());
-            noti.setImgn(UploadFIles.uploadFileN(file, String.valueOf(noti.getTitulo())));
-            notifc.create(noti);
-            FacesUtils.mensaje(prop.getString("succesNoti"));
-            return "/pages/tatuador/gnoticia.xhtml?faces-redirect=true";
+            nc.edit(nt);
+            FacesUtils.mensaje("Se ha actualizado con Exito");
         } catch (Exception e) {
-            FacesUtils.mensaje("Perra");
-        }
-        return "";
-    }
-
-    public void editarNoticia() {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
-        try {
-            notifc.edit(noti);
-            FacesUtils.mensaje(prop.getString("actualNoti"));
-        } catch (Exception e) {
-            FacesUtils.mensaje(prop.getString("errorNoti") + e.getMessage());
+            FacesUtils.mensaje("Ocurrio un error" + " " + e.getMessage());
         }
     }
 }

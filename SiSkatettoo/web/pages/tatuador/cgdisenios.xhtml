@@ -64,19 +64,19 @@
                                         <div class="modal-body" style="margin-top: -105px">
                                             <div class="form-group">
                                                 <h:outputLabel value="#{editeliBundle.nombDis}:" for="nombreD" />
-                                                <h:inputText class="form-control" id="nombreD" value="#{disenioManagedBean.disenio.nombreD}" title="NombreDisenio" required="true" requiredMessage="The NombreDisenio field is required."/>
+                                                <h:inputText class="form-control" id="nombreD" value="#{disenioManagedBean.disenio.nombreD}" title="#{editeliBundle.nombDis}" required="true" requiredMessage="#{editeliBundle.disNmsj}"/>
                                             </div>
                                             <div class="form-group">
                                                 <h:outputLabel value="#{editeliBundle.dis}:" for="nombreDisenio" />
-                                                <h:inputFile class="form-control" id="nombreDisenio" value="#{disenioManagedBean.file}" title="Disenio"/>
+                                                <h:inputFile class="form-control" id="nombreDisenio" value="#{disenioManagedBean.file}" title="#{editeliBundle.subDis}"/>
                                             </div>
                                             <div class="form-group">
                                                 <h:outputLabel value="#{editeliBundle.anotaci}:" for="anotaciones" />
-                                                <h:inputTextarea class="form-control" rows="4" cols="30" id="anotaciones" value="#{disenioManagedBean.disenio.anotaciones}" title="Anotaciones" required="true" requiredMessage="The Anotaciones field is required."/>
+                                                <h:inputTextarea class="form-control" rows="4" cols="30" id="anotaciones" value="#{disenioManagedBean.disenio.anotaciones}" title="#{editeliBundle.anotaci}" />
                                             </div>
                                             <div class="form-group">
                                                 <h:outputLabel value="#{editeliBundle.estil}:" for="idEstiloDisenio" />
-                                                <h:selectOneMenu class="form-control" id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" required="true" requiredMessage="The IdEstiloDisenio field is required.">
+                                                <h:selectOneMenu class="form-control" id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" required="true" requiredMessage="#{editeliBundle.disEmsj}">
                                                     <!-- TODO: update below reference to list of available items-->
                                                     <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
                                                 </h:selectOneMenu>

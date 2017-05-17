@@ -48,8 +48,8 @@
                             </ul>
                             <h:form>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><h:commandLink value="#{loginManagedBean.usuario.nombre} #{loginManagedBean.usuario.apellido}" action="#{usuarioManagedBean.actualizarUsuario()}"/></li>
-                                    <li><h:commandLink value="Cerrar Sesión" action="#{loginManagedBean.cerrarSesion()}"/></li>
+                                    <li><h:commandLink value="#{loginManagedBean.usuario.nombre} #{loginManagedBean.usuario.apellido}"  action="#{usuarioManagedBean.actualizarUsuario()}"/></li>
+                                    <li><h:commandLink value="Cerrar Sesión"  action="#{loginManagedBean.cerrarSesion()}"/></li>
                                 </ul>
                             </h:form>
                         </div>
@@ -60,7 +60,7 @@
 
         <div id="content" class="center_content">
             <ui:insert name="content">
-                
+
             </ui:insert>
         </div>
     </h:body>

@@ -23,43 +23,50 @@
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <h:messages showSummary="true" />
-                    <div class="contenido-izquierda">
-                        <div class="contenido-sucursal-header">
-                            <img alt="Mert Salih Kaplan" src="../../#{loginManagedBean.usuario.idSucursal.fotoSuc}" class="avatar-sucursal"/>
-                        </div>
-                        <div class="contenido-sucursal listatatuadoressucursal">
-                            <h:form>
-                                <h:commandButton class="left" value="Editar" action="#{loginManagedBean.actualizarSucursal()}"/>
-                            </h:form>
-                            <h:form>
-                                <div class="info-sucursal">
-                                    <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
-                                    <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
-                                    <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
-                                    <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
-                                </div>
-                            </h:form>
-                        </div>
+                <div class="contenido-izquierda">
+                    <div class="contenido-sucursal-header">
+                        <img alt="Mert Salih Kaplan" src="../../#{loginManagedBean.usuario.idSucursal.fotoSuc}" class="avatar-sucursal"/>
                     </div>
-                <script>
-                    $('.tatuador-link').on('click', function () {
-                        $("html, body").animate({scrollTop: $('#listadisenios').offset().top}, 700);
-                    });
-                </script>
-                <div class="modal fade pop-up-2" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h3 class="modal-title text-center" id="lineModalLabel">#{item.nombre} #{item.apellido}</h3>
-                            </div>
-                            <div class="modal-body">
+                    <div class="contenido-sucursal listatatuadoressucursal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
 
-
+                                </div>
+                                <div class="col-md-4">
+                                    <h:form>
+                                        <div class="info-sucursal">
+                                            <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
+                                            <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
+                                            <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
+                                            <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
+                                        </div>
+                                    </h:form>
+                                </div>
+                                <div class="col-md-4">
+                                    <h:form>
+                                        <a jsf:action="#{loginManagedBean.actualizarSucursal()}" class="glyphicon glyphicon-pencil editarSuc"/>
+                                    </h:form>
+                                </div>
                             </div>
+                        </div>
+                        <div class="sucursal-tattooist">
+                            <h:form>
+                            <h2>Tatuadores</h2>
+                                <ul id="display-inline-block-example">
+                                    <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
+                                        <li>
+                                            <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
+                                            <span>#{item.nombre} #{item.apellido}</span>
+                                            <h:commandButton value="Ver trabajo" action="#{sucursalSessionController.tatuadorA(item)}"/>
+                                        </li>
+                                    </ui:repeat>
+                                </ul>
+                            </h:form>
                         </div>
                     </div>
                 </div>
+
             </ui:define>
 
         </ui:composition>

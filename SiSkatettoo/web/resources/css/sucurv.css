@@ -189,3 +189,13 @@ body{text-align: center;font-family:Verdana;}
 }
   margin-left: 10px; /* This value prevents fancyControl image from touching Title bar. */
 }
+
+a.editarSuc{
+    text-decoration: none;
+    font-size: 30px;
+    color: #000;
+}
+a.editarSuc:hover{
+    color: #f00;
+    text-decoration: none;
+}

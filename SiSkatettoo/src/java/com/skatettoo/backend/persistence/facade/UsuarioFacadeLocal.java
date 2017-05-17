@@ -38,4 +38,6 @@ public interface UsuarioFacadeLocal {
     String registrarCl(Usuario us, Rol r);
     
     Object autenticar(Usuario usu);
+    
+    Object enviarCorreo(Usuario usu);
 }

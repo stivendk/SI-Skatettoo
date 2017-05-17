@@ -23,7 +23,7 @@
                     <div class="">
                         <div class="container">
                             <div class="row">
-                                <ui:repeat value="#{noticiaManagedBean.listarNoticia()}" var="item">
+                                <ui:repeat value="#{noticiaController.listarNoticias()}" var="item">
                                     <h:form>
                                         <div class="col-sm-4 col-md-4">
                                             <div class="post">
@@ -34,7 +34,7 @@
                                                 <div class="content">
                                                     <div class="author">
                                                         #{inicioBundle.por} <b>#{item.idUsuario.nombre} #{item.idUsuario.apellido}</b> | <h:commandLink pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="#{inicioBundle.ver}">
-                                                            <f:ajax event="click" listener="#{noticiaManagedBean.verNoticia(item)}" render="noticias"/> 
+                                                            <f:ajax event="click" listener="#{noticiaController.verNoticia(item)}" render="noticias"/> 
                                                         </h:commandLink> 
                                                     </div>
                                                 </div>
@@ -54,13 +54,13 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">×</button>
-                                    <h4 class="modal-title">#{noticiaManagedBean.noti.titulo}</h4>
+                                    <h4 class="modal-title">#{noticiaController.nt.titulo}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="../../#{noticiaManagedBean.noti.imgn}" class="img-responsive" width="460px" height="250px"/>
-                                    <p>#{noticiaManagedBean.noti.descripcion}</p>
+                                    <img src="../../#{noticiaController.nt.imgn}" class="img-responsive" width="460px" height="250px"/>
+                                    <p>#{noticiaController.nt.descripcion}</p>
                                     <br/>
-                                    <b>#{noticiaManagedBean.noti.idUsuario.nombre} #{noticiaManagedBean.noti.idUsuario.apellido}</b>
+                                    <b>#{noticiaController.nt.idUsuario.nombre} #{noticiaController.nt.idUsuario.apellido}</b>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">#{inicioBundle.cerrar}</button>
