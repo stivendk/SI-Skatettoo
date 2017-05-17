@@ -39,6 +39,15 @@ public class SessionFilter implements Filter {
         } else {
             if(req.getSession().getAttribute("usuario")==null){
                 res.sendRedirect(req.getContextPath() + "/index.xhtml");
+            }else{
+                Usuario u = (Usuario) req.getSession().getAtttribute("usuario");
+                if(s.contains("disenios") && !u.getIdRol().getIdRol() == 1){
+                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
+                } else if(s.contains("tatuador") && !u.getIdRol().getIdRol() == 2){
+                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
+                } else if(s.contains("admin") && !u.getIdRol().getIdRol() == 3){
+                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
+                }
             }
             chain.doFilter(request, response);
         }
