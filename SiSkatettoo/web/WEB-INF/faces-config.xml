@@ -45,5 +45,13 @@
             <base-name>com.skatettoo.traducciones.editeli</base-name>
             <var>editeliBundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.tatuador</base-name>
+            <var>tatuadorBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.cliente</base-name>
+            <var>clienteBundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

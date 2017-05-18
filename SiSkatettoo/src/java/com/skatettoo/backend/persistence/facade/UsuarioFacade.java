@@ -8,6 +8,8 @@ package com.skatettoo.backend.persistence.facade;
 import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.controllers.FacesUtils;
+import com.skatettoo.frontend.email.Email;
+import com.skatettoo.frontend.util.GeneradorPss;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,7 +47,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
                 usuario = query.getResultList().get(0);
                 if (usuario.getIdRol().getIdRol() == 2) {
                     if (true) {
-                        
+
                     }
                 }
             }
@@ -87,16 +89,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
                     if (u.getIdRol().getIdRol() == 2) {
                         if (u.getEstadoUsuario() != 4) {
                             return u;
-                        }else{
+                        } else {
                             return 4;
                         }
-                    }else{
+                    } else {
                         return u;
                     }
-                }else{
+                } else {
                     return 3;
                 }
-            }else{
+            } else {
                 return 2;
             }
         } catch (Exception e) {
@@ -107,17 +109,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     @Override
     public Object enviarCorreo(Usuario us) {
-         Usuario usuario = null;
+        Usuario usuario = null;
         TypedQuery<Usuario> query;
         try {
             query = em.createQuery("FROM Usuario u WHERE u.email = ?1 ", Usuario.class);
             query.setParameter(1, us.getEmail());
             if (!query.getResultList().isEmpty()) {
                 usuario = query.getResultList().get(0);
+                usuario.setPassword(GeneradorPss.generadorPassword());
+                getEntityManager().merge(usuario);
+                Email e = new Email("Contraseña", "Tu contraseña es: " + " " + usuario.getPassword(), usuario.getEmail());
+                e.enviarEmail();
             }
         } catch (Exception e) {
-            throw e;
+            
         }
-        return usuario;
+        return "";
     }
 }

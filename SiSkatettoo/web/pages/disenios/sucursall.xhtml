@@ -26,9 +26,9 @@
             <ui:define name="content">
                 <h:form>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Localidad </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{clienteBundle.locali} </a>
                         <ul class="dropdown-menu">
-                                <li><h:link outcome="/pages/disenios/sucursales.xhtml?faces-redirect=true" value="Todos"/></li>
+                            <li><h:link outcome="/pages/disenios/sucursales.xhtml?faces-redirect=true" value="#{clienteBundle.tod}"/></li>
                                 <li class="divider"></li>
                             <ui:repeat value="#{localidadManagedBean.listarLocalidad()}" var="loc">
                                 <li><h:commandLink action="#{localidadManagedBean.selectLocalidad(loc)}" value="#{loc.localidad}"></h:commandLink></li>
@@ -54,7 +54,7 @@
                                                         <p>#{sucur.descripcion}<span>...</span></p>
                                                     </div>
                                                     <div class="mascara-enlace-blog-home">
-                                                        <span>Ver </span>
+                                                        <span>#{clienteBundle.ver} </span>
                                                     </div> 
                                                 </h:commandLink>
                                             </div>

@@ -135,8 +135,6 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     public String recuperarContraseña(){
         try {
             usuariofc.enviarCorreo(usuario);
-            Email e = new Email("Contraseña", "Tu contraseña es: " + " " + usuario.getPassword(), getUsuario().getEmail());
-            e.enviarEmail();
             return "login.xhtml";
         } catch (Exception e) {
             FacesUtils.mensaje("Te la creiste we" + " " + e.getMessage());

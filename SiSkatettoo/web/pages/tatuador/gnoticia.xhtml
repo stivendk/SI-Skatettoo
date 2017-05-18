@@ -14,7 +14,7 @@
 
 
             <ui:define name="titulo">
-                Noticias | Skatettoo
+                #{tatuadorBundle.noti} | Skatettoo
             </ui:define>
 
             <ui:define name="content">
@@ -56,28 +56,28 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">×</button>
-                                        <h4 class="modal-title">Publicar Noticia</h4>
+                                        <h4 class="modal-title">#{tatuadorBundle.publiN}</h4>
                                     </div>
                                     <h:form enctype="multipart/form-data" pt:method="post" prependId="false" class="form" role="form">
                                         <h:panelGrid columns="3">
                                             <div class="modal-body">
 
                                                 <div class="form-group">
-                                                    <h:outputLabel value="Titulo:" for="titulo" />
-                                                    <h:inputText id="titulo" value="#{noticiaController.nt.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                    <h:outputLabel value="#{tatuadorBundle.nTitulo}:" for="titulo" />
+                                                    <h:inputText id="titulo" value="#{noticiaController.nt.titulo}" title="#{tatuadorBundle.nTitulo}" required="true" requiredMessage="#{tatuadorBundle.nTitmsj}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <h:outputLabel value="Imagen:" for="imagen" />
-                                                    <h:inputFile id="imagen" value="#{noticiaController.file}" title="Imagen" />
+                                                    <h:outputLabel value="#{tatuadorBundle.nIma}:" for="imagen" />
+                                                    <h:inputFile id="imagen" value="#{noticiaController.file}" title="#{tatuadorBundle.nIma}" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <h:outputLabel value="Descripcion:" for="descripcion" />
-                                                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaController.nt.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                    <h:outputLabel value="#{tatuadorBundle.nDes}:" for="descripcion" />
+                                                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{noticiaController.nt.descripcion}" title="#{tatuadorBundle.nDes}" required="true" requiredMessage="#{tatuadorBundle.nDesmsj}"/>
                                                 </div>
                                             </div>
                                         </h:panelGrid>
                                         <div class="modal-footer">
-                                            <h:commandButton type="submit" value="Publicar" action="#{noticiaController.publicarNoticia()}" class="btn btn-success" />
+                                            <h:commandButton type="submit" value="#{tatuadorBundle.nPub}" action="#{noticiaController.publicarNoticia()}" class="btn btn-success" />
                                         </div>
                                     </h:form>
                                 </div>
@@ -98,21 +98,21 @@
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <h:outputLabel value="Titulo:" for="titulo1" />
-                                                    <h:inputText class="form-control" id="titulo1" value="#{noticiaSessionController.nt.titulo}" title="Titulo" required="true" requiredMessage="The Titulo field is required."/>
+                                                    <h:outputLabel value="#{tatuadorBundle.nTitulo}:" for="titulo1" />
+                                                    <h:inputText class="form-control" id="titulo1" value="#{noticiaSessionController.nt.titulo}" title="#{tatuadorBundle.nTitulo}" required="true" requiredMessage="#{tatuadorBundle.nTitmsj}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <h:outputLabel value="Descripcion:" for="descripcion1" />
-                                                    <h:inputTextarea class="form-control" rows="4" cols="30" id="descripcion1" value="#{noticiaSessionController.nt.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                    <h:outputLabel value="#{tatuadorBundle.nDes}:" for="descripcion1" />
+                                                    <h:inputTextarea class="form-control" rows="4" cols="30" id="descripcion1" value="#{noticiaSessionController.nt.descripcion}" title="#{tatuadorBundle.nDes}" required="true" requiredMessage="#{tatuadorBundle.nDesmsj}"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer ">
                                             <div class="btn-group" style="margin-top: 10px">
                                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
-                                                <h:commandButton type="submit" value="Actualizar" actionListener="#{noticiaSessionController.editarNoticia()}" class="btn btn-primary btn-lg"/>
+                                                <h:commandButton type="submit" value="#{tatuadorBundle.nAct}" actionListener="#{noticiaSessionController.editarNoticia()}" class="btn btn-primary btn-lg"/>
                                             </div>
                                         </div>
                                     </h:form>

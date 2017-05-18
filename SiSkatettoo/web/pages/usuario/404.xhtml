@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>404</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="../../img/st1.ico" type="image/x-icon"/>
+        <h:outputStylesheet name="css/404.css"/>
+        <h:outputScript name="js/404.js"/>
+    </head>
+    <body style="position: fixed; background-color: #000">
+        <h:messages showSummary="true" style="display: none"/>
+        <center><h1 style=" color: #fff;">ERROR 404</h1></center>
+        <center><h2 style=" color: #fff;">#{indexBundle.pagn}</h2></center>
+        <center><h:link style=" color: #fff;" outcome="inicio.xhtml"><h3>#{indexBundle.reg}</h3></h:link></center>
+        <div class="fof">
+            <canvas></canvas>
+        </div>
+    </body>
+</html>

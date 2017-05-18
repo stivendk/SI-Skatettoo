@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
     <body>
@@ -25,7 +26,7 @@
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <h:form>
-                    <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="/pages/admin/gsucursal.xhtml"/>
+                    <h:commandLink class="glyphicon glyphicon-arrow-left regresar" action="#{tatuadorSessionController.sucursal()}"/>
                 </h:form>
                 <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
                     <div class="row panel">
@@ -38,7 +39,7 @@
                                 <h1>#{tatuadorSessionController.ta.nombre} #{tatuadorSessionController.ta.apellido}</h1>
                                 <h4>cell: #{tatuadorSessionController.ta.telefono}</h4>
                                 <h:form>
-                                    <span>Tatuador de <h:commandLink value="#{tatuadorSessionController.ta.idSucursal.nombre}" title="#{tatuadorSessionController.ta.idSucursal.nombre}" action="#{tatuadorSessionController.sucursal()}"/></span>
+                                    <span>#{tatuadorBundle.tatuad} <h:commandLink value="#{tatuadorSessionController.ta.idSucursal.nombre}" title="#{tatuadorSessionController.ta.idSucursal.nombre}" action="#{tatuadorSessionController.sucursal()}"/></span>
                                 </h:form>
                             </div>
                         </div>
@@ -47,18 +48,19 @@
                 </div>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>Diseños: #{tatuadorSessionController.disenioTatuador().size()}</h1></center>
+                        <center><h1>#{tatuadorBundle.dise} #{tatuadorSessionController.disenioTatuador().size()}</h1></center>
                         <div class="container">
                             <div class="row">
                                 <ui:repeat value="#{tatuadorSessionController.disenioTatuador()}" var="dis">
                                     <div class="col-sm-4">
                                         <div class="thumbnail">
-                                            <a jsf:action="#{disenioManagedBean.verDisenio(dis)}" class="">
+                                            <h:commandLink pt:data-toggle="modal" pt:data-target="#lightbox">
+                                                <f:ajax event="click" listener="#{disenioManagedBean.verDisenio2(dis)}" render="disenio"/>
                                                 <div class="caption">
                                                     <p class="">#{dis.anotaciones}</p>
                                                 </div>
                                                 <img src="../../#{dis.nombreDisenio}" alt="#{dis.nombreD}" class=""/>
-                                            </a>
+                                            </h:commandLink>
                                         </div>
                                     </div>
                                 </ui:repeat>
@@ -66,6 +68,20 @@
                         </div>
                     </section>
                 </h:form>
+                <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <h:form id="disenio">
+                        <div class="modal-dialog">
+                            <button type="button" class="close" style="color:#000;z-index: 10000;" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="modal-content">
+                                <center><h1>#{panelDisenioManagedBean.dis.nombreD}</h1></center>
+                                <div class="modal-body">
+                                    <img class="img-responsive" src="../../#{panelDisenioManagedBean.dis.nombreDisenio}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+                <script src="../../resources/js/lightbox.js"></script>
             </ui:define>
 
         </ui:composition>

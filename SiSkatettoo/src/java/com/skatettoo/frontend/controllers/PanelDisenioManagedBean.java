@@ -73,6 +73,6 @@ public class PanelDisenioManagedBean {
     public String autor(Usuario us){
         setTa(dis.getIdUsuario());
         FacesUtils.setObjectAcceso("tatuador", ta);
-        return "/pages/tatuador/perfil.xhtml?faces-redirect=true";
+        return "/pages/disenios/perfil.xhtml?faces-redirect=true";
     }
 }

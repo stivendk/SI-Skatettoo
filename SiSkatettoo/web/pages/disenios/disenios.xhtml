@@ -19,15 +19,15 @@
             </ui:define>
 
             <ui:define name="titulo">
-                Diseños | Skatettoo
+                #{indexBundle.disenios} | Skatettoo
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <h:form>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estilos </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{clienteBundle.estil} </a>
                         <ul class="dropdown-menu">
-                                <li><h:link outcome="/pages/disenios/disenios.xhtml?faces-redirect=true" value="Todos"/></li>
+                            <li><h:link outcome="/pages/disenios/disenios.xhtml?faces-redirect=true" value="#{clienteBundle.tod}"/></li>
                                 <li class="divider"></li>
                             <ui:repeat value="#{estiloManagedBean.listarEstilo()}" var="es">
                                 <li><h:commandLink action="#{estiloManagedBean.selecEstiloD(es)}" value="#{es.nombreEstilo}"></h:commandLink></li>
@@ -38,7 +38,7 @@
                 </h:form>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>Diseños</h1></center>
+                        <center><h1>#{indexBundle.disenios}</h1></center>
                         <div class="container">
                             <div class="row">
                                 <ui:repeat value="#{disenioManagedBean.listarDisenio()}" var="dis">

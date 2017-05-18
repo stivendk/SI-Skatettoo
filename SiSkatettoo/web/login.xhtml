@@ -9,7 +9,7 @@
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <link rel="icon" href="img/st1.ico" type="image/x-icon"/>
-        <title>Iniciar Sesion</title>
+        <title>#{loginBundle.login}</title>
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <link rel="stylesheet" type="text/css" href="resources/css/login.css"></link>
         <script src="resources/js/jquery-2.2.3.min.js"></script>
@@ -28,23 +28,23 @@
                                 <h2><i ></i> Entrar</h2>
                                 <h:form pt:method="post" pt:accept-charset="utf-8" pt:autocomplete="off" role="form" class="form-horizontal" >
                                     <div class="form-group ">
-                                        <h:outputLabel  class="sr-only"> Correo</h:outputLabel>
+                                        <h:outputLabel  class="sr-only">#{loginBundle.correo}</h:outputLabel>
                                         <h:inputText pt:type="email" class="form-control"  id="login_value" 
-                                                     pt:placeholder="Correo" tabindex="1" value="#{usuarioManagedBean.usuario.email}" />
+                                                     pt:placeholder="#{loginBundle.correo}" tabindex="1" value="#{usuarioManagedBean.usuario.email}" />
                                     </div>
                                     <div class="form-group ">
-                                        <h:outputLabel for="password" class="sr-only">Password</h:outputLabel>
+                                        <h:outputLabel for="password" class="sr-only">#{loginBundle.password}</h:outputLabel>
                                         <h:inputText pt:type="password" class="form-control"  id="password"
-                                                     pt:placeholder="Password" value="#{usuarioManagedBean.usuario.password}" tabindex="2" />
+                                                     pt:placeholder="#{loginBundle.password}" value="#{usuarioManagedBean.usuario.password}" tabindex="2" />
                                     </div>
 
                                     <br/>
                                     <h:messages showSummary="true"/>
                                     <div class="form-group ">				
-                                        <h:commandButton type="submit" value="Entrar" action="#{usuarioManagedBean.iniciarSessions()}" id="submit" tabindex="5" class="btn btn-lg btn-block btn-danger"/>
+                                        <h:commandButton type="submit" value="#{loginBundle.entrar}" action="#{usuarioManagedBean.iniciarSessions()}" id="submit" tabindex="5" class="btn btn-lg btn-block btn-danger"/>
                                     </div>
                                 </h:form>
-                                <h:link value="¿Olvidaste tu contraseña?" outcome="olvidaste.xhtml"/>
+                                <h:link value="#{loginBundle.olds}" outcome="olvidaste.xhtml"/>
                             </div>
                         </div>
                     </section>

@@ -58,7 +58,7 @@
                                         <li>
                                             <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
                                             <span>#{item.nombre} #{item.apellido}</span>
-                                            <h:commandButton value="Ver trabajo" action="#{sucursalSessionController.tatuadorA(item)}"/>
+                                            <h:commandButton class="btn btn-dark" value="Ver trabajo" action="#{sucursalSessionController.tatuadorA(item)}"/>
                                         </li>
                                     </ui:repeat>
                                 </ul>

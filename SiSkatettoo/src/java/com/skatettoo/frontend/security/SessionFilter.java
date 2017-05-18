@@ -5,6 +5,7 @@
  */
 package com.skatettoo.frontend.security;
 
+import com.skatettoo.backend.persistence.entities.Usuario;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -40,13 +41,13 @@ public class SessionFilter implements Filter {
             if(req.getSession().getAttribute("usuario")==null){
                 res.sendRedirect(req.getContextPath() + "/index.xhtml");
             }else{
-                Usuario u = (Usuario) req.getSession().getAtttribute("usuario");
-                if(s.contains("disenios") && !u.getIdRol().getIdRol() == 1){
-                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
-                } else if(s.contains("tatuador") && !u.getIdRol().getIdRol() == 2){
-                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
-                } else if(s.contains("admin") && !u.getIdRol().getIdRol() == 3){
-                    res.sendRedirect(req.getContextPath() + "/index.xhtml");
+                Usuario u = (Usuario) req.getSession().getAttribute("usuario");
+                if(s.contains("disenios") && u.getIdRol().getIdRol() != 1){
+                    res.sendRedirect(req.getContextPath() + "/pages/usuario/404.xhtml");
+                } else if(s.contains("tatuador") && u.getIdRol().getIdRol() != 2){
+                    res.sendRedirect(req.getContextPath() + "/pages/usuario/404.xhtml");
+                } else if(s.contains("admin") && u.getIdRol().getIdRol() != 3){
+                    res.sendRedirect(req.getContextPath() + "/pages/usuario/404.xhtml");
                 }
             }
             chain.doFilter(request, response);

@@ -80,13 +80,19 @@ public class SucursalSessionController implements Serializable{
     public String tatuadorS(Usuario ta) {
         setTa(ta);
         FacesUtils.setObjectAcceso("tatuador", ta);
-        return "/pages/disenios/tatuador.xhtml?faces-redirect=true";
+        return "/pages/tatuador/tatuador.xhtml?faces-redirect=true";
+    }
+    
+    public String autor(Usuario us){
+        setTa(us);
+        FacesUtils.setObjectAcceso("tatuador", us);
+        return "/pages/disenios/perfil.xhtml?faces-redirect=true";
     }
     
     public String tatuadorA(Usuario ta) {
         setTa(ta);
         FacesUtils.setObjectAcceso("tatuador", ta);
-        return "/pages/admin/tatuador.xhtml?faces-redirect=true";
+        return "/pages/admin/diseniador.xhtml?faces-redirect=true";
     }
     
     public List<Usuario> tattuadoresSurcursal() {

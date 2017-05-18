@@ -35,9 +35,9 @@
                                 <p>#{sucursalSessionController.su.direccion}</p>
                                 <p>#{sucursalSessionController.su.telefono}</p>
                                 <p>#{sucursalSessionController.su.descripcion}</p>
-                                <h2>Tatuadores</h2>
+                                <h2>#{clienteBundle.tatd}</h2>
                             </div>
-                            <center><h:commandButton value="Solicitar Cita" class="btn-success btn-block btn-lg" action="#{sucursalSessionController.enviarSucursal()}"/></center>
+                            <center><h:commandButton value="#{clienteBundle.solic}" class="btn-success btn-block btn-lg" action="#{sucursalSessionController.enviarSucursal()}"/></center>
                             <div class="sucursal-tattooist">
                                 <h:form>
                                     <ul id="display-inline-block-example">
@@ -45,7 +45,7 @@
                                             <li>
                                                 <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
                                                 <span>#{item.nombre} #{item.apellido}</span>
-                                                <h:commandButton value="Ver trabajo" action="#{sucursalSessionController.tatuadorS(item)}"/>
+                                                <h:commandButton class="btn btn-dark" value="#{clienteBundle.verTra}" action="#{sucursalSessionController.autor(item)}"/>
                                             </li>
                                         </ui:repeat>
                                     </ul>

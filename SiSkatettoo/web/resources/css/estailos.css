@@ -155,6 +155,7 @@ body{
     padding: 15px 25px;
     color: #fff;
     background-color: rgba(0,0,0,0.4);
+    border-radius: 30px;
 }
 .texto{
     color: #000;

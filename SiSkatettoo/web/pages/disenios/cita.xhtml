@@ -15,10 +15,10 @@
             <ui:define name="head2">
                 <h:outputStylesheet  name="css/datepicker.min.css"/>
                 <h:outputScript name="js/datepicker.min.js" />
-                <h:outputScript name="js/datepicker.es.js" />
+                <h:outputScript name="js/datepicker.#{clienteBundle.datePic}.js" />
             </ui:define>
             <ui:define name="titulo">
-                Enviar Cita | Skatettoo
+                #{clienteBundle.envCi} | Skatettoo
             </ui:define>
 
             <ui:define name="top2"></ui:define>
@@ -33,9 +33,9 @@
                                             <fieldset>
                                                 <!-- Name input-->
                                                 <div class="form-group">
-                                                    <h:outputLabel class="col-md-3 control-label" value="Fecha Hora:" for="fechaHora" />
+                                                    <h:outputLabel class="col-md-3 control-label" value="#{clienteBundle.cFech}:" for="fechaHora" />
                                                     <div class="col-md-9">
-                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="FechaHora" required="true" requiredMessage="The FechaHora field is required.">
+                                                        <h:inputText pt:data-language='es' pt:data-time-format='hh:ii:00' pt:data-timepicker="true" class="form-control" id="fechaHora" pt:placeholder="mm/dd/yyyy hh:mm:ss" value="#{citaManagedBean.cita.fechaHora}" title="#{clienteBundle.cFech}" required="true" requiredMessage="#{clienteBundle.cFechmsj}">
                                                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                                         </h:inputText>
                                                     </div>
@@ -43,9 +43,9 @@
 
                                                 <!-- Email input-->
                                                 <div class="form-group">
-                                                    <h:outputLabel class="col-md-3 control-label" value="Tatuador:" for="tatuador" />
+                                                    <h:outputLabel class="col-md-3 control-label" value="#{clienteBundle.cTatua}:" for="tatuador" />
                                                     <div class="col-md-9">
-                                                        <h:selectOneMenu class="form-control" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="The IdSucursal field is required.">
+                                                        <h:selectOneMenu class="form-control" title="#{clienteBundle.cTatua}" id="tatuador" value="#{citaManagedBean.cita.tatuador}" required="true" requiredMessage="#{clienteBundle.cTatuamsj}">
                                                             <!-- TODO: update below reference to list of available items-->
                                                             <f:selectItems value="#{panelSucursalManagedBean.tattuadoresSurcursal()}" var="sucu" itemLabel="#{sucu.nombre} #{sucu.apellido}"/>
                                                         </h:selectOneMenu>
@@ -53,7 +53,7 @@
                                                 </div>
                                                 <br/>
                                                 <div class="form-group">
-                                                    <h:outputLabel class="col-md-3 control-label" value="Adjuntar imagen:"  for="adjuntarImagen"/>
+                                                    <h:outputLabel class="col-md-3 control-label" value="#{clienteBundle.cAdjun}:"  for="adjuntarImagen"/>
                                                     <div class="col-md-9">
                                                         <div class="input-group image-preview">
                                                             <span class="input-group-btn">
@@ -62,7 +62,7 @@
                                                                 <div class="btn btn-default image-preview-input">
                                                                     <h:inputFile id="adjuntarImagen" value="#{citaManagedBean.file}"/>
                                                                     <span class="glyphicon glyphicon-folder-open"></span>
-                                                                    <span class="image-preview-input-title">Buscar</span>
+                                                                    <span class="image-preview-input-title">#{clienteBundle.cBuscar}</span>
                                                                 </div>
                                                             </span>
                                                         </div>
@@ -71,20 +71,20 @@
 
                                                 <!-- Message body -->
                                                 <div class="form-group">
-                                                    <h:outputLabel class="col-md-3 control-label" value="Descripcion:" for="descripcion" />
+                                                    <h:outputLabel class="col-md-3 control-label" value="#{clienteBundle.cDesc}:" for="descripcion" />
                                                     <div class="col-md-9">
-                                                        <h:inputTextarea pt:placeholder="Escribe los detalles de la cita" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                                                        <h:inputTextarea pt:placeholder="#{clienteBundle.cDescmsj}" class="form-control" rows="10" cols="30" id="descripcion" value="#{citaManagedBean.cita.descripcion}" title="#{clienteBundle.cDesc}" required="true" requiredMessage="#{clienteBundle.cDescmsj2}"/>
                                                     </div>
                                                 </div>
 
                                                 <!-- Form actions -->
                                                 <div class="form-group">
                                                     <div class="col-md-12 text-right">
-                                                        <h:commandButton type="submit" value="Enviar" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
+                                                        <h:commandButton type="submit" value="#{clienteBundle.cEnviar}" class="btn btn-lg btn-success" actionListener="#{citaManagedBean.solicitarCita()}"/>
                                                     </div>
                                                 </div>
                                             </fieldset>
-
+ 
                                             <script>
                                                 var disabledDays = [0];
                                                 $("#fechaHora").datepicker({
