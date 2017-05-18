@@ -36,6 +36,7 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     @EJB
     private DisenioFacadeLocal diseniofc;
     private List<Disenio> resultado;
+    ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
 
     @Inject
     LoginManagedBean us;
@@ -84,7 +85,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void registrarDisenio() {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             disenio.setIdUsuario(getUs().getUsuario());
             disenio.setNombreDisenio(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
@@ -96,7 +96,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void eliminarDisenioA(Disenio d) {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             diseniofc.remove(d);
             FacesUtils.mensaje(prop.getString("deleteNoti"));
@@ -106,7 +105,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void eliminarDisenio(Disenio d) {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             diseniofc.remove(d);
             FacesUtils.mensaje(prop.getString("deleteNoti"));
@@ -116,7 +114,6 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
     }
 
     public void editarDisenio() {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             diseniofc.edit(disenio);
             FacesUtils.mensaje(prop.getString("actualNoti"));

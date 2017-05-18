@@ -7,6 +7,7 @@ package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Noticia;
 import com.skatettoo.backend.persistence.facade.NoticiaFacadeLocal;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -24,6 +25,7 @@ public class NoticiaSessionController {
     private Noticia nt;
     @EJB 
     private NoticiaFacadeLocal nc;
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
 
     public Noticia getNt() {
         return nt;
@@ -44,9 +46,9 @@ public class NoticiaSessionController {
     public void editarNoticia(){
         try {
             nc.edit(nt);
-            FacesUtils.mensaje("Se ha actualizado con Exito");
+            FacesUtils.mensaje(prop.getString("update"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error" + " " + e.getMessage());
+            FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
     }
 }

@@ -28,10 +28,10 @@
                 <div class="container fondo" >
                     <div class="row">
                         <div class="col-md-12 tabla">
-                            <h4>#{editeliBundle.citas}</h4>
+                            <h4>#{editeliBundle.citas} | <h:link value="#{editeliBundle.citR}" outcome="rcitas.xhtml"/></h4>
                             <div class="table-responsive">
                                 <h:form >
-                                    <table id="mytable" class="table table-bordred table-striped tabla">
+                                    <table id="mytable" class="table table-bordred table-striped tabla" >
                                         <thead>
                                             <th>#{editeliBundle.sucu}</th>
                                             <th>#{editeliBundle.clien}</th>
@@ -40,6 +40,7 @@
                                             <th>#{editeliBundle.fechora}</th>
                                             <th>#{editeliBundle.responder}</th>
                                             <th>#{editeliBundle.aplazar}</th>
+                                            <th>#{tatuadorBundle.reali}</th>
                                         </thead>
                                         <tbody>
                                             <h:form>
@@ -61,6 +62,7 @@
                                                         <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#aplazar" value="#{editeliBundle.aplazar}"><span class="glyphicon glyphicon-pencil"></span>
                                                                 <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}"/>
                                                             </h:commandButton></td>
+                                                        <td><center><button jsf:action="#{citaManagedBean.terminarCita(cita)}" class="glyphicon glyphicon-ok btn btn-success"></button></center></td>
                                                     </tr>
                                                 </ui:repeat>
                                             </h:form>

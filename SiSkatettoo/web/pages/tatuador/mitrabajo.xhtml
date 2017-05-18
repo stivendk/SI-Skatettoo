@@ -78,7 +78,7 @@
                                                 <h:outputLabel value="#{editeliBundle.estil}:" for="idEstiloDisenio" />
                                                 <h:selectOneMenu class="form-control" id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" required="true" requiredMessage="#{editeliBundle.disEmsj}">
                                                     <!-- TODO: update below reference to list of available items-->
-                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
+                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estilosBundle[estiilo.nombreEstilo]}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
@@ -119,7 +119,7 @@
                                                 <h:outputLabel value="Estilo Disenio:" for="estiloDisenio" />
                                                 <h:selectOneMenu class="form-control" id="estiloDisenio" value="#{panelDisenioManagedBean.dis.idEstiloDisenio}" required="true" requiredMessage="The IdEstiloDisenio field is required.">
                                                     <!-- TODO: update below reference to list of available items-->
-                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estiilo.nombreEstilo}"/>
+                                                    <f:selectItems value="#{estiloManagedBean.listarEstilo()}" var="estiilo" itemLabel="#{estilosBundle[estiilo.nombreEstilo]}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>

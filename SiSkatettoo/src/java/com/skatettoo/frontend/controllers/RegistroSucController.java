@@ -13,6 +13,7 @@ import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.frontend.util.GeneradorPss;
 import java.io.Serializable;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -33,7 +34,7 @@ import javax.servlet.http.Part;
  */
 @Named(value = "registroSucController")
 @RequestScoped
-public class RegistroSucController implements Serializable{
+public class RegistroSucController implements Serializable {
 
     private Sucursal suc;
     private Part file;
@@ -41,6 +42,7 @@ public class RegistroSucController implements Serializable{
     private SucursalFacadeLocal slfc;
     @Inject
     private RegistroController sfc;
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
 
     public RegistroController getSfc() {
         return sfc;
@@ -61,16 +63,16 @@ public class RegistroSucController implements Serializable{
     public void setSuc(Sucursal suc) {
         this.suc = suc;
     }
-    
+
     public RegistroSucController() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         suc = new Sucursal();
     }
-    
-    public String registrarAdminS(){
+
+    public String registrarAdminS() {
         try {
             suc.setPin(GeneradorPss.generadorPassword());
             suc.setFotoSuc(UploadFIles.uploadFileS(file, GeneradorPss.generadorPassword()));
@@ -80,11 +82,11 @@ public class RegistroSucController implements Serializable{
             getSfc().registrarAdmin();
             return "login.xhtml?faces-redirect=true";
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("msjError"));
         }
         return "";
     }
-    
+
     public void validatePassword(ComponentSystemEvent event) {
 
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -109,7 +111,7 @@ public class RegistroSucController implements Serializable{
 
         if (!password.equals(confirmPassword)) {
 
-            FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+            FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             fc.addMessage(passwordId, msg);
             fc.renderResponse();

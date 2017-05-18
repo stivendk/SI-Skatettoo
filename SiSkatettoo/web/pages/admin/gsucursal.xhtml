@@ -18,7 +18,7 @@
                 <h:outputScript name="js/datepicker.es.js" />
             </ui:define>
             <ui:define name="titulo">
-                Gestionar Sucursal | Skatettoo
+                #{loginManagedBean.usuario.idSucursal.nombre} | Skatettoo
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
@@ -52,13 +52,13 @@
                         </div>
                         <div class="sucursal-tattooist">
                             <h:form>
-                            <h2>Tatuadores</h2>
+                                <h2>#{adminBundle.msc}</h2>
                                 <ul id="display-inline-block-example">
                                     <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
                                         <li>
                                             <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
                                             <span>#{item.nombre} #{item.apellido}</span>
-                                            <h:commandButton class="btn btn-dark" value="Ver trabajo" action="#{sucursalSessionController.tatuadorA(item)}"/>
+                                            <h:commandButton class="btn btn-dark" value="#{adminBundle.ver}" action="#{sucursalSessionController.tatuadorA(item)}"/>
                                         </li>
                                     </ui:repeat>
                                 </ul>

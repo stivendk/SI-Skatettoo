@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -33,7 +34,8 @@ public class RegistroController {
     private Rol rl;
     @EJB private UsuarioFacadeLocal ufc;
     @Inject SucursalManagedBean smb;
-
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
+    
     public Usuario getUs() {
         return us;
     }
@@ -70,11 +72,11 @@ public class RegistroController {
             r.setIdRol(1);
             us.setIdRol(r);
             ufc.create(us);
-            Email e = new Email("Nuevo Usuario", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo espero que lo disfrutes mucho", getUs().getEmail());
+            Email e = new Email(prop.getString("emailAsC"), getUs().getNombre() + " " + getUs().getApellido() + "\n" + prop.getString("emailDesC"), getUs().getEmail());
             e.enviarEmail();
             return "login.xhtml?faces-redirect=true";
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("msjError"));
         }
         return "";
     }
@@ -86,10 +88,10 @@ public class RegistroController {
             us.setIdRol(r);
             us.setEstadoUsuario(1);
             ufc.create(us);
-            Email e = new Email("Nueva Sucursal", getUs().getNombre() + " " + getUs().getApellido() + "\nBienvenido a Skatettoo " + getUs().getIdSucursal().getNombre() + "\nEl codigo de tu tattoo studio es " + getUs().getIdSucursal().getPin() + "\nEspero que lo disfrutes mucho", getUs().getEmail());
+            Email e = new Email(prop.getString("emailAsS"), getUs().getNombre() + " " + getUs().getApellido() + "\n"+ prop.getString("emailDesS1 ") + getUs().getIdSucursal().getNombre() + "\n"+ prop.getString("emailDesS2 ") + getUs().getIdSucursal().getPin() + "\n" + prop.getString("emailDesS3"), getUs().getEmail());
             e.enviarEmail();
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("msjError"));
         }
         return "";
     }
@@ -118,7 +120,7 @@ public class RegistroController {
 
         if (!password.equals(confirmPassword)) {
 
-            FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+            FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             fc.addMessage(passwordId, msg);
             fc.renderResponse();

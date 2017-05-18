@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.facade.NoticiaFacadeLocal;
 import com.skatettoo.frontend.util.GeneradorPss;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -27,6 +28,7 @@ public class NoticiaController {
 
     private Noticia nt;
     private Part file;
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
     @EJB
     private NoticiaFacadeLocal nfc;
     @Inject LoginManagedBean us;
@@ -64,17 +66,17 @@ public class NoticiaController {
             nt.setIdUsuario(getUs().getUsuario());
             nt.setImgn(UploadFIles.uploadFileN(file, GeneradorPss.generadorPassword()));
             nfc.create(nt);
-            FacesUtils.mensaje("Publicada con exito");
+            FacesUtils.mensaje(prop.getString("pubNot"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error" + e.getMessage());
+            FacesUtils.mensaje(prop.getString("msjError ") + e.getMessage());
         }
     }
     public void editarNoticia(){
         try {
             nfc.edit(nt);
-            FacesUtils.mensaje("Se ha actualizado con exito");
+            FacesUtils.mensaje(prop.getString("update"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error" + e.getMessage());
+            FacesUtils.mensaje(prop.getString("msjError ") + e.getMessage());
         }
     }
     public void actualizarNoticia(Noticia n){
@@ -89,9 +91,9 @@ public class NoticiaController {
     public void eliminarNoticia(Noticia n){
         try {
             nfc.remove(n);
-            FacesUtils.mensaje("Se ha eliminado");
+            FacesUtils.mensaje(prop.getString("delete"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("msjError ") + e.getMessage());
         }
     }
     public List<Noticia> listarNoticias(){

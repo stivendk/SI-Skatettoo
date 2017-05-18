@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -39,7 +40,7 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     private Localidad loc;
     private String pin;
     private List<Sucursal> consulta;
-
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
     @EJB
     private SucursalFacadeLocal sucufc;
     @Inject
@@ -125,13 +126,13 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
     public void editarSucursal() throws NoSuchAlgorithmException {
         sucu.setFotoSuc(UploadFIles.uploadFileS(file, GeneradorPss.generadorPassword()));
         sucufc.edit(sucu);
-        FacesUtils.mensaje("Se ha actualizado con exito!");
+        FacesUtils.mensaje(prop.getString("update"));
     }
-    
+
     public void erSucursal() {
         FacesUtils.setObjectAcceso("sucursal", sucu);
         sucufc.edit(sucu);
-        FacesUtils.mensaje("Se ha actualizado con exito!");
+        FacesUtils.mensaje(prop.getString("update"));
     }
 
     public void selectLocalidad(Localidad l) {
@@ -175,13 +176,13 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         }
         return sul;
     }
-    
-    public String pinSucursal(){
+
+    public String pinSucursal() {
         consulta = sucufc.consuSuc(pin);
         return "newxhtml1.xhtml?faces-redirect=true";
     }
-    
-    public String enviarSucur(Sucursal suc){
+
+    public String enviarSucur(Sucursal suc) {
         setSucu(suc);
         return "newxhtml.xhtml?faces-redirect=true";
     }

@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.frontend.util.Generador;
+import com.skatettoo.frontend.util.GeneradorPss;
 import java.io.File;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -48,7 +49,7 @@ public class CitaManagedBean implements Serializable {
     LoginManagedBean us;
     @Inject
     PanelSucursalManagedBean su;
-
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
     public PanelSucursalManagedBean getSu() {
         return su;
     }
@@ -98,19 +99,18 @@ public class CitaManagedBean implements Serializable {
     }
 
     public String solicitarCita() {
-        ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
         try {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
-            cita.setDisenioAdjunto(UploadFIles.uploadFileC(file, String.valueOf(cita.getDisenioAdjunto())));
+            cita.setDisenioAdjunto(UploadFIles.uploadFileC(file, GeneradorPss.generadorPassword()));
             citafc.create(cita);
-            Email e = new Email("Nueva solicitud", "El cliente " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha enviado una cita para el dia " + getCita().getFechaHora(), getCita().getTatuador().getEmail());
+            Email e = new Email(prop.getString("emailSol"), prop.getString("emailCSol ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("emailSdes ") + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();
-            FacesUtils.mensaje(prop.getString("envio"));
+            FacesUtils.mensaje(prop.getString("envioSol"));
             return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
         } catch (Exception e) {
-            FacesUtils.mensaje(prop.getString("errorNoti"));
-            throw e;
+            FacesUtils.mensaje(prop.getString("msjError") + e.getMessage());
         }
+        return "";
     }
 
     public void eliminarCita() {
@@ -120,29 +120,17 @@ public class CitaManagedBean implements Serializable {
     public void responderCita() {
         FacesUtils.setObjectAcceso("cita", cita);
         citafc.edit(cita);
-        FacesUtils.mensaje("Se ha actualizado la cita");
+        FacesUtils.mensaje(prop.getString("citaActu"));
 
     }
 
-    public String terminarCita(Cita c) {
-        if (getCita().getEstadoCita() != 3 | cita.getEstadoCita() != 2) {
-            cita = c;
-            FacesUtils.setObjectAcceso("cita", cita);
-            return "/pages/tatuador/tcita.xhtml?faces-redirect=true";
-        } else {
-            FacesUtils.mensaje("Aun no has respondido la cita");
-            return "";
-        }
-    }
-    
-    public String terminarCitaA(Cita c) {
-        if (getCita().getEstadoCita() != 3 | cita.getEstadoCita() != 2) {
-            cita = c;
-            FacesUtils.setObjectAcceso("cita", cita);
-            return "/pages/admin/tcita.xhtml?faces-redirect=true";
-        } else {
-            FacesUtils.mensaje("Aun no has respondido la cita");
-            return "";
+    public void terminarCita(Cita c) {
+        try {
+            setCita(c);
+            citafc.terminarCita(getCita(), c.getIdUsuario());
+            FacesUtils.mensaje(prop.getString("citat"));
+        } catch (Exception e) {
+            FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
     }
 
@@ -152,39 +140,6 @@ public class CitaManagedBean implements Serializable {
             FacesUtils.setObjectAcceso("cita", c);
         } else {
             FacesUtils.mensaje("Ya respondiste esta cita");
-        }
-    }
-
-    public String actualizarCitaA(Cita c) {
-        if (getCita().getEstadoCita() != 1) {
-            cita = c;
-            FacesUtils.setObjectAcceso("cita", cita);
-            return "/pages/admin/rcita.xhtml?faces-redirect=true";
-        } else {
-            FacesUtils.mensaje("Ya respondiste esta cita");
-            return "";
-        }
-    }
-
-    public String aplazarCita(Cita c) {
-        if (getCita().getEstadoCita() != 1) {
-            setCita(c);
-            FacesUtils.setObjectAcceso("cita", cita);
-            return "/pages/tatuador/acita.xhtml?faces-redirect=true";
-        } else {
-            FacesUtils.mensaje("Ya respondiste esta cita");
-            return "";
-        }
-    }
-
-    public String aplazarCitaA(Cita c) {
-        if (getCita().getEstadoCita() != 1) {
-        cita = c;
-        FacesUtils.setObjectAcceso("cita", cita);
-        return "/pages/admin/acita.xhtml?faces-redirect=true";
-        } else {
-            FacesUtils.mensaje("Ya respondiste esta cita");
-            return "";
         }
     }
 
@@ -228,6 +183,9 @@ public class CitaManagedBean implements Serializable {
             for (Cita c : listarCita()) {
                 if (c.getTatuador().getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
                     l.add(c);
+                } 
+                if (c.getEstadoCita() == 4){
+                    l.remove(c);
                 }
             }
         } catch (Exception e) {
@@ -236,7 +194,24 @@ public class CitaManagedBean implements Serializable {
         return l;
     }
     
-    public void mostrarInfo(Cita c){
+    public List<Cita> listarAdminR() {
+        List<Cita> l = new ArrayList<>();
+        try {
+            for (Cita c : listarCita()) {
+                if (c.getTatuador().getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
+                    l.add(c);
+                } 
+                if (c.getEstadoCita() != 4 ){
+                    l.remove(c);
+                }
+            }
+        } catch (Exception e) {
+
+        }
+        return l;
+    }
+
+    public void mostrarInfo(Cita c) {
         setCita(c);
         FacesUtils.setObjectAcceso("cita", cita);
     }

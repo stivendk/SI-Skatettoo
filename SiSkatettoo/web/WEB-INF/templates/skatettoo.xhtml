@@ -43,13 +43,13 @@
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <ui:repeat value="#{loginManagedBean.permis}" var="per">
-                                    <li><h:link value="#{per.nombrePermiso}" outcome="#{per.url}"/></li> 
+                                    <li><h:link value="#{menuBundle[per.nombrePermiso]}" outcome="#{per.url}"/></li> 
                                 </ui:repeat>
                             </ul>
                             <h:form>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><h:commandLink value="#{loginManagedBean.usuario.nombre} #{loginManagedBean.usuario.apellido}"  action="#{usuarioManagedBean.actualizarUsuario()}"/></li>
-                                    <li><h:commandLink value="Cerrar Sesión"  action="#{loginManagedBean.cerrarSesion()}"/></li>
+                                    <li><h:commandLink value="#{indexBundle.cerrarS}"  action="#{loginManagedBean.cerrarSesion()}"/></li>
                                 </ul>
                             </h:form>
                         </div>

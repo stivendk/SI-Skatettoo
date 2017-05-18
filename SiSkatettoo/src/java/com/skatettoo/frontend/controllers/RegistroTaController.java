@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -43,6 +44,7 @@ public class RegistroTaController implements Serializable {
     private SucursalFacadeLocal sfc;
     @Inject
     private Conversation conversation;
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
 
     public RegistroTaController() {
     }
@@ -91,13 +93,13 @@ public class RegistroTaController implements Serializable {
     public void init() {
         ta = new Usuario();
     }
-    
-    public void pinSucursal(){
+
+    public void pinSucursal() {
         consulta = sfc.consuSuc(pin);
         conversation.begin();
     }
-    
-    public String enviarSucur(Sucursal sc){
+
+    public String enviarSucur(Sucursal sc) {
         suc = sc;
         return "tatuador.xhtml?faces-redirect=true";
     }
@@ -110,7 +112,7 @@ public class RegistroTaController implements Serializable {
             ta.setEstadoUsuario(4);
             ta.setIdSucursal(suc);
             tfc.create(ta);
-            Email e = new Email("Nuevo Tatuador", getTa().getNombre() + getTa().getApellido() + "\n Bienvenido a Skatettoo" + "\nPor el momento estas inhabilitado, espera a que tu Administrador de habilite", getTa().getEmail());
+            Email e = new Email(prop.getString("emailTas"), getTa().getNombre() + getTa().getApellido() + "\n" + prop.getString("emailDesS1") + "\n" + prop.getString("emailTdes"), getTa().getEmail());
             e.enviarEmail();
             conversation.end();
             return "login.xhtml?faces-redirect=true";
@@ -145,7 +147,7 @@ public class RegistroTaController implements Serializable {
 
             if (!password.equals(confirmPassword)) {
 
-                FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+                FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
                 msg.setSeverity(FacesMessage.SEVERITY_ERROR);
                 fc.addMessage(passwordId, msg);
                 fc.renderResponse();

@@ -11,6 +11,7 @@ import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -26,13 +27,15 @@ import javax.inject.Named;
 public class PanelSucursalManagedBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     private Sucursal sucu;
     private Usuario tatuador;
     private Disenio dis;
-
-    @EJB private SucursalFacadeLocal sfl;
-    @Inject LoginManagedBean us;
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
+    @EJB
+    private SucursalFacadeLocal sfl;
+    @Inject
+    LoginManagedBean us;
 
     public LoginManagedBean getUs() {
         return us;
@@ -74,8 +77,6 @@ public class PanelSucursalManagedBean implements Serializable {
     public List<Usuario> tattuadoresSurcursal() {
         return sucu.getUsuarioList();
     }
-    
-    
 
     public List<Disenio> listaDisenio() {
         try {
@@ -85,36 +86,36 @@ public class PanelSucursalManagedBean implements Serializable {
         return null;
     }
 
-    public String enviarSucursal(){
-        if(getUs().getUsuario().getEstadoUsuario()!=2){
+    public String enviarSucursal() {
+        if (getUs().getUsuario().getEstadoUsuario() != 2) {
             setSucu(sucu);
             FacesUtils.setObjectAcceso("sucursal", sucu);
             return "/pages/disenios/cita.xhtml?faces-redirect=true";
-        } else{
-            FacesUtils.mensaje("Ya tienes una cita en proceso");
+        } else {
+            FacesUtils.mensaje(prop.getString("citNo"));
             return "";
         }
     }
-    
-    public String enviarDisenio(Disenio d){
+
+    public String enviarDisenio(Disenio d) {
         dis = d;
         FacesUtils.setObjectAcceso("disenio", dis);
         return "/pages/disenios/disenio.xhtml?faces-redirect=true";
     }
-    
+
     public void seleccionarTatt(Usuario t) {
         setTatuador(t);
     }
-    
+
     public void selecTatt(Usuario t) {
         tatuador = t;
     }
-    
+
     public List<Disenio> listUsSucu() {
         return getTatuador().getDisenioList();
     }
-    
-    public String tatuadorS(Usuario ta){
+
+    public String tatuadorS(Usuario ta) {
         setTatuador(ta);
         FacesUtils.setObjectAcceso("tatuador", ta);
         return "/pages/tatuador/perfil.xhtml?faces-redirect=true";

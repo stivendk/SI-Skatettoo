@@ -12,7 +12,7 @@
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
 
             <ui:define name="titulo">
-                Reportes | Skatettoo
+                #{adminBundle.repor} | Skatettoo
             </ui:define>
 
             <ui:define name="content">
@@ -22,7 +22,7 @@
 
                         <div class="col-md-12 tabla">
                             <h:form>
-                                <h1><h:outputText value="Reportes"/></h1>
+                                <h1><h:outputText value="#{adminBundle.repor}"/></h1>
                                 <h:commandLink value="pdf" class="btn btn-danger btn-s">
                                     <p:dataExporter type="pdf" target="mitabla" fileName="Citas"/>
                                 </h:commandLink>
@@ -32,25 +32,25 @@
                                 <p:dataTable id="mitabla" value="#{citaManagedBean.citaSucu()}" var="item">
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Cliente"/>
+                                            <h:outputText value="#{adminBundle.clie}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idUsuario.nombre} #{item.idUsuario.apellido}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Tatuador"/>
+                                            <h:outputText value="#{adminBundle.tat}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.tatuador.nombre} #{item.tatuador.apellido}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Valor de Tatuaje"/>
+                                            <h:outputText value="#{adminBundle.val}"/>
                                         </f:facet>
                                         <h:outputText value="$#{item.valorTatuaje}"/>
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Fecha y Hora"/>
+                                            <h:outputText value="#{adminBundle.fech}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fechaHora}">
                                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+
+            <ui:define name="head2">
+                <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputScript name="js/datepicker.min.js" />
+                <h:outputScript name="js/datepicker.es.js" />
+
+            </ui:define>  
+
+            <ui:define name="titulo">
+                #{editeliBundle.citas} | Skatetto
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="container fondo" >
+                    <div class="row">
+                        <div class="col-md-12 tabla">
+                            <h4><h:link value="#{editeliBundle.citas}" outcome="ccitas.xhtml"/> | #{editeliBundle.citR} </h4>
+                            <div class="table-responsive">
+                                <h:form >
+                                    <table id="mytable" class="table table-bordred table-striped tabla" >
+                                        <thead>
+                                            <th>#{editeliBundle.sucu}</th>
+                                            <th>#{editeliBundle.clien}</th>
+                                            <th>#{editeliBundle.tatu}</th>
+                                            <th>#{editeliBundle.email}</th>
+                                            <th>#{editeliBundle.fechora}</th>
+                                        </thead>
+                                        <tbody>
+                                            <h:form>
+                                                <h:messages showSummary="true"/>
+                                                <ui:repeat value="#{citaManagedBean.listarAdminR()}" var="cita">
+                                                    <tr>
+                                                        <td>#{cita.idSucursal.nombre}</td>
+                                                        <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
+                                                        <td>#{cita.tatuador.nombre} #{cita.tatuador.apellido}</td>
+                                                        <td>#{cita.idUsuario.email}</td>
+                                                        <td>
+                                                            <h:outputText value="#{cita.fechaHora}">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                            </h:outputText>
+                                                        </td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </h:form>
+                                        </tbody>
+                                    </table>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </ui:define>
+
+        </ui:composition>
+        <script src="resources/js/jquery-2.2.3.min.js"></script>
+    </body>
+</html>

@@ -53,5 +53,21 @@
             <base-name>com.skatettoo.traducciones.cliente</base-name>
             <var>clienteBundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.admin</base-name>
+            <var>adminBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.controllerMsj</base-name>
+            <var>controllerMsjBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.menu</base-name>
+            <var>menuBundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>com.skatettoo.traducciones.estilos</base-name>
+            <var>estilosBundle</var>
+        </resource-bundle>
     </application>
 </faces-config>

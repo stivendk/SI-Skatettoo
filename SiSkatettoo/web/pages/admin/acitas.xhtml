@@ -12,24 +12,23 @@
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
 
             <ui:define name="titulo">
-                Cita | Skatettoo
+                #{editeliBundle.citas} | Skatetto
             </ui:define>
 
             <ui:define name="content">
                 <div class="container fondo" >
                     <div class="row">
                         <div class="col-md-12 tabla">
-                            <h4>Citas</h4>
+                            <h4>#{editeliBundle.citas}</h4>
                             <div class="table-responsive">
                                 <h:form >
                                     <table id="mytable" class="table table-bordred table-striped tabla">
                                         <thead>
-                                            <th>Sucursal</th>
-                                            <th>Cliente</th>
-                                            <th>Tatuador</th>
-                                            <th>Email</th>
-                                            <th>Fecha y Hora</th>
-                                            
+                                            <th>#{editeliBundle.sucu}</th>
+                                            <th>#{editeliBundle.clien}</th>
+                                            <th>#{editeliBundle.tatu}</th>
+                                            <th>#{editeliBundle.email}</th>
+                                            <th>#{editeliBundle.fechora}</th>
                                         </thead>
                                         <tbody>
                                             

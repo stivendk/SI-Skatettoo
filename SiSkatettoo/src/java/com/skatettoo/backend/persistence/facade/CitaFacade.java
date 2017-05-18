@@ -57,6 +57,7 @@ public class CitaFacade extends AbstractFacade<Cita> implements CitaFacadeLocal 
                 c.setEstadoCita((short)4);
                 u.setEstadoUsuario((short)1);
                 getEntityManager().merge(u);
+                getEntityManager().merge(c);
             }else {
                 FacesUtils.mensaje("El cliente aun no ha realizado su cita");
             }

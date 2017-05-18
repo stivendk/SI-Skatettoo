@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import java.io.Serializable;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -32,6 +33,7 @@ public class CitaSessionController implements Serializable {
     PanelSucursalManagedBean su;
     @Inject
     UsuarioManagedBean usu;
+    ResourceBundle prop = FacesUtils.getBundle("editeliBundle");
 
     public CitaSessionController() {
     }
@@ -63,8 +65,8 @@ public class CitaSessionController implements Serializable {
 
     public void responderCita() {
         cfl.edit(cit);
-        FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
-        Email e = new Email("Cita aceptada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha respondido la cita que enviaste para el dia " + getCit().getFechaHora() + "\nPor el valor de: $" + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
+        FacesUtils.mensaje(prop.getString("resCita"));
+        Email e = new Email(prop.getString("citaa"), prop.getString("citaAt ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("citaFech ") + getCit().getFechaHora() + "\n" + prop.getString("citaVala") + getCit().getValorTatuaje(), getCit().getIdUsuario().getEmail());
         e.enviarEmail();
     }
 
@@ -72,21 +74,13 @@ public class CitaSessionController implements Serializable {
         try {
             cit.setEstadoCita((short) 2);
             cfl.edit(cit);
-            FacesUtils.mensaje("Se ha Actualizado satisfactoriamente");
-            Email e = new Email("Cita aplazada", "El tatuador " + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\nTe ha puesto una nueva fecha para continuar con la cita el dia " + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
+            FacesUtils.mensaje(prop.getString("citaAc"));
+            Email e = new Email(prop.getString("citaAp"), prop.getString("citaAt ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("citaFech2 ") + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
             e.enviarEmail();
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un problema" + e.getMessage());
+            FacesUtils.mensaje(prop.getString("msjError") + e.getMessage());
         }
 
-    }
-
-    public void terminarCita(Cita c) {
-        cfl.terminarCita(c, usu.getUsuario());
-        cfl.edit(c);
-        Email e = new Email("Cita terminada", "El tatto studdio " + getUs().getUsuario().getIdSucursal().getNombre() + "\nY Skatettoo, te agradecemos por utilizar nuestro sistema, esperamos que regreses pronto. ", getCit().getIdUsuario().getEmail());
-        e.enviarEmail();
-        FacesUtils.mensaje("La cita ha finalizado satisfactoriamente");
     }
 
 }

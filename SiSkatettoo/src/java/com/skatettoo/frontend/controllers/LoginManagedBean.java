@@ -13,7 +13,9 @@ import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -36,7 +38,7 @@ public class LoginManagedBean implements Serializable {
     private Part file;
     private List<Permiso> permis;
     private Sucursal suc;
-    
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
     @Inject SucursalManagedBean su;
     @EJB UsuarioFacadeLocal usfc;
 
@@ -72,7 +74,7 @@ public class LoginManagedBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Permiso> getPermis() {
+    public List<Permiso> getPermis() {       
         return permis;
     }    
     
@@ -93,6 +95,10 @@ public class LoginManagedBean implements Serializable {
         }
     }
     
+    public List<Usuario> listE(){
+        return usuario.getIdSucursal().getUsuarioList();
+    }
+    
     public String actualizarSucursal() {
         setSuc(usuario.getIdSucursal());
         return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
@@ -102,7 +108,7 @@ public class LoginManagedBean implements Serializable {
         try {
             su.editarSucursal();
         } catch (Exception e) {
-            FacesUtils.mensaje("Se realizo correctamente");
+            FacesUtils.mensaje(prop.getString("succes"));
         }
     }
     
@@ -137,7 +143,7 @@ public class LoginManagedBean implements Serializable {
 
         if (!password.equals(confirmPassword)) {
 
-            FacesMessage msg = new FacesMessage("Las contraseñas deben coincidir");
+            FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             fc.addMessage(passwordId, msg);
             fc.renderResponse();
@@ -150,6 +156,7 @@ public class LoginManagedBean implements Serializable {
         FacesUtils.removerObjectAcceso("usuario");
         FacesUtils.removerObjectAcceso("tatuador");
         FacesUtils.removerObjectAcceso("sucursal");
+        FacesUtils.removerObjectAcceso("estilo");
         FacesUtils.removerObjectAcceso("disenio");
         FacesUtils.removerObjectAcceso("localidad");
         FacesUtils.removerObjectAcceso("noticia");

@@ -30,7 +30,7 @@
                             <li><h:link outcome="/pages/disenios/disenios.xhtml?faces-redirect=true" value="#{clienteBundle.tod}"/></li>
                                 <li class="divider"></li>
                             <ui:repeat value="#{estiloManagedBean.listarEstilo()}" var="es">
-                                <li><h:commandLink action="#{estiloManagedBean.selecEstiloD(es)}" value="#{es.nombreEstilo}"></h:commandLink></li>
+                                <li><h:commandLink action="#{estiloManagedBean.selecEstiloD(es)}" value="#{estilosBundle[es.nombreEstilo]}"></h:commandLink></li>
                                 <li class="divider"></li>
                             </ui:repeat>
                         </ul>
@@ -38,7 +38,7 @@
                 </h:form>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>#{panelEstiloManagedBean.estild.nombreEstilo}</h1></center>
+                        <center><h1>#{estilosBundle[panelEstiloManagedBean.estild.nombreEstilo]}</h1></center>
                         <div class="container">
                             <div class="row">
                                 <ui:repeat value="#{panelEstiloManagedBean.disenioEstilo()}" var="dis">

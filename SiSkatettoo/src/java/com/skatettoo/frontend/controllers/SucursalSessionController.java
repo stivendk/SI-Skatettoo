@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import java.io.Serializable;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -32,7 +33,7 @@ public class SucursalSessionController implements Serializable{
     LoginManagedBean us;
     @Inject
     Conversation con;
-    
+    ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
     public LoginManagedBean getUs() {
         return us;
     }
@@ -105,7 +106,7 @@ public class SucursalSessionController implements Serializable{
             FacesUtils.setObjectAcceso("sucursal", su);
             return "/pages/disenios/cita.xhtml?faces-redirect=true";
         } else{
-            FacesUtils.mensaje("Ya tienes una cita en proceso");
+            FacesUtils.mensaje(prop.getString("citNo"));
             return "";
         }
     }

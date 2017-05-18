@@ -17,7 +17,7 @@
             </ui:define>
 
             <ui:define name="titulo">
-                Gestionar sucursal | Skatettoo
+                #{adminBundle.gestSuc} | Skatettoo
             </ui:define>
 
             <ui:define name="content">
@@ -27,26 +27,26 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
                                 <h:form>
-                                    <legend><i class="glyphicon glyphicon-globe"></i> Editar Sucursal
+                                    <legend><i class="glyphicon glyphicon-globe"></i> #{adminBundle.editSuc}
                                         <label for="fotoSuc" class="btn-bs-file btn btn-primary glyphicon glyphicon-picture" style="margin-left: 151px">
-                                            <h:inputFile class="glyphicon glyphicon-picture" id="fotoSuc" value="#{loginManagedBean.file}" title="#{regClienteBundle.cliCell}"/>
+                                            <h:inputFile class="glyphicon glyphicon-picture" id="fotoSuc" value="#{loginManagedBean.file}" title="#{adminBundle.act}"/>
                                         </label>
                                     </legend>
                                     <div class="row">
                                         <div class="col-xs-6 col-md-6">
-                                            <label for="nombre">Nombre</label>
-                                            <h:inputText class="form-control" pt:placeholder="Nombre" id="nombre"  value="#{loginManagedBean.suc.nombre}" title="Nombre sucursal" required="true" requiredMessage="El nombre es requerido."/>
+                                            <label for="nombre">#{adminBundle.nomSuc}</label>
+                                            <h:inputText class="form-control" pt:placeholder="#{adminBundle.nombSuc}" id="nombre"  value="#{loginManagedBean.suc.nombre}" title="#{adminBundle.nombSuc}" required="true" requiredMessage="#{adminBundle.nombmsj}"/>
                                         </div>
                                     </div>
-                                    <label for="direccion">Dirección</label>
-                                    <h:inputText class="form-control" pt:placeholder="Dirección" id="direccion" value="#{loginManagedBean.suc.direccion}" title="Direccion" required="true" requiredMessage="La dirección es requerida."/>
-                                    <label for="username">Descripcion</label>
-                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="Descripción" id="username" value="#{loginManagedBean.suc.descripcion}" title="Descripción" required="true" requiredMessage="Tu Username es requerido."/>
-                                    <label for="telefono">Celular</label>
-                                    <h:inputText class="form-control" pt:placeholder="Cel" id="telefono" pt:type="number" value="#{loginManagedBean.suc.telefono}" title="Telefono" required="true" requiredMessage="Tu celular es requerido."/>
+                                    <label for="direccion">#{adminBundle.dir}</label>
+                                    <h:inputText class="form-control" pt:placeholder="#{adminBundle.dir}" id="direccion" value="#{loginManagedBean.suc.direccion}" title="#{adminBundle.dir}" required="true" requiredMessage="#{adminBundle.dirmsj}"/>
+                                    <label for="username">#{adminBundle.des}</label>
+                                    <h:inputTextarea rows="4" cols="30" class="form-control" pt:placeholder="#{adminBundle.des}" id="username" value="#{loginManagedBean.suc.descripcion}" title="#{adminBundle.des}"/>
+                                    <label for="telefono">#{adminBundle.cel}</label>
+                                    <h:inputText class="form-control" pt:placeholder="#{adminBundle.cel}" id="telefono" pt:type="number" value="#{loginManagedBean.suc.telefono}" title="#{adminBundle.cel}" required="true" requiredMessage="#{adminBundle.celmsj}"/>
                                     <br />
                                     <br />
-                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="Guardar" actionListener="#{loginManagedBean.editarSucursal()}"/>
+                                    <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="#{adminBundle.gur}" actionListener="#{loginManagedBean.editarSucursal()}"/>
                                 </h:form>
                             </div>
                         </div>

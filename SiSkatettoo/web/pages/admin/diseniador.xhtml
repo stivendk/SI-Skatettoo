@@ -39,7 +39,7 @@
                                 <h1>#{tatuadorSessionController.ta.nombre} #{tatuadorSessionController.ta.apellido}</h1>
                                 <h4>cell: #{tatuadorSessionController.ta.telefono}</h4>
                                 <h:form>
-                                    <span>Tatuador de <h:link value="#{tatuadorSessionController.ta.idSucursal.nombre}" title="#{tatuadorSessionController.ta.idSucursal.nombre}" outcome="/pages/admin/gsucursal.xhtml"/></span>
+                                    <span>#{adminBundle.tatt} <h:link value="#{tatuadorSessionController.ta.idSucursal.nombre}" title="#{tatuadorSessionController.ta.idSucursal.nombre}" outcome="/pages/admin/gsucursal.xhtml"/></span>
                                 </h:form>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <h:form>
                     <section style="background-color: #fff; padding-bottom: 50px;">
-                        <center><h1>Diseños: #{tatuadorSessionController.disenioTatuador().size()}</h1></center>
+                        <center><h1>#{adminBundle.dis} #{tatuadorSessionController.disenioTatuador().size()}</h1></center>
                         <div class="container">
                             <div class="row">
                                 <ui:repeat value="#{tatuadorSessionController.disenioTatuador()}" var="dis">
