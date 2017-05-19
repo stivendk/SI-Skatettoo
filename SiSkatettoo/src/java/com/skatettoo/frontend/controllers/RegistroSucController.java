@@ -43,7 +43,7 @@ public class RegistroSucController implements Serializable {
     @Inject
     private RegistroController sfc;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
-
+    
     public RegistroController getSfc() {
         return sfc;
     }
@@ -63,7 +63,7 @@ public class RegistroSucController implements Serializable {
     public void setSuc(Sucursal suc) {
         this.suc = suc;
     }
-
+    
     public RegistroSucController() {
     }
 
@@ -86,7 +86,7 @@ public class RegistroSucController implements Serializable {
         }
         return "";
     }
-
+    
     public void validatePassword(ComponentSystemEvent event) {
 
         FacesContext fc = FacesContext.getCurrentInstance();

@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
@@ -12,15 +13,16 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <link rel="stylesheet" type="text/css" href="resources/css/formulario.css"></link>
         <script src="resources/js/jquery-2.2.3.min.js"></script>
+        <script src="resources/js/uploadIm.js"></script>
     </h:head>
     <h:body>
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="/index"/>
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
                         <legend><i class="glyphicon glyphicon-globe"></i> #{indexBundle.registrate}</legend>
-                        <h:form pt:method="post" enctype="multipart/form-data" prependId="false" class="form" role="form">
+                        <h:form  pt:method="post" prependId="false" class="form" role="form">
                             <label for="nombreS">#{regSucursalBundle.nombSuc}</label>
                             <h:inputText class="form-control" pt:placeholder="#{regSucursalBundle.nombSuc}" pt:type="text" id="nombreS" value="#{registroSucController.suc.nombre}" title="#{regSucursalBundle.nombSuc}" required="true" requiredMessage="#{regSucursalBundle.msjNombSuc}">
                                 <f:ajax event="blur" render="nombSError"/>

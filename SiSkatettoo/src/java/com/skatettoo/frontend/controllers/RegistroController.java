@@ -96,6 +96,8 @@ public class RegistroController {
         return "";
     }
     
+    
+    
     public void validatePassword(ComponentSystemEvent event) {
 
         FacesContext fc = FacesContext.getCurrentInstance();
