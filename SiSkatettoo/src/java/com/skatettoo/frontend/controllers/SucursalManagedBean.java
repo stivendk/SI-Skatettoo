@@ -186,4 +186,6 @@ public class SucursalManagedBean implements Serializable, Managedbean<Sucursal> 
         setSucu(suc);
         return "newxhtml.xhtml?faces-redirect=true";
     }
+    
+    
 }

@@ -14,6 +14,7 @@ import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -165,4 +166,6 @@ public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
     public List<Usuario> listarSucur() {
         return usuariofc.findAll();
     }
+    
+    
 }

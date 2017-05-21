@@ -5,12 +5,16 @@
  */
 package com.skatettoo.frontend.controllers;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.frontend.util.Generador;
 import com.skatettoo.frontend.util.GeneradorPss;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -215,4 +219,6 @@ public class CitaManagedBean implements Serializable {
         setCita(c);
         FacesUtils.setObjectAcceso("cita", cita);
     }
+    
+    
 }

@@ -10,6 +10,7 @@ import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.util.GeneradorPss;
+import com.skatettoo.reportes.Generador;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -34,6 +35,8 @@ import javax.servlet.http.Part;
 @SessionScoped
 public class LoginManagedBean implements Serializable {
 
+    private static final long serialVersionUID = 24L;
+    
     private Usuario usuario;
     private Part file;
     private List<Permiso> permis;
@@ -150,6 +153,11 @@ public class LoginManagedBean implements Serializable {
 
         }
 
+    }
+    
+    public void reporte() throws Exception{
+        Generador g = new Generador(usuario.getIdSucursal().getUsuarioList(), usuario.getIdSucursal().getNombre());
+        g.generarPDF();
     }
     
     public String cerrarSesion() {

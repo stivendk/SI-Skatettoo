@@ -10,7 +10,33 @@
     <body>
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+            <ui:define name="head2">
+                <h:outputStylesheet name="css/tablitas.css"/>
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"/>
+                <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.15/datatables.min.css"/>
 
+                <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.15/datatables.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $('#mytable').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: ':contains("Office")'
+                                    }
+                                },
+                                'excelHtml5',
+                                'csvHtml5',
+                                'pdfHtml5'
+                            ]
+                        });
+                    });
+                </script>
+
+            </ui:define>
             <ui:define name="titulo">
                 #{adminBundle.repor} | Skatettoo
             </ui:define>
@@ -20,47 +46,48 @@
                     <div class="row">
 
 
-                        <div class="col-md-12 tabla">
-                            <h:form>
-                                <h1><h:outputText value="#{adminBundle.repor}"/></h1>
-                                <h:commandLink value="pdf" class="btn btn-danger btn-s">
-                                    <p:dataExporter type="pdf" target="mitabla" fileName="Citas"/>
-                                </h:commandLink>
-                                <h:commandLink value="excel" class="btn btn-success btn-s">
-                                    <p:dataExporter type="xls" target="mitabla" fileName="Citas"/>
-                                </h:commandLink>
-                                <p:dataTable id="mitabla" value="#{citaManagedBean.citaSucu()}" var="item">
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{adminBundle.clie}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.idUsuario.nombre} #{item.idUsuario.apellido}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{adminBundle.tat}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.tatuador.nombre} #{item.tatuador.apellido}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{adminBundle.val}"/>
-                                        </f:facet>
-                                        <h:outputText value="$#{item.valorTatuaje}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{adminBundle.fech}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaHora}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </h:outputText>
-                                    </p:column>
-                                </p:dataTable>
+                        <div class="table-responsive">
+                            <h:form >
+                                <table id="mytable" class="display nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <th>#{adminBundle.msc}</th>
+                                        <th>#{adminBundle.cantD}</th>
+                                        <th>#{adminBundle.ciRe}</th>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="repo">
+                                            <tr>
+                                                <td>#{repo.nombre} #{repo.apellido}</td>
+                                                <td>#{repo.disenioList.size()}</td>
+                                                <td>#{repo.citaList1.size()}</td>
+                                                <td>
+                                                    <h:outputText value="#{cita.fechaHora}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                                    </h:outputText>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>    
+                                    </tbody>
+                                </table>
+                                <h:messages showSummary="true" />
                             </h:form>
                         </div>
+                        <h:form>
+                            <h:commandButton value="Exportar" actionListener="#{loginManagedBean.reporte()}"/>
+                        </h:form>
                     </div>
                 </div>
+                <h:outputScript name="js/tablitas.js"/>
+                <script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.js"/>
+                <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"/>
+                <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"/>
+                <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"/>
+                <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"/>
+                <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"/>
+                <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"/>
+                <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"/>
+                <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.print.min.js"/>
             </ui:define>
 
         </ui:composition>
