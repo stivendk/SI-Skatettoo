@@ -75,7 +75,7 @@ public class UploadFIles {
 
     public static String uploadFileU(Part file, String d) {
         try {
-            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("img/usuario");
+            String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("usuario");
             path = path.substring(0, path.indexOf("\\build"));
             path = path + "\\web\\img\\usuario\\";
             String[] h = file.getContentType().split("/");

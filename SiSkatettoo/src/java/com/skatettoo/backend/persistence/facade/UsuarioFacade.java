@@ -6,10 +6,12 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Rol;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.controllers.FacesUtils;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.frontend.util.GeneradorPss;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -126,4 +128,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return "";
     }
+
+    @Override
+    public List<Usuario> consultarEstado(String estado, Sucursal s) {
+        return em.createNamedQuery("Usuario.findByEstadoUsuario").setParameter("estado", estado).getResultList();
+    }
+    
+    
 }

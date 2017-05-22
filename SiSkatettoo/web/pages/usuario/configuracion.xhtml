@@ -30,12 +30,8 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
                                 <h:messages showSummary="true"/>
-                                <h:form enctype="multipart/form-data" pt:method="post" class="form" role="form">
-                                    <legend><i class="glyphicon glyphicon-globe"></i> #{regClienteBundle.editInfo}
-                                        <label for="fotoPerfil" class="btn-bs-file btn btn-primary glyphicon glyphicon-picture" style="margin-left: 200px">
-                                            <h:inputFile class="glyphicon glyphicon-picture" id="fotoPerfil" value="#{loginManagedBean.file}" title="#{regClienteBundle.subirFo}"/>
-                                        </label>
-                                    </legend>
+                                <h:form pt:method="post" class="form" role="form">
+                                    <legend><i class="glyphicon glyphicon-globe"></i> #{regClienteBundle.editInfo}</legend>
                                     <div class="row">
                                         <div class="col-xs-6 col-md-6">
                                             <label for="nombre">#{regClienteBundle.cliNombre}</label>

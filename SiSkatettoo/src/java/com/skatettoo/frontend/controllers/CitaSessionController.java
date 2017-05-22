@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.frontend.email.Email;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -72,11 +73,16 @@ public class CitaSessionController implements Serializable {
 
     public void aplazarCita() {
         try {
-            cit.setEstadoCita((short) 2);
-            cfl.edit(cit);
-            FacesUtils.mensaje(prop.getString("citaAc"));
-            Email e = new Email(prop.getString("citaAp"), prop.getString("citaAt ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("citaFech2 ") + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
-            e.enviarEmail();
+            Date n = new Date();
+            if (cit.getFechaHora().after(n)) {
+                cit.setEstadoCita((short) 2);
+                cfl.edit(cit);
+                FacesUtils.mensaje(prop.getString("citaAc"));
+                Email e = new Email(prop.getString("citaAp"), prop.getString("citaAt ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("citaFech2 ") + getCit().getFechaHora(), getCit().getIdUsuario().getEmail());
+                e.enviarEmail();
+            }else{
+                FacesUtils.mensaje("Tienes que aplazar la cita a una fecha posterior a la actual");
+            }
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("msjError") + e.getMessage());
         }

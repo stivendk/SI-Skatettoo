@@ -30,8 +30,12 @@
                     <div class="contenido-sucursal listatatuadoressucursal">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-4">
-
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-1">
+                                    <h:form>
+                                        <h:commandLink action="#{loginManagedBean.actualizarFSuc()}" title="#{adminBundle.act}" class="glyphicon glyphicon-camera editarSuc"/>
+                                    </h:form>
                                 </div>
                                 <div class="col-md-4">
                                     <h:form>
@@ -42,21 +46,21 @@
                                             <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
                                         </div>
                                     </h:form>
+                                    <h2>______<h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/>_____</h2>
                                 </div>
                                 <div class="col-md-4">
                                     <h:form>
-                                        <a jsf:action="#{loginManagedBean.actualizarSucursal()}" class="glyphicon glyphicon-pencil editarSuc"/>
+                                        <a jsf:action="#{loginManagedBean.actualizarSucursal()}" title="#{adminBundle.editSuc}" class="glyphicon glyphicon-pencil editarSuc"/>
                                     </h:form>
                                 </div>
                             </div>
                         </div>
                         <div class="sucursal-tattooist">
                             <h:form>
-                                <h2>#{adminBundle.msc}</h2>
                                 <ul id="display-inline-block-example">
                                     <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
                                         <li>
-                                            <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
+                                            <h:graphicImage library="img" pt:src="../../#{item.fotoPerfil}" class="avatar-tatuador"/>
                                             <span>#{item.nombre} #{item.apellido}</span>
                                             <h:commandButton class="btn btn-dark" value="#{adminBundle.ver}" action="#{sucursalSessionController.tatuadorA(item)}"/>
                                         </li>
@@ -66,7 +70,6 @@
                         </div>
                     </div>
                 </div>
-
             </ui:define>
 
         </ui:composition>

@@ -21,11 +21,59 @@ import javax.faces.event.ValueChangeEvent;
  * @author StivenDavid
  */
 @Named(value = "traductorController")
-@ApplicationScoped
-public class traductorController implements Serializable{
-        
-    public void changeLocale(String trad){
-        FacesContext context=FacesContext.getCurrentInstance();
-        context.getViewRoot().setLocale(new Locale(trad));
+@SessionScoped
+public class traductorController implements Serializable {
+
+    private String locale;
+    private static Map<String, Object> listIdiomas;
+
+    public String getLocale() {
+        return locale;
     }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
+    public Map<String, Object> getListIdiomas() {
+        return listIdiomas;
+    }
+
+    public static void setListIdiomas(Map<String, Object> listIdiomas) {
+        traductorController.listIdiomas = listIdiomas;
+    }
+
+    static {
+        listIdiomas = new LinkedHashMap<String, Object>();
+        Locale español = new Locale("es");
+        listIdiomas.put("Español", español);
+        listIdiomas.put("English", Locale.ENGLISH);
+    }
+
+    public String changeLanguage(String locale) {
+        this.locale = locale;
+        FacesContext.getCurrentInstance().getViewRoot()
+                .setLocale(new Locale(this.locale));
+        return locale;
+    }
+
+    public void cambioIdioma() {
+        for (Map.Entry<String, Object> entry : listIdiomas.entrySet()) {
+            if (entry.getValue().toString().equals(locale)) {
+                FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) entry.getValue());
+            }
+        }
+    }
+
+    public void cambioIdiomaIngles() {
+
+        for (Map.Entry<String, Object> entry : listIdiomas.entrySet()) {
+            if (entry.getValue().toString().equals(locale)) {
+
+                FacesContext.getCurrentInstance().getViewRoot().setLocale(Locale.ENGLISH);
+            }
+        }
+    }
+
+
 }

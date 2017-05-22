@@ -35,10 +35,12 @@ public class Generador {
     public static final long serialVersionUID = 45L;
 
     private List<Usuario> usu;
+    private List<Usuario> us;
     private String titulo;
 
-    public Generador(List<Usuario> usu, String titulo) {
+    public Generador(List<Usuario> usu, List<Usuario> us, String titulo) {
         this.usu = usu;
+        this.us = us;
         this.titulo = titulo;
     }
 
@@ -48,6 +50,14 @@ public class Generador {
 
     public void setUsu(List<Usuario> usu) {
         this.usu = usu;
+    }
+
+    public List<Usuario> getUs() {
+        return us;
+    }
+
+    public void setUs(List<Usuario> us) {
+        this.us = us;
     }
 
     public String getTitulo() {
@@ -66,23 +76,23 @@ public class Generador {
             path = path.substring(0, path.indexOf("\\build"));
             path = path + "\\web\\img\\";
             Document doc = new Document(PageSize.A4, 36, 36, 10, 10);
-            PdfPTable tabla = new PdfPTable(3);
+            PdfPTable tabla = new PdfPTable(4);
             PdfWriter.getInstance(doc, new FileOutputStream(path + "\\archivo\\reporte.pdf\\"));
             doc.open();
             Image img = Image.getInstance(path + "Skatetoo4.png");
             img.scaleAbsolute(40, 40);
             img.setAlignment(Element.ALIGN_LEFT);
             doc.add(img);
-            doc.add((Element) getHeader(this.getTitulo()));
+            doc.addTitle(this.titulo);
             doc.addAuthor("\n ");
             doc.addAuthor("\n ");
             doc.addAuthor("\n ");
             doc.addAuthor("\n ");
             tabla.setWidthPercentage(100);
-            tabla.setWidths(new float[]{1.4f, 0.8f, 0.8f});
+            tabla.setWidths(new float[]{1.4f, 0.8f, 0.8f, 0.8f});
             Object font = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.WHITE);
             PdfPCell cell = new PdfPCell(new Phrase("Reporte de tatuadores", (Font) font));
-            cell.setColspan(3);
+            cell.setColspan(4);
             cell.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell.setPaddingTop(0f);
             cell.setPaddingBottom(7f);
@@ -93,12 +103,19 @@ public class Generador {
             tabla.addCell("Tatuador");
             tabla.addCell("Cantidad de diseños");
             tabla.addCell("Citas realizadas");
+            tabla.addCell("Noticias publicadas");
             for(Usuario u : this.getUsu()){
                 tabla.addCell(u.getNombre() + " " + u.getApellido());
                 tabla.addCell(String.valueOf(u.getDisenioList().size()));
                 tabla.addCell(String.valueOf(u.getCitaList1().size()));
+                tabla.addCell(String.valueOf(u.getNoticiaList().size()));
             }
             doc.add(tabla);
+            doc.bottomMargin();
+            doc.add(new Paragraph("Tatuador mas solicitado"));
+            for(Usuario u : this.getUs()){
+                doc.add(new Paragraph(u.getNombre() + " " + u.getApellido()));
+            }
             doc.close();
             FacesContext context = FacesContext.getCurrentInstance();
             ExternalContext externalContext = context.getExternalContext();
@@ -133,5 +150,5 @@ public class Generador {
         return p;
     }
     
-
+    
 }

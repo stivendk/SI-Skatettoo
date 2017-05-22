@@ -9,6 +9,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.skatettoo.backend.persistence.entities.Cita;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
@@ -19,6 +20,7 @@ import java.io.File;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -40,6 +42,7 @@ public class CitaManagedBean implements Serializable {
 
     private Cita cita;
     private Part file;
+    private Sucursal sc;
     private Generador gen;
     @Inject
     EmailManagedBean email;
@@ -81,6 +84,14 @@ public class CitaManagedBean implements Serializable {
         return us;
     }
 
+    public Sucursal getSc() {
+        return sc;
+    }
+
+    public void setSc(Sucursal sc) {
+        this.sc = sc;
+    }
+
     public Part getFile() {
         return file;
     }
@@ -107,7 +118,7 @@ public class CitaManagedBean implements Serializable {
             citafc.crearCita(us.getUsuario(), usu.getUsuario(), cita, su.getSucu());
             cita.setDisenioAdjunto(UploadFIles.uploadFileC(file, GeneradorPss.generadorPassword()));
             citafc.create(cita);
-            Email e = new Email(prop.getString("emailSol"), prop.getString("emailCSol ") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("emailSdes ") + getCita().getFechaHora(), getCita().getTatuador().getEmail());
+            Email e = new Email(prop.getString("emailSol"), prop.getString("emailCSol") + getUs().getUsuario().getNombre() + " " + getUs().getUsuario().getApellido() + "\n" + prop.getString("emailSdes ") + getCita().getFechaHora(), getCita().getTatuador().getEmail());
             e.enviarEmail();
             FacesUtils.mensaje(prop.getString("envioSol"));
             return "/pages/disenios/sucurv.xhtml?faces-redirect=true";
@@ -130,9 +141,14 @@ public class CitaManagedBean implements Serializable {
 
     public void terminarCita(Cita c) {
         try {
+            Date n = new Date();
             setCita(c);
-            citafc.terminarCita(getCita(), c.getIdUsuario());
-            FacesUtils.mensaje(prop.getString("citat"));
+            if (c.getFechaHora().after(c.getFechaHora())) {
+                citafc.terminarCita(getCita(), c.getIdUsuario());
+                FacesUtils.mensaje(prop.getString("citat"));
+            }else{
+                FacesUtils.mensaje("La fecha aun no ha pasado");
+            }
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
@@ -214,7 +230,7 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
-
+    
     public void mostrarInfo(Cita c) {
         setCita(c);
         FacesUtils.setObjectAcceso("cita", cita);

@@ -138,6 +138,12 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         FacesUtils.setObjectAcceso("disenio", d);
         return "/pages/disenios/disenio.xhtml?faces-redirect=true";
     }
+    
+    public String verDisenio3(Disenio d) {
+        disenio = d;
+        FacesUtils.setObjectAcceso("disenio", d);
+        return "disenio.xhtml?faces-redirect=true";
+    }
 
     public void verDisenio2(Disenio d) {
         setDisenio(d);

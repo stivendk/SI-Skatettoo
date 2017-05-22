@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
+            <ui:define name="head2">
+             </ui:define>
+            <ui:define name="titulo">
+                #{adminBundle.msc} | Skatettoo
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="container fondo" >
+                    <div class="row">
+
+
+                        <div class="table-responsive">
+                            <h:form >
+                                <h2>#{adminBundle.msc} | <h:link value="#{adminBundle.nstt}" outcome="nuevott.xhtml"/><span class="badge badge-info">#{loginManagedBean.estadoUsuario().size()}</span></h2>
+                                <table id="mytable" class="table table-bordred table-striped tabla" cellspacing="0" width="100%">
+                                    <thead>
+                                        <th>#{adminBundle.msc}</th>
+                                        <th>#{adminBundle.desac}</th>
+                                    </thead>
+                                    <tbody>
+
+                                        <ui:repeat value="#{loginManagedBean.estadoUsuarioA()}" var="repo">
+                                            <tr>
+                                                <td>#{repo.nombre} #{repo.apellido}</td>
+                                                <td><center><button jsf:action="#{loginManagedBean.desactivar(repo)}" class="glyphicon glyphicon-remove btn btn-danger"></button></center></td>
+                                            </tr>
+                                        </ui:repeat>    
+                                    </tbody>
+                                </table>
+                                <h:messages showSummary="true" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

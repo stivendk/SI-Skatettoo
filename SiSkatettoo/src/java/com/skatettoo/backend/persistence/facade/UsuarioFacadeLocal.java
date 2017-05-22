@@ -6,6 +6,7 @@
 package com.skatettoo.backend.persistence.facade;
 
 import com.skatettoo.backend.persistence.entities.Rol;
+import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -40,4 +41,6 @@ public interface UsuarioFacadeLocal {
     Object autenticar(Usuario usu);
     
     Object enviarCorreo(Usuario usu);
+    
+    List<Usuario> consultarEstado(String estado, Sucursal s);
 }

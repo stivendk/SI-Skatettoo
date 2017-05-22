@@ -42,7 +42,7 @@
                             <ul id="display-inline-block-example">
                                 <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
                                     <li>
-                                        <h:graphicImage library="img" pt:src="../../img/#{item.fotoPerfil}.jpg" class="avatar-tatuador"/>
+                                        <h:graphicImage library="img" pt:src="../../#{item.fotoPerfil}" class="avatar-tatuador"/>
                                         <span>#{item.nombre} #{item.apellido}</span>
                                         <h:commandButton class="btn btn-dark" value="Ver trabajo" action="#{sucursalSessionController.tatuadorS(item)}"/>
                                     </li>

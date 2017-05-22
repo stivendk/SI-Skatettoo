@@ -45,7 +45,7 @@
                 <script src="resources/js/jquery-2.2.3.min.js"></script>
             </ui:define>
             <ui:define name="titulo">
-                #{disenioManagedBean.disenio.nombreD} | Skatettoo
+                #{panelDisenioManagedBean.dis.nombreD} | Skatettoo
             </ui:define>
             <ui:define name="top2"></ui:define>
             <ui:define name="content">
@@ -58,17 +58,17 @@
                                     <div class="preview col-md-6">
 
                                         <div class="preview-pic tab-content">
-                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="#{disenioManagedBean.disenio.nombreDisenio}" alt="#{disenioManagedBean.disenio.nombreD}" /></div>
+                                            <div class="tab-pane active" id="pic-1"><img class="img-responsive" src="#{panelDisenioManagedBean.dis.nombreDisenio}" alt="#{panelDisenioManagedBean.dis.nombreD}" /></div>
                                         </div>
                                     </div>
                                     <div class="details col-md-6">
-                                        <h1 class="product-description">#{disenioManagedBean.disenio.nombreD}</h1>
+                                        <h1 class="product-description">#{panelDisenioManagedBean.dis.nombreD}</h1>
                                         <div class="vacio"></div>
                                         <div class="vacio"></div>
-                                        <h3 class="product-description">#{disenioManagedBean.disenio.anotaciones}</h3>
+                                        <h3 class="product-description">#{panelDisenioManagedBean.dis.anotaciones}</h3>
                                         
                                         <div class="action">
-                                            <a href="#">#{disenioManagedBean.disenio.idUsuario.nombre} #{disenioManagedBean.disenio.idUsuario.apellido}</a>
+                                            <a href="#">#{panelDisenioManagedBean.dis.idUsuario.nombre} #{panelDisenioManagedBean.dis.idUsuario.apellido}</a>
                                         </div>
                                     </div>
                                 </div>

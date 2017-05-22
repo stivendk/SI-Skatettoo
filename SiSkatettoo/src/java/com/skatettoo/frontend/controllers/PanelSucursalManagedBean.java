@@ -9,7 +9,9 @@ import com.skatettoo.backend.persistence.entities.Disenio;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
+import com.skatettoo.frontend.util.GeneradorPss;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -17,6 +19,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -29,6 +32,7 @@ public class PanelSucursalManagedBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Sucursal sucu;
+    private Part file;
     private Usuario tatuador;
     private Disenio dis;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
@@ -47,6 +51,14 @@ public class PanelSucursalManagedBean implements Serializable {
 
     public void setSucu(Sucursal sucu) {
         this.sucu = sucu;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
     public Usuario getTatuador() {
@@ -119,5 +131,16 @@ public class PanelSucursalManagedBean implements Serializable {
         setTatuador(ta);
         FacesUtils.setObjectAcceso("tatuador", ta);
         return "/pages/tatuador/perfil.xhtml?faces-redirect=true";
+    }
+    
+    public void cambiarFoto() throws NoSuchAlgorithmException{
+        try {
+            sucu.setFotoSuc(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
+            sfl.edit(sucu);
+            FacesUtils.mensaje("buena");
+        } catch (Exception e) {
+            FacesUtils.mensaje("error");
+        }
+        
     }
 }
