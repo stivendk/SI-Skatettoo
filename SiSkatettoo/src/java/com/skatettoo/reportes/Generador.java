@@ -35,12 +35,12 @@ public class Generador {
     public static final long serialVersionUID = 45L;
 
     private List<Usuario> usu;
-    private List<Usuario> us;
+    /*private List<Usuario> us;*/
     private String titulo;
 
-    public Generador(List<Usuario> usu, List<Usuario> us, String titulo) {
+    public Generador(List<Usuario> usu, String titulo) {
         this.usu = usu;
-        this.us = us;
+        /*this.us = us;*/
         this.titulo = titulo;
     }
 
@@ -52,13 +52,13 @@ public class Generador {
         this.usu = usu;
     }
 
-    public List<Usuario> getUs() {
+    /*public List<Usuario> getUs() {
         return us;
     }
 
     public void setUs(List<Usuario> us) {
         this.us = us;
-    }
+    }*/
 
     public String getTitulo() {
         return titulo;
@@ -112,10 +112,10 @@ public class Generador {
             }
             doc.add(tabla);
             doc.bottomMargin();
-            doc.add(new Paragraph("Tatuador mas solicitado"));
+           /* doc.add(new Paragraph("Tatuador mas solicitado"));
             for(Usuario u : this.getUs()){
                 doc.add(new Paragraph(u.getNombre() + " " + u.getApellido()));
-            }
+            }*/
             doc.close();
             FacesContext context = FacesContext.getCurrentInstance();
             ExternalContext externalContext = context.getExternalContext();

@@ -50,17 +50,6 @@
                                     <h:messages showSummary="true" />
                                 </h:form>
                             </div>
-                            <h3>#{adminBundle.mss}</h3>
-                            <ui:repeat value="#{loginManagedBean.masSolicitado()}" var="ta">
-                                <div class="col-sm-6 col-md-6 col-lg-3 mt-4">
-                                    <div class="card">
-                                        <img class="card-img-top" src="../../#{ta.fotoPerfil}"/>
-                                        <div class="card-block">
-                                            <h5 class="text-bold">#{ta.nombre} #{ta.apellido}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ui:repeat>
                         </div>
                         <div class="col-md-6">
                             <canvas id="doughnut-chart" width="500" height="250"></canvas>

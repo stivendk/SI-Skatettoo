@@ -6,6 +6,7 @@
 package com.skatettoo.frontend.controllers;
 
 import com.skatettoo.backend.persistence.entities.Permiso;
+import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Sucursal;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
@@ -185,7 +186,7 @@ public class LoginManagedBean implements Serializable {
     }
     
     public void reporte() throws Exception{
-        Generador g = new Generador(usuario.getIdSucursal().getUsuarioList(), masSolicitado(), usuario.getIdSucursal().getNombre());
+        Generador g = new Generador(usuario.getIdSucursal().getUsuarioList(), usuario.getIdSucursal().getNombre());
         g.generarPDF();
     }
     
@@ -205,7 +206,7 @@ public class LoginManagedBean implements Serializable {
             if (l.getEstadoUsuario() != 4) {
                 t.add(l);
             }
-        }
+        }   
         return t;
     }
     
@@ -217,6 +218,21 @@ public class LoginManagedBean implements Serializable {
             }
         }
         return t;
+    }
+    
+    public List<Usuario> tamasSolicitado(){
+        Rol r = new Rol();
+        r.setIdRol(2);
+        List<Usuario> u = new ArrayList<>();
+        for(Usuario t : usuario.getIdSucursal().getUsuarioList()){
+            if (t.getIdRol() != r) {
+                u.add(t);
+                if (t.getCitaList().size() >= usuario.getIdSucursal().getCitaList().size()) {
+                
+                }
+            }
+        }
+        return u;
     }
     
     public void activar(Usuario u){
