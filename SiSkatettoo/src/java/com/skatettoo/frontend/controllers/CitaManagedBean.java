@@ -10,6 +10,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.skatettoo.backend.persistence.entities.Cita;
 import com.skatettoo.backend.persistence.entities.Sucursal;
+import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.CitaFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
@@ -214,7 +215,7 @@ public class CitaManagedBean implements Serializable {
         return l;
     }
     
-    public List<Cita> listarAdminR() {
+    public List<Cita> listarAminR() {
         List<Cita> l = new ArrayList<>();
         try {
             for (Cita c : listarCita()) {
@@ -229,6 +230,26 @@ public class CitaManagedBean implements Serializable {
 
         }
         return l;
+    }
+    
+    public List<Cita> listarAdminq(){
+        List<Cita> t = new ArrayList<>();
+        for(Cita l : us.getUsuario().getCitaList1()){
+            if (l.getEstadoCita() == 4) {
+                t.add(l);
+            }
+        }
+        return t;
+    }
+    
+    public List<Cita> listarAdminR(){
+        List<Cita> t = new ArrayList<>();
+        for(Cita l : us.getUsuario().getCitaList1()){
+            if (l.getEstadoCita() != 4) {
+                t.add(l);
+            }
+        }
+        return t;
     }
     
     public void mostrarInfo(Cita c) {

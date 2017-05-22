@@ -37,7 +37,7 @@
                                         </thead>
                                         <tbody>
                                             <h:form>
-                                                <ui:repeat value="#{citaManagedBean.listarAdmin()}" var="cita">
+                                                <ui:repeat value="#{citaManagedBean.listarAdminq()}" var="cita">
                                                     <tr>
                                                         <td>#{cita.idSucursal.nombre}</td>
                                                         <td>#{cita.idUsuario.nombre} #{cita.idUsuario.apellido}</td>
@@ -52,7 +52,10 @@
                                                             </h:commandButton></td>
                                                         <td><h:commandButton class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#aplazar" value="#{editeliBundle.aplazar}"><span class="glyphicon glyphicon-pencil"></span>
                                                                 <f:ajax event="click" listener="#{citaManagedBean.actualizarCita(cita)}"/>
-                                                            </h:commandButton></td>  
+                                                            </h:commandButton></td> 
+                                                        <td><h:commandLink class="btn btn-primary btn-xs" pt:href="#" pt:data-toggle="modal" pt:data-target="#ordinea" value="#{inicioBundle.ver}">
+                                                                <f:ajax event="click" listener="#{citaManagedBean.mostrarInfo(cita)}" render="citas3"/>
+                                                            </h:commandLink></td>
                                                         <td><center><button jsf:action="#{citaManagedBean.terminarCita(cita)}" class="glyphicon glyphicon-ok btn btn-success"></button></center></td>
                                                     </tr>
                                                 </ui:repeat>
@@ -129,6 +132,34 @@
                             </div><!-- /.modal-dalog -->
                         </div><!-- /.modal -->
                     </div>
+                </div>
+                <div id="ordinea" class="modal fade" role="dialog">
+                    <h:form id="citas3">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">#{citaSessionController.cit.idSucursal.nombre}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="../../#{citaSessionController.cit.disenioAdjunto}" class="img-circle" style="width: 500px"/>
+                                    <p>#{citaSessionController.cit.descripcion}</p>
+                                    <h:outputText value="#{citaSessionController.cit.fechaHora}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+
+                                    </h:outputText>
+                                    <br/>
+                                    <b>#{citaSessionController.cit.idUsuario.nombre} #{citaSessionController.cit.idUsuario.apellido}</b>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{clienteBundle.cClo}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </h:form>
                 </div>
                 <div id="ordine" class="modal fade" role="dialog">
                     <h:form id="citas">
