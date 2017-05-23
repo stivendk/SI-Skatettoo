@@ -15,12 +15,18 @@
         <script src="resources/js/jquery-2.2.3.min.js"></script>
     </h:head>
     <h:body>
+        <h:form class="navbar-fixed-bottom navbar-right">
+            <li>
+                <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
+                <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+            </li>
+        </h:form>
         <h:form>
             <div class="login-body">
                 <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="index.xhtml"/>
                 <article class="container-login center-block">
                     <section>
-                         <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
+                        <div class="tab-content tabs-login col-lg-12 col-md-12 col-sm-12 cols-xs-12">
                             <div id="login-access" class="tab-pane fade active in">
                                 <h2><i ></i> #{loginBundle.olvidar}</h2>
                                 <p>#{loginBundle.msjOlvidar}</p>

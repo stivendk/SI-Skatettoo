@@ -48,6 +48,12 @@
                                 </ul>
                             </h:form>
                         </div>
+                        <h:form class="navbar-fixed-bottom navbar-right">
+                            <li>
+                                <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
+                                <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+                            </li>
+                        </h:form>
                     </div>
                 </nav></ui:define>
             <ui:define name="top2"></ui:define>

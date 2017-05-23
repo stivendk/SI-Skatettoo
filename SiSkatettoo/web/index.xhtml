@@ -35,17 +35,14 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><h:link outcome="login.xhtml" value="#{indexBundle.iniciarS}"/></li>
                         <li><h:link outcome="registro.xhtml" value="#{indexBundle.registrate}"/></li>
-                        <li style="display: none">
-                            <h:form>
-                                <h:selectOneMenu value="#{traductorController.locale}"
-                                                 onchange="submit()"
-                                                 valueChangeListener="#{traductorController.cambioIdiomaIngles()}">
-                                    <f:selectItems value="#{traductorController.listIdiomas}"/>
-                                </h:selectOneMenu>
-                            </h:form>
-                        </li>
                     </ul>
                 </div>
+                <h:form class="navbar-fixed-bottom navbar-right">
+                    <li>
+                        <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
+                        <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+                    </li>
+                </h:form>
             </div>
         </nav>
         <div class="vacio"></div>

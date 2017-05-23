@@ -54,6 +54,12 @@
                                     <li><h:commandLink value="#{indexBundle.cerrarS}"  action="#{loginManagedBean.cerrarSesion()}"/></li>
                                 </ul>
                             </h:form>
+                            <h:form class="navbar-fixed-bottom navbar-right">
+                                <li style="list-style: none">
+                                    <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
+                                    <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+                                </li>
+                            </h:form>
                         </div>
                     </div>
                 </nav>

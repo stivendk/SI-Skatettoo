@@ -16,6 +16,12 @@
         <script src="resources/js/uploadIm.js"></script>
     </h:head>
     <h:body>
+        <h:form class="navbar-fixed-bottom navbar-right">
+            <li>
+                <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
+                <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+            </li>
+        </h:form>
         <h:form enctype="multipart/form-data">
             <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="/index"/>
             <div class="container">
