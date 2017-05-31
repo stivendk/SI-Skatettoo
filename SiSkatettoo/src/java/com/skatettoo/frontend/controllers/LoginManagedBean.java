@@ -240,7 +240,7 @@ public class LoginManagedBean implements Serializable {
             setUsuario(u);
             u.setEstadoUsuario(1);
             usfc.edit(u);
-            Email e = new Email(prop.getString("emailTas"), prop.getString("newT"), u.getEmail());
+            Email e = new Email(prop.getString("emailTas"), prop.getString("newT") + "\n" + prop.getString("newTema") + " " + u.getEmail() + "\n" + prop.getString("newTpss") + " " + u.getPassword(), u.getEmail());
             e.enviarEmail();
             FacesUtils.mensaje(prop.getString("nue"));
         } catch (Exception e) {

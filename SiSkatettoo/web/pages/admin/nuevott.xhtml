@@ -12,40 +12,58 @@
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
             <ui:define name="head2">
-             </ui:define>
+                <h:outputStylesheet  name="css/adminsb.css"/>
+            </ui:define>
             <ui:define name="titulo">
                 #{adminBundle.repor} | Skatettoo
             </ui:define>
 
             <ui:define name="content">
-                <div class="container fondo" >
-                    <div class="row">
-
-
-                        <div class="table-responsive">
-                            <h:form >
-                                <h2><h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/> | #{adminBundle.nstt}</h2>
-                                <table id="mytable" class="table table-bordred table-striped tabla" cellspacing="0" width="100%">
-                                    <thead>
-                                        <th>#{adminBundle.msc}</th>
-                                        <th>#{adminBundle.acel}</th>
-                                    </thead>
-                                    <tbody>
-
-                                        <ui:repeat value="#{loginManagedBean.estadoUsuario()}" var="repo">
-                                            <tr>
-                                                <td>#{repo.nombre} #{repo.apellido}</td>
-                                                <td><center><button jsf:action="#{loginManagedBean.activar(repo)}" class="glyphicon glyphicon-ok btn btn-success"></button></center></td>
-                                            </tr>
-                                        </ui:repeat>    
-                                    </tbody>
-                                </table>
-                                <h:messages showSummary="true" />
+                <div id="wrapper">
+                    <div id="sidebar-wrapper" style="margin-top: -29px">
+                        <ul class="sidebar-nav">
+                            <h:form>
+                                <li><h:link value="#{adminBundle.milo}" outcome="gsucursal.xhtml"/></li>
+                                <li class="active"><h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/></li>
+                                <li><h:commandLink action="#{loginManagedBean.actualizarSucursal()}" value="#{adminBundle.editSuc}" title="#{adminBundle.editSuc}"/></li>
+                                <li><h:commandLink action="#{loginManagedBean.actualizarFSuc()}" value="#{adminBundle.fotSuc}" title="#{adminBundle.fotSuc}"/></li>
                             </h:form>
+                        </ul>
+                    </div>
+                    <div id="page-content-wrapper">
+                        <div class="container-fluid">
+                            <a href="#menu-toggle" class="navbar-left glyphicon glyphicon-menu-hamburger editarSuc" id="menu-toggle" style="z-index: 2000"/>
+                            <div class="container fondo" >
+                                <div class="row">
+
+
+                                    <div class="table-responsive">
+                                        <h:form >
+                                            <h2><h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/> | #{adminBundle.nstt}</h2>
+                                            <table id="mytable" class="table table-bordred table-striped tabla" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <th>#{adminBundle.msc}</th>
+                                                    <th>#{adminBundle.acel}</th>
+                                                </thead>
+                                                <tbody>
+
+                                                    <ui:repeat value="#{loginManagedBean.estadoUsuario()}" var="repo">
+                                                        <tr>
+                                                            <td>#{repo.nombre} #{repo.apellido}</td>
+                                                            <td><center><button jsf:action="#{loginManagedBean.activar(repo)}" class="glyphicon glyphicon-ok btn btn-success"></button></center></td>
+                                                        </tr>
+                                                    </ui:repeat>    
+                                                </tbody>
+                                            </table>
+                                            <h:messages showSummary="true" />
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+                <h:outputScript name="js/adminsb.js"/>
             </ui:define>
 
         </ui:composition>

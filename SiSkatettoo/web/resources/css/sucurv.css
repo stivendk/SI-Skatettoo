@@ -195,7 +195,8 @@ a.editarSuc{
     font-size: 30px;
     color: #000;
 }
-a.editarSuc:hover{
+a.editarSuc:hover,
+a.editarSuc:active{
     color: #f00;
     text-decoration: none;
 }

@@ -11,8 +11,9 @@
 
         <ui:composition template="./../../WEB-INF/templates/skatettoo.xhtml">
             <ui:define name="head2">
+                <h:outputStylesheet name="css/estailos.css"/>
                 <h:outputStylesheet name="css/report.css"/>
-
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
             </ui:define>
             <ui:define name="titulo">
                 #{adminBundle.repor} | Skatettoo
@@ -27,7 +28,7 @@
                         </h:form>
                         <div class="col-md-6">
                             <div class="table-responsive">
-                                <h:form >
+                                <h:form>
                                     <table id="mytable" class="table table-bordred table-striped display nowrap" cellspacing="0" width="100%">
                                         <thead>
                                             <th>#{adminBundle.msc}</th>
@@ -39,9 +40,9 @@
                                                 <tr>
                                                     <td>#{repo.nombre} #{repo.apellido}</td>
                                                     <td>
-                                                        <h:commandButton value="#{clienteBundle.ver}" class="btn btn-darks">
+                                                        <h:commandLink value="#{clienteBundle.ver}" class="btn btn-darks">
                                                             <f:ajax event="click" listener="#{loginManagedBean.reportTat(repo)}" render="repotat"/>
-                                                        </h:commandButton>
+                                                        </h:commandLink>
                                                     </td>
                                                 </tr>
                                             </ui:repeat>    
@@ -50,6 +51,16 @@
                                     <h:messages showSummary="true" />
                                 </h:form>
                             </div>
+                            <ui:repeat value="#{loginManagedBean.masSolicitado()}" var="ta">
+                                <div class="col-sm-6 col-md-6 col-lg-3 mt-4">
+                                    <div class="card">
+                                        <img class="card-img-top" src="../../#{ta.fotoPerfil}"/>
+                                        <div class="card-block">
+                                            <h5 class="text-bold">#{ta.nombre} #{ta.apellido}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
                         </div>
                         <div class="col-md-6">
                             <canvas id="doughnut-chart" width="500" height="250"></canvas>

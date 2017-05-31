@@ -12,6 +12,7 @@
             <ui:define name="head2">
                 <h:outputStylesheet name="css/sucurv.css" />
                 <h:outputStylesheet  name="css/datepicker.min.css"/>
+                <h:outputStylesheet  name="css/adminsb.css"/>
                 <h:outputStylesheet name="css/gallery.css"/>
                 <h:outputScript name="js/jquery-2.2.3.min.js"/>
                 <h:outputScript name="js/datepicker.min.js" />
@@ -20,54 +21,118 @@
             <ui:define name="titulo">
                 #{loginManagedBean.usuario.idSucursal.nombre} | Skatettoo
             </ui:define>
-            <ui:define name="top2"></ui:define>
             <ui:define name="content">
                 <h:messages showSummary="true" />
-                <div class="contenido-izquierda">
-                    <div class="contenido-sucursal-header">
-                        <img alt="Mert Salih Kaplan" src="../../#{loginManagedBean.usuario.idSucursal.fotoSuc}" class="avatar-sucursal"/>
+                <button type="button" class="navbar-right btn btn-info btn-lg glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#nuevoTat" style="z-index: 2000"></button>
+                <div id="wrapper">
+                    <div id="sidebar-wrapper" style="margin-top: -29px">
+                        <ul class="sidebar-nav">
+                            <h:form>
+                                <li class="active"><h:link value="#{adminBundle.milo}" outcome="gsucursal.xhtml"/></li>
+                                <li><h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/></li>
+                                <li><h:commandLink action="#{loginManagedBean.actualizarSucursal()}" value="#{adminBundle.editSuc}" title="#{adminBundle.editSuc}"/></li>
+                                <li><h:commandLink action="#{loginManagedBean.actualizarFSuc()}" value="#{adminBundle.fotSuc}" title="#{adminBundle.fotSuc}"/></li>
+                            </h:form>
+                        </ul>
                     </div>
-                    <div class="contenido-sucursal listatatuadoressucursal">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3">
+                    <div id="page-content-wrapper">
+                        <div class="container-fluid">
+                            <a href="#menu-toggle" class="navbar-left glyphicon glyphicon-menu-hamburger editarSuc" id="menu-toggle" style="z-index: 2000"/>
+                            <div class="contenido-izquierda">
+                                <div class="contenido-sucursal-header">
+                                    <img alt="Mert Salih Kaplan" src="../../#{loginManagedBean.usuario.idSucursal.fotoSuc}" class="avatar-sucursal"/>
                                 </div>
-                                <div class="col-md-1">
-                                    <h:form>
-                                        <h:commandLink action="#{loginManagedBean.actualizarFSuc()}" title="#{adminBundle.act}" class="glyphicon glyphicon-camera editarSuc"/>
-                                    </h:form>
-                                </div>
-                                <div class="col-md-4">
-                                    <h:form>
-                                        <div class="info-sucursal">
-                                            <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
-                                            <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
-                                            <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
-                                            <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
+                                <div class="contenido-sucursal listatatuadoressucursal">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h:form>
+                                                    <div class="info-sucursal">
+                                                        <h1>#{loginManagedBean.usuario.idSucursal.nombre}</h1>
+                                                        <p>#{loginManagedBean.usuario.idSucursal.direccion}</p>
+                                                        <p>#{loginManagedBean.usuario.idSucursal.telefono}</p>
+                                                        <p>#{loginManagedBean.usuario.idSucursal.descripcion}</p>
+                                                    </div>
+                                                </h:form>
+                                                <center><h2>#{adminBundle.msc}</h2></center>
+                                            </div>
+                                            <div class="col-md-4">
+                                            </div>
                                         </div>
-                                    </h:form>
-                                    <h2>______<h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/>_____</h2>
-                                </div>
-                                <div class="col-md-4">
-                                    <h:form>
-                                        <a jsf:action="#{loginManagedBean.actualizarSucursal()}" title="#{adminBundle.editSuc}" class="glyphicon glyphicon-pencil editarSuc"/>
-                                    </h:form>
+                                    </div>
+                                    <div class="sucursal-tattooist">
+                                        <h:form>
+                                            <ul id="display-inline-block-example">
+                                                <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
+                                                    <li>
+                                                        <h:graphicImage library="img" pt:src="../../#{item.fotoPerfil}" class="avatar-tatuador"/>
+                                                        <span>#{item.nombre} #{item.apellido}</span>
+                                                        <h:commandButton class="btn btn-dark" value="#{adminBundle.ver}" action="#{sucursalSessionController.tatuadorA(item)}"/>
+                                                    </li>
+                                                </ui:repeat>
+                                            </ul>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="sucursal-tattooist">
-                            <h:form>
-                                <ul id="display-inline-block-example">
-                                    <ui:repeat value="#{loginManagedBean.usuario.idSucursal.usuarioList}" var="item">
-                                        <li>
-                                            <h:graphicImage library="img" pt:src="../../#{item.fotoPerfil}" class="avatar-tatuador"/>
-                                            <span>#{item.nombre} #{item.apellido}</span>
-                                            <h:commandButton class="btn btn-dark" value="#{adminBundle.ver}" action="#{sucursalSessionController.tatuadorA(item)}"/>
-                                        </li>
-                                    </ui:repeat>
-                                </ul>
-                            </h:form>
-                        </div>
+                    </div>
+                </div>
+                <h:outputScript name="js/adminsb.js" />
+                <div class="container">
+                    <div class="row">
+                        <div id="nuevoTat" class="modal fade in">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header" style="margin-top: -98px;">
+                                        <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                        <h4 class="modal-title">#{editeliBundle.newDise}</h4>
+                                    </div>
+                                    <h:form enctype="multipart/form-data" pt:method="post" prependId="false" class="form" role="form">
+                                        <div class="modal-body" >
+                                            <div class="row">
+                                                <div class="col-xs-6 col-md-6">
+                                                    <label for="nombre">#{regClienteBundle.cliNombre}</label>
+                                                    <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliNombre}(s)" id="nombre" value="#{registroTaController.ta.nombre}" title="#{regClienteBundle.cliNombre}" required="true" requiredMessage="#{regClienteBundle.msjNombre}">
+                                                        <f:ajax event="blur" render="nombreError"/>
+                                                    </h:inputText>
+                                                    <h:message for="nombre" errorClass="invalid" id="nombreError" />
+                                                </div>
+                                                <div class="col-xs-6 col-md-6">
+                                                    <label for="apellido">#{regClienteBundle.cliApellido}</label>
+                                                    <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliApellido}(s)" id="apellido" value="#{registroTaController.ta.apellido}" title="#{regClienteBundle.cliApellido}" required="true" requiredMessage="#{regClienteBundle.msjApellido}">
+                                                        <f:ajax event="blur" render="apellidoError"/>
+                                                    </h:inputText>
+                                                    <h:message for="apellido" errorClass="invalid" id="apellidoError" />
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <label for="email">#{regClienteBundle.cliEmail}</label>
+                                            <h:inputText class="form-control" pt:placeholder="eeeee@example.com" pt:type="email" id="email" value="#{registroTaController.ta.email}" title="#{regClienteBundle.cliEmail}" required="true" requiredMessage="#{regClienteBundle.msjEmail}">
+                                                <f:ajax event="blur" render="emailError"/>
+                                            </h:inputText>
+                                            <h:message for="email" errorClass="invalid" id="emailError" />
+                                            <br/>
+                                            <label for="telefono">#{regClienteBundle.cliCell}</label>
+                                            <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliCell}" id="telefono" pt:type="number" value="#{registroTaController.ta.telefono}" title="#{regClienteBundle.cliCell}" required="true" requiredMessage="#{regClienteBundle.msjCell}">
+                                                <f:ajax event="blur" render="telefonoError"/>
+                                            </h:inputText>
+                                            <h:message for="telefono" errorClass="invalid" id="telefonoError" />
+                                            <br/>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <div class="btn-group">
+                                                <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                                <h:commandButton class="btn btn-primary btn-lg" type="submit" value="#{registroBundle.registrar}" action="#{registroTaController.registrarTatuador()}"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dalog -->
+                        </div><!-- /.modal -->
                     </div>
                 </div>
             </ui:define>
@@ -75,4 +140,3 @@
         </ui:composition>
     </body>
 </html>
-

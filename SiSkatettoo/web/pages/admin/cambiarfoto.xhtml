@@ -12,39 +12,58 @@
 
             <ui:define name="head2">
                 <h:outputStylesheet name="css/estailos.css" />
+                <h:outputStylesheet  name="css/adminsb.css"/>
             </ui:define>
 
             <ui:define name="titulo">
-                Cmabiar foto | Skatettoo
+                #{adminBundle.camFo} | Skatettoo
             </ui:define>
 
             <ui:define name="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="modal-content">
-
-                            <h:form enctype="multipart/form-data" id="editarDis"  pt:method="post" prependId="false" class="form" role="form">
-                                <div class="modal-header" style="margin-top: -98px">
-                                    <h4 class="modal-title">#{sucursalFotoController.su.nombre}</h4>
-                                </div>
-
-                                <div class="modal-body" style="margin-top: 29px">
-                                    <div class="form-group">
-                                        <h:outputLabel value="#{adminBundle.act}:" for="nombreDaa" />
-                                        <h:inputFile id="nombreDa" value="#{sucursalFotoController.file}" title="#{adminBundle.act}"/>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="modal-footer ">
-                                    <div class="btn-group">
-                                        <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
-                                        <h:commandButton type="submit" value="#{adminBundle.edi}" actionListener="#{sucursalFotoController.cambiarFoto()}" class="btn btn-primary btn-lg"></h:commandButton>
-                                    </div>
-                                </div>
+                <div id="wrapper">
+                    <div id="sidebar-wrapper" style="margin-top: -29px">
+                        <ul class="sidebar-nav">
+                            <h:form>
+                                <li><h:link value="#{adminBundle.milo}" outcome="gsucursal.xhtml"/></li>
+                                <li><h:link value="#{adminBundle.msc}" outcome="equipo.xhtml"/></li>
+                                <li><h:commandLink action="#{loginManagedBean.actualizarSucursal()}" value="#{adminBundle.editSuc}" title="#{adminBundle.editSuc}"/></li>
+                                <li class="active"><h:commandLink action="#{loginManagedBean.actualizarFSuc()}" value="#{adminBundle.fotSuc}" title="#{adminBundle.fotSuc}"/></li>
                             </h:form>
+                        </ul>
+                    </div>
+                    <div id="page-content-wrapper">
+                        <div class="container-fluid">
+                            <a href="#menu-toggle" class="navbar-left glyphicon glyphicon-menu-hamburger editarSuc" id="menu-toggle" style="z-index: 2000"/>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="modal-content">
+
+                                        <h:form enctype="multipart/form-data" id="editarDis"  pt:method="post" prependId="false" class="form" role="form">
+                                            <div class="modal-header" style="margin-top: -98px">
+                                                <h4 class="modal-title">#{sucursalFotoController.su.nombre}</h4>
+                                            </div>
+
+                                            <div class="modal-body" style="margin-top: 29px">
+                                                <div class="form-group">
+                                                    <h:outputLabel value="#{adminBundle.act}:" for="nombreDaa" />
+                                                    <h:inputFile id="nombreDa" value="#{sucursalFotoController.file}" title="#{adminBundle.act}"/>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="modal-footer ">
+                                                <div class="btn-group">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
+                                                    <h:commandButton type="submit" value="#{adminBundle.edi}" actionListener="#{sucursalFotoController.cambiarFoto()}" class="btn btn-primary btn-lg"></h:commandButton>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <h:outputScript name="js/adminsb.js"/>
             </ui:define>
 
         </ui:composition>

@@ -11,6 +11,7 @@ import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.backend.persistence.facade.SucursalFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.email.Email;
+import com.skatettoo.frontend.util.GeneradorPss;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
@@ -44,11 +45,17 @@ public class RegistroTaController implements Serializable {
     private SucursalFacadeLocal sfc;
     @Inject
     private Conversation conversation;
+    @Inject
+    private LoginManagedBean us;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
 
     public RegistroTaController() {
     }
 
+    public LoginManagedBean getUs() {
+        return us;
+    }
+    
     public Usuario getTa() {
         return ta;
     }
@@ -104,22 +111,22 @@ public class RegistroTaController implements Serializable {
         return "tatuador.xhtml?faces-redirect=true";
     }
 
-    public String registrarTatuador() {
+    public void registrarTatuador() {
         try {
             Rol r = new Rol();
             r.setIdRol(2);
             ta.setIdRol(r);
             ta.setEstadoUsuario(4);
-            ta.setIdSucursal(suc);
+            ta.setIdSucursal(getUs().getSuc());
+            ta.setPassword(GeneradorPss.generadorPassword());
             tfc.create(ta);
             Email e = new Email(prop.getString("emailTas"), getTa().getNombre() + getTa().getApellido() + "\n" + prop.getString("emailDesS1") + "\n" + prop.getString("emailTdes"), getTa().getEmail());
             e.enviarEmail();
             conversation.end();
-            return "login.xhtml?faces-redirect=true";
+            FacesUtils.mensaje(prop.getString("newtat"));
         } catch (Exception e) {
-            FacesUtils.mensaje("Ocurrio un error");
+            FacesUtils.mensaje(prop.getString("msjError" + e.getMessage()));
         }
-        return "";
     }
 
     public void validatePassword(ComponentSystemEvent event) {
