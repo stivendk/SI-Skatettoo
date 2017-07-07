@@ -28,18 +28,17 @@
                     <div class="seccion">
                         <ui:repeat value="#{noticiaController.notiUsuario()}" var="noticia">
                             <h:form>
-                                <div class="panel-body" id="cuidados">
-                                    <center><h1 class="parrafo">#{noticia.titulo}</h1></center>
-                                    <figure class="pull-left "><img class="img-responsive img-rounded" alt="image" src="../../#{noticia.imgn}" width="400px" height="400px"/>
-                                        <figcaption class="text-center"></figcaption>
-                                    </figure>
-                                    <hr/> 
-                                    <p class="parrafo">#{noticia.descripcion}</p>
-                                    <hr/>
-                                    <td><h:commandButton pt:href="#" pt:data-toggle="modal" pt:data-target="#actualNoti" class="btn btn-primary btn-xs"  value="#{editeliBundle.editar}"><span class="glyphicon glyphicon-pencil"></span>
+                                <div class="col-md-12 blogShort">
+                                    <h1>#{noticia.titulo}</h1>
+                                    <img class="pull-left img-responsive thumb margin10 img-thumbnail" alt="image" src="../../#{noticia.imgn}" width="400px" height="400px"/>
+
+                                    <article><p>
+                                               #{noticia.descripcion}
+                                        </p></article>
+                                    <td><h:commandButton pt:href="#" pt:data-toggle="modal" pt:data-target="#actualNoti" class="btn btn-primary btn-xs pull-right marginBottom10"  value="#{editeliBundle.editar}">
                                             <f:ajax event="click" listener="#{noticiaController.actualizarNoticia(noticia)}" render="editNoti"/>
                                         </h:commandButton></td>
-                                    <td><h:commandButton class="btn btn-danger btn-xs" actionListener="#{noticiaController.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"><span class="glyphicon glyphicon-trash"></span></h:commandButton></td>
+                                    <td><h:commandButton class="btn btn-danger btn-xs pull-right marginBottom10" actionListener="#{noticiaController.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"></h:commandButton></td>
                                 </div>
                                 <div class="bgimg-2">
                                     <div class="caption">

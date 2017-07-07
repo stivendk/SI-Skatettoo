@@ -16,16 +16,16 @@
     <h:body>
         <h:form class="navbar-fixed-bottom navbar-right">
             <li>
-                <h:commandButton value="English " action="#{traductorController.changeLocale('en')}"/>
-                <h:commandButton value="Español" action="#{traductorController.changeLocale('es')}"/>
+                <h:commandButton class="btn btn-dark btn-xs" value="English " action="#{traductorController.changeLocale('en')}"/>
+                <h:commandButton class="btn btn-dark btn-xs" value="Español" action="#{traductorController.changeLocale('es')}"/>
             </li>
         </h:form>
         <h:form>
             <h:link class="glyphicon glyphicon-arrow-left regresar" outcome="/index"/>
             <div class="container">
+                <div class="vacio"></div>
                 <div class="row">
-                    <div class="col-md-1 espacio"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 well well-sm info-reg">
+                    <div class="col-xs-12 col-sm-12 col-md-5 well well-sm info-reg">
                         <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regCli}</legend>
                         <div class="vacio-letra"></div>
                         <p>#{registroBundle.descrCli}</p>
@@ -33,18 +33,10 @@
                             <h:link class="btn btn-lg btn-primary btn-block" outcome="cliente.xhtml" value="#{registroBundle.registrar}"/>
                         </h:form>
                     </div>
-                    <div class="col-md-1 espacio"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-3 well well-sm info-reg">
-                        <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regTa}</legend>
-                        <div class="vacio-letra"></div>
-                        <p>#{registroBundle.descrTa}</p>
-                        <h:form pt:method="post" prependId="false" class="form" role="form">
-                            <h:link class="btn btn-lg btn-primary btn-block" outcome="regtatuador.xhtml" value="#{registroBundle.registrar}"/>
-                        </h:form>
-                    </div>
-                    <div class="col-md-1 espacio"></div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 well well-sm info-reg">
+                    <div class="col-md-2 espacio"></div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 well well-sm info-reg">
                         <legend class="letra-blanca"><i class="glyphicon glyphicon-globe"></i> #{registroBundle.regAd}</legend>
+                        <br/>
                         <p>#{registroBundle.descrAd}</p>
                         <h:form pt:method="post" prependId="false" class="form" role="form">
                             <h:link class="btn btn-lg btn-primary btn-block" outcome="crsucu.xhtml" value="#{registroBundle.registrar}"/>

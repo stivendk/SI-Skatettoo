@@ -111,3 +111,16 @@ body {
     text-decoration: none;
     color: #f00;
 }
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+.btn-dark {
+    border-radius: 0;
+    padding: 15px 25px;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 30px;
+}

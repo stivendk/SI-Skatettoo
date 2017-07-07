@@ -9,6 +9,7 @@ import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.email.Email;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
+import com.skatettoo.frontend.util.PasswordHash;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
@@ -99,34 +100,37 @@ public class RegistroController {
     
     
     public void validatePassword(ComponentSystemEvent event) {
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
 
-        FacesContext fc = FacesContext.getCurrentInstance();
+            UIComponent components = event.getComponent();
 
-        UIComponent components = event.getComponent();
+            // get password
+            UIInput uiInputPassword = (UIInput) components.findComponent("password");
+            String password = uiInputPassword.getLocalValue() == null ? ""
+                    : uiInputPassword.getLocalValue().toString();
+            String passwordId = uiInputPassword.getClientId();
 
-        // get password
-        UIInput uiInputPassword = (UIInput) components.findComponent("password");
-        String password = uiInputPassword.getLocalValue() == null ? ""
-                : uiInputPassword.getLocalValue().toString();
-        String passwordId = uiInputPassword.getClientId();
+            // get confirm password
+            UIInput uiInputConfirmPassword = (UIInput) components.findComponent("confirmPassword");
+            String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
+                    : uiInputConfirmPassword.getLocalValue().toString();
 
-        // get confirm password
-        UIInput uiInputConfirmPassword = (UIInput) components.findComponent("confirmPassword");
-        String confirmPassword = uiInputConfirmPassword.getLocalValue() == null ? ""
-                : uiInputConfirmPassword.getLocalValue().toString();
+            // Let required="true" do its job.
+            if (password.isEmpty() || confirmPassword.isEmpty()) {
+                return;
+            }
 
-        // Let required="true" do its job.
-        if (password.isEmpty() || confirmPassword.isEmpty()) {
-            return;
-        }
+            if (!password.equals(confirmPassword)) {
 
-        if (!password.equals(confirmPassword)) {
+                FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
+                msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+                fc.addMessage(passwordId, msg);
+                fc.renderResponse();
 
-            FacesMessage msg = new FacesMessage(prop.getString("errorPass"));
-            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            fc.addMessage(passwordId, msg);
-            fc.renderResponse();
-
+            }
+        } catch (Exception e) {
+            FacesUtils.mensaje("No te olvides de confirmar tu contraseña");
         }
 
     }
