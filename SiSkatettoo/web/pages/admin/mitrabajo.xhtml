@@ -39,8 +39,9 @@
                                                 <h:commandButton value="#{editeliBundle.editar}" pt:href="#" pt:data-toggle="modal" pt:data-target="#actualDis" class="btn btn-primary btn-sm">
                                                     <f:ajax event="click" listener="#{disenioManagedBean.actualizarDisenio(dis)}" render="editarDis"/>
                                                 </h:commandButton>
-                                                <h:commandButton value="#{editeliBundle.eliminar}" actionListener="#{disenioManagedBean.eliminarDisenio(dis)}" class="btn btn-danger btn-sm"/>
-
+                                                <h:commandButton value="#{editeliBundle.eliminar}" pt:data-toggle="modal" pt:data-target="#eliminado" pt:href="#" class="btn btn-danger btn-sm">
+                                                    <f:ajax event="click" listener="#{disenioManagedBean.cogerDisenio(dis)}" render="eliminar"/>
+                                                </h:commandButton>
                                             </div>
                                             <img src="../../#{dis.nombreDisenio}" width="200px" height="200px" alt="..." class="img-responsive"/>
                                         </div>
@@ -50,6 +51,28 @@
                         </div>
                     </section>
                 </h:form>
+                <div id="eliminado" class="modal fade in">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <h:form id="eliminar">
+                            <div class="modal-header">
+                                <a class="btn btn-default close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                <h4 class="modal-title">¿Estas seguro?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h4>#{panelDisenioManagedBean.dis.nombreD}</h4>
+                                <p>¿Estas seguro de eliminar este diseño?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn-group">
+                                    <h:commandButton value="Cancelar" class="btn btn-info" actionListener="#{panelDisenioManagedBean.cancelarElimin()}" pt:data-dismiss="modal"></h:commandButton>
+                                    <h:commandButton value="#{editeliBundle.eliminar}" actionListener="#{panelDisenioManagedBean.eliminarDisenio(dis)}" class="btn btn-danger"/>
+                                </div>
+                            </div>
+                            </h:form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dalog -->
+                </div>
                 <div class="container">
                     <div class="row">
                         <div id="nuevoDis" class="modal fade in">
@@ -85,7 +108,7 @@
                                         <div class="modal-footer ">
                                             <div class="btn-group">
                                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg" > #{editeliBundle.cancelar}</button>
-                                                <h:commandButton type="submit" value="#{editeliBundle.publi}" actionListener="#{disenioManagedBean.registrarDisenio()}" class="btn btn-primary btn-lg"></h:commandButton>
+                                                <h:commandButton type="submit" value="#{editeliBundle.publi}" actionListener="#{disenioManagedBean.registrarDisenioA()}" class="btn btn-primary btn-lg"></h:commandButton>
                                             </div>
                                         </div>
                                     </h:form>

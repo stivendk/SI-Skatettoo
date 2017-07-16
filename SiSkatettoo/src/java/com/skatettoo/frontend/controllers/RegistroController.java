@@ -33,10 +33,13 @@ public class RegistroController {
 
     private Usuario us;
     private Rol rl;
-    @EJB private UsuarioFacadeLocal ufc;
-    @Inject SucursalManagedBean smb;
+    private String confirmar;
+    @EJB
+    private UsuarioFacadeLocal ufc;
+    @Inject
+    SucursalManagedBean smb;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
-    
+
     public Usuario getUs() {
         return us;
     }
@@ -48,7 +51,7 @@ public class RegistroController {
     public void setUs(Usuario us) {
         this.us = us;
     }
-    
+
     public RegistroController() {
     }
 
@@ -59,46 +62,67 @@ public class RegistroController {
     public void setRl(Rol rl) {
         this.rl = rl;
     }
-    
-    
+
+    public String getConfirmar() {
+        return confirmar;
+    }
+
+    public void setConfirmar(String confirmar) {
+        this.confirmar = confirmar;
+    }
+
     @PostConstruct
-    public void init(){
-       us = new Usuario();
+    public void init() {
+        us = new Usuario();
     }
-    
-    
-    public String registrarCliente(){
+
+    public String registrarCliente() {
         try {
-            Rol r = new Rol();
-            r.setIdRol(1);
-            us.setIdRol(r);
-            ufc.create(us);
-            Email e = new Email(prop.getString("emailAsC"), getUs().getNombre() + " " + getUs().getApellido() + "\n" + prop.getString("emailDesC"), getUs().getEmail());
-            e.enviarEmail();
-            return "login.xhtml?faces-redirect=true";
+            if (validar(us.getPassword())) {
+                Rol r = new Rol();
+                r.setIdRol(1);
+                us.setIdRol(r);
+                us.setPassword(ufc.passwordHash(us.getPassword()));
+                ufc.create(us);
+                Email e = new Email(prop.getString("emailAsC"), getUs().getNombre() + " " + getUs().getApellido() + "\n" + prop.getString("emailDesC"), getUs().getEmail());
+                e.enviarEmail();
+                return "login.xhtml?faces-redirect=true";
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Las contraseñas no coinciden!", "Se modifico"));
+            }
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("msjError"));
         }
         return "";
     }
-    
-    public String registrarAdmin(){
+
+    public String registrarAdmin() {
         try {
-            Rol r = new Rol();
-            r.setIdRol(3);
-            us.setIdRol(r);
-            us.setEstadoUsuario(1);
-            ufc.create(us);
-            Email e = new Email(prop.getString("emailAsS"), getUs().getNombre() + " " + getUs().getApellido() + "\n"+ prop.getString("emailDesS1 ") + getUs().getIdSucursal().getNombre() + "\n"+ prop.getString("emailDesS2 ") + getUs().getIdSucursal().getPin() + "\n" + prop.getString("emailDesS3"), getUs().getEmail());
-            e.enviarEmail();
+            if (validar(us.getPassword())) {
+                Rol r = new Rol();
+                r.setIdRol(3);
+                us.setIdRol(r);
+                us.setEstadoUsuario(1);
+                ufc.create(us);
+                Email e = new Email(prop.getString("emailAsS"), getUs().getNombre() + " " + getUs().getApellido() + "\n" + prop.getString("emailDesS1 ") + getUs().getIdSucursal().getNombre() + "\n" + prop.getString("emailDesS2 ") + getUs().getIdSucursal().getPin() + "\n" + prop.getString("emailDesS3"), getUs().getEmail());
+                e.enviarEmail();
+            }else{
+                FacesUtils.mensaje(prop.getString("msjError"));
+            }
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("msjError"));
         }
         return "";
     }
-    
-    
-    
+
+    public boolean validar(String us) {
+        boolean coinciden = false;
+        if (us.equals(confirmar)) {
+            coinciden = true;
+        }
+        return coinciden;
+    }
+
     public void validatePassword(ComponentSystemEvent event) {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();

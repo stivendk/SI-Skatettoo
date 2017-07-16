@@ -47,6 +47,12 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Usuario implements Serializable, IEntitie {
 
     private static final long serialVersionUID = 1L;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "telefono")
+    private long telefono;
+
 
     @Basic(optional = false)
     @NotNull
@@ -82,10 +88,6 @@ public class Usuario implements Serializable, IEntitie {
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "telefono")
-    private int telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
     private List<Disenio> disenioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
@@ -108,7 +110,7 @@ public class Usuario implements Serializable, IEntitie {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String password, String nombre, String apellido, String email, int telefono) {
+    public Usuario(Integer idUsuario, String password, String nombre, String apellido, String email, long telefono) {
         this.idUsuario = idUsuario;
         this.password = password;
         this.nombre = nombre;
@@ -165,13 +167,6 @@ public class Usuario implements Serializable, IEntitie {
         this.email = email;
     }
 
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
 
     @Override
     public int hashCode() {
@@ -261,5 +256,13 @@ public class Usuario implements Serializable, IEntitie {
 
     public void setEstadoUsuario(int estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
+    }
+
+    public long getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(long telefono) {
+        this.telefono = telefono;
     }
 }

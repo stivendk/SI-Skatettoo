@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -38,18 +38,35 @@ import javax.servlet.http.Part;
 public class LoginManagedBean implements Serializable {
 
     private static final long serialVersionUID = 24L;
-    
+
     private Usuario usuario;
+    private String password;
     private Part file;
     private List<Permiso> permis;
     private List<Usuario> consulta;
     private Sucursal suc;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
-    @Inject SucursalManagedBean su;
-    @EJB UsuarioFacadeLocal usfc;
+    @Inject
+    SucursalManagedBean su;
+    @EJB
+    UsuarioFacadeLocal usfc;
+    @Inject
+    RegistroController rc;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public Sucursal getSuc() {
         return suc;
+    }
+
+    public RegistroController getRc() {
+        return rc;
     }
 
     public void setSuc(Sucursal suc) {
@@ -71,7 +88,7 @@ public class LoginManagedBean implements Serializable {
     public void setConsulta(List<Usuario> consulta) {
         this.consulta = consulta;
     }
-    
+
     public LoginManagedBean() {
     }
 
@@ -79,7 +96,6 @@ public class LoginManagedBean implements Serializable {
         return su;
     }
 
-    
     public Usuario getUsuario() {
         return usuario;
     }
@@ -88,50 +104,60 @@ public class LoginManagedBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Permiso> getPermis() {       
+    public List<Permiso> getPermis() {
         return permis;
-    }    
-    
+    }
+
     @PostConstruct
     public void init() {
         usuario = (Usuario) FacesUtils.getObjectMapSession("usuario");
         permis = getUsuario().getIdRol().getPermisoList();
-        
     }
 
-    public void modificarUs(){
+    public void modificarUs() {
         try {
-            usfc.edit(usuario);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Se a guardado satisfactoriamente!", "Se modifico"));
+            Usuario us = (Usuario) FacesUtils.getObjectMapSession("usuario");
+            if (rc.validar(password)) {
+                password = usfc.passwordHash(password);
+                if (!us.getPassword().equals(password)) {
+                    usuario.setPassword(password);
+                }
+                usfc.edit(usuario); 
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Se a guardado satisfactoriamente!", "Se modifico"));
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Las contraseñas no coinciden!", "Se modifico"));
+
+            }
         } catch (Exception e) {
             FacesUtils.mensaje("Ocurrio un error" + " " + e.getMessage());
         }
     }
-    
-    public List<Usuario> listE(){
+
+    public List<Usuario> listE() {
         return usuario.getIdSucursal().getUsuarioList();
     }
-    
+
     public String actualizarSucursal() {
         setSuc(usuario.getIdSucursal());
         return "/pages/admin/gsucursall.xhtml?faces-redirect=true";
     }
-    
-    public String actualizarFSuc(){
+
+    public String actualizarFSuc() {
         setSuc(usuario.getIdSucursal());
         FacesUtils.setObjectAcceso("sucursal", usuario.getIdSucursal());
         return "/pages/admin/cambiarfoto.xhtml?faces-rediderect=true";
     }
-    
-    public void editarSucursal(){
+
+    public void editarSucursal() {
         try {
             su.editarSucursal();
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("succes"));
         }
     }
-    
-    public void editarSucursalP(){
+
+    public void editarSucursalP() {
         try {
             su.getSucu().setFotoSuc(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
             su.editarSucursal();
@@ -139,19 +165,18 @@ public class LoginManagedBean implements Serializable {
             FacesUtils.mensaje(prop.getString("succes"));
         }
     }
-    
-    
+
     public String gestSurcursal() {
         usuario.setIdSucursal(suc);
         FacesUtils.setObjectAcceso("sucursal", suc);
         return "/pages/admin/gsucursall?faces-redirect=true";
     }
-    
-    public void reportTat(Usuario t){
+
+    public void reportTat(Usuario t) {
         setUsuario(t);
         FacesUtils.setObjectAcceso("tatuador", t);
     }
-    
+
     public void validatePassword(ComponentSystemEvent event) {
 
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -184,58 +209,58 @@ public class LoginManagedBean implements Serializable {
         }
 
     }
-    
-    public void reporte() throws Exception{
+
+    public void reporte() throws Exception {
         Generador g = new Generador(usuario.getIdSucursal().getUsuarioList(), usuario.getIdSucursal().getNombre());
         g.generarPDF();
     }
-    
-    public List<Usuario> estadoUsuario(){
+
+    public List<Usuario> estadoUsuario() {
         List<Usuario> t = new ArrayList<>();
-        for(Usuario l : usuario.getIdSucursal().getUsuarioList()){
+        for (Usuario l : usuario.getIdSucursal().getUsuarioList()) {
             if (l.getEstadoUsuario() == 4) {
                 t.add(l);
             }
         }
         return t;
     }
-    
-    public List<Usuario> estadoUsuarioA(){
+
+    public List<Usuario> estadoUsuarioA() {
         List<Usuario> t = new ArrayList<>();
-        for(Usuario l : usuario.getIdSucursal().getUsuarioList()){
+        for (Usuario l : usuario.getIdSucursal().getUsuarioList()) {
             if (l.getEstadoUsuario() != 4) {
                 t.add(l);
             }
-        }   
+        }
         return t;
     }
-    
-    public List<Usuario> masSolicitado(){
+
+    public List<Usuario> masSolicitado() {
         List<Usuario> t = new ArrayList<>();
-        for(Usuario l : usuario.getIdSucursal().getUsuarioList()){
+        for (Usuario l : usuario.getIdSucursal().getUsuarioList()) {
             if (l.getCitaList1().size() >= usuario.getIdSucursal().getCitaList().size()) {
                 t.add(l);
             }
         }
         return t;
     }
-    
-    public List<Usuario> tamasSolicitado(){
+
+    public List<Usuario> tamasSolicitado() {
         Rol r = new Rol();
         r.setIdRol(2);
         List<Usuario> u = new ArrayList<>();
-        for(Usuario t : usuario.getIdSucursal().getUsuarioList()){
+        for (Usuario t : usuario.getIdSucursal().getUsuarioList()) {
             if (t.getIdRol() != r) {
                 u.add(t);
                 if (t.getCitaList().size() >= usuario.getIdSucursal().getCitaList().size()) {
-                
+
                 }
             }
         }
         return u;
     }
-    
-    public void activar(Usuario u){
+
+    public void activar(Usuario u) {
         try {
             setUsuario(u);
             u.setEstadoUsuario(1);
@@ -247,8 +272,8 @@ public class LoginManagedBean implements Serializable {
             FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
     }
-    
-    public void desactivar(Usuario u){
+
+    public void desactivar(Usuario u) {
         try {
             setUsuario(u);
             u.setEstadoUsuario(4);
@@ -260,7 +285,7 @@ public class LoginManagedBean implements Serializable {
             FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
     }
-    
+
     public String cerrarSesion() {
         FacesUtils.removerObjectAcceso("usuario");
         FacesUtils.removerObjectAcceso("tatuador");
@@ -273,5 +298,5 @@ public class LoginManagedBean implements Serializable {
         usuario = null;
         return "/index.xhtml?faces-redirect=true";
     }
-    
+
 }

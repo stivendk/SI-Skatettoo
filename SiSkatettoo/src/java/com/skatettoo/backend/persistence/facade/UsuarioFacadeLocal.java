@@ -43,4 +43,7 @@ public interface UsuarioFacadeLocal {
     Object enviarCorreo(Usuario usu);
     
     List<Usuario> consultarEstado(String estado, Sucursal s);
+    
+    String passwordHash (String password); 
+
 }

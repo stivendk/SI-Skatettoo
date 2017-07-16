@@ -84,18 +84,37 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
         disenio = new Disenio();
     }
 
-    public void registrarDisenio() {
+    public String registrarDisenio() {
         try {
             disenio.setIdUsuario(getUs().getUsuario());
             disenio.setNombreDisenio(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
             diseniofc.create(disenio);
             FacesUtils.mensaje(prop.getString("newDis"));
+            return "/pages/tatuador/mitrabajo.xhtml?faces-redirect=true";
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("errorNoti") + e.getMessage());
         }
+        return "";
+    }
+    
+    public String registrarDisenioA() {
+        try {
+            disenio.setIdUsuario(getUs().getUsuario());
+            disenio.setNombreDisenio(UploadFIles.uploadFile(file, GeneradorPss.generadorPassword()));
+            diseniofc.create(disenio);
+            FacesUtils.mensaje(prop.getString("newDis"));
+            return "/pages/admin/mitrabajo.xhtml?faces-redirect=true";
+        } catch (Exception e) {
+            FacesUtils.mensaje(prop.getString("errorNoti") + e.getMessage());
+        }
+        return "";
     }
 
-    public void eliminarDisenioA(Disenio d) {
+    public void cogerDisenio(Disenio d){
+        FacesUtils.setObjectAcceso("disenio", d);
+    } 
+
+    public void eliminarDisenio(Disenio d) {
         try {
             diseniofc.remove(d);
             FacesUtils.mensaje(prop.getString("deleteNoti"));
@@ -103,8 +122,8 @@ public class DisenioManagedBean implements Serializable, Managedbean<Disenio> {
             FacesUtils.mensaje(prop.getString("errorNoti"));
         }
     }
-
-    public void eliminarDisenio(Disenio d) {
+    
+    public void eliminarDisenioA(Disenio d) {
         try {
             diseniofc.remove(d);
             FacesUtils.mensaje(prop.getString("deleteNoti"));

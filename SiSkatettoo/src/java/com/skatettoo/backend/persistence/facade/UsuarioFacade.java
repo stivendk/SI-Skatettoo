@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -83,11 +84,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @Override
     public Object autenticar(Usuario usu) {
         Usuario u = new Usuario();
+        String ps= passwordHash(usu.getPassword());
         try {
             TypedQuery<Usuario> query = getEntityManager().createNamedQuery("Usuario.findByEmail", Usuario.class).setParameter("email", usu.getEmail());
             if (query.getResultList().size() > 0) {
                 u = query.getResultList().get(0);
-                if (u.getPassword().equals(usu.getPassword())) {
+                if (u.getPassword().equals(ps)) {
                     if (u.getIdRol().getIdRol() == 2) {
                         if (u.getEstadoUsuario() != 4) {
                             return u;
@@ -132,6 +134,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @Override
     public List<Usuario> consultarEstado(String estado, Sucursal s) {
         return em.createNamedQuery("Usuario.findByEstadoUsuario").setParameter("estado", estado).getResultList();
+    }
+
+    @Override
+    public String passwordHash(String password) {
+       Query query;
+       String ps = null;
+        try {
+            query = em.createNativeQuery("SELECT encriptarpss(?)");
+            query.setParameter(1, password);
+            ps= (String) query.getSingleResult();
+        } catch (Exception e) {
+            throw e;
+        }
+        return ps;
+        
     }
     
     

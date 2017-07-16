@@ -61,16 +61,19 @@ public class NoticiaController {
         nt = new Noticia();
     }
     
-    public void publicarNoticia(){
+    public String publicarNoticia(){
         try {
             nt.setIdUsuario(getUs().getUsuario());
             nt.setImgn(UploadFIles.uploadFileN(file, GeneradorPss.generadorPassword()));
             nfc.create(nt);
             FacesUtils.mensaje(prop.getString("pubNot"));
+            return "/pages/tatuador/gnoticia.xhtml?faces-redirect=true?";
         } catch (Exception e) {
             FacesUtils.mensaje(prop.getString("msjError ") + e.getMessage());
         }
+        return "";
     }
+    
     public void editarNoticia(){
         try {
             nfc.edit(nt);
@@ -86,6 +89,10 @@ public class NoticiaController {
     
     public void verNoticia(Noticia n){
         setNt(n);
+    }
+    
+    public void cogerNoticia(Noticia n){
+        FacesUtils.setObjectAcceso("noticia", n);
     }
     
     public void eliminarNoticia(Noticia n){

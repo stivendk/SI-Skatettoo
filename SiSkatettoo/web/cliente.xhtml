@@ -25,19 +25,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 well well-sm salte">
+                        <h:messages showSummary="true"/>
                         <legend><i class="glyphicon glyphicon-globe"></i> #{indexBundle.registrate}</legend>
                         <h:form pt:method="post" prependId="false" class="form" role="form">
                             <div class="row">
                                 <div class="col-xs-6 col-md-6">
                                     <label for="nombre">#{regClienteBundle.cliNombre}</label>
-                                    <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliNombre}(s)" id="nombre" value="#{registroController.us.nombre}" title="#{regClienteBundle.cliNombre}" required="true" requiredMessage="#{regClienteBundle.msjNombre}">
+                                    <h:inputText class="form-control" pt:pattern="[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,30}+[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,30}" pt:placeholder="#{regClienteBundle.cliNombre}(s)" id="nombre" value="#{registroController.us.nombre}" title="#{regClienteBundle.cliNombre}" required="true" requiredMessage="#{regClienteBundle.msjNombre}">
                                         <f:ajax event="blur" render="nombreError"/>
                                     </h:inputText>
                                     <h:message for="nombre" errorClass="invalid" id="nombreError" />
                                 </div>
                                 <div class="col-xs-6 col-md-6">
                                     <label for="apellido">#{regClienteBundle.cliApellido}</label>
-                                    <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliApellido}(s)" id="apellido" value="#{registroController.us.apellido}" title="#{regClienteBundle.cliApellido}" required="true" requiredMessage="#{regClienteBundle.msjApellido}">
+                                    <h:inputText class="form-control" pt:pattern="[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,30}+[A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]{1,30}" pt:placeholder="#{regClienteBundle.cliApellido}(s)" id="apellido" value="#{registroController.us.apellido}" title="#{regClienteBundle.cliApellido}" required="true" requiredMessage="#{regClienteBundle.msjApellido}">
                                         <f:ajax event="blur" render="apellidoError"/>
                                     </h:inputText>
                                     <h:message for="apellido" errorClass="invalid" id="apellidoError" />
@@ -45,7 +46,7 @@
                             </div>
                             <br/>
                             <label for="email">#{regClienteBundle.cliEmail}</label>
-                            <h:inputText class="form-control" pt:placeholder="eeeee@example.com" pt:type="email" id="email" value="#{registroController.us.email}" title="#{regClienteBundle.cliEmail}" required="true" requiredMessage="#{regClienteBundle.msjEmail}">
+                            <h:inputText class="form-control" pt:placeholder="eeeee@example.com" pt:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" pt:type="email" id="email" value="#{registroController.us.email}" title="#{regClienteBundle.cliEmail}" required="true" requiredMessage="#{regClienteBundle.msjEmail}">
                                 <f:ajax event="blur" render="emailError"/>
                             </h:inputText>
                             <h:message for="email" errorClass="invalid" id="emailError" />
@@ -54,18 +55,16 @@
                             <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliCell}" id="telefono" pt:type="number" value="#{registroController.us.telefono}" title="#{regClienteBundle.cliCell}" required="true" requiredMessage="#{regClienteBundle.msjCell}">
                                 <f:ajax event="blur" render="telefonoError"/>
                             </h:inputText>
-                            <h:message for="telefono" errorClass="invalid" id="telefonoError" />
+                            <h:message for="telefono" pt:pattern="[01]{10}" errorClass="invalid" id="telefonoError" />
                             <br/>
                             <label for="password">#{regClienteBundle.cliCla}</label>
-                            <h:inputSecret class="form-control" pt:placeholder="#{regClienteBundle.cliCla}" id="password"  value="#{registroController.us.password}" title="#{regClienteBundle.cliCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}">
-                                <f:validator validatorId="passwordValidator" />
-                                <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                            <h:inputSecret class="form-control"  pt:placeholder="#{regClienteBundle.cliCla}" id="password"  value="#{registroController.us.password}" title="#{regClienteBundle.cliCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}">
                                 <f:ajax event="blur" render="passwordError"/>
                             </h:inputSecret>
                             <h:message for="password" errorClass="invalid" id="passwordError" />
                             <br/>
                             <label for="password2">#{regClienteBundle.cliConCla}</label>
-                            <h:inputSecret class="form-control" binding="#{confirmPassword}" pt:placeholder="#{regClienteBundle.cliConCla}" id="confirmPassword"  title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}">
+                            <h:inputSecret class="form-control" value="#{registroController.confirmar}" binding="#{confirmPassword}" pt:placeholder="#{regClienteBundle.cliConCla}" id="confirmPassword"  title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}">
                                 <f:ajax event="blur" render="password2Error" /> 
                             </h:inputSecret>
                             <h:message for="confirmPassword" errorClass="invalid" id="password2Error" />

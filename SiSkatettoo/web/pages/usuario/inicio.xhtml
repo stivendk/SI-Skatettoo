@@ -27,15 +27,16 @@
                                     <h:form>
                                         <div class="col-sm-4 col-md-4">
                                             <div class="post">
-                                                <div class="post-img-content">
-                                                    <img src="../../#{item.imgn}" class="img-responsive" width="460px" height="250px"/>
-                                                    <span class="post-title"><b>#{item.titulo}</b><br /></span>
-                                                </div>
+                                                <h:commandLink pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine">
+                                                    <div class="post-img-content">
+                                                        <img src="../../#{item.imgn}" class="img-responsive" width="460px" height="250px"/>
+                                                        <span class="post-title"><b>#{item.titulo}</b><br /></span>
+                                                    </div>
+                                                    <f:ajax event="click" listener="#{noticiaController.verNoticia(item)}" render="noticias"/> 
+                                                </h:commandLink> 
                                                 <div class="content">
                                                     <div class="author">
-                                                        #{inicioBundle.por} <b>#{item.idUsuario.nombre} #{item.idUsuario.apellido}</b> | <h:commandLink pt:href="#" pt:data-toggle="modal" pt:data-target="#ordine" value="#{inicioBundle.ver}">
-                                                            <f:ajax event="click" listener="#{noticiaController.verNoticia(item)}" render="noticias"/> 
-                                                        </h:commandLink> 
+                                                        #{inicioBundle.por} <b>#{item.idUsuario.nombre} #{item.idUsuario.apellido}</b> | 
                                                     </div>
                                                 </div>
                                             </div>

@@ -58,6 +58,7 @@ public class CitaManagedBean implements Serializable {
     @Inject
     PanelSucursalManagedBean su;
     ResourceBundle prop = FacesUtils.getBundle("controllerMsjBundle");
+
     public PanelSucursalManagedBean getSu() {
         return su;
     }
@@ -147,7 +148,7 @@ public class CitaManagedBean implements Serializable {
             if (c.getFechaHora().after(c.getFechaHora())) {
                 citafc.terminarCita(getCita(), c.getIdUsuario());
                 FacesUtils.mensaje(prop.getString("citat"));
-            }else{
+            } else {
                 FacesUtils.mensaje("La fecha aun no ha pasado");
             }
         } catch (Exception e) {
@@ -204,8 +205,8 @@ public class CitaManagedBean implements Serializable {
             for (Cita c : listarCita()) {
                 if (c.getTatuador().getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
                     l.add(c);
-                } 
-                if (c.getEstadoCita() == 4){
+                }
+                if (c.getEstadoCita() == 4) {
                     l.remove(c);
                 }
             }
@@ -214,15 +215,15 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
-    
+
     public List<Cita> listarAminR() {
         List<Cita> l = new ArrayList<>();
         try {
             for (Cita c : listarCita()) {
                 if (c.getTatuador().getIdUsuario().equals(us.getUsuario().getIdUsuario())) {
                     l.add(c);
-                } 
-                if (c.getEstadoCita() != 4 ){
+                }
+                if (c.getEstadoCita() != 4) {
                     l.remove(c);
                 }
             }
@@ -231,31 +232,30 @@ public class CitaManagedBean implements Serializable {
         }
         return l;
     }
-    
-    public List<Cita> listarAdminq(){
+
+    public List<Cita> listarAdminq() {
         List<Cita> t = new ArrayList<>();
-        for(Cita l : us.getUsuario().getCitaList1()){
+        for (Cita l : us.getUsuario().getCitaList1()) {
             if (l.getEstadoCita() == 4) {
                 t.add(l);
             }
         }
         return t;
     }
-    
-    public List<Cita> listarAdminR(){
+
+    public List<Cita> listarAdminR() {
         List<Cita> t = new ArrayList<>();
-        for(Cita l : us.getUsuario().getCitaList1()){
+        for (Cita l : us.getUsuario().getCitaList1()) {
             if (l.getEstadoCita() != 4) {
                 t.add(l);
             }
         }
         return t;
     }
-    
+
     public void mostrarInfo(Cita c) {
         setCita(c);
         FacesUtils.setObjectAcceso("cita", cita);
     }
-    
-    
+
 }

@@ -38,7 +38,9 @@
                                     <td><h:commandButton pt:href="#" pt:data-toggle="modal" pt:data-target="#actualNoti" class="btn btn-primary btn-xs pull-right marginBottom10"  value="#{editeliBundle.editar}">
                                             <f:ajax event="click" listener="#{noticiaController.actualizarNoticia(noticia)}" render="editNoti"/>
                                         </h:commandButton></td>
-                                    <td><h:commandButton class="btn btn-danger btn-xs pull-right marginBottom10" actionListener="#{noticiaController.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}"></h:commandButton></td>
+                                    <td><h:commandButton pt:data-toggle="modal" pt:data-target="#eliminado" pt:href="#" class="btn btn-danger btn-xs pull-right marginBottom10" actionListener="#{noticiaController.eliminarNoticia(noticia)}" value="#{editeliBundle.eliminar}">
+                                            <f:ajax event="click" listener="#{noticiaController.cogerNoticia(noticia)}" render="eliminar"/>
+                                        </h:commandButton></td>
                                 </div>
                                 <div class="bgimg-2">
                                     <div class="caption">
@@ -47,6 +49,28 @@
                             </h:form>
                         </ui:repeat>
                     </div>
+                </div>
+                <div id="eliminado" class="modal fade in">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <h:form id="eliminar">
+                            <div class="modal-header">
+                                <a class="btn btn-default close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                                <h4 class="modal-title">¿Estas seguro?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h4>#{noticiaSessionController.nt.titulo}</h4>
+                                <p>¿Estas seguro de eliminar esta publicación?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn-group">
+                                    <h:commandButton class="btn btn-info" actionListener="#{noticiaSessionController.cancelarNoticia()}" pt:data-dismiss="modal">Cancelar</h:commandButton>
+                                    <h:commandButton value="#{editeliBundle.eliminar}" actionListener="#{noticiaSessionController.eliminarNoticia(noticia)}" class="btn btn-danger"/>
+                                </div>
+                            </div>
+                            </h:form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dalog -->
                 </div>
                 <div class="container">
                     <div class="row">

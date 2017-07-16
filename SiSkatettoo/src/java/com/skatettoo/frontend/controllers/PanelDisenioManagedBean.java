@@ -54,20 +54,28 @@ public class PanelDisenioManagedBean {
         setDis(d);
     }
     
+    public void eliminarDisenio(Disenio d){
+        d = (Disenio) FacesUtils.getObjectMapSession("disenio");
+        dfl.remove(d);
+        FacesUtils.mensaje("Tu diseño se ha eliminado");
+    }
+    
+    public void cancelarElimin(){
+        FacesUtils.removerObjectAcceso("disenio");
+    }
+    
     public void removerDisenioss(){
         FacesUtils.removerObjectAcceso("disenio");
     }
     
-    public String editarDisenio() {
+    public void editarDisenio() {
         dfl.edit(dis);
         FacesUtils.mensaje("Tu diseño se ha actualizado");
-        return "/pages/tatuador/cgdisenios.xhtml?faces-redirect=true";
     }
     
-    public String editarDisenioA() {
+    public void editarDisenioA() {
         dfl.edit(dis);
         FacesUtils.mensaje("Tu diseño se ha actualizado");
-        return "/pages/admin/cgdisenios.xhtml?faces-redirect=true";
     }
     
     public String autor(Usuario us){

@@ -49,13 +49,13 @@
                                     <h:inputText class="form-control" pt:placeholder="#{regClienteBundle.cliCell}" id="telefono" pt:type="number" value="#{loginManagedBean.usuario.telefono}" title="#{regClienteBundle.cliCell}" required="true" />
                                     <br/>
                                     <label for="password">#{regClienteBundle.cliCla}</label>
-                                    <h:inputSecret class="form-control" pt:placeholder="#{regClienteBundle.cliCla}" id="password"  value="#{loginManagedBean.usuario.password}" title="#{regClienteBundle.cliCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}">
-                                        <f:validator validatorId="passwordValidator" />
-                                        <f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                                    <h:inputSecret class="form-control" pt:placeholder="#{regClienteBundle.cliCla}" id="password"  value="#{loginManagedBean.password}" title="#{regClienteBundle.cliCla}" required="true" requiredMessage="#{regClienteBundle.msjCla}">
+                                        <!---<f:validator validatorId="passwordValidator" />
+                                        <f:attribute name="confirmPassword" value="# {confirmPassword}" />-->
                                     </h:inputSecret>
                                     <br/>
                                     <label for="password2">#{regClienteBundle.cliConCla}</label>
-                                    <h:inputSecret class="form-control" binding="#{confirmPassword}" pt:placeholder="#{regClienteBundle.cliConCla}" id="confirmPassword"  title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}"/>
+                                    <h:inputSecret class="form-control" value="#{registroController.confirmar}" binding="#{confirmPassword}" pt:placeholder="#{regClienteBundle.cliConCla}" id="confirmPassword"  title="#{regClienteBundle.cliConCla}" required="true" requiredMessage="#{regClienteBundle.msjConCla}"/>
                                     <br />
                                     <br />
                                     <h:commandButton class="btn btn-lg btn-primary btn-block" type="submit" value="#{regClienteBundle.guardar}" action="#{loginManagedBean.modificarUs()}"/>

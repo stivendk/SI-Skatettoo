@@ -51,4 +51,14 @@ public class NoticiaSessionController {
             FacesUtils.mensaje(prop.getString("msjError") + " " + e.getMessage());
         }
     }
+    
+    public void eliminarNoticia(Noticia n){
+        n = (Noticia) FacesUtils.getObjectMapSession("noticia");
+        nc.remove(n);
+        FacesUtils.mensaje(prop.getString("delete"));
+    }
+    
+    public void cancelarNoticia(){
+        FacesUtils.removerObjectAcceso("noticia");
+    }
 }
